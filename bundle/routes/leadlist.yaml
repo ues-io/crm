@@ -1,0 +1,5 @@
+name: leadlist
+path: lead
+view: lead_list
+theme: uesio/core.default
+title: lead List View

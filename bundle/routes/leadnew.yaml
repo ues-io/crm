@@ -1,0 +1,5 @@
+name: leadnew
+path: leadnew
+view: lead_new
+theme: uesio/core.default
+title: lead Create New View

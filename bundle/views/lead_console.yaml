@@ -1,0 +1,58 @@
+name: lead_console
+definition:
+  # Wires connect to data in collections
+  wires:
+    lead:
+      collection: uesio/crm.lead
+      fields:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.firstname:
+        uesio/crm.fullname:
+        uesio/crm.industry:
+        uesio/crm.is_converted:
+        uesio/crm.lastname:
+        uesio/crm.location:
+        uesio/crm.mailing_city:
+        uesio/crm.mailing_country:
+        uesio/crm.mailing_state_province:
+        uesio/crm.mailing_street:
+        uesio/crm.mailing_zip_postal:
+        uesio/crm.no_employees:
+        uesio/crm.phone:
+        uesio/crm.phone_business:
+        uesio/crm.phone_mobile:
+        uesio/crm.topic:
+        uesio/crm.website:
+  # Components determine the layout and composition of your view
+  # Wires connect to data in collections
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+              extra:
+                - uesio/io.box:
+                    components:
+                      - uesio/io.list:
+                          wire: lead
+                          components:
+                            - uesio/io.tile:
+                                uesio.variant: uesio/io.item
+                                content:
+                                  - uesio/io.text:
+                                      text: $RecordMeta{name}
+                                      element: div
+                                signals:
+                                  - signal: component/CALL
+                                    component: uesio/core.view
+                                    componentsignal: SET_PARAM
+                                    targettype: specific
+                                    target: detailview
+                                    param: recordid
+                                    value: ${uesio/core.id}
+        content:
+          - uesio/core.view:
+              uesio.id: detailview
+              view: lead_detail_content
+              params:
+                recordid: ""

@@ -1,0 +1,5 @@
+name: leaddetail
+path: lead/detail/{recordid}
+view: lead_detail
+theme: uesio/core.default
+title: lead Detail View

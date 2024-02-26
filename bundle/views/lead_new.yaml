@@ -1,0 +1,104 @@
+name: lead_new
+definition:
+  # Wires connect to data in collections
+  wires:
+    lead:
+      collection: uesio/crm.lead
+      fields:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.firstname:
+        uesio/crm.fullname:
+        uesio/crm.industry:
+        uesio/crm.is_converted:
+        uesio/crm.lastname:
+        uesio/crm.location:
+        uesio/crm.mailing_city:
+        uesio/crm.mailing_country:
+        uesio/crm.mailing_state_province:
+        uesio/crm.mailing_street:
+        uesio/crm.mailing_zip_postal:
+        uesio/crm.no_employees:
+        uesio/crm.phone:
+        uesio/crm.phone_business:
+        uesio/crm.phone_mobile:
+        uesio/crm.topic:
+        uesio/crm.website:
+      init:
+        create: true
+        query: false
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.list:
+              wire: lead
+              uesio.id: leadList
+              mode: EDIT
+              components:
+                - uesio/io.titlebar:
+                    title: Create a new $Collection{label}
+                    subtitle: $RecordMeta{name}
+                    uesio.variant: uesio/io.main
+                    actions:
+                      - uesio/io.group:
+                          components:
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - lead
+                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                    collection: uesio/crm.lead
+                                text: Create
+                                hotkey: "meta+s"
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/CANCEL
+                                    wire: lead
+                                text: Reset
+                                uesio.variant: uesio/io.secondary
+                - uesio/io.box:
+                    uesio.variant: uesio/io.section
+                    components:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.description
+                      - uesio/io.field:
+                          fieldId: uesio/crm.email
+                      - uesio/io.field:
+                          fieldId: uesio/crm.firstname
+                      - uesio/io.field:
+                          fieldId: uesio/crm.fullname
+                      - uesio/io.field:
+                          fieldId: uesio/crm.industry
+                      - uesio/io.field:
+                          fieldId: uesio/crm.is_converted
+                      - uesio/io.field:
+                          fieldId: uesio/crm.lastname
+                      - uesio/io.field:
+                          fieldId: uesio/crm.location
+                      - uesio/io.field:
+                          fieldId: uesio/crm.mailing_city
+                      - uesio/io.field:
+                          fieldId: uesio/crm.mailing_country
+                      - uesio/io.field:
+                          fieldId: uesio/crm.mailing_state_province
+                      - uesio/io.field:
+                          fieldId: uesio/crm.mailing_street
+                      - uesio/io.field:
+                          fieldId: uesio/crm.mailing_zip_postal
+                      - uesio/io.field:
+                          fieldId: uesio/crm.no_employees
+                      - uesio/io.field:
+                          fieldId: uesio/crm.phone
+                      - uesio/io.field:
+                          fieldId: uesio/crm.phone_business
+                      - uesio/io.field:
+                          fieldId: uesio/crm.phone_mobile
+                      - uesio/io.field:
+                          fieldId: uesio/crm.topic
+                      - uesio/io.field:
+                          fieldId: uesio/crm.website

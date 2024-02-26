@@ -1,0 +1,108 @@
+name: lead_list
+definition:
+  # Wires connect to data in collections
+  wires:
+    lead:
+      collection: uesio/crm.lead
+      fields:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.firstname:
+        uesio/crm.fullname:
+        uesio/crm.industry:
+        uesio/crm.is_converted:
+        uesio/crm.lastname:
+        uesio/crm.location:
+        uesio/crm.mailing_city:
+        uesio/crm.mailing_country:
+        uesio/crm.mailing_state_province:
+        uesio/crm.mailing_street:
+        uesio/crm.mailing_zip_postal:
+        uesio/crm.no_employees:
+        uesio/crm.phone:
+        uesio/crm.phone_business:
+        uesio/crm.phone_mobile:
+        uesio/crm.topic:
+        uesio/crm.website: # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.titlebar:
+              title: $Collection{lead:pluralLabel}
+              subtitle: List View
+              uesio.variant: uesio/io.main
+              actions:
+                - uesio/io.group:
+                    components:
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: lead
+                              prepend: true
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_EDIT_MODE
+                              targettype: specific
+                              componentid: leadTable
+                          text: $Label{uesio/io.create}
+                          uesio.variant: uesio/io.primary
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - lead
+                          text: $Label{uesio/io.save}
+                          hotkey: "meta+s"
+                          uesio.variant: uesio/io.secondary
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: lead
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CANCEL
+                              wire: lead
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: lead
+                          text: $Label{uesio/io.cancel}
+                          uesio.variant: uesio/io.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: leadTable
+                          text: Mode
+                          uesio.variant: uesio/io.secondary
+          - uesio/io.box:
+              uesio.variant: uesio/io.section
+              components:
+                - uesio/io.table:
+                    rowactions:
+                      - icon: visibility
+                        text: View
+                        uesio.display:
+                          - type: recordIsNotNew
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            viewtype: detail
+                            recordid: ${uesio/core.id}
+                            collection: uesio/crm.lead
+                      - icon: delete
+                        text: $Label{uesio/io.delete}
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                    columns:
+                      - field: uesio/crm.firstname
+                      - field: uesio/crm.lastname
+                      - field: uesio/crm.email
+                      - field: uesio/crm.industry
+                      - field: uesio/crm.phone
+                      - field: uesio/crm.website
+                    uesio.id: leadTable
+                    mode: READ
+                    wire: lead
+                    pagesize: 10

@@ -1,5 +1,5 @@
 name: contact
-public: true
 label: contact
+public: true
 pluralLabel: contacts
-nameField: uesio/crm.lastname
+nameField: lastname
