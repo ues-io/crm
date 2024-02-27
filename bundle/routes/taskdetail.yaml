@@ -1,0 +1,5 @@
+name: taskdetail
+path: task/detail/{recordid}
+view: task_detail
+theme: uesio/core.default
+title: Task Detail View

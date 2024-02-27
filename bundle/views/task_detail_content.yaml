@@ -1,0 +1,91 @@
+name: task_detail_content
+definition:
+  # Wires connect to data in collections
+  wires:
+    task:
+      collection: uesio/crm.task
+      fields:
+        uesio/crm.description:
+        uesio/crm.due_by:
+        uesio/crm.name:
+        uesio/crm.related_account:
+        uesio/crm.related_contact:
+        uesio/crm.related_lead:
+        uesio/crm.related_opportunity:
+      conditions:
+        - field: uesio/core.id
+          valueSource: PARAM
+          param: recordid
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.box:
+        uesio.display:
+          - type: paramIsSet
+            param: recordid
+        components:
+          - uesio/io.list:
+              wire: task
+              uesio.id: taskList
+              components:
+                - uesio/io.titlebar:
+                    title: $RecordMeta{name}
+                    subtitle: $Collection{label}
+                    uesio.variant: uesio/io.main
+                    actions:
+                      - uesio/io.group:
+                          components:
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - task
+                                text: Save
+                                hotkey: "meta+s"
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/CANCEL
+                                    wire: task
+                                text: Cancel
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: TOGGLE_MODE
+                                    targettype: specific
+                                    componentid: taskList
+                                text: Mode
+                                uesio.variant: uesio/io.secondary
+                - uesio/io.box:
+                    uesio.variant: uesio/io.section
+                    components:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.description
+                      - uesio/io.field:
+                          fieldId: uesio/crm.due_by
+                      - uesio/io.field:
+                          fieldId: uesio/crm.name
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_account
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_contact
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_lead
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_opportunity
+    - uesio/io.box:
+        uesio.display:
+          - type: paramIsNotSet
+            param: recordid
+        uesio.styleTokens:
+          root:
+            - p-10
+        components:
+          - uesio/io.text:
+              text: Select a record
+  params:
+    recordid:
+      type: RECORD
+      required: true
+      collection: uesio/crm.task

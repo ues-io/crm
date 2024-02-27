@@ -1,0 +1,98 @@
+name: task_list
+definition:
+  # Wires connect to data in collections
+  wires:
+    task:
+      collection: uesio/crm.task
+      fields:
+        uesio/crm.description:
+        uesio/crm.due_by:
+        uesio/crm.name:
+        uesio/crm.related_account:
+        uesio/crm.related_contact:
+        uesio/crm.related_lead:
+        uesio/crm.related_opportunity:
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.titlebar:
+              title: $Collection{task:pluralLabel}
+              subtitle: List View
+              uesio.variant: uesio/io.main
+              actions:
+                - uesio/io.group:
+                    components:
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: task
+                              prepend: true
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_EDIT_MODE
+                              targettype: specific
+                              componentid: taskTable
+                          text: $Label{uesio/io.create}
+                          uesio.variant: uesio/io.primary
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - task
+                          text: $Label{uesio/io.save}
+                          hotkey: "meta+s"
+                          uesio.variant: uesio/io.secondary
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: task
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CANCEL
+                              wire: task
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: task
+                          text: $Label{uesio/io.cancel}
+                          uesio.variant: uesio/io.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: taskTable
+                          text: Mode
+                          uesio.variant: uesio/io.secondary
+          - uesio/io.box:
+              uesio.variant: uesio/io.section
+              components:
+                - uesio/io.table:
+                    rowactions:
+                      - icon: visibility
+                        text: View
+                        uesio.display:
+                          - type: recordIsNotNew
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            viewtype: detail
+                            recordid: ${uesio/core.id}
+                            collection: uesio/crm.task
+                      - icon: delete
+                        text: $Label{uesio/io.delete}
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                    columns:
+                      - field: uesio/crm.description
+                      - field: uesio/crm.due_by
+                      - field: uesio/crm.name
+                      - field: uesio/crm.related_account
+                      - field: uesio/crm.related_contact
+                      - field: uesio/crm.related_lead
+                      - field: uesio/crm.related_opportunity
+                    uesio.id: taskTable
+                    mode: READ
+                    wire: task
+                    pagesize: 10

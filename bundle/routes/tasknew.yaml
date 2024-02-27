@@ -1,0 +1,5 @@
+name: tasknew
+path: tasknew
+view: task_new
+theme: uesio/core.default
+title: Task Create New View

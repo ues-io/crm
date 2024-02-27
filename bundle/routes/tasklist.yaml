@@ -1,0 +1,5 @@
+name: tasklist
+path: task
+view: task_list
+theme: uesio/core.default
+title: Task List View

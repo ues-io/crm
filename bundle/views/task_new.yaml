@@ -1,0 +1,68 @@
+name: task_new
+definition:
+  # Wires connect to data in collections
+  wires:
+    task:
+      collection: uesio/crm.task
+      fields:
+        uesio/crm.description:
+        uesio/crm.due_by:
+        uesio/crm.name:
+        uesio/crm.related_account:
+        uesio/crm.related_contact:
+        uesio/crm.related_lead:
+        uesio/crm.related_opportunity:
+      init:
+        create: true
+        query: false
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.list:
+              wire: task
+              uesio.id: taskList
+              mode: EDIT
+              components:
+                - uesio/io.titlebar:
+                    title: Create a new $Collection{label}
+                    subtitle: $RecordMeta{name}
+                    uesio.variant: uesio/io.main
+                    actions:
+                      - uesio/io.group:
+                          components:
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - task
+                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                    collection: uesio/crm.task
+                                text: Create
+                                hotkey: "meta+s"
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/CANCEL
+                                    wire: task
+                                text: Reset
+                                uesio.variant: uesio/io.secondary
+                - uesio/io.box:
+                    uesio.variant: uesio/io.section
+                    components:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.description
+                      - uesio/io.field:
+                          fieldId: uesio/crm.due_by
+                      - uesio/io.field:
+                          fieldId: uesio/crm.name
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_account
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_contact
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_lead
+                      - uesio/io.field:
+                          fieldId: uesio/crm.related_opportunity
