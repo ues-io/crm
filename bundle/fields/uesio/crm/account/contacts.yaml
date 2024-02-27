@@ -2,7 +2,7 @@ name: contacts
 label: Contacts
 type: REFERENCEGROUP
 reference:
-  collection: contact
+  collection: .contact
 referenceGroup:
   collection: contact
   field: account

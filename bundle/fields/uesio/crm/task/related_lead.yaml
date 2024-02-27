@@ -1,5 +1,5 @@
 name: related_lead
-type: REFERENCE
 label: Related Lead
+type: REFERENCE
 reference:
-  collection: uesio/crm.lead
+  collection: lead

@@ -1,5 +1,5 @@
 name: related_opportunity
-type: REFERENCE
 label: Related Opportunity
+type: REFERENCE
 reference:
-  collection: uesio/crm.opportunity
+  collection: opportunity

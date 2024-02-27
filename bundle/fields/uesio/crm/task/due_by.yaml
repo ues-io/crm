@@ -1,3 +1,3 @@
 name: due_by
-type: TIMESTAMP
 label: Due By
+type: TIMESTAMP

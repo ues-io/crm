@@ -1,5 +1,5 @@
 name: related_account
-type: REFERENCE
 label: Related Account
+type: REFERENCE
 reference:
-  collection: uesio/crm.account
+  collection: account

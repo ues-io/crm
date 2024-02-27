@@ -1,5 +1,5 @@
 name: related_contact
-type: REFERENCE
 label: Related Contact
+type: REFERENCE
 reference:
-  collection: uesio/crm.contact
+  collection: contact
