@@ -25,24 +25,11 @@ definition:
                         uesio.id: img-uesio-logo
                         height: 32
                         file: uesio/core.logowhite
-                    - uesio/io.text:
-                        uesio.styleTokens:
-                          root:
-                            - grid
-                            - text-center
-                            - align-center
-                            - items-center
-                            - text-sm
-                            - uppercase
-                            - text-slate-800
-                            - rounded
-                            - h-8
-                            - bg-slate-100
-                            - tracking-wider
-                            - border-2
-                            - border-slate-800
-                        text: crm
-                        element: div
+                    - uesio/builder.icontile:
+                        title: CRM
+                        icon: bubble_chart
+                        iconcolor: "#fb7185"
+                        tileVariant: uesio/builder.apptag
               - uesio/io.navsection:
                   content:
                     - uesio/io.sitenav:
