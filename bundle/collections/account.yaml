@@ -1,5 +1,5 @@
 name: account
-label: account
+label: Account
 public: true
-pluralLabel: accounts
+pluralLabel: Accounts
 nameField: name

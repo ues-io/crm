@@ -1,5 +1,5 @@
 name: contact
-label: contact
+label: Contact
 public: true
-pluralLabel: contacts
+pluralLabel: Contacts
 nameField: lastname

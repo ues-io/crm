@@ -1,0 +1,4 @@
+name: gender
+type: SELECT
+label: Gender
+selectList: uesio/crm.gender
