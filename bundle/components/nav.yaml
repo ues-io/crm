@@ -17,26 +17,33 @@ definition:
                 - grid
                 - gap-4
             components:
-              - uesio/io.titlebar:
-                  uesio.variant: uesio/builder.profile
-                  avatar:
-                    - uesio/io.grid:
+              - uesio/io.group:
+                  uesio.variant: uesio/builder.appcrumb
+                  components:
+                    - uesio/io.image:
+                        uesio.variant: uesio/builder.logo
+                        uesio.id: img-uesio-logo
+                        height: 32
+                        file: uesio/core.logowhite
+                    - uesio/io.text:
                         uesio.styleTokens:
                           root:
-                            - h-8
-                            - w-8
-                            - bg-[#3730a3]
-                            - rounded-full
+                            - grid
+                            - text-center
+                            - align-center
                             - items-center
-                            - justify-center
-                        items:
-                          - uesio/io.text:
-                              uesio.variant: uesio/io.icon
-                              text: person
-                              color: white
-                  title: crm
+                            - text-sm
+                            - uppercase
+                            - text-slate-800
+                            - rounded
+                            - h-8
+                            - bg-slate-100
+                            - tracking-wider
+                            - border-2
+                            - border-slate-800
+                        text: crm
+                        element: div
               - uesio/io.navsection:
-                  title: Collections
                   content:
                     - uesio/io.sitenav:
       content:
