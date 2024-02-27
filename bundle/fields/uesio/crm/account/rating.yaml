@@ -1,4 +1,0 @@
-name: rating
-label: Rating
-type: SELECT
-selectList: rating
