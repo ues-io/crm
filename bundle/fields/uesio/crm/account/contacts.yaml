@@ -1,9 +1,9 @@
 name: contacts
-type: REFERENCEGROUP
 label: Contacts
+type: REFERENCEGROUP
 reference:
-  collection: uesio/crm.contact
+  collection: contact
 referenceGroup:
-  collection: uesio/crm.contact
-  field: uesio/crm.account
+  collection: contact
+  field: account
   onDelete: CASCADE

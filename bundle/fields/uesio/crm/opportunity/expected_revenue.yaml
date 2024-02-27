@@ -1,5 +1,5 @@
 name: expected_revenue
-type: NUMBER
 label: Expected Revenue
+type: NUMBER
 number:
   decimals: 2

@@ -1,5 +1,5 @@
 name: parent_account
-type: REFERENCE
 label: Parent Account
+type: REFERENCE
 reference:
-  collection: uesio/crm.account
+  collection: account

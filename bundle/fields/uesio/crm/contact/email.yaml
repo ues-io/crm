@@ -1,4 +1,4 @@
 name: email
-type: EMAIL
 label: Email
+type: EMAIL
 required: true

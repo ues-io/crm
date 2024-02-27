@@ -1,4 +1,4 @@
 name: description
-type: LONGTEXT
 label: Description
+type: LONGTEXT
 required: true

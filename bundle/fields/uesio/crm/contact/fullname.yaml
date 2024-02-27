@@ -1,6 +1,6 @@
 name: fullname
-type: FORMULA
 label: Fullname
+type: FORMULA
 formula:
   expression: uesio/crm.firstname + " " + uesio/crm.lastname
   returntype: TEXT

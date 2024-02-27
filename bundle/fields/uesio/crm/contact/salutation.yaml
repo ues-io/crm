@@ -1,4 +1,4 @@
 name: salutation
-type: SELECT
 label: Salutation
-selectList: uesio/crm.salutation
+type: SELECT
+selectList: salutation

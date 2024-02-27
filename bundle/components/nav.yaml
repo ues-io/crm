@@ -187,7 +187,6 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
-
       content:
         - uesio/core.slot:
             name: extra

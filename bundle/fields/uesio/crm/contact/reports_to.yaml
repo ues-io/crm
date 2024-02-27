@@ -1,5 +1,5 @@
 name: reports_to
-type: REFERENCE
 label: Reports To
+type: REFERENCE
 reference:
-  collection: uesio/crm.contact
+  collection: contact
