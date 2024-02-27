@@ -32,7 +32,162 @@ definition:
                         tileVariant: uesio/builder.apptag
               - uesio/io.navsection:
                   content:
-                    - uesio/io.sitenav:
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Leads
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: filter_alt
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - p-1.5
+                                avatar:
+                                  - text-sm
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: add
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Accounts
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: domain
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - p-1.5
+                                avatar:
+                                  - text-sm
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: add
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Contacts
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: person
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - p-1.5
+                                avatar:
+                                  - text-sm
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: add
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Opportunities
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: payments
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - p-1.5
+                                avatar:
+                                  - text-sm
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: add
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Tasks
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: task_alt
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - p-1.5
+                                avatar:
+                                  - text-sm
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.icon
+                                    text: add
+
       content:
         - uesio/core.slot:
             name: extra
