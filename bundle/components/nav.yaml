@@ -52,6 +52,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: filter_alt
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.lead
+                                  viewtype: list
                           - uesio/io.tile:
                               uesio.variant: uesio/io.nav
                               uesio.styleTokens:
@@ -63,6 +67,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.lead
+                                  viewtype: createnew
                     - uesio/io.box:
                         uesio.styleTokens:
                           root:
@@ -83,6 +91,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: domain
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.account
+                                  viewtype: list
                           - uesio/io.tile:
                               uesio.variant: uesio/io.nav
                               uesio.styleTokens:
@@ -94,6 +106,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.account
+                                  viewtype: createnew
                     - uesio/io.box:
                         uesio.styleTokens:
                           root:
@@ -114,6 +130,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: person
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.contact
+                                  viewtype: list
                           - uesio/io.tile:
                               uesio.variant: uesio/io.nav
                               uesio.styleTokens:
@@ -125,6 +145,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.contact
+                                  viewtype: createnew
                     - uesio/io.box:
                         uesio.styleTokens:
                           root:
@@ -145,6 +169,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: payments
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.opportunity
+                                  viewtype: list
                           - uesio/io.tile:
                               uesio.variant: uesio/io.nav
                               uesio.styleTokens:
@@ -156,6 +184,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.opportunity
+                                  viewtype: createnew
                     - uesio/io.box:
                         uesio.styleTokens:
                           root:
@@ -176,6 +208,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: task_alt
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.task
+                                  viewtype: list
                           - uesio/io.tile:
                               uesio.variant: uesio/io.nav
                               uesio.styleTokens:
@@ -187,6 +223,10 @@ definition:
                                 - uesio/io.text:
                                     uesio.variant: uesio/io.icon
                                     text: add
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/crm.task
+                                  viewtype: createnew
       content:
         - uesio/core.slot:
             name: extra
