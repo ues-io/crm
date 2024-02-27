@@ -1,0 +1,5 @@
+name: accountdetail
+path: account/detail/{recordid}
+view: account_detail
+theme: uesio/core.default
+title: Account Detail View

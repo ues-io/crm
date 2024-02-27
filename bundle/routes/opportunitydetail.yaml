@@ -1,0 +1,5 @@
+name: opportunitydetail
+path: opportunity/detail/{recordid}
+view: opportunity_detail
+theme: uesio/core.default
+title: Opportunity Detail View

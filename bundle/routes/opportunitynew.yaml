@@ -1,0 +1,5 @@
+name: opportunitynew
+path: opportunitynew
+view: opportunity_new
+theme: uesio/core.default
+title: Opportunity Create New View

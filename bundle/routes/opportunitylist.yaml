@@ -1,0 +1,5 @@
+name: opportunitylist
+path: opportunity
+view: opportunity_list
+theme: uesio/core.default
+title: Opportunity List View

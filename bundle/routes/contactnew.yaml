@@ -1,0 +1,5 @@
+name: contactnew
+path: contactnew
+view: contact_new
+theme: uesio/core.default
+title: Contact Create New View

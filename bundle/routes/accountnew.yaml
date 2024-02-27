@@ -1,0 +1,5 @@
+name: accountnew
+path: accountnew
+view: account_new
+theme: uesio/core.default
+title: Account Create New View

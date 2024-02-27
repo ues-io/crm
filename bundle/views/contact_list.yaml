@@ -1,0 +1,128 @@
+name: contact_list
+definition:
+  # Wires connect to data in collections
+  wires:
+    contact:
+      collection: uesio/crm.contact
+      fields:
+        uesio/crm.account:
+        uesio/crm.birthdate:
+        uesio/crm.department:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.email_opt_out:
+        uesio/crm.firstname:
+        uesio/crm.fullname:
+        uesio/crm.gender:
+        uesio/crm.image:
+        uesio/crm.lastname:
+        uesio/crm.mailing_city:
+        uesio/crm.mailing_country:
+        uesio/crm.mailing_state:
+        uesio/crm.mailing_street:
+        uesio/crm.mailing_zip:
+        uesio/crm.phone_business:
+        uesio/crm.phone_mobile:
+        uesio/crm.reports_to:
+        uesio/crm.role:
+        uesio/crm.salutation:
+        uesio/crm.title:
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.titlebar:
+              title: $Collection{contact:pluralLabel}
+              subtitle: List View
+              uesio.variant: uesio/io.main
+              actions:
+                - uesio/io.group:
+                    components:
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: contact
+                              prepend: true
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_EDIT_MODE
+                              targettype: specific
+                              componentid: contactTable
+                          text: $Label{uesio/io.create}
+                          uesio.variant: uesio/io.primary
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - contact
+                          text: $Label{uesio/io.save}
+                          hotkey: "meta+s"
+                          uesio.variant: uesio/io.secondary
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: contact
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CANCEL
+                              wire: contact
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: contact
+                          text: $Label{uesio/io.cancel}
+                          uesio.variant: uesio/io.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: contactTable
+                          text: Mode
+                          uesio.variant: uesio/io.secondary
+          - uesio/io.box:
+              uesio.variant: uesio/io.section
+              components:
+                - uesio/io.table:
+                    rowactions:
+                      - icon: visibility
+                        text: View
+                        uesio.display:
+                          - type: recordIsNotNew
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            viewtype: detail
+                            recordid: ${uesio/core.id}
+                            collection: uesio/crm.contact
+                      - icon: delete
+                        text: $Label{uesio/io.delete}
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                    columns:
+                      - field: uesio/crm.account
+                      - field: uesio/crm.birthdate
+                      - field: uesio/crm.department
+                      - field: uesio/crm.description
+                      - field: uesio/crm.email
+                      - field: uesio/crm.email_opt_out
+                      - field: uesio/crm.firstname
+                      - field: uesio/crm.fullname
+                      - field: uesio/crm.gender
+                      - field: uesio/crm.image
+                      - field: uesio/crm.lastname
+                      - field: uesio/crm.mailing_city
+                      - field: uesio/crm.mailing_country
+                      - field: uesio/crm.mailing_state
+                      - field: uesio/crm.mailing_street
+                      - field: uesio/crm.mailing_zip
+                      - field: uesio/crm.phone_business
+                      - field: uesio/crm.phone_mobile
+                      - field: uesio/crm.reports_to
+                      - field: uesio/crm.role
+                      - field: uesio/crm.salutation
+                      - field: uesio/crm.title
+                    uesio.id: contactTable
+                    mode: READ
+                    wire: contact
+                    pagesize: 10

@@ -1,0 +1,43 @@
+name: opportunity_console
+definition:
+  # Wires connect to data in collections
+  wires:
+    opportunity:
+      collection: uesio/crm.opportunity
+      fields:
+        uesio/crm.close_date:
+        uesio/crm.description:
+        uesio/crm.expected_revenue:
+        uesio/crm.topic:
+  # Components determine the layout and composition of your view
+  # Wires connect to data in collections
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+              extra:
+                - uesio/io.box:
+                    components:
+                      - uesio/io.list:
+                          wire: opportunity
+                          components:
+                            - uesio/io.tile:
+                                uesio.variant: uesio/io.item
+                                content:
+                                  - uesio/io.text:
+                                      text: $RecordMeta{name}
+                                      element: div
+                                signals:
+                                  - signal: component/CALL
+                                    component: uesio/core.view
+                                    componentsignal: SET_PARAM
+                                    targettype: specific
+                                    target: detailview
+                                    param: recordid
+                                    value: ${uesio/core.id}
+        content:
+          - uesio/core.view:
+              uesio.id: detailview
+              view: opportunity_detail_content
+              params:
+                recordid: ""

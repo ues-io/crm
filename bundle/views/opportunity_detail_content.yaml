@@ -1,0 +1,82 @@
+name: opportunity_detail_content
+definition:
+  # Wires connect to data in collections
+  wires:
+    opportunity:
+      collection: uesio/crm.opportunity
+      fields:
+        uesio/crm.close_date:
+        uesio/crm.description:
+        uesio/crm.expected_revenue:
+        uesio/crm.topic:
+      conditions:
+        - field: uesio/core.id
+          valueSource: PARAM
+          param: recordid
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.box:
+        uesio.display:
+          - type: paramIsSet
+            param: recordid
+        components:
+          - uesio/io.list:
+              wire: opportunity
+              uesio.id: opportunityList
+              components:
+                - uesio/io.titlebar:
+                    title: $RecordMeta{name}
+                    subtitle: $Collection{label}
+                    uesio.variant: uesio/io.main
+                    actions:
+                      - uesio/io.group:
+                          components:
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - opportunity
+                                text: Save
+                                hotkey: "meta+s"
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/CANCEL
+                                    wire: opportunity
+                                text: Cancel
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: TOGGLE_MODE
+                                    targettype: specific
+                                    componentid: opportunityList
+                                text: Mode
+                                uesio.variant: uesio/io.secondary
+                - uesio/io.box:
+                    uesio.variant: uesio/io.section
+                    components:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.close_date
+                      - uesio/io.field:
+                          fieldId: uesio/crm.description
+                      - uesio/io.field:
+                          fieldId: uesio/crm.expected_revenue
+                      - uesio/io.field:
+                          fieldId: uesio/crm.topic
+    - uesio/io.box:
+        uesio.display:
+          - type: paramIsNotSet
+            param: recordid
+        uesio.styleTokens:
+          root:
+            - p-10
+        components:
+          - uesio/io.text:
+              text: Select a record
+  params:
+    recordid:
+      type: RECORD
+      required: true
+      collection: uesio/crm.opportunity

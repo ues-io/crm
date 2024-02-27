@@ -1,0 +1,5 @@
+name: accountlist
+path: account
+view: account_list
+theme: uesio/core.default
+title: Account List View

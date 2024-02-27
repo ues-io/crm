@@ -1,0 +1,113 @@
+name: account_new
+definition:
+  # Wires connect to data in collections
+  wires:
+    account:
+      collection: uesio/crm.account
+      fields:
+        uesio/crm.account_type:
+        uesio/crm.annual_revenue:
+        uesio/crm.billing_city:
+        uesio/crm.billing_country:
+        uesio/crm.billing_state_province:
+        uesio/crm.billing_street:
+        uesio/crm.billing_zip:
+        uesio/crm.contacts:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.industry:
+        uesio/crm.logo:
+        uesio/crm.name:
+        uesio/crm.no_employees:
+        uesio/crm.parent_account:
+        uesio/crm.phone:
+        uesio/crm.shipping_city:
+        uesio/crm.shipping_country:
+        uesio/crm.shipping_state_province:
+        uesio/crm.shipping_street:
+        uesio/crm.shipping_zip:
+        uesio/crm.website:
+      init:
+        create: true
+        query: false
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.list:
+              wire: account
+              uesio.id: accountList
+              mode: EDIT
+              components:
+                - uesio/io.titlebar:
+                    title: Create a new $Collection{label}
+                    subtitle: $RecordMeta{name}
+                    uesio.variant: uesio/io.main
+                    actions:
+                      - uesio/io.group:
+                          components:
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - account
+                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                    collection: uesio/crm.account
+                                text: Create
+                                hotkey: "meta+s"
+                                uesio.variant: uesio/io.secondary
+                            - uesio/io.button:
+                                signals:
+                                  - signal: wire/CANCEL
+                                    wire: account
+                                text: Reset
+                                uesio.variant: uesio/io.secondary
+                - uesio/io.box:
+                    uesio.variant: uesio/io.section
+                    components:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.account_type
+                      - uesio/io.field:
+                          fieldId: uesio/crm.annual_revenue
+                      - uesio/io.field:
+                          fieldId: uesio/crm.billing_city
+                      - uesio/io.field:
+                          fieldId: uesio/crm.billing_country
+                      - uesio/io.field:
+                          fieldId: uesio/crm.billing_state_province
+                      - uesio/io.field:
+                          fieldId: uesio/crm.billing_street
+                      - uesio/io.field:
+                          fieldId: uesio/crm.billing_zip
+                      - uesio/io.field:
+                          fieldId: uesio/crm.contacts
+                      - uesio/io.field:
+                          fieldId: uesio/crm.description
+                      - uesio/io.field:
+                          fieldId: uesio/crm.email
+                      - uesio/io.field:
+                          fieldId: uesio/crm.industry
+                      - uesio/io.field:
+                          fieldId: uesio/crm.logo
+                      - uesio/io.field:
+                          fieldId: uesio/crm.name
+                      - uesio/io.field:
+                          fieldId: uesio/crm.no_employees
+                      - uesio/io.field:
+                          fieldId: uesio/crm.parent_account
+                      - uesio/io.field:
+                          fieldId: uesio/crm.phone
+                      - uesio/io.field:
+                          fieldId: uesio/crm.shipping_city
+                      - uesio/io.field:
+                          fieldId: uesio/crm.shipping_country
+                      - uesio/io.field:
+                          fieldId: uesio/crm.shipping_state_province
+                      - uesio/io.field:
+                          fieldId: uesio/crm.shipping_street
+                      - uesio/io.field:
+                          fieldId: uesio/crm.shipping_zip
+                      - uesio/io.field:
+                          fieldId: uesio/crm.website
