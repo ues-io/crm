@@ -12,7 +12,6 @@ definition:
         uesio/crm.billing_state_province:
         uesio/crm.billing_street:
         uesio/crm.billing_zip:
-        uesio/crm.contacts:
         uesio/crm.description:
         uesio/crm.email:
         uesio/crm.industry:
@@ -36,7 +35,7 @@ definition:
           - uesio/io.titlebar:
               title: $Collection{account:pluralLabel}
               subtitle: List View
-              uesio.variant: uesio/io.main
+              uesio.variant: uesio/crm.main
               actions:
                 - uesio/io.group:
                     components:
@@ -85,6 +84,7 @@ definition:
               uesio.variant: uesio/io.section
               components:
                 - uesio/io.table:
+                    uesio.variant: uesio/crm.main
                     rowactions:
                       - icon: visibility
                         text: View
@@ -100,27 +100,11 @@ definition:
                         signals:
                           - signal: wire/TOGGLE_DELETE_STATUS
                     columns:
-                      - field: uesio/crm.account_type
-                      - field: uesio/crm.annual_revenue
-                      - field: uesio/crm.billing_city
-                      - field: uesio/crm.billing_country
-                      - field: uesio/crm.billing_state_province
-                      - field: uesio/crm.billing_street
-                      - field: uesio/crm.billing_zip
-                      - field: uesio/crm.contacts
-                      - field: uesio/crm.description
-                      - field: uesio/crm.email
-                      - field: uesio/crm.industry
-                      - field: uesio/crm.logo
                       - field: uesio/crm.name
+                      - field: uesio/crm.annual_revenue
+                      - field: uesio/crm.description
+                      - field: uesio/crm.industry
                       - field: uesio/crm.no_employees
-                      - field: uesio/crm.parent_account
-                      - field: uesio/crm.phone
-                      - field: uesio/crm.shipping_city
-                      - field: uesio/crm.shipping_country
-                      - field: uesio/crm.shipping_state_province
-                      - field: uesio/crm.shipping_street
-                      - field: uesio/crm.shipping_zip
                       - field: uesio/crm.website
                     uesio.id: accountTable
                     mode: READ

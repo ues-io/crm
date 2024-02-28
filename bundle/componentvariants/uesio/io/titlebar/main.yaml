@@ -1,0 +1,9 @@
+name: main
+label: Main
+extends: uesio/io.main
+definition:
+  uesio.styleTokens:
+    root:
+      - bg-white
+      - border-0
+public: true
