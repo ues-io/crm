@@ -50,7 +50,7 @@ definition:
       - "[&.hasRowAction>tr]:hover:cursor-pointer"
       - "[&.hasRowAction>tr]:hover:bg-slate-50"
     rowDeleted:
-      - bg-red-100
+      - bg-rose-50
     noData:
       - text-center
       - p-4
