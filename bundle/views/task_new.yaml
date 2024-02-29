@@ -29,7 +29,7 @@ definition:
                 - uesio/io.titlebar:
                     title: Create a new $Collection{label}
                     subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:
@@ -42,27 +42,37 @@ definition:
                                     collection: uesio/crm.task
                                 text: Create
                                 hotkey: "meta+s"
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.primary
                             - uesio/io.button:
                                 signals:
-                                  - signal: wire/CANCEL
+                                  - signal: wire/RESET
                                     wire: task
                                 text: Reset
                                 uesio.variant: uesio/io.secondary
                 - uesio/io.box:
                     uesio.variant: uesio/io.section
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.due_by
-                      - uesio/io.field:
-                          fieldId: uesio/crm.name
-                      - uesio/io.field:
-                          fieldId: uesio/crm.related_account
-                      - uesio/io.field:
-                          fieldId: uesio/crm.related_contact
-                      - uesio/io.field:
-                          fieldId: uesio/crm.related_lead
-                      - uesio/io.field:
-                          fieldId: uesio/crm.related_opportunity
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.three_columns
+                          items:
+                            - uesio/io.box:
+                                uesio.styleTokens:
+                                  root:
+                                    - col-span-2
+                                components:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.name
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.description
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.due_by
+                            - uesio/io.box:
+                                components:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.related_account
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.related_contact
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.related_lead
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.related_opportunity

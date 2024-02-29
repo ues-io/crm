@@ -9,6 +9,11 @@ definition:
         uesio/crm.description:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
+        uesio/core.createdby:
+        uesio/core.createdat:
+        uesio/core.updatedby:
+        uesio/core.updatedat:
+        uesio/core.owner:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -27,7 +32,7 @@ definition:
                 - uesio/io.titlebar:
                     title: $RecordMeta{name}
                     subtitle: $Collection{label}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:
@@ -57,14 +62,45 @@ definition:
                 - uesio/io.box:
                     uesio.variant: uesio/io.section
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.close_date
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.expected_revenue
-                      - uesio/io.field:
-                          fieldId: uesio/crm.topic
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.three_columns
+                          items:
+                            - uesio/io.box:
+                                uesio.styleTokens:
+                                  root:
+                                    - col-span-2
+                                components:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.topic
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.description
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.close_date
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.expected_revenue
+                            - uesio/io.box:
+                                components:
+                                  - uesio/io.tabs:
+                                      tabs:
+                                        - id: audit
+                                          label: Audit Fields
+                                          components:
+                                            - uesio/io.field:
+                                                fieldId: uesio/core.createdby
+                                                user:
+                                                  subtitle: $Time{uesio/core.createdat}
+                                            - uesio/io.field:
+                                                fieldId: uesio/core.updatedby
+                                                user:
+                                                  subtitle: $Time{uesio/core.updatedat}
+                                            - uesio/io.field:
+                                                fieldId: uesio/core.owner
+                                        - id: comments
+                                          label: Comments
+                                          components:
+                                        - id: attachments
+                                          label: Attachments
+                                          components:
     - uesio/io.box:
         uesio.display:
           - type: paramIsNotSet

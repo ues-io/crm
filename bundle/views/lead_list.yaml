@@ -32,7 +32,7 @@ definition:
           - uesio/io.titlebar:
               title: $Collection{lead:pluralLabel}
               subtitle: List View
-              uesio.variant: uesio/io.main
+              uesio.variant: uesio/crm.main
               actions:
                 - uesio/io.group:
                     components:
@@ -47,7 +47,7 @@ definition:
                               targettype: specific
                               componentid: leadTable
                           text: $Label{uesio/io.create}
-                          uesio.variant: uesio/io.primary
+                          uesio.variant: uesio/crm.primary
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE
@@ -81,6 +81,7 @@ definition:
               uesio.variant: uesio/io.section
               components:
                 - uesio/io.table:
+                    uesio.variant: uesio/crm.main
                     rowactions:
                       - icon: visibility
                         text: View

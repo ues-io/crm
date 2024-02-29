@@ -30,7 +30,7 @@ definition:
                 - uesio/io.titlebar:
                     title: $RecordMeta{name}
                     subtitle: $Collection{label}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:

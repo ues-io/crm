@@ -50,7 +50,7 @@ definition:
                               targettype: specific
                               componentid: accountTable
                           text: $Label{uesio/io.create}
-                          uesio.variant: uesio/io.primary
+                          uesio.variant: uesio/crm.primary
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE

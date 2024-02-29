@@ -1,0 +1,8 @@
+name: three_columns
+label: Three Column Responsive
+extends: uesio/io.three_columns
+definition:
+  uesio.styleTokens:
+    root:
+      - gap-10
+public: true

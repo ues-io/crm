@@ -41,7 +41,7 @@ definition:
                 - uesio/io.titlebar:
                     title: Create a new $Collection{label}
                     subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:
@@ -54,7 +54,7 @@ definition:
                                     collection: uesio/crm.lead
                                 text: Create
                                 hotkey: "meta+s"
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.primary
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL

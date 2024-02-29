@@ -26,7 +26,7 @@ definition:
                 - uesio/io.titlebar:
                     title: Create a new $Collection{label}
                     subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:
@@ -39,7 +39,7 @@ definition:
                                     collection: uesio/crm.opportunity
                                 text: Create
                                 hotkey: "meta+s"
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.primary
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL
@@ -50,10 +50,10 @@ definition:
                     uesio.variant: uesio/io.section
                     components:
                       - uesio/io.field:
-                          fieldId: uesio/crm.close_date
+                          fieldId: uesio/crm.topic
                       - uesio/io.field:
                           fieldId: uesio/crm.description
                       - uesio/io.field:
-                          fieldId: uesio/crm.expected_revenue
+                          fieldId: uesio/crm.close_date
                       - uesio/io.field:
-                          fieldId: uesio/crm.topic
+                          fieldId: uesio/crm.expected_revenue
