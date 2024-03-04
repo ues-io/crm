@@ -78,15 +78,11 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.opportunity
-                      - icon: delete
-                        text: $Label{uesio/io.delete}
-                        signals:
-                          - signal: wire/TOGGLE_DELETE_STATUS
                     columns:
-                      - field: uesio/crm.close_date
-                      - field: uesio/crm.description
-                      - field: uesio/crm.expected_revenue
                       - field: uesio/crm.topic
+                      - field: uesio/crm.description
+                      - field: uesio/crm.close_date
+                      - field: uesio/crm.expected_revenue
                     uesio.id: opportunityTable
                     mode: READ
                     wire: opportunity

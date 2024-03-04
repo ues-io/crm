@@ -41,24 +41,50 @@ definition:
                                   - signal: wire/SAVE
                                     wires:
                                       - opportunity
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: SET_READ_MODE
                                 text: Save
                                 hotkey: "meta+s"
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.primary
+                                uesio.display:
+                                  - type: wireHasChanges
+                                    wire: opportunity
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL
                                     wire: opportunity
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: SET_READ_MODE
                                 text: Cancel
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: wireHasChanges
+                                    wire: opportunity
                             - uesio/io.button:
                                 signals:
                                   - signal: component/CALL
                                     component: uesio/io.list
-                                    componentsignal: TOGGLE_MODE
+                                    componentsignal: SET_EDIT_MODE
                                     targettype: specific
                                     componentid: opportunityList
-                                text: Mode
+                                text: Edit
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: fieldMode
+                                    mode: READ
+                            - uesio/io.button:
+                                uesio.variant: uesio/io.secondary
+                                text: Delete
+                                signals:
+                                  - signal: wire/MARK_FOR_DELETE
+                                    wire: opportunity
+                                  - signal: wire/SAVE
+                                    wires:
+                                      - opportunity
+                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                    collection: uesio/crm.opportunity
                 - uesio/io.box:
                     uesio.variant: uesio/io.section
                     components:
@@ -83,7 +109,7 @@ definition:
                                   - uesio/io.tabs:
                                       tabs:
                                         - id: audit
-                                          label: Audit Fields
+                                          label: Audit
                                           components:
                                             - uesio/io.field:
                                                 fieldId: uesio/core.createdby
@@ -98,8 +124,11 @@ definition:
                                         - id: comments
                                           label: Comments
                                           components:
-                                        - id: attachments
-                                          label: Attachments
+                                        - id: files
+                                          label: Files
+                                          components:
+                                        - id: tasks
+                                          label: Tasks
                                           components:
     - uesio/io.box:
         uesio.display:

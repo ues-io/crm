@@ -14,13 +14,13 @@ definition:
       - tracking-wider
       - uppercase
       - text-xs
-      - p-4
-      - text-rose-800
-      - bg-rose-50
+      - px-4
+      - py-2
+      - text-slate-800
+      - border-b-2
+      - border-slate-800
       - font-normal
       - whitespace-nowrap
-      - first:rounded-l-lg
-      - last:rounded-r-lg
     headerCellInner:
       - text-left
       - grid

@@ -108,7 +108,6 @@ definition:
                       - field: uesio/crm.title
                       - field: uesio/crm.email
                     uesio.id: contactTable
-                    selectable: true
                     mode: READ
                     wire: contact
                     pagesize: 10
