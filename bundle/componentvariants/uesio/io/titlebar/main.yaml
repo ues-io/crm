@@ -6,4 +6,7 @@ definition:
     root:
       - bg-white
       - border-0
+    avatar:
+      - border-0
+      - text-4xl
 public: true

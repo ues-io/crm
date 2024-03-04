@@ -9,6 +9,7 @@ definition:
         uesio/crm.description:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
+        uesio/crm.account:
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
@@ -83,6 +84,7 @@ definition:
                       - field: uesio/crm.description
                       - field: uesio/crm.close_date
                       - field: uesio/crm.expected_revenue
+                      - field: uesio/crm.account
                     uesio.id: opportunityTable
                     mode: READ
                     wire: opportunity

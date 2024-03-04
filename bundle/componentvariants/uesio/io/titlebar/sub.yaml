@@ -1,0 +1,12 @@
+name: sub
+label: Sub
+extends: uesio/io.default
+definition:
+  uesio.styleTokens:
+    root:
+      - bg-white
+      - border-b-2
+      - border-slate-800
+      - py-2
+      - mb-4
+public: true

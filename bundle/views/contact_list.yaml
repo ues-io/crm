@@ -96,10 +96,6 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.contact
-                      - icon: delete
-                        text: $Label{uesio/io.delete}
-                        signals:
-                          - signal: wire/TOGGLE_DELETE_STATUS
                     columns:
                       - field: uesio/crm.salutation
                       - field: uesio/crm.firstname

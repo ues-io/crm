@@ -9,6 +9,8 @@ definition:
         uesio/crm.description:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
+        uesio/crm.account:
+        uesio/crm.contact:
         uesio/core.createdby:
         uesio/core.createdat:
         uesio/core.updatedby:
@@ -100,10 +102,17 @@ definition:
                                       fieldId: uesio/crm.topic
                                   - uesio/io.field:
                                       fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.close_date
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.expected_revenue
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.two_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.close_date
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.expected_revenue
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.account
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.contact
                             - uesio/io.box:
                                 components:
                                   - uesio/io.tabs:
