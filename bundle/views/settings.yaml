@@ -1,0 +1,111 @@
+name: settings
+definition:
+  # Wires connect to data in collections
+  wires:
+    leadsources:
+      collection: uesio/crm.lead_source
+      fields:
+        uesio/crm.api_name:
+        uesio/crm.label:
+        uesio/crm.active:
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.titlebar:
+              uesio.variant: uesio/crm.main
+              title: Settings
+              subtitle: Personalize ues.io CRM for your organization.
+          - uesio/io.box:
+              uesio.variant: uesio/io.section
+              components:
+                - uesio/io.tabs:
+                    tabs:
+                      - id: leadsources
+                        label: Lead Sources
+                        components:
+                          - uesio/io.grid:
+                              uesio.variant: uesio/crm.three_columns
+                              items:
+                                - uesio/io.box:
+                                    uesio.styleTokens:
+                                      root:
+                                        - col-span-2
+                                    components:
+                                      - uesio/io.table:
+                                          uesio.variant: uesio/crm.main
+                                          columns:
+                                            - field: uesio/crm.api_name
+                                            - field: uesio/crm.label
+                                            - field: uesio/crm.active
+                                          uesio.id: leadsources
+                                          mode: READ
+                                          wire: leadsources
+                                          pagesize: 10
+                                - uesio/io.box:
+                                    components:
+                                      - uesio/io.titlebar:
+                                          title:
+                                          uesio.variant: uesio/crm.sub_noborder
+                                          actions:
+                                            - uesio/io.group:
+                                                components:
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CREATE_RECORD
+                                                          wire: leadsources
+                                                          prepend: true
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_EDIT_MODE
+                                                          targettype: specific
+                                                          componentid: leadsources
+                                                      text: $Label{uesio/io.create}
+                                                      uesio.variant: uesio/crm.primary
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/SAVE
+                                                          wires:
+                                                            - leadsources
+                                                      text: $Label{uesio/io.save}
+                                                      hotkey: "meta+s"
+                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: leadsources
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CANCEL
+                                                          wire: leadsources
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: leadsources
+                                                      text: $Label{uesio/io.cancel}
+                                                      uesio.variant: uesio/io.secondary
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: TOGGLE_MODE
+                                                          targettype: specific
+                                                          componentid: leadsources
+                                                      text: Edit
+                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.display:
+                                                        - type: fieldMode
+                                                          mode: READ
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Specify the valid lead sources for your organization. A lead source is where the data for a lead originated.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Only active lead sources will appear when selecting a source for a new lead.
+                      - id: opportunitystages
+                        label: Opportunity Stages
+                        components:

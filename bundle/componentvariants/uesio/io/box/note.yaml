@@ -1,0 +1,11 @@
+name: note
+label: Note
+definition:
+  uesio.styleTokens:
+    root:
+      - bg-rose-100
+      - p-4
+      - text-base
+      - font-light
+      - text-rose-900
+public: true

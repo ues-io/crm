@@ -1,0 +1,5 @@
+name: api_name
+label: API Name
+type: TEXT
+required: true
+createonly: true
