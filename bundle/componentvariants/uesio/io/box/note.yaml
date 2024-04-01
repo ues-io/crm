@@ -1,5 +1,6 @@
 name: note
 label: Note
+public: true
 definition:
   uesio.styleTokens:
     root:
@@ -8,4 +9,3 @@ definition:
       - text-base
       - font-light
       - text-rose-900
-public: true

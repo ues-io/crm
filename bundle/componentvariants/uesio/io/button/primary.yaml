@@ -1,5 +1,6 @@
 name: primary
 label: Primary
+public: true
 extends: uesio/io.secondary
 definition:
   uesio.styleTokens:
@@ -7,4 +8,3 @@ definition:
       - bg-rose-800
       - border-rose-800
       - text-white
-public: true

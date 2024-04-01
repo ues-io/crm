@@ -30,7 +30,7 @@ definition:
               subtitle: Welcome to ues.io CRM.
               avatar:
                 - uesio/io.text:
-                    text: "👋"
+                    text: "\U0001F44B"
           - uesio/io.box:
               uesio.variant: uesio/io.section
               components:

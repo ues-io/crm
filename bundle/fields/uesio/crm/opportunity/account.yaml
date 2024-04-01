@@ -1,5 +1,5 @@
 name: account
-type: REFERENCE
 label: Account
+type: REFERENCE
 reference:
-  collection: uesio/crm.account
+  collection: account

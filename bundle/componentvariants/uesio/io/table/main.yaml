@@ -1,5 +1,6 @@
 name: main
 label: Main
+public: true
 definition:
   uesio.styleTokens:
     root:
@@ -62,4 +63,3 @@ definition:
       - p-6
       - border-b-1
       - border-slate-100
-public: true

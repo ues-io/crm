@@ -1,5 +1,6 @@
 name: sub_noborder
 label: Sub No Border
+public: true
 extends: uesio/io.default
 definition:
   uesio.styleTokens:
@@ -7,4 +8,3 @@ definition:
       - bg-white
       - py-2
       - mb-4
-public: true

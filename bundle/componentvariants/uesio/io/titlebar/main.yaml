@@ -1,5 +1,6 @@
 name: main
 label: Main
+public: true
 extends: uesio/io.main
 definition:
   uesio.styleTokens:
@@ -9,4 +10,3 @@ definition:
     avatar:
       - border-0
       - text-4xl
-public: true
