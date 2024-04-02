@@ -24,10 +24,52 @@ definition:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
         uesio/crm.website:
+        uesio/crm.company: {}
+        uesio/core.id: {}
+        uesio/crm.lead_status: {}
+        uesio/crm.lead_rating: {}
+        uesio/crm.next_steps: {}
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
+    tasks:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.due_by: {}
+        uesio/crm.name: {}
+        uesio/crm.related_lead: {}
+      collection: uesio/crm.task
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.related_lead
+          operator: IN
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
+    events:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.related_lead
+          operator: IN
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -51,15 +93,47 @@ definition:
                                   - signal: wire/SAVE
                                     wires:
                                       - lead
+                                      - tasks
+                                      - events
                                 text: Save
                                 hotkey: "meta+s"
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.primary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: lead
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: tasks
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: events
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL
                                     wire: lead
+                                  - signal: wire/CANCEL
+                                    wire: tasks
+                                  - signal: wire/CANCEL
+                                    wire: events
                                 text: Cancel
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: lead
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: tasks
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: events
                             - uesio/io.button:
                                 signals:
                                   - signal: component/CALL
@@ -67,49 +141,158 @@ definition:
                                     componentsignal: TOGGLE_MODE
                                     targettype: specific
                                     componentid: leadList
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: TOGGLE_MODE
+                                    targettype: specific
+                                    componentid: tasks_table
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: TOGGLE_MODE
+                                    targettype: specific
+                                    componentid: events_table
                                 text: Mode
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: wireHasNoChanges
+                                    operator: EQUALS
+                                    wire: lead
                 - uesio/io.box:
                     uesio.variant: uesio/io.section
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.firstname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.fullname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.industry
-                      - uesio/io.field:
-                          fieldId: uesio/crm.is_converted
-                      - uesio/io.field:
-                          fieldId: uesio/crm.lastname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.location
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_zip_postal
-                      - uesio/io.field:
-                          fieldId: uesio/crm.no_employees
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_business
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_mobile
-                      - uesio/io.field:
-                          fieldId: uesio/crm.topic
-                      - uesio/io.field:
-                          fieldId: uesio/crm.website
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.two_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.topic
+                            - uesio/io.field:
+                                fieldId: uesio/crm.company
+                            - uesio/io.field:
+                                fieldId: uesio/crm.industry
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.lead_status
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.lead_rating
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.next_steps
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.is_converted
+                                      uesio.display:
+                                        - type: fieldValue
+                                          operator: EQUALS
+                                          wire: lead
+                                          field: uesio/crm.lead_status
+                                          value: Closed - Converted
+                          uesio.styleTokens:
+                            root:
+                              - p-3
+                              - border-2
+                              - rounded-md
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.three_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.firstname
+                            - uesio/io.field:
+                                fieldId: uesio/crm.lastname
+                            - uesio/io.field:
+                                fieldId: uesio/crm.email
+                            - uesio/io.field:
+                                fieldId: uesio/crm.description
+                            - uesio/io.field:
+                                fieldId: uesio/crm.website
+                            - uesio/io.field:
+                                fieldId: uesio/crm.no_employees
+                          uesio.styleTokens:
+                            root:
+                              - p-3
+                              - border-2
+                              - rounded-md
+                              - mt-5
+                - uesio/io.accordion:
+                    uesio.variant: ""
+                    title: Detail
+                    subtitle: null
+                    expandicon: expand_more
+                    collapseicon: expand_less
+                    expanded: false
+                    components:
+                      - uesio/io.grid:
+                          uesio.variant: uesio/io.four_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.fullname
+                            - uesio/io.field:
+                                fieldId: uesio/crm.phone
+                            - uesio/io.field:
+                                fieldId: uesio/crm.phone_business
+                            - uesio/io.field:
+                                fieldId: uesio/crm.phone_mobile
+                            - uesio/io.field:
+                                fieldId: uesio/crm.location
+                            - uesio/io.field:
+                                fieldId: uesio/crm.mailing_city
+                            - uesio/io.field:
+                                fieldId: uesio/crm.mailing_street
+                            - uesio/io.field:
+                                fieldId: uesio/crm.mailing_state_province
+                            - uesio/io.field:
+                                fieldId: uesio/crm.mailing_country
+                            - uesio/io.field:
+                                fieldId: uesio/crm.mailing_zip_postal
+                          uesio.styleTokens:
+                            root:
+                              - p-3
+                              - border-2
+                              - mt-1
+                              - rounded-lg
+                    uesio.styleTokens:
+                      root:
+                        - border-gray-200
+                        - border-2
+                        - -mt-5
+                        - ml-10
+                        - mr-10
+                        - rounded-md
+                      components: []
+                      content: []
+          - uesio/io.tabs:
+              uesio.variant: uesio/io.default
+              tabs:
+                - id: tasks
+                  label: Tasks
+                  components:
+                    - uesio/io.table:
+                        wire: tasks
+                        columns:
+                          - field: uesio/crm.name
+                          - field: uesio/crm.description
+                          - field: uesio/crm.due_by
+                        mode: READ
+                        uesio.id: tasks_table
+                  icon: task_alt
+                - id: events
+                  label: Events
+                  components:
+                    - uesio/io.table:
+                        wire: events
+                        columns:
+                          - field: uesio/crm.name
+                          - field: uesio/crm.description
+                          - field: uesio/crm.location
+                          - field: uesio/crm.starttime
+                          - field: uesio/crm.endtime
+                        uesio.id: events_table
+                  icon: calendar_month
+              uesio.id: leads_tab
+              uesio.styleTokens:
+                root:
+                  - pt-6
+                  - pl-10
+                  - pr-10
     - uesio/io.box:
         uesio.display:
           - type: paramIsNotSet

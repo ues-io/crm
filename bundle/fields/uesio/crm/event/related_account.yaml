@@ -1,0 +1,5 @@
+name: related_account
+label: Account
+type: REFERENCE
+reference:
+  collection: account

@@ -1,0 +1,9 @@
+name: rating
+options:
+  - label: Warm
+    value: Warm
+  - label: Hot
+    value: Hot
+  - label: Cold
+    value: Cold
+blank_option_label: None Selected
