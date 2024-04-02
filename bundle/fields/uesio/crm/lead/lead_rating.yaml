@@ -1,0 +1,4 @@
+name: lead_rating
+label: Rating
+type: SELECT
+selectList: rating

@@ -1,0 +1,5 @@
+name: related_lead
+label: Lead
+type: REFERENCE
+reference:
+  collection: lead

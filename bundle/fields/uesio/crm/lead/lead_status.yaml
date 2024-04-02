@@ -1,0 +1,4 @@
+name: lead_status
+label: Lead Status
+type: SELECT
+selectList: lead_status

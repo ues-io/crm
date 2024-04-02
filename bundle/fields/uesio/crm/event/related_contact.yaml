@@ -1,0 +1,5 @@
+name: related_contact
+label: Contact
+type: REFERENCE
+reference:
+  collection: contact
