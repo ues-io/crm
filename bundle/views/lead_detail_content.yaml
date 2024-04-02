@@ -158,7 +158,7 @@ definition:
                                     operator: EQUALS
                                     wire: lead
                 - uesio/io.box:
-                    uesio.variant: uesio/io.section
+                    uesio.variant: uesio/crm.section
                     components:
                       - uesio/io.grid:
                           uesio.variant: uesio/crm.two_columns
@@ -186,11 +186,9 @@ definition:
                                           wire: lead
                                           field: uesio/crm.lead_status
                                           value: Closed - Converted
-                          uesio.styleTokens:
-                            root:
-                              - p-3
-                              - border-2
-                              - rounded-md
+                - uesio/io.box:
+                    uesio.variant: uesio/crm.section
+                    components:
                       - uesio/io.grid:
                           uesio.variant: uesio/crm.three_columns
                           items:
@@ -206,14 +204,8 @@ definition:
                                 fieldId: uesio/crm.website
                             - uesio/io.field:
                                 fieldId: uesio/crm.no_employees
-                          uesio.styleTokens:
-                            root:
-                              - p-3
-                              - border-2
-                              - rounded-md
-                              - mt-5
                 - uesio/io.accordion:
-                    uesio.variant: ""
+                    uesio.variant: uesio/crm.accordion
                     title: Detail
                     subtitle: null
                     expandicon: expand_more
@@ -243,63 +235,43 @@ definition:
                                 fieldId: uesio/crm.mailing_country
                             - uesio/io.field:
                                 fieldId: uesio/crm.mailing_zip_postal
-                          uesio.styleTokens:
-                            root:
-                              - p-3
-                              - border-2
-                              - mt-1
-                              - rounded-lg
-                    uesio.styleTokens:
-                      root:
-                        - border-gray-200
-                        - border-2
-                        - -mt-5
-                        - ml-10
-                        - mr-10
-                        - rounded-md
-                      components: []
-                      content: []
-          - uesio/io.tabs:
-              uesio.variant: uesio/io.default
-              tabs:
-                - id: tasks
-                  label: Tasks
-                  components:
-                    - uesio/io.table:
-                        wire: tasks
-                        columns:
-                          - field: uesio/crm.name
-                          - field: uesio/crm.description
-                          - field: uesio/crm.due_by
-                        mode: READ
-                        uesio.id: tasks_table
-                  icon: task_alt
-                - id: events
-                  label: Events
-                  components:
-                    - uesio/io.table:
-                        wire: events
-                        columns:
-                          - field: uesio/crm.name
-                          - field: uesio/crm.description
-                          - field: uesio/crm.location
-                          - field: uesio/crm.starttime
-                          - field: uesio/crm.endtime
-                        uesio.id: events_table
-                  icon: calendar_month
-              uesio.id: leads_tab
-              uesio.styleTokens:
-                root:
-                  - pt-6
-                  - pl-10
-                  - pr-10
+          - uesio/io.box:
+              components:
+                - uesio/io.tabs:
+                    uesio.variant: uesio/io.default
+                    tabs:
+                      - id: tasks
+                        label: Tasks
+                        components:
+                          - uesio/io.table:
+                              wire: tasks
+                              columns:
+                                - field: uesio/crm.name
+                                - field: uesio/crm.description
+                                - field: uesio/crm.due_by
+                              mode: READ
+                              uesio.id: tasks_table
+                        icon: task_alt
+                      - id: events
+                        label: Events
+                        components:
+                          - uesio/io.table:
+                              wire: events
+                              columns:
+                                - field: uesio/crm.name
+                                - field: uesio/crm.description
+                                - field: uesio/crm.location
+                                - field: uesio/crm.starttime
+                                - field: uesio/crm.endtime
+                              uesio.id: events_table
+                        icon: calendar_month
+                    uesio.id: leads_tab
+              uesio.variant: uesio/io.section
     - uesio/io.box:
+        uesio.variant: uesio/io.section
         uesio.display:
           - type: paramIsNotSet
             param: recordid
-        uesio.styleTokens:
-          root:
-            - p-10
         components:
           - uesio/io.text:
               text: Select a record
