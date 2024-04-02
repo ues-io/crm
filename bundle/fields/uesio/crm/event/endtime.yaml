@@ -1,3 +1,4 @@
 name: endtime
 label: Endtime
 type: TIMESTAMP
+required: true
