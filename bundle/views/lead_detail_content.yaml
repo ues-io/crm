@@ -95,6 +95,21 @@ definition:
                                       - lead
                                       - tasks
                                       - events
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: leadList
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: tasks_table
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: events_table
                                 text: Save
                                 hotkey: "meta+s"
                                 uesio.variant: uesio/crm.primary
@@ -243,27 +258,61 @@ definition:
                       - id: tasks
                         label: Tasks
                         components:
-                          - uesio/io.table:
-                              wire: tasks
-                              columns:
-                                - field: uesio/crm.name
-                                - field: uesio/crm.description
-                                - field: uesio/crm.due_by
-                              mode: READ
-                              uesio.id: tasks_table
+                          - uesio/io.box:
+                              components:
+                                - uesio/io.button:
+                                    text: New
+                                    icon: add
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: wire/CREATE_RECORD
+                                        stepId: new_task
+                                        wire: tasks
+                                        prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: tasks_table
+                                - uesio/io.table:
+                                    wire: tasks
+                                    columns:
+                                      - field: uesio/crm.name
+                                      - field: uesio/crm.description
+                                      - field: uesio/crm.due_by
+                                    mode: READ
+                                    uesio.id: tasks_table
                         icon: task_alt
                       - id: events
                         label: Events
                         components:
-                          - uesio/io.table:
-                              wire: events
-                              columns:
-                                - field: uesio/crm.name
-                                - field: uesio/crm.description
-                                - field: uesio/crm.location
-                                - field: uesio/crm.starttime
-                                - field: uesio/crm.endtime
-                              uesio.id: events_table
+                          - uesio/io.box:
+                              components:
+                                - uesio/io.button:
+                                    text: New
+                                    icon: add
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: wire/CREATE_RECORD
+                                        stepId: create_event
+                                        wire: events
+                                        prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: events_table
+                                - uesio/io.table:
+                                    wire: events
+                                    columns:
+                                      - field: uesio/crm.name
+                                      - field: uesio/crm.description
+                                      - field: uesio/crm.location
+                                      - field: uesio/crm.starttime
+                                      - field: uesio/crm.endtime
+                                    uesio.id: events_table
                         icon: calendar_month
                     uesio.id: leads_tab
               uesio.variant: uesio/io.section
