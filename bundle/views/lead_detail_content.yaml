@@ -156,16 +156,6 @@ definition:
                                     componentsignal: TOGGLE_MODE
                                     targettype: specific
                                     componentid: leadList
-                                  - signal: component/CALL
-                                    component: uesio/io.table
-                                    componentsignal: TOGGLE_MODE
-                                    targettype: specific
-                                    componentid: tasks_table
-                                  - signal: component/CALL
-                                    component: uesio/io.table
-                                    componentsignal: TOGGLE_MODE
-                                    targettype: specific
-                                    componentid: events_table
                                 text: Mode
                                 uesio.variant: uesio/io.secondary
                                 uesio.display:
@@ -275,6 +265,17 @@ definition:
                                         componentsignal: TOGGLE_MODE
                                         targettype: specific
                                         componentid: tasks_table
+                                - uesio/io.button:
+                                    text: MODE
+                                    icon: edit
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: tasks_table
                                 - uesio/io.table:
                                     wire: tasks
                                     columns:
@@ -299,6 +300,17 @@ definition:
                                         stepId: create_event
                                         wire: events
                                         prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: events_table
+                                - uesio/io.button:
+                                    text: MODE
+                                    icon: edit
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
                                       - signal: component/CALL
                                         component: uesio/io.table
                                         componentsignal: TOGGLE_MODE
