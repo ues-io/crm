@@ -31,6 +31,88 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
+    contacts:
+      fields:
+        uesio/crm.firstname: {}
+        uesio/crm.gender: {}
+        uesio/crm.lastname: {}
+        uesio/crm.email: {}
+        uesio/crm.description: {}
+        uesio/crm.department: {}
+        uesio/crm.account: {}
+        uesio/core.id: {}
+      collection: uesio/crm.contact
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - id: accid
+          field: uesio/crm.account
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
+    opportunities:
+      fields:
+        uesio/crm.close_date: {}
+        uesio/crm.contact:
+          fields:
+            uesio/crm.account: {}
+        uesio/crm.description: {}
+        uesio/crm.expected_revenue: {}
+        uesio/crm.topic: {}
+        uesio/crm.account: {}
+      collection: uesio/crm.opportunity
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - id: oppaccid
+          field: uesio/crm.account
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
+    tasks:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.due_by: {}
+        uesio/crm.name: {}
+        uesio/crm.related_contact: null
+        uesio/crm.related_account: {}
+      collection: uesio/crm.task
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - id: acctaskid
+          field: uesio/crm.related_account
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
+    events:
+      fields:
+        uesio/crm.related_account: null
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/crm.related_contact:
+          fields:
+            uesio/crm.account: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - id: accid
+          field: uesio/crm.related_account
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -45,7 +127,7 @@ definition:
                 - uesio/io.titlebar:
                     title: $RecordMeta{name}
                     subtitle: $Collection{label}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
                       - uesio/io.group:
                           components:
@@ -54,15 +136,65 @@ definition:
                                   - signal: wire/SAVE
                                     wires:
                                       - account
+                                      - events
+                                      - tasks
+                                      - contacts
+                                      - opportunities
                                 text: Save
                                 hotkey: "meta+s"
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: account
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: tasks
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: events
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: contacts
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: opportunities
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL
                                     wire: account
+                                  - signal: wire/CANCEL
+                                    wire: contacts
+                                  - signal: wire/CANCEL
+                                    wire: opportunities
+                                  - signal: wire/CANCEL
+                                    wire: tasks
+                                  - signal: wire/CANCEL
+                                    wire: events
                                 text: Cancel
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: account
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: tasks
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: events
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: contacts
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: opportunities
                             - uesio/io.button:
                                 signals:
                                   - signal: component/CALL
@@ -72,65 +204,417 @@ definition:
                                     componentid: accountList
                                 text: Mode
                                 uesio.variant: uesio/io.secondary
+                    avatar:
+                      - uesio/io.image:
+                          loading: lazy
+                          src: $UserFile{uesio/crm.logo}
+                          uesio.variant: ""
+                          uesio.styleTokens:
+                            root:
+                              - rounded-lg
+                              - p-1
+                          width: 120
+                    uesio.styleTokens:
+                      root:
+                        - p-8
                 - uesio/io.box:
-                    uesio.variant: uesio/io.section
+                    uesio.variant: ""
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.account_type
-                      - uesio/io.field:
-                          fieldId: uesio/crm.annual_revenue
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_zip
-                      - uesio/io.field:
-                          fieldId: uesio/crm.contacts
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.industry
-                      - uesio/io.field:
-                          fieldId: uesio/crm.logo
-                      - uesio/io.field:
-                          fieldId: uesio/crm.name
-                      - uesio/io.field:
-                          fieldId: uesio/crm.no_employees
-                      - uesio/io.field:
-                          fieldId: uesio/crm.parent_account
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_zip
-                      - uesio/io.field:
-                          fieldId: uesio/crm.website
-    - uesio/io.box:
-        uesio.display:
-          - type: paramIsNotSet
-            param: recordid
-        uesio.styleTokens:
-          root:
-            - p-10
-        components:
-          - uesio/io.text:
-              text: Select a record
+                      - uesio/io.box:
+                          components:
+                            - uesio/io.grid:
+                                uesio.variant: uesio/io.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.name
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.parent_account
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.industry
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.account_type
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.description
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.annual_revenue
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.phone
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.email
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.no_employees
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.logo
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.website
+                          uesio.variant: uesio/crm.section
+                      - uesio/io.accordion:
+                          uesio.variant: uesio/crm.accordion
+                          title: Billing & Shipping
+                          subtitle: null
+                          expandicon: expand_more
+                          collapseicon: expand_less
+                          expanded: false
+                          components:
+                            - uesio/io.grid:
+                                uesio.variant: uesio/io.two_columns
+                                items:
+                                  - uesio/io.grid:
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.billing_street
+                                            labelPosition: top
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.billing_city
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.billing_country
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.billing_state_province
+                                            labelPosition: top
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.billing_zip
+                                            labelPosition: top
+                                      uesio.variant: uesio/io.one_column
+                                      uesio.styleTokens:
+                                        root:
+                                          - p-8
+                                  - uesio/io.grid:
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.shipping_street
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.shipping_city
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.shipping_country
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.shipping_state_province
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.shipping_zip
+                                      uesio.variant: uesio/io.one_column
+                                      uesio.styleTokens:
+                                        root:
+                                          - p-8
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.tabs:
+                                uesio.variant: uesio/io.default
+                                tabs:
+                                  - id: contactstable
+                                    label: Contacts
+                                    components:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: newContact
+                                              wire: contacts
+                                              prepend: true
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: contactstable
+                                            - signal: wire/UPDATE_FIELDS
+                                              wire: contacts
+                                              fields:
+                                                - field: uesio/crm.account->uesio/core.id
+                                                  value: $Param{recordid}
+                                      - uesio/io.button:
+                                          text: Mode
+                                          icon: edit
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: contactstable
+                                          uesio.styleTokens:
+                                            root: []
+                                      - uesio/io.table:
+                                          wire: contacts
+                                          columns:
+                                            - field: uesio/crm.firstname
+                                            - field: uesio/crm.lastname
+                                            - field: uesio/crm.email
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: View
+                                                    icon: remove_red_eye
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: route/NAVIGATE_TO_ROUTE
+                                                        route: uesio/crm.contactdetail
+                                                        params:
+                                                          recordid: ${uesio/core.id}
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: contacts
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: Delete
+                                                    icon: delete
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: wire/MARK_FOR_DELETE
+                                                        wire: contacts
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: contacts
+                                          pagesize: 10
+                                          mode: READ
+                                          uesio.id: contactstable
+                                  - id: oppstable
+                                    label: Opportunities
+                                    components:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: oppcreate
+                                              wire: opportunities
+                                              prepend: true
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: oppstable
+                                            - signal: wire/UPDATE_FIELDS
+                                              wire: opportunities
+                                              fields:
+                                                - field: uesio/crm.account->uesio/core.id
+                                                  value: $Param{recordid}
+                                      - uesio/io.button:
+                                          text: Mode
+                                          icon: edit
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          uesio.styleTokens:
+                                            root: []
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: oppstable
+                                      - uesio/io.table:
+                                          columns:
+                                            - field: uesio/crm.topic
+                                            - field: uesio/crm.description
+                                            - field: uesio/crm.expected_revenue
+                                            - field: uesio/crm.contact
+                                              reference:
+                                                conditions:
+                                                  - field: uesio/crm.account
+                                                    value: ${uesio/crm.account->uesio/core.id}
+                                            - field: uesio/crm.close_date
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: View
+                                                    icon: remove_red_eye
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: route/NAVIGATE_TO_ROUTE
+                                                        route: uesio/crm.opportunitydetail
+                                                        params:
+                                                          recordid: ${uesio/core.id}
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: opportunities
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: Delete
+                                                    icon: delete
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: wire/MARK_FOR_DELETE
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: opportunities
+                                          wire: opportunities
+                                          mode: READ
+                                          pagesize: 10
+                                          uesio.id: oppstable
+                                  - label: Tasks
+                                    id: taskstable
+                                    components:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: createtask
+                                              wire: tasks
+                                              prepend: true
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: taskstable
+                                            - signal: wire/UPDATE_FIELDS
+                                              wire: tasks
+                                              fields:
+                                                - field: uesio/crm.related_account->uesio/core.id
+                                                  value: $Param{recordid}
+                                      - uesio/io.button:
+                                          text: Mode
+                                          icon: edit
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: taskstable
+                                          uesio.styleTokens:
+                                            root: []
+                                      - uesio/io.table:
+                                          wire: tasks
+                                          uesio.id: taskstable
+                                          mode: READ
+                                          pagesize: 10
+                                          columns:
+                                            - field: uesio/crm.name
+                                            - field: uesio/crm.description
+                                            - field: uesio/crm.due_by
+                                            - field: uesio/crm.related_contact
+                                              reference:
+                                                conditions:
+                                                  - field: uesio/crm.account
+                                                    value: ${uesio/crm.related_account->uesio/core.id}
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: View
+                                                    icon: remove_red_eye
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: route/NAVIGATE_TO_ROUTE
+                                                        route: uesio/crm.taskdetail
+                                                        params:
+                                                          recordid: ${uesio/core.id}
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: tasks
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: Delete
+                                                    icon: delete
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: wire/MARK_FOR_DELETE
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: tasks
+                                  - label: Events
+                                    id: eventstable
+                                    components:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: createevent
+                                              wire: events
+                                              prepend: true
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: eventstable
+                                            - signal: wire/UPDATE_FIELDS
+                                              wire: events
+                                              fields:
+                                                - field: uesio/crm.related_account->uesio/core.id
+                                                  value: $Param{recordid}
+                                      - uesio/io.button:
+                                          text: Mode
+                                          icon: edit
+                                          uesio.variant: uesio/builder.actionbutton
+                                          iconPlacement: start
+                                          uesio.styleTokens:
+                                            root: []
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: eventstable
+                                      - uesio/io.table:
+                                          wire: events
+                                          uesio.id: eventstable
+                                          mode: READ
+                                          pagesize: 10
+                                          columns:
+                                            - field: uesio/crm.name
+                                            - field: uesio/crm.description
+                                            - field: uesio/crm.location
+                                            - field: uesio/crm.starttime
+                                            - field: uesio/crm.endtime
+                                            - field: uesio/crm.related_contact
+                                              reference:
+                                                conditions:
+                                                  - field: uesio/crm.account
+                                                    value: ${uesio/crm.related_account->uesio/core.id}
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: View
+                                                    icon: remove_red_eye
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals: []
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: events
+                                            - type: custom
+                                              components:
+                                                - uesio/io.button:
+                                                    text: Delete
+                                                    icon: delete
+                                                    uesio.variant: uesio/builder.actionbutton
+                                                    iconPlacement: start
+                                                    signals:
+                                                      - signal: wire/MARK_FOR_DELETE
+                                                    uesio.display:
+                                                      - type: wireHasNoChanges
+                                                        operator: EQUALS
+                                                        wire: events
+                                uesio.id: detailtab
   params:
     recordid:
       type: RECORD
       required: true
       collection: uesio/crm.account
+  panels: {}
