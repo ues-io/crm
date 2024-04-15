@@ -1,0 +1,5 @@
+name: eventlist
+path: event
+view: event_list
+theme: uesio/core.default
+title: Events List View

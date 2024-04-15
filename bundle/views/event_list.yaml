@@ -1,0 +1,258 @@
+name: event_list
+definition:
+  # Wires connect to data in collections
+  wires:
+    events:
+      fields:
+        uesio/crm.related_account: {}
+        uesio/crm.related_contact: {}
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: true
+        create: false
+    eventdetail:
+      fields:
+        uesio/crm.related_account: {}
+        uesio/crm.related_contact: {}
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: false
+        create: false
+      conditions:
+        - id: eventid
+          field: uesio/core.id
+          operator: CONTAINS
+          valueSource: VALUE
+          value: recordid
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/io.titlebar:
+              title: $Collection{events:pluralLabel}
+              subtitle: Events View
+              uesio.variant: uesio/crm.main
+              actions:
+                - uesio/io.group:
+                    components:
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: events
+                              prepend: true
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_EDIT_MODE
+                              targettype: specific
+                              componentid: eventsTable
+                          text: $Label{uesio/io.create}
+                          uesio.variant: uesio/crm.primary
+                          uesio.display: []
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - events
+                          text: $Label{uesio/io.save}
+                          hotkey: "meta+s"
+                          uesio.variant: uesio/io.secondary
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: events
+                      - uesio/io.button:
+                          signals:
+                            - signal: wire/CANCEL
+                              wire: events
+                          uesio.display:
+                            - type: wireHasChanges
+                              wire: events
+                          text: $Label{uesio/io.cancel}
+                          uesio.variant: uesio/io.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: eventsTable
+                          text: Mode
+                          uesio.variant: uesio/io.secondary
+          - uesio/io.box:
+              uesio.variant: uesio/io.section
+              components:
+                - uesio/io.accordion:
+                    uesio.variant: uesio/crm.accordion
+                    title: Calendar
+                    subtitle: null
+                    expandicon: expand_more
+                    collapseicon: expand_less
+                    expanded: false
+                    components:
+                      - uesio/io.calendar:
+                          uesio.variant: uesio/io.default
+                          weekends: true
+                          events:
+                            - label: ${uesio/crm.name}
+                              wire: events
+                              startField: uesio/crm.starttime
+                              endField: uesio/crm.endtime
+                          onEventClick:
+                            - signal: wire/SET_CONDITION_VALUE
+                              wire: eventdetail
+                              conditionId: eventid
+                              value: ${uesio/core.id}
+                            - signal: wire/LOAD
+                              wires:
+                                - eventdetail
+                            - signal: panel/OPEN
+                              panel: viewevent
+                          onDateClick:
+                            - signal: wire/EMPTY
+                              wire: eventdetail
+                            - signal: wire/CREATE_RECORD
+                              stepId: newevent
+                              wire: eventdetail
+                            - signal: panel/OPEN
+                              panel: viewevent
+                    uesio.styleTokens:
+                      root: []
+                - uesio/io.accordion:
+                    uesio.variant: uesio/crm.accordion
+                    title: Events List
+                    subtitle: null
+                    expandicon: expand_more
+                    collapseicon: expand_less
+                    expanded: true
+                    components:
+                      - uesio/io.table:
+                          uesio.variant: uesio/crm.main
+                          rowactions:
+                            - icon: visibility
+                              text: View
+                              uesio.display:
+                                - type: recordIsNotNew
+                              signals:
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  viewtype: detail
+                                  recordid: ${uesio/core.id}
+                                  collection: uesio/crm.event
+                          columns:
+                            - field: uesio/crm.name
+                            - field: uesio/crm.description
+                            - field: uesio/crm.starttime
+                            - field: uesio/crm.endtime
+                            - field: uesio/crm.location
+                            - field: uesio/crm.related_account
+                            - field: uesio/crm.related_contact
+                            - field: uesio/crm.related_lead
+                          uesio.id: eventsTable
+                          mode: READ
+                          wire: events
+                          pagesize: 10
+                    uesio.styleTokens:
+                      root:
+                        - mt-8
+        header: []
+  panels:
+    viewevent:
+      uesio.type: uesio/io.dialog
+      components:
+        - uesio/io.box:
+            components:
+              - uesio/io.list:
+                  mode: EDIT
+                  wire: eventdetail
+                  uesio.id: eventdetaillist
+                  components:
+                    - uesio/io.field:
+                        fieldId: uesio/crm.name
+                    - uesio/io.field:
+                        fieldId: uesio/crm.description
+                    - uesio/io.group:
+                        columnGap: 10px
+                        components:
+                          - uesio/io.field:
+                              fieldId: uesio/crm.starttime
+                          - uesio/io.field:
+                              fieldId: uesio/crm.endtime
+                    - uesio/io.field:
+                        fieldId: uesio/crm.location
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_contact
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_account
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_lead
+                    - uesio/io.group:
+                        columnGap: 10px
+                        components:
+                          - uesio/io.button:
+                              text: Save
+                              icon: ""
+                              uesio.variant: uesio/crm.primary
+                              iconPlacement: start
+                              signals:
+                                - signal: wire/SAVE
+                                  wires:
+                                    - eventdetail
+                          - uesio/io.button:
+                              text: Cancel
+                              icon: ""
+                              uesio.variant: uesio/io.secondary
+                              iconPlacement: start
+                              signals:
+                                - signal: wire/CANCEL
+                                  wire: eventdetail
+                                - signal: panel/CLOSE
+                                  panel: viewevent
+                        uesio.styleTokens:
+                          root: []
+                        alignItems: end
+                        uesio.variant: uesio/io.default
+                        justifyContent: space-between
+                        uesio.display:
+                          - type: group
+                            conjunction: AND
+                            conditions:
+                              - type: fieldValue
+                                operator: NOT_EQUALS
+                                wire: eventdetail
+                                field: uesio/crm.name
+                                value: ""
+                              - type: wireHasChanges
+                                operator: EQUALS
+                                wire: eventdetail
+                                fields:
+                                  - uesio/crm.related_account
+                                  - uesio/crm.related_contact
+                                  - uesio/crm.description
+                                  - uesio/crm.endtime
+                                  - uesio/crm.related_lead
+                                  - uesio/crm.location
+                                  - uesio/crm.name
+                                  - uesio/crm.starttime
+      width: 40%
+      height: 60%
+      title: Event Details
+      uesio.variant: uesio/io.default
+      afterClose:
+        - signal: wire/LOAD_NEXT_BATCH
+          wires:
+            - events

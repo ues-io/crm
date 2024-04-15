@@ -1,0 +1,5 @@
+name: eventnew
+path: eventnew
+view: event_new
+theme: uesio/core.default
+title: Event Create New View
