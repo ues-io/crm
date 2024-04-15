@@ -1,0 +1,5 @@
+name: eventdetail
+path: event/detail/{recordid}
+view: event_detail
+theme: uesio/core.default
+title: Event Detail View

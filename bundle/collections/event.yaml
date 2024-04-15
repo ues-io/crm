@@ -1,3 +1,4 @@
 name: event
 label: Event
 pluralLabel: Events
+nameField: name
