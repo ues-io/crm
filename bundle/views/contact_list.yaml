@@ -26,8 +26,7 @@ definition:
         uesio/crm.reports_to:
         uesio/crm.role:
         uesio/crm.salutation:
-        uesio/crm.title:
-  # Components determine the layout and composition of your view
+        uesio/crm.title: # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -97,12 +96,14 @@ definition:
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.contact
                     columns:
-                      - field: uesio/crm.salutation
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname
+                      - field: uesio/crm.account
                       - field: uesio/crm.department
                       - field: uesio/crm.title
+                      - field: uesio/crm.role
                       - field: uesio/crm.email
+                      - field: uesio/crm.phone_mobile
                     uesio.id: contactTable
                     mode: READ
                     wire: contact
