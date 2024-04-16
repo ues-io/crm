@@ -77,6 +77,10 @@ definition:
           valueSource: LOOKUP
           lookupWire: contact
           lookupField: uesio/core.id
+        - field: uesio/crm.account
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/crm.account->uesio/core.id
       batchsize: 200
       init:
         query: true
