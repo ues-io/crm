@@ -31,6 +31,61 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
+    event:
+      collection: uesio/crm.event
+      fields:
+        uesio/crm.related_contact: {}
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+      conditions:
+        - id: eventId
+          field: uesio/crm.related_contact
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
+    task:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.due_by: {}
+        uesio/crm.name: {}
+        uesio/crm.related_contact: {}
+      collection: uesio/crm.task
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - id: contId
+          field: uesio/crm.related_contact
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
+    opportunity:
+      fields:
+        uesio/crm.close_date: {}
+        uesio/crm.contact:
+        uesio/crm.description: {}
+        uesio/crm.expected_revenue: {}
+        uesio/crm.topic: {}
+        uesio/crm.account: {}
+      collection: uesio/crm.opportunity
+      defaults:
+        - field: uesio/crm.contact
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/core.id
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.contact
+          operator: EQ
+          valueSource: PARAM
+          param: recordid
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -54,15 +109,56 @@ definition:
                                   - signal: wire/SAVE
                                     wires:
                                       - contact
+                                      - event
+                                      - task
+                                      - opportunity
                                 text: Save
                                 hotkey: "meta+s"
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: contact
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: event
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: task
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: opportunity
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/CANCEL
                                     wire: contact
+                                  - signal: wire/CANCEL
+                                    wire: opportunity
+                                  - signal: wire/CANCEL
+                                    wire: task
+                                  - signal: wire/CANCEL
+                                    wire: event
                                 text: Cancel
                                 uesio.variant: uesio/io.secondary
+                                uesio.display:
+                                  - type: group
+                                    conjunction: OR
+                                    conditions:
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: contact
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: event
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: task
+                                      - type: wireHasChanges
+                                        operator: EQUALS
+                                        wire: opportunity
                             - uesio/io.button:
                                 signals:
                                   - signal: component/CALL
@@ -72,63 +168,200 @@ definition:
                                     componentid: contactList
                                 text: Mode
                                 uesio.variant: uesio/io.secondary
+                    avatar:
+                      - uesio/io.image:
+                          loading: lazy
+                          src: $UserFile{uesio/crm.image}
+                          uesio.variant: ""
+                          uesio.styleTokens:
+                            root:
+                              - rounded-lg
                 - uesio/io.box:
                     uesio.variant: uesio/io.section
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.account
-                      - uesio/io.field:
-                          fieldId: uesio/crm.birthdate
-                      - uesio/io.field:
-                          fieldId: uesio/crm.department
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email_opt_out
-                      - uesio/io.field:
-                          fieldId: uesio/crm.firstname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.fullname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.gender
-                      - uesio/io.field:
-                          fieldId: uesio/crm.image
-                      - uesio/io.field:
-                          fieldId: uesio/crm.lastname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_state
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_zip
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_business
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_mobile
-                      - uesio/io.field:
-                          fieldId: uesio/crm.reports_to
-                      - uesio/io.field:
-                          fieldId: uesio/crm.role
-                      - uesio/io.field:
-                          fieldId: uesio/crm.salutation
-                      - uesio/io.field:
-                          fieldId: uesio/crm.title
-    - uesio/io.box:
-        uesio.display:
-          - type: paramIsNotSet
-            param: recordid
-        uesio.styleTokens:
-          root:
-            - p-10
-        components:
-          - uesio/io.text:
-              text: Select a record
+                      - uesio/io.box:
+                          components:
+                            - uesio/io.grid:
+                                uesio.variant: uesio/io.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.firstname
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.lastname
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.fullname
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.salutation
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.title
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.account
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.phone_mobile
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.phone_business
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.email
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.department
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.birthdate
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.email_opt_out
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.gender
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.reports_to
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.role
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.description
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.image
+                          uesio.variant: uesio/crm.section
+                      - uesio/io.accordion:
+                          uesio.variant: uesio/crm.accordion
+                          title: Mailing
+                          expandicon: expand_more
+                          collapseicon: expand_less
+                          expanded: false
+                          components:
+                            - uesio/io.grid:
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.mailing_street
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.mailing_city
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.mailing_country
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.mailing_state
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.mailing_zip
+                                uesio.variant: uesio/io.two_columns
+                          subtitle: ""
+                - uesio/io.box:
+                    components:
+                      - uesio/io.tabs:
+                          uesio.variant: uesio/io.default
+                          tabs:
+                            - id: oppsTab
+                              label: Opportunities
+                              components:
+                                - uesio/io.button:
+                                    text: New
+                                    icon: add
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: wire/CREATE_RECORD
+                                        stepId: newOpp
+                                        wire: opportunity
+                                        prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: SET_EDIT_MODE
+                                        targettype: specific
+                                        componentid: oppTable
+                                - uesio/io.button:
+                                    text: Mode
+                                    icon: edit
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: oppTable
+                                - uesio/io.table:
+                                    wire: opportunity
+                                    columns:
+                                      - field: uesio/crm.topic
+                                      - field: uesio/crm.description
+                                      - field: uesio/crm.expected_revenue
+                                      - field: uesio/crm.contact
+                                      - field: uesio/crm.account
+                                    uesio.id: oppTable
+                            - id: taskTab
+                              label: Tasks
+                              components:
+                                - uesio/io.button:
+                                    text: New
+                                    icon: add
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: wire/CREATE_RECORD
+                                        wire: task
+                                        prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: SET_EDIT_MODE
+                                        targettype: specific
+                                        componentid: taskTable
+                                - uesio/io.button:
+                                    text: Mode
+                                    icon: edit
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: taskTable
+                                - uesio/io.table:
+                                    wire: task
+                                    uesio.id: taskTable
+                                    columns:
+                                      - field: uesio/crm.name
+                                      - field: uesio/crm.description
+                                      - field: uesio/crm.due_by
+                                      - field: uesio/crm.related_contact
+                            - label: Events
+                              id: eventTab
+                              components:
+                                - uesio/io.button:
+                                    text: New
+                                    icon: add
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: wire/CREATE_RECORD
+                                        wire: event
+                                        prepend: true
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: SET_EDIT_MODE
+                                        targettype: specific
+                                        componentid: eventTable
+                                - uesio/io.button:
+                                    text: Mode
+                                    icon: edit
+                                    uesio.variant: uesio/builder.actionbutton
+                                    iconPlacement: start
+                                    signals:
+                                      - signal: component/CALL
+                                        component: uesio/io.table
+                                        componentsignal: TOGGLE_MODE
+                                        targettype: specific
+                                        componentid: eventTable
+                                - uesio/io.table:
+                                    wire: event
+                                    uesio.id: eventTable
+                                    columns:
+                                      - field: uesio/crm.name
+                                      - field: uesio/crm.description
+                                      - field: uesio/crm.location
+                                      - field: uesio/crm.starttime
+                                      - field: uesio/crm.endtime
+                                      - field: uesio/crm.related_contact
+                    uesio.variant: uesio/crm.section
+                    uesio.styleTokens:
+                      root:
+                        - ml-20
+                        - mr-20
   params:
     recordid:
       type: RECORD
