@@ -96,6 +96,7 @@ definition:
                         text: $Label{uesio/io.delete}
                         signals:
                           - signal: wire/TOGGLE_DELETE_STATUS
+                            wire: lead
                     columns:
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname

@@ -11,8 +11,7 @@ definition:
         uesio/crm.related_account:
         uesio/crm.related_contact:
         uesio/crm.related_lead:
-        uesio/crm.related_opportunity:
-  # Components determine the layout and composition of your view
+        uesio/crm.related_opportunity: # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -81,6 +80,11 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.task
+                      - icon: delete
+                        text: Delete
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                            wire: task
                     columns:
                       - field: uesio/crm.description
                       - field: uesio/crm.due_by

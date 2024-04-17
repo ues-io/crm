@@ -59,7 +59,13 @@ definition:
         uesio/crm.name: {}
         uesio/crm.starttime: {}
         uesio/core.id: {}
+        uesio/crm.related_contact: {}
       collection: uesio/crm.event
+      defaults:
+        - field: uesio/crm.related_lead
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
       batchsize: 200
       init:
         query: true
@@ -82,7 +88,7 @@ definition:
               uesio.id: leadList
               components:
                 - uesio/io.titlebar:
-                    title: $RecordMeta{name}
+                    title: ${uesio/crm.fullname}
                     subtitle: $Collection{label}
                     uesio.variant: uesio/io.main
                     actions:
@@ -284,6 +290,21 @@ definition:
                                       - field: uesio/crm.due_by
                                     mode: READ
                                     uesio.id: tasks_table
+                                    rowactions:
+                                      - icon: visibility
+                                        text: View
+                                        uesio.display:
+                                          - type: recordIsNotNew
+                                        signals:
+                                          - signal: route/NAVIGATE_TO_ROUTE
+                                            route: uesio/crm.taskdetail
+                                            params:
+                                              recordid: ${uesio/core.id}
+                                      - icon: delete
+                                        text: Delete
+                                        signals:
+                                          - signal: wire/TOGGLE_DELETE_STATUS
+                                            wire: tasks
                         icon: task_alt
                       - id: events
                         label: Events
@@ -325,6 +346,21 @@ definition:
                                       - field: uesio/crm.starttime
                                       - field: uesio/crm.endtime
                                     uesio.id: events_table
+                                    rowactions:
+                                      - icon: visibility
+                                        text: View
+                                        uesio.display:
+                                          - type: recordIsNotNew
+                                        signals:
+                                          - signal: route/NAVIGATE_TO_ROUTE
+                                            route: uesio/crm.eventdetail
+                                            params:
+                                              recordid: ${uesio/core.id}
+                                      - icon: delete
+                                        text: Delete
+                                        signals:
+                                          - signal: wire/TOGGLE_DELETE_STATUS
+                                            wire: events
                         icon: calendar_month
                     uesio.id: leads_tab
               uesio.variant: uesio/io.section
