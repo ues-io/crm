@@ -40,6 +40,16 @@ definition:
         uesio/crm.location: {}
         uesio/crm.name: {}
         uesio/crm.starttime: {}
+        uesio/crm.related_account: null
+      defaults:
+        - field: uesio/crm.related_contact
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/core.id
+        - field: uesio/crm.related_account
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/crm.account->uesio/core.id
       conditions:
         - id: eventId
           field: uesio/crm.related_contact
@@ -52,7 +62,17 @@ definition:
         uesio/crm.due_by: {}
         uesio/crm.name: {}
         uesio/crm.related_contact: {}
+        uesio/crm.related_account: {}
       collection: uesio/crm.task
+      defaults:
+        - field: uesio/crm.related_contact
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/core.id
+        - field: uesio/crm.related_account
+          valueSource: LOOKUP
+          lookupWire: contact
+          lookupField: uesio/crm.account->uesio/core.id
       batchsize: 200
       init:
         query: true
@@ -102,7 +122,7 @@ definition:
               uesio.id: contactList
               components:
                 - uesio/io.titlebar:
-                    title: $RecordMeta{name}
+                    title: ${uesio/crm.fullname}
                     subtitle: $Collection{label}
                     uesio.variant: uesio/io.main
                     actions:
@@ -284,8 +304,28 @@ definition:
                                       - field: uesio/crm.topic
                                       - field: uesio/crm.description
                                       - field: uesio/crm.expected_revenue
-                                      - field: uesio/crm.contact
-                                      - field: uesio/crm.account
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: View
+                                              icon: remove_red_eye
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: route/NAVIGATE_TO_ROUTE
+                                                  route: uesio/crm.opportunitydetail
+                                                  params:
+                                                    recordid: ${uesio/core.id}
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: Delete
+                                              icon: delete
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: wire/TOGGLE_DELETE_STATUS
+                                                  wire: opportunity
                                     uesio.id: oppTable
                             - id: taskTab
                               label: Tasks
@@ -322,7 +362,28 @@ definition:
                                       - field: uesio/crm.name
                                       - field: uesio/crm.description
                                       - field: uesio/crm.due_by
-                                      - field: uesio/crm.related_contact
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: View
+                                              icon: remove_red_eye
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: route/NAVIGATE_TO_ROUTE
+                                                  route: uesio/crm.taskdetail
+                                                  params:
+                                                    recordid: ${uesio/core.id}
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: Delete
+                                              icon: delete
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: wire/TOGGLE_DELETE_STATUS
+                                                  wire: task
                             - label: Events
                               id: eventTab
                               components:
@@ -360,7 +421,29 @@ definition:
                                       - field: uesio/crm.location
                                       - field: uesio/crm.starttime
                                       - field: uesio/crm.endtime
-                                      - field: uesio/crm.related_contact
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: View
+                                              icon: remove_red_eye
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: route/NAVIGATE_TO_ROUTE
+                                                  route: uesio/crm.eventdetail
+                                                  params:
+                                                    recordid: ${uesio/core.id}
+                                      - type: custom
+                                        components:
+                                          - uesio/io.button:
+                                              text: Delete
+                                              icon: delete
+                                              uesio.variant: uesio/builder.actionbutton
+                                              iconPlacement: start
+                                              signals:
+                                                - signal: wire/TOGGLE_DELETE_STATUS
+                                                  route: uesio/crm.eventdetail
+                                                  wire: event
                     uesio.variant: uesio/crm.section
                     uesio.styleTokens:
                       root:
