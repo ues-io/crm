@@ -95,6 +95,11 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.contact
+                      - icon: delete
+                        text: Delete
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                            wire: contact
                     columns:
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname

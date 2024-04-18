@@ -149,10 +149,15 @@ definition:
                               uesio.display:
                                 - type: recordIsNotNew
                               signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  viewtype: detail
-                                  recordid: ${uesio/core.id}
-                                  collection: uesio/crm.event
+                                - signal: route/NAVIGATE_TO_ROUTE
+                                  route: uesio/crm.eventdetail
+                                  params:
+                                    recordid: ${uesio/core.id}
+                            - icon: delete
+                              text: Delete
+                              signals:
+                                - signal: wire/TOGGLE_DELETE_STATUS
+                                  wire: events
                           columns:
                             - field: uesio/crm.name
                             - field: uesio/crm.description

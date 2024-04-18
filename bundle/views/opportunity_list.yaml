@@ -9,8 +9,7 @@ definition:
         uesio/crm.description:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
-        uesio/crm.account:
-  # Components determine the layout and composition of your view
+        uesio/crm.account: # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -79,6 +78,11 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.opportunity
+                      - icon: delete
+                        text: Delete
+                        signals:
+                          - signal: wire/TOGGLE_DELETE_STATUS
+                            wire: opportunity
                     columns:
                       - field: uesio/crm.topic
                       - field: uesio/crm.description

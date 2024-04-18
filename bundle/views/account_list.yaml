@@ -25,8 +25,7 @@ definition:
         uesio/crm.shipping_state_province:
         uesio/crm.shipping_street:
         uesio/crm.shipping_zip:
-        uesio/crm.website:
-  # Components determine the layout and composition of your view
+        uesio/crm.website: # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -99,6 +98,7 @@ definition:
                         text: $Label{uesio/io.delete}
                         signals:
                           - signal: wire/TOGGLE_DELETE_STATUS
+                            wire: account
                     columns:
                       - field: uesio/crm.name
                       - field: uesio/crm.annual_revenue
