@@ -42,7 +42,9 @@ definition:
                                 - uesio/io.box:
                                     uesio.styleTokens:
                                       root:
-                                        - col-span-2
+                                        - lg:col-span-2
+                                        - lg:order-first
+                                        - order-last
                                     components:
                                       - uesio/io.table:
                                           uesio.variant: uesio/crm.main
@@ -60,8 +62,21 @@ definition:
                                           title:
                                           uesio.variant: uesio/crm.sub_noborder
                                           actions:
-                                            - uesio/io.group:
-                                                components:
+                                            - uesio/io.toolbar:
+                                                linkedComponentId: leadsources
+                                                linkedComponentType: uesio/io.table
+                                                right:
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/SAVE
+                                                          wires:
+                                                            - leadsources
+                                                      text: $Label{uesio/io.save}
+                                                      hotkey: "meta+s"
+                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: leadsources
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CREATE_RECORD
@@ -74,26 +89,34 @@ definition:
                                                           componentid: leadsources
                                                       text: $Label{uesio/io.create}
                                                       uesio.variant: uesio/crm.primary
-                                                  - uesio/io.button:
-                                                      signals:
-                                                        - signal: wire/SAVE
-                                                          wires:
-                                                            - leadsources
-                                                      text: $Label{uesio/io.save}
-                                                      hotkey: "meta+s"
-                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.styleTokens:
+                                                        root:
+                                                          - bg-emerald-600
+                                                          - border-emerald-600
                                                       uesio.display:
-                                                        - type: wireHasChanges
-                                                          wire: leadsources
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          sourceValue: $ComponentState{[uesio/io.table][leadsources][mode]}
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CANCEL
                                                           wire: leadsources
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: leadsources
                                                       uesio.display:
-                                                        - type: wireHasChanges
-                                                          wire: leadsources
+                                                        - type: group
+                                                          conjunction: OR
+                                                          conditions:
+                                                            - type: wireHasChanges
+                                                              wire: leadsources
+                                                            - type: mergeValue
+                                                              value: EDIT
+                                                              sourceValue: $ComponentState{[uesio/io.table][leadsources][mode]}
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.variant: uesio/crm.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -102,10 +125,14 @@ definition:
                                                           targettype: specific
                                                           componentid: leadsources
                                                       text: Edit
-                                                      uesio.variant: uesio/io.secondary
+                                                      icon: edit_square
+                                                      iconFill: false
+                                                      uesio.variant: uesio/crm.secondary
                                                       uesio.display:
-                                                        - type: fieldMode
-                                                          mode: READ
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: NOT_EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][leadsources][mode]}
                                       - uesio/io.box:
                                           uesio.variant: uesio/crm.note
                                           components:
@@ -125,7 +152,9 @@ definition:
                                 - uesio/io.box:
                                     uesio.styleTokens:
                                       root:
-                                        - col-span-2
+                                        - lg:col-span-2
+                                        - lg:order-first
+                                        - order-last
                                     components:
                                       - uesio/io.table:
                                           uesio.variant: uesio/crm.main
@@ -143,8 +172,21 @@ definition:
                                           title:
                                           uesio.variant: uesio/crm.sub_noborder
                                           actions:
-                                            - uesio/io.group:
-                                                components:
+                                            - uesio/io.toolbar:
+                                                linkedComponentId: opportunitystages
+                                                linkedComponentType: uesio/io.table
+                                                right:
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/SAVE
+                                                          wires:
+                                                            - opportunitystages
+                                                      text: $Label{uesio/io.save}
+                                                      hotkey: "meta+s"
+                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: opportunitystages
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CREATE_RECORD
@@ -157,26 +199,34 @@ definition:
                                                           componentid: opportunitystages
                                                       text: $Label{uesio/io.create}
                                                       uesio.variant: uesio/crm.primary
-                                                  - uesio/io.button:
-                                                      signals:
-                                                        - signal: wire/SAVE
-                                                          wires:
-                                                            - opportunitystages
-                                                      text: $Label{uesio/io.save}
-                                                      hotkey: "meta+s"
-                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.styleTokens:
+                                                        root:
+                                                          - bg-emerald-600
+                                                          - border-emerald-600
                                                       uesio.display:
-                                                        - type: wireHasChanges
-                                                          wire: opportunitystages
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          sourceValue: $ComponentState{[uesio/io.table][opportunitystages][mode]}
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CANCEL
                                                           wire: opportunitystages
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: opportunitystages
                                                       uesio.display:
-                                                        - type: wireHasChanges
-                                                          wire: leadsources
+                                                        - type: group
+                                                          conjunction: OR
+                                                          conditions:
+                                                            - type: wireHasChanges
+                                                              wire: opportunitystages
+                                                            - type: mergeValue
+                                                              value: EDIT
+                                                              sourceValue: $ComponentState{[uesio/io.table][opportunitystages][mode]}
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/io.secondary
+                                                      uesio.variant: uesio/crm.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -185,10 +235,14 @@ definition:
                                                           targettype: specific
                                                           componentid: opportunitystages
                                                       text: Edit
-                                                      uesio.variant: uesio/io.secondary
+                                                      icon: edit_square
+                                                      iconFill: false
+                                                      uesio.variant: uesio/crm.secondary
                                                       uesio.display:
-                                                        - type: fieldMode
-                                                          mode: READ
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: NOT_EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][opportunitystages][mode]}
                                       - uesio/io.box:
                                           uesio.variant: uesio/crm.note
                                           components:

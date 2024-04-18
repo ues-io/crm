@@ -6,6 +6,7 @@ definition:
     root:
       - grid
       - overflow-auto
+      - mb-6
     table:
       - border-separate
       - border-spacing-0
