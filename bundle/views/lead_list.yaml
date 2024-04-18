@@ -23,7 +23,8 @@ definition:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
-        uesio/crm.website: # Components determine the layout and composition of your view
+        uesio/crm.website:
+        uesio/crm.initials:
   components:
     - uesio/io.viewlayout:
         left:
@@ -33,29 +34,28 @@ definition:
               title: $Collection{lead:pluralLabel}
               subtitle: List View
               uesio.variant: uesio/crm.main
+              avatar:
+                - uesio/io.text:
+                    uesio.variant: uesio/io.icon
+                    text: filter_alt
               actions:
-                - uesio/io.group:
-                    components:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: lead
-                              prepend: true
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_EDIT_MODE
-                              targettype: specific
-                              componentid: leadTable
-                          text: $Label{uesio/io.create}
-                          uesio.variant: uesio/crm.primary
+                - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: leadTable
+                    left:
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE
                               wires:
                                 - lead
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: leadTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.primary
                           uesio.display:
                             - type: wireHasChanges
                               wire: lead
@@ -63,10 +63,27 @@ definition:
                           signals:
                             - signal: wire/CANCEL
                               wire: lead
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: leadTable
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: leadTable
                           uesio.display:
-                            - type: wireHasChanges
-                              wire: lead
+                            - type: group
+                              conjunction: OR
+                              conditions:
+                                - type: wireHasChanges
+                                  wire: lead
+                                - type: mergeValue
+                                  value: EDIT
+                                  sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
                           text: $Label{uesio/io.cancel}
+                          icon: cancel
                           uesio.variant: uesio/io.secondary
                       - uesio/io.button:
                           signals:
@@ -75,16 +92,67 @@ definition:
                               componentsignal: TOGGLE_MODE
                               targettype: specific
                               componentid: leadTable
-                          text: Mode
+                          uesio.display:
+                            - type: mergeValue
+                              value: EDIT
+                              operator: NOT_EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                          text: Edit
+                          icon: edit_square
+                          iconFill: false
                           uesio.variant: uesio/io.secondary
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
+                - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: leadTable
+                    left:
+                      - uesio/io.searchbox:
+                          uesio.variant: uesio/crm.main
+                          wire: lead
+                          placeholder: Search Leads
+                          searchFields:
+                            - uesio/crm.firstname
+                            - uesio/crm.lastname
+                    right:
+                      - uesio/io.button:
+                          uesio.variant: uesio/crm.primary
+                          text: Quick Create
+                          uesio.styleTokens:
+                            root:
+                              - bg-emerald-600
+                              - border-emerald-600
+                          icon: add_circle
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: lead
+                              prepend: true
+                          uesio.display:
+                            - type: mergeValue
+                              value: EDIT
+                              sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                      - uesio/io.button:
+                          text: Mark for Delete
+                          icon: delete
+                          uesio.variant: uesio/crm.primary
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: GET_SELECTED
+                              targettype: specific
+                              componentid: leadTable
+                            - signal: wire/TOGGLE_DELETE_STATUS
+                          uesio.display:
+                            - type: hasValue
+                              value: $ComponentState{[uesio/io.table][leadTable][selected->count]}
                 - uesio/io.table:
                     uesio.variant: uesio/crm.main
+                    selectable: true
                     rowactions:
                       - icon: visibility
                         text: View
+                        type: DEFAULT
                         uesio.display:
                           - type: recordIsNotNew
                         signals:
@@ -92,12 +160,13 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.lead
-                      - icon: delete
-                        text: $Label{uesio/io.delete}
-                        signals:
-                          - signal: wire/TOGGLE_DELETE_STATUS
-                            wire: lead
                     columns:
+                      - components:
+                          - uesio/io.avatar:
+                              uesio.styleTokens:
+                                root:
+                                  - m-auto
+                              text: ${initials}
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname
                       - field: uesio/crm.email

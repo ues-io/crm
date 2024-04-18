@@ -30,9 +30,10 @@ definition:
               subtitle: Welcome to ues.io CRM.
               avatar:
                 - uesio/io.text:
-                    text: "\U0001F44B"
+                    uesio.variant: uesio/io.icon
+                    text: home
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.grid:
                     uesio.variant: uesio/crm.three_columns

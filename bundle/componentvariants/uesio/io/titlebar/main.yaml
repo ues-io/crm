@@ -8,5 +8,12 @@ definition:
       - bg-white
       - border-0
     avatar:
+      - bg-rose-100
+      - rounded-md
       - border-0
-      - text-4xl
+      - text-rose-800
+      - text-3xl
+      - "[&>div]:w-12"
+      - "[&>div]:h-12"
+      - "[&>div]:rounded-md"
+      - "[&>div]:text-2xl"

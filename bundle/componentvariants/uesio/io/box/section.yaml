@@ -4,6 +4,3 @@ extends: uesio/io.section
 definition:
   uesio.styleTokens:
     root:
-      - p-3
-      - border-2
-      - rounded-md
