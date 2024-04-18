@@ -1,5 +1,6 @@
 name: search
 label: Search
+public: true
 definition:
   uesio.styleTokens:
     wrapper:
@@ -26,4 +27,3 @@ definition:
       - placeholder:text-slate-500
       - placeholder:font-light
       - outline-offset-0
-public: true
