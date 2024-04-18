@@ -27,6 +27,7 @@ definition:
         uesio/crm.shipping_street:
         uesio/crm.shipping_zip:
         uesio/crm.website:
+        uesio/crm.initials:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -205,18 +206,9 @@ definition:
                                 text: Mode
                                 uesio.variant: uesio/io.secondary
                     avatar:
-                      - uesio/io.image:
-                          loading: lazy
-                          src: $UserFile{uesio/crm.logo}
-                          uesio.variant: ""
-                          uesio.styleTokens:
-                            root:
-                              - rounded-lg
-                              - p-1
-                          width: 120
-                    uesio.styleTokens:
-                      root:
-                        - p-8
+                      - uesio/io.avatar:
+                          text: ${initials}
+                          image: $UserFile{uesio/crm.logo}
                 - uesio/io.box:
                     uesio.variant: ""
                     components:

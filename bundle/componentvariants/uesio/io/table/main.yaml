@@ -15,8 +15,8 @@ definition:
       - tracking-wider
       - uppercase
       - text-xs
-      - px-4
-      - py-2
+      - px-[19px]
+      - py-3.5
       - text-slate-800
       - border-b-2
       - border-slate-800
@@ -37,12 +37,14 @@ definition:
       - text-[10pt]
       - "[&>.numberlabel]:block"
       - "[&.isselected>.numberlabel]:hidden"
-      - "[&:hover>.numberlabel]:hidden"
+      - "group-hover:[&>.numberlabel]:hidden"
       - "[&>.numbercheck]:hidden"
       - "[&.isselected>.numbercheck]:block"
-      - "[&:hover>.numbercheck]:block"
+      - "group-hover:[&>.numbercheck]:block"
       - "[&:>div]:leading-none"
       - leading-none
+    row:
+      - group
     cell:
       - p-0
       - border-b-1

@@ -24,8 +24,12 @@ definition:
               uesio.variant: uesio/crm.main
               title: Settings
               subtitle: Personalize ues.io CRM for your organization.
+              avatar:
+                - uesio/io.text:
+                    uesio.variant: uesio/io.icon
+                    text: settings
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.tabs:
                     tabs:

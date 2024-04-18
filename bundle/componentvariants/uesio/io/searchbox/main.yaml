@@ -1,0 +1,7 @@
+name: main
+label: Main
+definition:
+  fieldVariant: uesio/crm.search
+public: true
+variants:
+  - uesio/io.field:uesio/crm.search
