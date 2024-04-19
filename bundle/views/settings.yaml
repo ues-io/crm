@@ -48,6 +48,7 @@ definition:
                                     components:
                                       - uesio/io.table:
                                           uesio.variant: uesio/crm.main
+                                          selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
                                             - field: uesio/crm.label
@@ -87,16 +88,25 @@ definition:
                                                           componentsignal: SET_EDIT_MODE
                                                           targettype: specific
                                                           componentid: leadsources
-                                                      text: $Label{uesio/io.create}
-                                                      uesio.variant: uesio/crm.primary
-                                                      uesio.styleTokens:
-                                                        root:
-                                                          - bg-emerald-600
-                                                          - border-emerald-600
+                                                      icon: add_circle
+                                                      uesio.variant: uesio/crm.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][leadsources][mode]}
+                                                  - uesio/io.button:
+                                                      icon: delete
+                                                      uesio.variant: uesio/crm.delete
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: GET_SELECTED
+                                                          targettype: specific
+                                                          componentid: leadsources
+                                                        - signal: wire/TOGGLE_DELETE_STATUS
+                                                      uesio.display:
+                                                        - type: hasValue
+                                                          value: $ComponentState{[uesio/io.table][leadsources][selected->count]}
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CANCEL
@@ -104,6 +114,11 @@ definition:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
                                                           componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: leadsources
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: CLEAR_SELECTED
                                                           targettype: specific
                                                           componentid: leadsources
                                                       uesio.display:
@@ -143,6 +158,26 @@ definition:
                                           components:
                                             - uesio/io.text:
                                                 text: Only active lead sources will appear when selecting a source for a new lead.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          uesio.display:
+                                            - type: wireHasNoRecords
+                                              wire: leadsources
+                                            - type: wireHasNoChanges
+                                              wire: leadsources
+                                          components:
+                                            - uesio/io.text:
+                                                text: You don't have any lead sources specified.
+                                                element: div
+                                            - uesio/io.button:
+                                                uesio.variant: uesio/crm.note
+                                                text: Use Default Lead Sources
+                                                signals:
+                                                  - signal: bot/CALL
+                                                    bot: uesio/crm.default_lead_sources
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - leadsources
                       - id: opportunitystages
                         label: Opportunity Stages
                         components:
@@ -158,6 +193,7 @@ definition:
                                     components:
                                       - uesio/io.table:
                                           uesio.variant: uesio/crm.main
+                                          selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
                                             - field: uesio/crm.label
@@ -197,16 +233,25 @@ definition:
                                                           componentsignal: SET_EDIT_MODE
                                                           targettype: specific
                                                           componentid: opportunitystages
-                                                      text: $Label{uesio/io.create}
-                                                      uesio.variant: uesio/crm.primary
-                                                      uesio.styleTokens:
-                                                        root:
-                                                          - bg-emerald-600
-                                                          - border-emerald-600
+                                                      icon: add_circle
+                                                      uesio.variant: uesio/crm.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][opportunitystages][mode]}
+                                                  - uesio/io.button:
+                                                      icon: delete
+                                                      uesio.variant: uesio/crm.delete
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: GET_SELECTED
+                                                          targettype: specific
+                                                          componentid: opportunitystages
+                                                        - signal: wire/TOGGLE_DELETE_STATUS
+                                                      uesio.display:
+                                                        - type: hasValue
+                                                          value: $ComponentState{[uesio/io.table][opportunitystages][selected->count]}
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: wire/CANCEL
@@ -214,6 +259,11 @@ definition:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
                                                           componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: opportunitystages
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: CLEAR_SELECTED
                                                           targettype: specific
                                                           componentid: opportunitystages
                                                       uesio.display:
@@ -247,9 +297,29 @@ definition:
                                           uesio.variant: uesio/crm.note
                                           components:
                                             - uesio/io.text:
-                                                text: Specify the valid lead sources for your organization. A lead source is where the data for a lead originated.
+                                                text: Specify the valid opportunity stages for your organization. An opportunity stage is the current position of an opportunity in the sales process.
                                       - uesio/io.box:
                                           uesio.variant: uesio/crm.note
                                           components:
                                             - uesio/io.text:
-                                                text: Only active lead sources will appear when selecting a source for a new lead.
+                                                text: Only active opportunity stages will appear when selecting a stage for a new opportunity.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          uesio.display:
+                                            - type: wireHasNoRecords
+                                              wire: opportunitystages
+                                            - type: wireHasNoChanges
+                                              wire: opportunitystages
+                                          components:
+                                            - uesio/io.text:
+                                                text: You don't have any opportunity stages specified.
+                                                element: div
+                                            - uesio/io.button:
+                                                uesio.variant: uesio/crm.note
+                                                text: Use Default Opportunity Stages
+                                                signals:
+                                                  - signal: bot/CALL
+                                                    bot: uesio/crm.default_opportunity_stages
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - opportunitystages
