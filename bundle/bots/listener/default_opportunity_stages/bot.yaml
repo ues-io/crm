@@ -1,0 +1,4 @@
+name: default_opportunity_stages
+public: true
+type: LISTENER
+dialect: TYPESCRIPT
