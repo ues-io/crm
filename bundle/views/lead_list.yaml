@@ -83,7 +83,7 @@ definition:
                                   value: EDIT
                                   sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -99,7 +99,7 @@ definition:
                           text: Edit
                           icon: edit_square
                           iconFill: false
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.secondary
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection
               components:
