@@ -87,7 +87,7 @@ definition:
                                   sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
                                   value: EDIT
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -101,7 +101,7 @@ definition:
                               operator: NOT_EQUALS
                               sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
                           text: Edit
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.secondary
                           icon: edit_square
                           iconFill: false
                     linkedComponentType: uesio/io.table
@@ -111,7 +111,7 @@ definition:
                     text: domain
                     uesio.variant: uesio/io.icon
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.toolbar:
                     left:
@@ -125,24 +125,18 @@ definition:
                       - uesio/io.button:
                           text: Quick Create
                           icon: add_circle
-                          uesio.variant: uesio/io.primary
-                          iconPlacement: ""
+                          uesio.variant: uesio/crm.add
                           signals:
                             - signal: wire/CREATE_RECORD
                               wire: account
                               prepend: true
-                          uesio.styleTokens:
-                            root:
-                              - bg-emerald-600
-                              - border-emerald-600
                           uesio.display:
                             - type: mergeValue
                               value: EDIT
                               sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
                       - uesio/io.button:
-                          text: Mark for Delete
                           icon: delete
-                          uesio.variant: uesio/crm.primary
+                          uesio.variant: uesio/crm.delete
                           signals:
                             - signal: component/CALL
                               component: uesio/io.table
