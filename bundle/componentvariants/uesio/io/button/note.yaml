@@ -1,13 +1,11 @@
 name: note
 label: Note
 public: true
+extends: uesio/crm.secondary
 definition:
   uesio.styleTokens:
     root:
-      - bg-indigo-100
-      - p-4
-      - text-base
-      - font-light
+      - bg-transparent
+      - mt-4
       - text-indigo-900
-      - rounded-md
-      - mb-4
+      - border-indigo-900

@@ -5,3 +5,14 @@ declare module "@uesio/app/selectlists/uesio/crm" {
 	export type Rating = "Warm" | "Hot" | "Cold"
 	export type Salutation = "Sir" | "Madam" | "Mr" | "Mrs" | "Miss"
 }
+declare module "@uesio/app/bots/listener/uesio/crm/default_lead_sources" {
+
+	type Params = {
+		a: number
+		b: number
+	}
+
+	export type {
+		Params
+	}
+}
