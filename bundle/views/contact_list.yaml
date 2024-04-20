@@ -96,6 +96,7 @@ definition:
                           text: Edit
                           uesio.variant: uesio/crm.secondary
                           icon: edit_square
+                          iconFill: false
                           uesio.display:
                             - type: mergeValue
                               operator: NOT_EQUALS

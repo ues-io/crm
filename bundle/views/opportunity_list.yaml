@@ -89,6 +89,7 @@ definition:
                               operator: NOT_EQUALS
                               value: EDIT
                           text: Edit
+                          iconFill: false
                           uesio.variant: uesio/crm.secondary
                           icon: edit_square
                     linkedComponentType: uesio/io.table
