@@ -1,0 +1,6 @@
+name: inits
+label: inits
+type: FORMULA
+formula:
+  expression: FIRST(uesio/crm.topic)
+  returntype: TEXT
