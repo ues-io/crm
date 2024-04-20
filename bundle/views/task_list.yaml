@@ -84,6 +84,7 @@ definition:
                           text: Edit
                           uesio.variant: uesio/crm.secondary
                           icon: edit_square
+                          iconFill: false
                           uesio.display:
                             - type: mergeValue
                               operator: NOT_EQUALS
@@ -96,7 +97,7 @@ definition:
                     text: task_alt
                     uesio.variant: uesio/io.icon
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.toolbar:
                     left:
