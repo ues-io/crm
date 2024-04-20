@@ -1,3 +1,6 @@
 name: initials
 label: initials
-type: TEXT
+type: FORMULA
+formula:
+  expression: FIRST(uesio/crm.topic)
+  returntype: TEXT
