@@ -10,6 +10,8 @@ definition:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
         uesio/crm.account: # Components determine the layout and composition of your view
+        uesio/crm.contact: {}
+        uesio/crm.initials: {}
   components:
     - uesio/io.viewlayout:
         left:
@@ -20,54 +22,126 @@ definition:
               subtitle: List View
               uesio.variant: uesio/crm.main
               actions:
-                - uesio/io.group:
-                    components:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: opportunity
-                              prepend: true
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_EDIT_MODE
-                              targettype: specific
-                              componentid: opportunityTable
-                          text: $Label{uesio/io.create}
-                          uesio.variant: uesio/crm.primary
+                - uesio/io.toolbar:
+                    right:
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE
+                              wire: opportunity
+                              prepend: true
+                              wires:
+                                - opportunity
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: oppsTable
+                            - signal: wire/LOAD
                               wires:
                                 - opportunity
                           text: $Label{uesio/io.save}
-                          hotkey: "meta+s"
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.primary
                           uesio.display:
                             - type: wireHasChanges
+                              operator: EQUALS
                               wire: opportunity
                       - uesio/io.button:
                           signals:
                             - signal: wire/CANCEL
+                              wires:
+                                - opportunity
                               wire: opportunity
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: opportunity
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: oppsTable
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              targettype: specific
+                              componentid: oppsTable
+                              componentsignal: CLEAR_SELECTED
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/io.secondary
+                          hotkey: "meta+s"
+                          uesio.variant: uesio/crm.secondary
+                          uesio.display:
+                            - type: group
+                              conjunction: OR
+                              conditions:
+                                - type: wireHasChanges
+                                  operator: EQUALS
+                                  wire: opportunity
+                                - type: mergeValue
+                                  operator: ""
+                                  sourceValue: $ComponentState{[uesio/io.table][oppsTable][mode]}
+                                  value: EDIT
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
+                              wire: opportunity
                               component: uesio/io.table
                               componentsignal: TOGGLE_MODE
                               targettype: specific
-                              componentid: opportunityTable
-                          text: Mode
-                          uesio.variant: uesio/io.secondary
+                              componentid: oppsTable
+                          uesio.display:
+                            - type: mergeValue
+                              sourceValue: $ComponentState{[uesio/io.table][oppsTable][mode]}
+                              operator: NOT_EQUALS
+                              value: EDIT
+                          text: Edit
+                          uesio.variant: uesio/crm.secondary
+                          icon: edit_square
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: oppsTable
+              avatar:
+                - uesio/io.text:
+                    text: payments
+                    uesio.variant: uesio/io.icon
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
+                - uesio/io.toolbar:
+                    left:
+                      - uesio/io.searchbox:
+                          wire: opportunity
+                          searchFields:
+                            - uesio/crm.topic
+                            - uesio/crm.account
+                          placeholder: Search Opportunities
+                          uesio.variant: uesio/crm.main
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: oppsTable
+                    right:
+                      - uesio/io.button:
+                          text: Quick Create
+                          icon: add_circle
+                          uesio.variant: uesio/crm.add
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: opportunity
+                              prepend: true
+                          uesio.display:
+                            - type: mergeValue
+                              operator: ""
+                              sourceValue: $ComponentState{[uesio/io.table][oppsTable][mode]}
+                              value: EDIT
+                      - uesio/io.button:
+                          icon: delete
+                          uesio.variant: uesio/crm.delete
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: GET_SELECTED
+                              targettype: specific
+                              componentid: oppsTable
+                            - signal: wire/TOGGLE_DELETE_STATUS
+                          uesio.display:
+                            - type: hasValue
+                              operator: EQUALS
+                              value: $ComponentState{[uesio/io.table][oppsTable][selected->count]}
                 - uesio/io.table:
                     uesio.variant: uesio/crm.main
+                    selectable: true
                     rowactions:
                       - icon: visibility
                         text: View
@@ -78,18 +152,22 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.opportunity
-                      - icon: delete
-                        text: Delete
-                        signals:
-                          - signal: wire/TOGGLE_DELETE_STATUS
-                            wire: opportunity
+                        type: DEFAULT
                     columns:
+                      - components:
+                          - uesio/io.avatar:
+                              text: ${initials}
+                              image: $UserFile{uesio/crm.logo}
+                              uesio.styleTokens:
+                                root:
+                                  - m-auto
                       - field: uesio/crm.topic
                       - field: uesio/crm.description
                       - field: uesio/crm.close_date
                       - field: uesio/crm.expected_revenue
                       - field: uesio/crm.account
-                    uesio.id: opportunityTable
+                      - field: uesio/crm.contact
+                    uesio.id: oppsTable
                     mode: READ
                     wire: opportunity
                     pagesize: 10

@@ -127,7 +127,6 @@ definition:
                           text: Quick Create
                           icon: add_circle
                           uesio.variant: uesio/crm.add
-                          iconPlacement: ""
                           signals:
                             - signal: wire/CREATE_RECORD
                               wire: contact
