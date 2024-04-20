@@ -119,7 +119,6 @@ definition:
               avatar:
                 - uesio/io.text:
                     text: calendar_month
-                    element: div
                     uesio.variant: uesio/io.icon
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection
@@ -132,8 +131,6 @@ definition:
                             - uesio/crm.name
                           placeholder: Search Events
                           uesio.variant: uesio/crm.main
-                          uesio.styleTokens:
-                            root: []
                     right:
                       - uesio/io.button:
                           text: Quick Create
