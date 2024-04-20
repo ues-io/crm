@@ -12,6 +12,7 @@ definition:
         uesio/crm.location: {}
         uesio/crm.name: {}
         uesio/crm.starttime: {}
+        uesio/crm.initials: {}
       collection: uesio/crm.event
       batchsize: 200
       init:
@@ -50,29 +51,24 @@ definition:
               subtitle: Events View
               uesio.variant: uesio/crm.main
               actions:
-                - uesio/io.group:
-                    components:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: events
-                              prepend: true
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_EDIT_MODE
-                              targettype: specific
-                              componentid: eventsTable
-                          text: $Label{uesio/io.create}
-                          uesio.variant: uesio/crm.primary
-                          uesio.display: []
+                - uesio/io.toolbar:
+                    right:
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE
                               wires:
                                 - events
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: eventsTable
+                            - signal: wire/LOAD
+                              wires:
+                                - events
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.primary
                           uesio.display:
                             - type: wireHasChanges
                               wire: events
@@ -80,25 +76,129 @@ definition:
                           signals:
                             - signal: wire/CANCEL
                               wire: events
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: SET_READ_MODE
+                              targettype: specific
+                              componentid: eventsTable
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: eventsTable
                           uesio.display:
-                            - type: wireHasChanges
-                              wire: events
+                            - type: group
+                              conjunction: OR
+                              conditions:
+                                - type: wireHasChanges
+                                  operator: EQUALS
+                                  wire: events
+                                - type: mergeValue
+                                  operator: ""
+                                  sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
+                                  value: EDIT
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/io.secondary
+                          uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
                               component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
+                              componentsignal: SET_EDIT_MODE
                               targettype: specific
                               componentid: eventsTable
-                          text: Mode
-                          uesio.variant: uesio/io.secondary
+                          text: Edit
+                          uesio.variant: uesio/crm.secondary
+                          uesio.display:
+                            - type: mergeValue
+                              operator: NOT_EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
+                              value: EDIT
+                          icon: edit_square
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: eventsTable
+              avatar:
+                - uesio/io.text:
+                    text: calendar_month
+                    element: div
+                    uesio.variant: uesio/io.icon
           - uesio/io.box:
-              uesio.variant: uesio/io.section
+              uesio.variant: uesio/crm.primarysection
               components:
+                - uesio/io.toolbar:
+                    left:
+                      - uesio/io.searchbox:
+                          wire: events
+                          searchFields:
+                            - uesio/crm.name
+                          placeholder: Search Events
+                          uesio.variant: uesio/crm.main
+                          uesio.styleTokens:
+                            root: []
+                    right:
+                      - uesio/io.button:
+                          text: Quick Create
+                          icon: add_circle
+                          uesio.variant: uesio/crm.add
+                          iconPlacement: start
+                          signals:
+                            - signal: wire/CREATE_RECORD
+                              wire: events
+                              prepend: true
+                          uesio.display:
+                            - type: mergeValue
+                              sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
+                              value: EDIT
+                      - uesio/io.button:
+                          icon: delete
+                          uesio.variant: uesio/crm.delete
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: GET_SELECTED
+                              targettype: specific
+                              componentid: eventsTable
+                            - signal: wire/TOGGLE_DELETE_STATUS
+                          uesio.display:
+                            - type: hasValue
+                              operator: EQUALS
+                              value: $ComponentState{[uesio/io.table][eventsTable][selected->count]}
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: eventsTable
+                - uesio/io.table:
+                    uesio.variant: uesio/crm.main
+                    selectable: true
+                    rowactions:
+                      - icon: visibility
+                        text: View
+                        uesio.display:
+                          - type: recordIsNotNew
+                        signals:
+                          - signal: route/NAVIGATE_TO_ROUTE
+                            route: uesio/crm.eventdetail
+                            params:
+                              recordid: ${uesio/core.id}
+                        type: DEFAULT
+                    columns:
+                      - type: custom
+                        components:
+                          - uesio/io.avatar:
+                              text: ${initials}
+                              image: $UserFile{uesio/crm.logo}
+                              uesio.variant: uesio/io.default
+                      - field: uesio/crm.name
+                      - field: uesio/crm.location
+                      - field: uesio/crm.starttime
+                      - field: uesio/crm.endtime
+                      - field: uesio/crm.description
+                      - field: uesio/crm.related_account
+                      - field: uesio/crm.related_contact
+                      - field: uesio/crm.related_lead
+                    uesio.id: eventsTable
+                    mode: READ
+                    wire: events
+                    pagesize: 10
                 - uesio/io.accordion:
-                    uesio.variant: uesio/crm.accordion
+                    uesio.variant: ""
                     title: Calendar
                     subtitle: null
                     expandicon: expand_more
@@ -132,49 +232,8 @@ definition:
                             - signal: panel/OPEN
                               panel: viewevent
                     uesio.styleTokens:
-                      root: []
-                - uesio/io.accordion:
-                    uesio.variant: uesio/crm.accordion
-                    title: Events List
-                    subtitle: null
-                    expandicon: expand_more
-                    collapseicon: expand_less
-                    expanded: true
-                    components:
-                      - uesio/io.table:
-                          uesio.variant: uesio/crm.main
-                          rowactions:
-                            - icon: visibility
-                              text: View
-                              uesio.display:
-                                - type: recordIsNotNew
-                              signals:
-                                - signal: route/NAVIGATE_TO_ROUTE
-                                  route: uesio/crm.eventdetail
-                                  params:
-                                    recordid: ${uesio/core.id}
-                            - icon: delete
-                              text: Delete
-                              signals:
-                                - signal: wire/TOGGLE_DELETE_STATUS
-                                  wire: events
-                          columns:
-                            - field: uesio/crm.name
-                            - field: uesio/crm.description
-                            - field: uesio/crm.starttime
-                            - field: uesio/crm.endtime
-                            - field: uesio/crm.location
-                            - field: uesio/crm.related_account
-                            - field: uesio/crm.related_contact
-                            - field: uesio/crm.related_lead
-                          uesio.id: eventsTable
-                          mode: READ
-                          wire: events
-                          pagesize: 10
-                    uesio.styleTokens:
                       root:
                         - mt-8
-        header: []
   panels:
     viewevent:
       uesio.type: uesio/io.dialog
