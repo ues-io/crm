@@ -2,4 +2,4 @@ name: opportunity_stage
 label: Opportunity Stage
 public: true
 pluralLabel: Opportunity Stages
-nameField: name
+nameField: label

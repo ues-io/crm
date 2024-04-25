@@ -5,4 +5,4 @@ extends: uesio/io.secondary
 definition:
   uesio.styleTokens:
     root:
-      - min-w-[84px]
+      - min-w-[88px]

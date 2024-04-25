@@ -29,6 +29,8 @@ definition:
         uesio/crm.lead_status: {}
         uesio/crm.lead_rating: {}
         uesio/crm.next_steps: {}
+        uesio/crm.initials: {}
+        uesio/crm.source: {}
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -90,10 +92,24 @@ definition:
                 - uesio/io.titlebar:
                     title: ${uesio/crm.fullname}
                     subtitle: $Collection{label}
-                    uesio.variant: uesio/io.main
+                    uesio.variant: uesio/crm.main
                     actions:
-                      - uesio/io.group:
-                          components:
+                      - uesio/io.toolbar:
+                          right:
+                            - uesio/io.button:
+                                signals:
+                                text: Convert Lead
+                                uesio.variant: uesio/crm.primary
+                                uesio.display:
+                                  - type: wireHasNoChanges
+                                    operator: EQUALS
+                                    wire: lead
+                                  - type: wireHasNoChanges
+                                    operator: EQUALS
+                                    wire: tasks
+                                  - type: wireHasNoChanges
+                                    operator: EQUALS
+                                    wire: events
                             - uesio/io.button:
                                 signals:
                                   - signal: wire/SAVE
@@ -140,8 +156,23 @@ definition:
                                     wire: tasks
                                   - signal: wire/CANCEL
                                     wire: events
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: leadList
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: tasks_table
+                                  - signal: component/CALL
+                                    component: uesio/io.table
+                                    componentsignal: SET_READ_MODE
+                                    targettype: specific
+                                    componentid: events_table
                                 text: Cancel
-                                uesio.variant: uesio/io.secondary
+                                uesio.variant: uesio/crm.secondary
                                 uesio.display:
                                   - type: group
                                     conjunction: OR
@@ -162,44 +193,67 @@ definition:
                                     componentsignal: TOGGLE_MODE
                                     targettype: specific
                                     componentid: leadList
-                                text: Mode
-                                uesio.variant: uesio/io.secondary
+                                text: Edit
+                                icon: edit_square
+                                iconFill: false
+                                uesio.variant: uesio/crm.secondary
                                 uesio.display:
+                                  - type: mergeValue
+                                    value: EDIT
+                                    operator: NOT_EQUALS
+                                    sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
                                   - type: wireHasNoChanges
-                                    operator: EQUALS
                                     wire: lead
+                                  - type: wireHasNoChanges
+                                    wire: tasks
+                                  - type: wireHasNoChanges
+                                    wire: events
+                            - uesio/io.button:
+                                signals:
+                                  - signal: component/CALL
+                                    component: uesio/io.list
+                                    componentsignal: TOGGLE_MODE
+                                    targettype: specific
+                                    componentid: leadList
+                                uesio.display:
+                                  - type: mergeValue
+                                    value: EDIT
+                                    operator: EQUALS
+                                    sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
+                                  - type: wireHasNoChanges
+                                    wire: lead
+                                  - type: wireHasNoChanges
+                                    wire: tasks
+                                  - type: wireHasNoChanges
+                                    wire: events
+                                icon: task_alt
+                                iconFill: false
+                                text: Read
+                                uesio.variant: uesio/crm.secondary
+                    avatar:
+                      - uesio/io.avatar:
+                          text: ${initials}
+                          image: $UserFile{uesio/crm.logo}
                 - uesio/io.box:
-                    uesio.variant: uesio/crm.section
+                    uesio.variant: uesio/crm.primarysection
                     components:
                       - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
+                          uesio.variant: uesio/crm.three_columns
                           items:
                             - uesio/io.field:
-                                fieldId: uesio/crm.topic
+                                fieldId: uesio/crm.lead_status
                             - uesio/io.field:
-                                fieldId: uesio/crm.company
+                                fieldId: uesio/crm.lead_rating
                             - uesio/io.field:
-                                fieldId: uesio/crm.industry
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.lead_status
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.lead_rating
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.next_steps
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.is_converted
-                                      uesio.display:
-                                        - type: fieldValue
-                                          operator: EQUALS
-                                          wire: lead
-                                          field: uesio/crm.lead_status
-                                          value: Closed - Converted
+                                fieldId: uesio/crm.source
+                      - uesio/io.field:
+                          fieldId: uesio/crm.next_steps
                 - uesio/io.box:
                     uesio.variant: uesio/crm.section
                     components:
+                      - uesio/io.titlebar:
+                          title: Contact Information
+                          uesio.variant: uesio/crm.sub
                       - uesio/io.grid:
                           uesio.variant: uesio/crm.three_columns
                           items:
@@ -210,30 +264,14 @@ definition:
                             - uesio/io.field:
                                 fieldId: uesio/crm.email
                             - uesio/io.field:
-                                fieldId: uesio/crm.description
-                            - uesio/io.field:
-                                fieldId: uesio/crm.website
-                            - uesio/io.field:
-                                fieldId: uesio/crm.no_employees
-                - uesio/io.accordion:
-                    uesio.variant: uesio/crm.accordion
-                    title: Detail
-                    subtitle: null
-                    expandicon: expand_more
-                    collapseicon: expand_less
-                    expanded: false
-                    components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/io.four_columns
-                          items:
-                            - uesio/io.field:
-                                fieldId: uesio/crm.fullname
-                            - uesio/io.field:
                                 fieldId: uesio/crm.phone
                             - uesio/io.field:
                                 fieldId: uesio/crm.phone_business
                             - uesio/io.field:
                                 fieldId: uesio/crm.phone_mobile
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.three_columns
+                          items:
                             - uesio/io.field:
                                 fieldId: uesio/crm.location
                             - uesio/io.field:
@@ -246,6 +284,39 @@ definition:
                                 fieldId: uesio/crm.mailing_country
                             - uesio/io.field:
                                 fieldId: uesio/crm.mailing_zip_postal
+                - uesio/io.box:
+                    uesio.variant: uesio/crm.section
+                    components:
+                      - uesio/io.titlebar:
+                          title: Account Information
+                          uesio.variant: uesio/crm.sub
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.two_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.company
+                            - uesio/io.field:
+                                fieldId: uesio/crm.industry
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.three_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.description
+                            - uesio/io.field:
+                                fieldId: uesio/crm.website
+                            - uesio/io.field:
+                                fieldId: uesio/crm.no_employees
+                - uesio/io.box:
+                    uesio.variant: uesio/crm.section
+                    components:
+                      - uesio/io.titlebar:
+                          title: Opportunity Information
+                          uesio.variant: uesio/crm.sub
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.two_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.topic
           - uesio/io.box:
               components:
                 - uesio/io.tabs:
@@ -254,113 +325,173 @@ definition:
                       - id: tasks
                         label: Tasks
                         components:
-                          - uesio/io.box:
-                              components:
-                                - uesio/io.button:
-                                    text: New
-                                    icon: add
-                                    uesio.variant: uesio/builder.actionbutton
-                                    iconPlacement: start
-                                    signals:
-                                      - signal: wire/CREATE_RECORD
-                                        stepId: new_task
-                                        wire: tasks
-                                        prepend: true
-                                      - signal: component/CALL
-                                        component: uesio/io.table
-                                        componentsignal: TOGGLE_MODE
-                                        targettype: specific
-                                        componentid: tasks_table
-                                - uesio/io.button:
-                                    text: MODE
-                                    icon: edit
-                                    uesio.variant: uesio/builder.actionbutton
-                                    iconPlacement: start
-                                    signals:
-                                      - signal: component/CALL
-                                        component: uesio/io.table
-                                        componentsignal: TOGGLE_MODE
-                                        targettype: specific
-                                        componentid: tasks_table
-                                - uesio/io.table:
-                                    wire: tasks
-                                    columns:
-                                      - field: uesio/crm.name
-                                      - field: uesio/crm.description
-                                      - field: uesio/crm.due_by
-                                    mode: READ
-                                    uesio.id: tasks_table
-                                    rowactions:
-                                      - icon: visibility
-                                        text: View
-                                        uesio.display:
-                                          - type: recordIsNotNew
-                                        signals:
-                                          - signal: route/NAVIGATE_TO_ROUTE
-                                            route: uesio/crm.taskdetail
-                                            params:
-                                              recordid: ${uesio/core.id}
-                                      - icon: delete
-                                        text: Delete
-                                        signals:
-                                          - signal: wire/TOGGLE_DELETE_STATUS
-                                            wire: tasks
+                          - uesio/io.titlebar:
+                              uesio.variant: uesio/crm.sub_noborder
+                              actions:
+                                - uesio/io.toolbar:
+                                    linkedComponentId: tasks_table
+                                    linkedComponentType: uesio/io.table
+                                    right:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add_circle
+                                          uesio.variant: uesio/crm.add
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: new_task
+                                              wire: tasks
+                                              prepend: true
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              sourceValue: $ComponentState{[uesio/io.table][tasks_table][mode]}
+                                      - uesio/io.button:
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: tasks_table
+                                          text: Edit
+                                          icon: edit_square
+                                          iconFill: false
+                                          uesio.variant: uesio/crm.secondary
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              operator: NOT_EQUALS
+                                              sourceValue: $ComponentState{[uesio/io.table][tasks_table][mode]}
+                                            - type: wireHasNoChanges
+                                              wire: tasks
+                                      - uesio/io.button:
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: tasks_table
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              operator: EQUALS
+                                              sourceValue: $ComponentState{[uesio/io.table][tasks_table][mode]}
+                                            - type: wireHasNoChanges
+                                              wire: tasks
+                                          icon: task_alt
+                                          iconFill: false
+                                          text: Read
+                                          uesio.variant: uesio/crm.secondary
+                          - uesio/io.table:
+                              uesio.variant: uesio/crm.main
+                              wire: tasks
+                              columns:
+                                - field: uesio/crm.name
+                                - field: uesio/crm.description
+                                - field: uesio/crm.due_by
+                              mode: READ
+                              uesio.id: tasks_table
+                              rowactions:
+                                - icon: visibility
+                                  text: View
+                                  uesio.display:
+                                    - type: recordIsNotNew
+                                  signals:
+                                    - signal: route/NAVIGATE_TO_ROUTE
+                                      route: uesio/crm.taskdetail
+                                      params:
+                                        recordid: ${uesio/core.id}
+                                - icon: delete
+                                  text: Delete
+                                  signals:
+                                    - signal: wire/TOGGLE_DELETE_STATUS
+                                      wire: tasks
                         icon: task_alt
                       - id: events
                         label: Events
                         components:
-                          - uesio/io.box:
-                              components:
-                                - uesio/io.button:
-                                    text: New
-                                    icon: add
-                                    uesio.variant: uesio/builder.actionbutton
-                                    iconPlacement: start
-                                    signals:
-                                      - signal: wire/CREATE_RECORD
-                                        stepId: create_event
-                                        wire: events
-                                        prepend: true
-                                      - signal: component/CALL
-                                        component: uesio/io.table
-                                        componentsignal: TOGGLE_MODE
-                                        targettype: specific
-                                        componentid: events_table
-                                - uesio/io.button:
-                                    text: MODE
-                                    icon: edit
-                                    uesio.variant: uesio/builder.actionbutton
-                                    iconPlacement: start
-                                    signals:
-                                      - signal: component/CALL
-                                        component: uesio/io.table
-                                        componentsignal: TOGGLE_MODE
-                                        targettype: specific
-                                        componentid: events_table
-                                - uesio/io.table:
-                                    wire: events
-                                    columns:
-                                      - field: uesio/crm.name
-                                      - field: uesio/crm.description
-                                      - field: uesio/crm.location
-                                      - field: uesio/crm.starttime
-                                      - field: uesio/crm.endtime
-                                    uesio.id: events_table
-                                    rowactions:
-                                      - icon: visibility
-                                        text: View
-                                        uesio.display:
-                                          - type: recordIsNotNew
-                                        signals:
-                                          - signal: route/NAVIGATE_TO_ROUTE
-                                            route: uesio/crm.eventdetail
-                                            params:
-                                              recordid: ${uesio/core.id}
-                                      - icon: delete
-                                        text: Delete
-                                        signals:
-                                          - signal: wire/TOGGLE_DELETE_STATUS
-                                            wire: events
+                          - uesio/io.titlebar:
+                              uesio.variant: uesio/crm.sub_noborder
+                              actions:
+                                - uesio/io.toolbar:
+                                    linkedComponentId: events_table
+                                    linkedComponentType: uesio/io.table
+                                    right:
+                                      - uesio/io.button:
+                                          text: New
+                                          icon: add_circle
+                                          uesio.variant: uesio/crm.add
+                                          iconPlacement: start
+                                          signals:
+                                            - signal: wire/CREATE_RECORD
+                                              stepId: new_event
+                                              wire: events
+                                              prepend: true
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              sourceValue: $ComponentState{[uesio/io.table][events_table][mode]}
+                                      - uesio/io.button:
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: events_table
+                                          text: Edit
+                                          icon: edit_square
+                                          iconFill: false
+                                          uesio.variant: uesio/crm.secondary
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              operator: NOT_EQUALS
+                                              sourceValue: $ComponentState{[uesio/io.table][events_table][mode]}
+                                            - type: wireHasNoChanges
+                                              wire: events
+                                      - uesio/io.button:
+                                          signals:
+                                            - signal: component/CALL
+                                              component: uesio/io.table
+                                              componentsignal: TOGGLE_MODE
+                                              targettype: specific
+                                              componentid: events_table
+                                          uesio.display:
+                                            - type: mergeValue
+                                              value: EDIT
+                                              operator: EQUALS
+                                              sourceValue: $ComponentState{[uesio/io.table][events_table][mode]}
+                                            - type: wireHasNoChanges
+                                              wire: events
+                                          icon: task_alt
+                                          iconFill: false
+                                          text: Read
+                                          uesio.variant: uesio/crm.secondary
+                          - uesio/io.table:
+                              wire: events
+                              uesio.variant: uesio/crm.main
+                              columns:
+                                - field: uesio/crm.name
+                                - field: uesio/crm.description
+                                - field: uesio/crm.location
+                                - field: uesio/crm.starttime
+                                - field: uesio/crm.endtime
+                              uesio.id: events_table
+                              rowactions:
+                                - icon: visibility
+                                  text: View
+                                  uesio.display:
+                                    - type: recordIsNotNew
+                                  signals:
+                                    - signal: route/NAVIGATE_TO_ROUTE
+                                      route: uesio/crm.eventdetail
+                                      params:
+                                        recordid: ${uesio/core.id}
+                                - icon: delete
+                                  text: Delete
+                                  signals:
+                                    - signal: wire/TOGGLE_DELETE_STATUS
+                                      wire: events
                         icon: calendar_month
                     uesio.id: leads_tab
               uesio.variant: uesio/io.section

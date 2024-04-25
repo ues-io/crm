@@ -1,7 +1,7 @@
-name: three_columns
-label: Three Column Responsive
+name: four_columns
+label: Four Column Responsive
 public: true
-extends: uesio/io.three_columns
+extends: uesio/io.four_columns
 definition:
   uesio.styleTokens:
     root:
