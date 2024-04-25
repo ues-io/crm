@@ -74,14 +74,8 @@ definition:
                               targettype: specific
                               componentid: leadTable
                           uesio.display:
-                            - type: group
-                              conjunction: OR
-                              conditions:
-                                - type: wireHasChanges
-                                  wire: lead
-                                - type: mergeValue
-                                  value: EDIT
-                                  sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                            - type: wireHasChanges
+                              wire: lead
                           text: $Label{uesio/io.cancel}
                           uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
@@ -96,9 +90,29 @@ definition:
                               value: EDIT
                               operator: NOT_EQUALS
                               sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: lead
                           text: Edit
                           icon: edit_square
                           iconFill: false
+                          uesio.variant: uesio/crm.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: leadTable
+                          uesio.display:
+                            - type: mergeValue
+                              value: EDIT
+                              operator: EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: lead
+                          icon: task_alt
+                          iconFill: false
+                          text: Read
                           uesio.variant: uesio/crm.secondary
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection

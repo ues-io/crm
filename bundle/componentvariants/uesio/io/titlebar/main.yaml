@@ -16,4 +16,4 @@ definition:
       - "[&>div]:w-12"
       - "[&>div]:h-12"
       - "[&>div]:rounded-md"
-      - "[&>div]:text-2xl"
+      - "[&>div]:text-xl"

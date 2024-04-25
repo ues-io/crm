@@ -1,0 +1,5 @@
+name: source
+label: Source
+type: REFERENCE
+reference:
+  collection: lead_source

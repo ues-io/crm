@@ -2,4 +2,4 @@ name: lead_source
 label: Lead Source
 public: true
 pluralLabel: Lead Sources
-nameField: name
+nameField: label
