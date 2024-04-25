@@ -12,13 +12,90 @@ definition:
         uesio/core.createdat:
         uesio/crm.close_date:
         uesio/crm.expected_revenue:
+        uesio/crm.account: {}
+        uesio/crm.contact: {}
+        uesio/crm.initials: {}
+      conditions:
+        - field: uesio/core.owner
+          operator: EQ
+          valueSource: VALUE
+          value: $User{id}
     topleads:
       collection: uesio/crm.lead
       fields:
         uesio/crm.firstname:
         uesio/crm.lastname:
-        uesio/crm.initials:
-  # Components determine the layout and composition of your view
+        uesio/crm.initials: # Components determine the layout and composition of your view
+        uesio/crm.lead_status: {}
+      conditions:
+        - field: uesio/core.owner
+          operator: EQ
+          valueSource: VALUE
+          value: $User{id}
+    tasks:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.due_by: {}
+        uesio/crm.initials: {}
+        uesio/crm.name: null
+        uesio/crm.related_account: {}
+        uesio/crm.related_contact: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.related_opportunity: {}
+      collection: uesio/crm.task
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/core.owner
+          operator: EQ
+          valueSource: VALUE
+          value: $User{id}
+    events:
+      fields:
+        uesio/crm.related_account: {}
+        uesio/crm.related_contact: {}
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.initials: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/core.owner
+          operator: EQ
+          valueSource: VALUE
+          value: $User{id}
+    eventdetail:
+      fields:
+        uesio/crm.related_account: {}
+        uesio/crm.related_contact: {}
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.initials: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+      collection: uesio/crm.event
+      batchsize: 1
+      init:
+        query: false
+        create: false
+      conditions:
+        - id: eventid
+          field: uesio/core.id
+          operator: CONTAINS
+          valueSource: VALUE
+          value: recordid
   components:
     - uesio/io.viewlayout:
         left:
@@ -32,53 +109,278 @@ definition:
                 - uesio/io.text:
                     uesio.variant: uesio/io.icon
                     text: home
-          - uesio/io.box:
-              uesio.variant: uesio/crm.primarysection
-              components:
-                - uesio/io.grid:
-                    uesio.variant: uesio/crm.three_columns
-                    items:
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root:
-                              - col-span-2
-                          components:
-                            - uesio/io.titlebar:
-                                title: Upcoming Opportunities
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.linechart:
-                                uesio.styleTokens:
-                                  chart:
-                                    - h-[300px]
-                                series:
-                                  - name: revenue
-                                    label: Expected Revenue
-                                    valueField: uesio/crm.expected_revenue
-                                    categoryField: uesio/crm.close_date
+          - uesio/io.tabs:
+              uesio.variant: uesio/io.default
+              tabs:
+                - id: dashboard
+                  label: Dashboard
+                  components:
+                    - uesio/io.grid:
+                        items:
+                          - uesio/io.box:
+                              uesio.styleTokens:
+                                root: []
+                              components:
+                                - uesio/io.titlebar:
+                                    title: Upcoming Leads
+                                    uesio.variant: uesio/crm.sub
+                                - uesio/io.barchart:
+                                    uesio.variant: uesio/io.default
+                                    title: ""
+                                    labels:
+                                      source: WIRE
+                                      timeunit: MONTH
+                                      timeunitfill: WEEK
+                                      wire: topleads
+                                      categoryField: uesio/crm.lead_status
+                                    series:
+                                      - label: Lead Count
+                                        wire: topleads
+                                        valueField: uesio/crm.initials
+                                        categoryField: uesio/crm.lead_status
+                          - uesio/io.box:
+                              uesio.styleTokens:
+                                root: []
+                              components:
+                                - uesio/io.titlebar:
+                                    title: Upcoming Opportunities
+                                    uesio.variant: uesio/crm.sub
+                                - uesio/io.linechart:
+                                    uesio.styleTokens:
+                                      chart:
+                                        - h-[300px]
+                                    series:
+                                      - name: revenue
+                                        label: Expected Revenue
+                                        valueField: uesio/crm.expected_revenue
+                                        categoryField: uesio/crm.close_date
+                                        wire: opportunities
+                                    labels:
+                                      source: DATA
+                                      timeunit: MONTH
+                          - uesio/io.box:
+                              components:
+                                - uesio/io.titlebar:
+                                    title: New Leads
+                                    uesio.variant: uesio/crm.sub
+                                - uesio/io.deck:
+                                    wire: topleads
+                                    mode: READ
+                                    id: topleads
+                                    components:
+                                      - uesio/io.tile:
+                                          uesio.variant: uesio/io.item
+                                          content:
+                                            - uesio/io.text:
+                                                text: ${firstname} ${lastname}
+                                          avatar:
+                                            - uesio/io.avatar:
+                                                text: ${initials}
+                                          signals:
+                                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                              collection: uesio/crm.lead
+                                              viewtype: detail
+                                              recordid: ${uesio/core.id}
+                              uesio.variant: ""
+                              uesio.styleTokens:
+                                root: []
+                          - uesio/io.box:
+                              components:
+                                - uesio/io.titlebar:
+                                    title: New Opportunities
+                                    uesio.variant: uesio/crm.sub
+                                - uesio/io.deck:
                                     wire: opportunities
-                                labels:
-                                  source: DATA
-                                  timeunit: MONTH
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.titlebar:
-                                title: New Leads
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.deck:
-                                wire: topleads
-                                mode: READ
-                                id: topleads
-                                components:
-                                  - uesio/io.tile:
-                                      uesio.variant: uesio/io.item
-                                      content:
-                                        - uesio/io.text:
-                                            text: ${firstname} ${lastname}
-                                      avatar:
-                                        - uesio/io.avatar:
-                                            text: ${initials}
-                                      signals:
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.lead
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
+                                    mode: READ
+                                    id: topleads
+                                    components:
+                                      - uesio/io.tile:
+                                          uesio.variant: uesio/io.item
+                                          content:
+                                            - uesio/io.text:
+                                                text: ${uesio/crm.account->uesio/crm.name} – ${uesio/crm.topic}
+                                          avatar:
+                                            - uesio/io.avatar:
+                                                text: ${initials}
+                                          signals:
+                                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                              collection: uesio/crm.lead
+                                              viewtype: detail
+                                              recordid: ${uesio/core.id}
+                              uesio.variant: ""
+                              uesio.styleTokens:
+                                root: []
+                        uesio.variant: uesio/crm.two_columns
+                        uesio.styleTokens:
+                          root:
+                            - gap-y-8
+                - id: activities
+                  label: Activities
+                  components:
+                    - uesio/io.titlebar:
+                        title: Tasks
+                        uesio.variant: uesio/crm.sub
+                    - uesio/io.table:
+                        selectable: true
+                        wire: tasks
+                        columns:
+                          - type: custom
+                            components:
+                              - uesio/io.avatar:
+                                  text: ${initials}
+                                  image: $UserFile{uesio/crm.logo}
+                                  uesio.variant: uesio/io.default
+                          - field: uesio/crm.name
+                            label: TASK
+                          - field: uesio/crm.description
+                          - field: uesio/crm.due_by
+                          - field: uesio/crm.related_account
+                          - field: uesio/crm.related_contact
+                          - field: uesio/crm.related_lead
+                          - field: uesio/crm.related_opportunity
+                        pagesize: 5
+                        uesio.variant: uesio/crm.main
+                    - uesio/io.titlebar:
+                        title: Events
+                        uesio.variant: uesio/crm.sub
+                    - uesio/io.table:
+                        selectable: true
+                        wire: events
+                        uesio.id: events
+                        columns:
+                          - type: custom
+                            components:
+                              - uesio/io.avatar:
+                                  text: ${initials}
+                                  image: $UserFile{uesio/crm.logo}
+                                  uesio.variant: uesio/io.default
+                          - field: uesio/crm.name
+                            label: EVENT
+                          - field: uesio/crm.description
+                          - field: uesio/crm.starttime
+                          - field: uesio/crm.endtime
+                          - field: uesio/crm.related_account
+                          - field: uesio/crm.related_contact
+                          - field: uesio/crm.related_lead
+                        uesio.styleTokens:
+                          root: []
+                        pagesize: 5
+                        uesio.variant: uesio/crm.main
+                - label: Calendar
+                  id: calendar
+                  components:
+                    - uesio/io.calendar:
+                        uesio.variant: uesio/io.default
+                        weekends: true
+                        events:
+                          - label: New Event Source
+                            wire: events
+                            startField: uesio/crm.starttime
+                            endField: uesio/crm.endtime
+                        uesio.styleTokens:
+                          root:
+                            - pb-28
+                        onEventClick:
+                          - signal: wire/SET_CONDITION_VALUE
+                            wire: eventdetail
+                            conditionId: eventid
+                            value: ${uesio/core.id}
+                          - signal: wire/LOAD
+                            wires:
+                              - eventdetail
+                          - signal: panel/OPEN
+                            panel: viewevent
+                        onDateClick:
+                          - signal: wire/EMPTY
+                            wire: eventdetail
+                          - signal: wire/CREATE_RECORD
+                            stepId: newevent
+                            wire: eventdetail
+                          - signal: panel/OPEN
+                            panel: viewevent
+  panels:
+    viewevent:
+      uesio.type: uesio/io.dialog
+      components:
+        - uesio/io.box:
+            components:
+              - uesio/io.list:
+                  mode: EDIT
+                  wire: eventdetail
+                  uesio.id: eventdetaillist
+                  components:
+                    - uesio/io.field:
+                        fieldId: uesio/crm.name
+                    - uesio/io.field:
+                        fieldId: uesio/crm.description
+                    - uesio/io.group:
+                        columnGap: 10px
+                        components:
+                          - uesio/io.field:
+                              fieldId: uesio/crm.starttime
+                          - uesio/io.field:
+                              fieldId: uesio/crm.endtime
+                    - uesio/io.field:
+                        fieldId: uesio/crm.location
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_contact
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_account
+                    - uesio/io.field:
+                        fieldId: uesio/crm.related_lead
+                    - uesio/io.group:
+                        columnGap: 10px
+                        components:
+                          - uesio/io.button:
+                              text: Save
+                              icon: ""
+                              uesio.variant: uesio/crm.primary
+                              iconPlacement: start
+                              signals:
+                                - signal: wire/SAVE
+                                  wires:
+                                    - eventdetail
+                          - uesio/io.button:
+                              text: Cancel
+                              icon: ""
+                              uesio.variant: uesio/io.secondary
+                              iconPlacement: start
+                              signals:
+                                - signal: wire/CANCEL
+                                  wire: eventdetail
+                                - signal: panel/CLOSE
+                                  panel: viewevent
+                        uesio.styleTokens:
+                          root: []
+                        alignItems: end
+                        uesio.variant: uesio/io.default
+                        justifyContent: space-between
+                        uesio.display:
+                          - type: group
+                            conjunction: AND
+                            conditions:
+                              - type: fieldValue
+                                operator: NOT_EQUALS
+                                wire: eventdetail
+                                field: uesio/crm.name
+                                value: ""
+                              - type: wireHasChanges
+                                operator: EQUALS
+                                wire: eventdetail
+                                fields:
+                                  - uesio/crm.related_account
+                                  - uesio/crm.related_contact
+                                  - uesio/crm.description
+                                  - uesio/crm.endtime
+                                  - uesio/crm.related_lead
+                                  - uesio/crm.location
+                                  - uesio/crm.name
+                                  - uesio/crm.starttime
+      width: 40%
+      height: 60%
+      title: Event Details
+      uesio.variant: uesio/io.default
+      afterClose:
+        - signal: wire/LOAD_NEXT_BATCH
+          wires:
+            - events
