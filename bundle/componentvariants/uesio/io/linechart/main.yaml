@@ -1,0 +1,16 @@
+name: main
+label: Main
+public: true
+extends: uesio/io.default
+definition:
+  uesio.styleTokens:
+    root:
+      - lg:h-full
+      - h-72
+      - relative
+      - p-4
+      - pt-0
+    chart:
+      - h-64
+      - lg:h-full
+      - relative
