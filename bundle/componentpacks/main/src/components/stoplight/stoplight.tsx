@@ -5,11 +5,11 @@ type ComponentDefinition = {
 }
 
 const StyleDefaults = Object.freeze({
-	root: ["absolute", "flex", "bottom-0", "right-0", "gap-0.5"],
-	circle: ["text-slate-200", "text-xs", "leading-none"],
+	root: ["absolute", "flex", "-bottom-0.5", "-right-0.5", "gap-0.5"],
+	circle: ["text-slate-200", "text-base", "leading-none"],
 	warm: ["text-yellow-400"],
 	hot: ["text-red-500"],
-	cold: ["text-sky-300"],
+	cold: ["text-sky-400"],
 })
 
 const Component: definition.UC<ComponentDefinition> = (props) => {

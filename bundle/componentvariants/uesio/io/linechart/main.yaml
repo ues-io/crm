@@ -9,7 +9,7 @@ definition:
       - h-72
       - relative
       - p-4
-      - pt-0
+      - pt-2
     chart:
       - h-64
       - lg:h-full

@@ -35,6 +35,9 @@ definition:
         uesio/crm.source:
           fields:
             uesio/core.uniquekey:
+      order:
+        - field: uesio/core.createdat
+          desc: true
     upcomingevents:
       collection: uesio/crm.event
       fields:
@@ -44,6 +47,13 @@ definition:
         uesio/crm.starttime:
         uesio/crm.endtime:
         uesio/crm.initials:
+      conditions:
+        - field: uesio/crm.endtime
+          operator: GTE
+          value: NOW
+      order:
+        - field: uesio/crm.starttime
+          desc: false
     upcomingtasks:
       collection: uesio/crm.task
       fields:
@@ -51,6 +61,20 @@ definition:
         uesio/crm.description:
         uesio/crm.due_by:
         uesio/crm.initials:
+        uesio/crm.is_completed:
+        uesio/crm.is_overdue:
+      conditions:
+        - type: GROUP
+          conjunction: OR
+          conditions:
+            - field: uesio/crm.due_by
+              operator: GTE
+              value: NOW
+            - field: uesio/crm.is_completed
+              operator: IS_BLANK
+      order:
+        - field: uesio/crm.due_by
+          desc: false
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
@@ -180,11 +204,41 @@ definition:
                                               - uesio/io.tile:
                                                   uesio.variant: uesio/crm.item
                                                   content:
-                                                    - uesio/io.text:
-                                                        text: ${name}
+                                                    - uesio/io.titlebar:
+                                                        uesio.variant: uesio/crm.item
+                                                        title: ${name}
+                                                        subtitle: $Date{due_by}
                                                   avatar:
-                                                    - uesio/io.avatar:
-                                                        text: ${initials}
+                                                    - uesio/io.text:
+                                                        uesio.display:
+                                                          - type: hasNoValue
+                                                            value: ${is_completed}
+                                                          - type: hasNoValue
+                                                            value: ${is_overdue}
+                                                        uesio.variant: uesio/crm.avataricon
+                                                        text: done
+                                                    - uesio/io.text:
+                                                        uesio.display:
+                                                          - type: hasValue
+                                                            value: ${is_completed}
+                                                          - type: hasNoValue
+                                                            value: ${is_overdue}
+                                                        uesio.variant: uesio/crm.avataricon
+                                                        text: done
+                                                        uesio.styleTokens:
+                                                          root:
+                                                            - bg-green-600
+                                                            - text-white
+                                                    - uesio/io.text:
+                                                        uesio.display:
+                                                          - type: hasValue
+                                                            value: ${is_overdue}
+                                                        uesio.variant: uesio/crm.avatariconoutline
+                                                        text: timer
+                                                        uesio.styleTokens:
+                                                          root:
+                                                            - bg-rose-500
+                                                            - text-white
                                                   signals:
                                                     - signal: route/NAVIGATE_TO_ASSIGNMENT
                                                       collection: uesio/crm.task
@@ -208,11 +262,14 @@ definition:
                                               - uesio/io.tile:
                                                   uesio.variant: uesio/crm.item
                                                   content:
-                                                    - uesio/io.text:
-                                                        text: ${name}
+                                                    - uesio/io.titlebar:
+                                                        uesio.variant: uesio/crm.item
+                                                        title: ${name}
+                                                        subtitle: $Date{starttime}
                                                   avatar:
-                                                    - uesio/io.avatar:
-                                                        text: ${initials}
+                                                    - uesio/io.text:
+                                                        uesio.variant: uesio/crm.avatariconoutline
+                                                        text: calendar_month
                                                   signals:
                                                     - signal: route/NAVIGATE_TO_ASSIGNMENT
                                                       collection: uesio/crm.event
