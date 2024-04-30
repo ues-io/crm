@@ -3,3 +3,5 @@ label: Opportunity Stage
 public: true
 pluralLabel: Opportunity Stages
 nameField: label
+uniqueKey:
+  - uesio/crm.api_name

@@ -1,0 +1,8 @@
+name: item
+label: Item
+public: true
+extends: uesio/io.default
+definition:
+  uesio.styleTokens:
+    title:
+      - text-sm

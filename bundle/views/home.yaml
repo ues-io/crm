@@ -29,7 +29,11 @@ definition:
       fields:
         uesio/crm.firstname:
         uesio/crm.lastname:
+        uesio/crm.email:
         uesio/crm.initials:
+        uesio/crm.source:
+          fields:
+            uesio/core.uniquekey:
     upcomingevents:
       collection: uesio/crm.event
       fields:
@@ -126,12 +130,27 @@ definition:
                                             wire: newleads
                                             mode: READ
                                             id: newleads
+                                            uesio.variant: uesio/crm.tiles
                                             components:
                                               - uesio/io.tile:
-                                                  uesio.variant: uesio/io.item
+                                                  uesio.variant: uesio/crm.item
                                                   content:
-                                                    - uesio/io.text:
-                                                        text: ${firstname} ${lastname}
+                                                    - uesio/io.titlebar:
+                                                        uesio.variant: uesio/crm.item
+                                                        title: ${firstname} ${lastname}
+                                                        subtitle: ${email}
+                                                        actions:
+                                                          - uesio/io.text:
+                                                              uesio.display:
+                                                                - type: hasValue
+                                                                  value: ${source->uesio/core.uniquekey}
+                                                              uesio.styleTokens:
+                                                                root:
+                                                                  - bg-teal-500
+                                                                  - text-white
+                                                              uesio.variant: uesio/crm.badge
+                                                              element: div
+                                                              text: ${source->uesio/core.uniquekey}
                                                   avatar:
                                                     - uesio/io.avatar:
                                                         text: ${initials}
@@ -153,9 +172,10 @@ definition:
                                             wire: upcomingtasks
                                             mode: READ
                                             id: upcomingtasks
+                                            uesio.variant: uesio/crm.tiles
                                             components:
                                               - uesio/io.tile:
-                                                  uesio.variant: uesio/io.item
+                                                  uesio.variant: uesio/crm.item
                                                   content:
                                                     - uesio/io.text:
                                                         text: ${name}
@@ -180,9 +200,10 @@ definition:
                                             wire: upcomingevents
                                             mode: READ
                                             id: upcomingevents
+                                            uesio.variant: uesio/crm.tiles
                                             components:
                                               - uesio/io.tile:
-                                                  uesio.variant: uesio/io.item
+                                                  uesio.variant: uesio/crm.item
                                                   content:
                                                     - uesio/io.text:
                                                         text: ${name}

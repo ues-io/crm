@@ -3,3 +3,5 @@ label: Lead Source
 public: true
 pluralLabel: Lead Sources
 nameField: label
+uniqueKey:
+  - uesio/crm.api_name
