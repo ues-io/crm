@@ -1,0 +1,13 @@
+name: badge
+label: Badge
+public: true
+definition:
+  uesio.styleTokens:
+    root:
+      - "[line-height:0]"
+      - text-[7pt]
+      - tracking-wider
+      - uppercase
+      - rounded
+      - py-2
+      - px-1
