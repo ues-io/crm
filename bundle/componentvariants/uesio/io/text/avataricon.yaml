@@ -1,0 +1,16 @@
+name: avataricon
+label: Avatar Icon
+public: true
+extends: uesio/io.icon
+definition:
+  uesio.styleTokens:
+    root:
+      - bg-slate-100
+      - rounded-full
+      - text-base
+      - text-slate-500
+      - h-8
+      - w-8
+      - grid
+      - items-center
+      - justify-center

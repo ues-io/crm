@@ -8,6 +8,7 @@ definition:
         uesio/crm.description:
         uesio/crm.due_by:
         uesio/crm.name:
+        uesio/crm.is_completed:
         uesio/crm.related_account:
         uesio/crm.related_contact:
         uesio/crm.related_lead:
@@ -66,6 +67,8 @@ definition:
                           fieldId: uesio/crm.due_by
                       - uesio/io.field:
                           fieldId: uesio/crm.name
+                      - uesio/io.field:
+                          fieldId: uesio/crm.is_completed
                       - uesio/io.field:
                           fieldId: uesio/crm.related_account
                       - uesio/io.field:

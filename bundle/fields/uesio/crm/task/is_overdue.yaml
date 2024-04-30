@@ -1,0 +1,6 @@
+name: is_overdue
+label: Is Overdue
+type: FORMULA
+formula:
+  expression: "!uesio/crm.is_completed && uesio/crm.due_by < NOW()"
+  returntype: CHECKBOX
