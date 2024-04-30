@@ -30,6 +30,7 @@ definition:
         uesio/crm.firstname:
         uesio/crm.lastname:
         uesio/crm.email:
+        uesio/crm.lead_rating:
         uesio/crm.initials:
         uesio/crm.source:
           fields:
@@ -151,6 +152,8 @@ definition:
                                                               uesio.variant: uesio/crm.badge
                                                               element: div
                                                               text: ${source->uesio/core.uniquekey}
+                                                          - uesio/crm.stoplight:
+                                                              field: lead_rating
                                                   avatar:
                                                     - uesio/io.avatar:
                                                         text: ${initials}

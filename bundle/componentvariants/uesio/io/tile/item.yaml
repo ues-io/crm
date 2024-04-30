@@ -10,3 +10,4 @@ definition:
       - p-2
       - hover:bg-slate-100
       - rounded
+      - relative

@@ -1,0 +1,19 @@
+name: stoplight
+category: DATA
+pack: main
+entrypoint: components/stoplight/stoplight
+title: Stoplight
+discoverable: true
+description: A stoplight component for ratings
+properties:
+  - name: field
+    label: Field
+    required: true
+    type: FIELD
+defaultDefinition:
+sections:
+  - type: HOME
+    properties:
+      - field
+  - type: STYLES
+  - type: DISPLAY
