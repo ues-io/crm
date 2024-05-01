@@ -31,6 +31,7 @@ definition:
         uesio/crm.lastname:
         uesio/crm.email:
         uesio/crm.lead_rating:
+        uesio/crm.image:
         uesio/crm.initials:
         uesio/crm.source:
           fields:
@@ -181,6 +182,7 @@ definition:
                                                   avatar:
                                                     - uesio/io.avatar:
                                                         text: ${initials}
+                                                        image: $UserFile{image}
                                                   signals:
                                                     - signal: route/NAVIGATE_TO_ASSIGNMENT
                                                       collection: uesio/crm.lead

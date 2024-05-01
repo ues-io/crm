@@ -23,6 +23,7 @@ definition:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
+        uesio/crm.image:
         uesio/crm.website:
         uesio/crm.company: {}
         uesio/core.id: {}
@@ -231,9 +232,27 @@ definition:
                                 text: Read
                                 uesio.variant: uesio/crm.secondary
                     avatar:
-                      - uesio/io.avatar:
-                          text: ${initials}
-                          image: $UserFile{uesio/crm.logo}
+                      - uesio/io.menu:
+                          uesio.variant: uesio/crm.upload
+                          arrow: true
+                          closeButton: true
+                          trigger:
+                            - uesio/io.avatar:
+                                uesio.variant: uesio/crm.main_pointer
+                                text: ${initials}
+                                image: $UserFile{uesio/crm.image}
+                          content:
+                            - uesio/io.box:
+                                components:
+                                  - uesio/io.titlebar:
+                                      uesio.variant: uesio/crm.sub
+                                      title: Upload or Delete Lead Image
+                                  - uesio/io.field:
+                                      labelPosition: none
+                                      uesio.context:
+                                        fieldMode: EDIT
+                                      fieldId: uesio/crm.image
+                                      displayAs: IMAGE
                 - uesio/io.box:
                     uesio.variant: uesio/crm.primarysection
                     components:

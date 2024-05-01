@@ -25,6 +25,7 @@ definition:
         uesio/crm.topic:
         uesio/crm.website:
         uesio/crm.initials:
+        uesio/crm.image:
   components:
     - uesio/io.viewlayout:
         left:
@@ -175,6 +176,7 @@ definition:
                                 root:
                                   - m-auto
                               text: ${initials}
+                              image: $UserFile{uesio/crm.image}
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname
                       - field: uesio/crm.email
