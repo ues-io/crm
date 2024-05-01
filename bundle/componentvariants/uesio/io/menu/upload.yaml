@@ -1,0 +1,10 @@
+name: upload
+label: Upload Menu
+extends: uesio/io.default
+definition:
+  uesio.styleTokens:
+    menu:
+      - w-72
+      - py-6
+      - px-8
+public: true
