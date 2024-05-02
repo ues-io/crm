@@ -2,6 +2,6 @@ name: opportunity_stage
 label: Opportunity Stage
 public: true
 pluralLabel: Opportunity Stages
-nameField: label
 uniqueKey:
-  - uesio/crm.api_name
+  - api_name
+nameField: label
