@@ -1,0 +1,5 @@
+name: activity
+label: Activity
+public: true
+pluralLabel: Activities
+nameField: name

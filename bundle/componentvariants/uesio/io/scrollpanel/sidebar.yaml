@@ -1,0 +1,13 @@
+name: sidebar
+label: Sidebar
+public: true
+extends: uesio/io.default
+definition:
+  uesio.styleTokens:
+    inner:
+      - p-2
+    footer:
+      - p-2
+      - bg-slate-100
+      - border-t
+      - border-slate-300

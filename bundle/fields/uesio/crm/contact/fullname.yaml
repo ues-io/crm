@@ -2,5 +2,5 @@ name: fullname
 label: Fullname
 type: FORMULA
 formula:
-  expression: uesio/crm.firstname + " " + uesio/crm.lastname
+  expression: TO_STRING(uesio/crm.firstname) + " " + TO_STRING(uesio/crm.lastname)
   returntype: TEXT
