@@ -1,7 +1,7 @@
 name: item
 label: Item
-extends: uesio/io.default
 public: true
+extends: uesio/io.default
 definition:
   uesio.styleTokens:
     root:
