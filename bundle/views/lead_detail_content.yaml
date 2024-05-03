@@ -64,11 +64,6 @@ definition:
         uesio/core.id: {}
         uesio/crm.related_contact: {}
       collection: uesio/crm.event
-      defaults:
-        - field: uesio/crm.related_lead
-          valueSource: LOOKUP
-          lookupWire: lead
-          lookupField: uesio/core.id
       batchsize: 200
       init:
         query: true
@@ -93,6 +88,12 @@ definition:
             uesio/core.lastname:
             uesio/core.username:
       collection: uesio/crm.activity
+      conditions:
+        - field: uesio/crm.parent
+          operator: IN
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
       batchsize: 200
     newactivity:
       fields:
@@ -104,6 +105,11 @@ definition:
         create: true
       collection: uesio/crm.activity
       batchsize: 200
+      defaults:
+        - field: uesio/crm.parent
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
