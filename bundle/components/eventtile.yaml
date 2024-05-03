@@ -1,0 +1,27 @@
+name: eventtile
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.tile:
+      uesio.variant: uesio/crm.item
+      content:
+        - uesio/io.titlebar:
+            uesio.variant: uesio/crm.item
+            title: ${name}
+            subtitle: $Date{starttime}
+      avatar:
+        - uesio/io.text:
+            uesio.variant: uesio/crm.avatariconoutline
+            text: calendar_month
+      signals:
+        - signal: route/NAVIGATE_TO_ASSIGNMENT
+          collection: uesio/crm.event
+          viewtype: detail
+          recordid: ${uesio/core.id}
+title: Event Tile Component
+discoverable: true
+description: A event tile
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

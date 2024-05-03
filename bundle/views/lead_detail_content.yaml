@@ -27,6 +27,11 @@ definition:
         uesio/crm.website:
         uesio/crm.company: {}
         uesio/core.id: {}
+        uesio/core.updatedby: {}
+        uesio/core.updatedat: {}
+        uesio/core.createdby: {}
+        uesio/core.createdat: {}
+        uesio/core.owner: {}
         uesio/crm.lead_status: {}
         uesio/crm.lead_rating: {}
         uesio/crm.next_steps: {}
@@ -42,6 +47,8 @@ definition:
         uesio/crm.due_by: {}
         uesio/crm.name: {}
         uesio/crm.related_lead: {}
+        uesio/crm.is_completed:
+        uesio/crm.is_overdue:
       collection: uesio/crm.task
       batchsize: 200
       init:
@@ -49,7 +56,24 @@ definition:
         create: false
       conditions:
         - field: uesio/crm.related_lead
-          operator: IN
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
+      order:
+        - field: uesio/crm.due_by
+          desc: false
+    newtask:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.due_by: {}
+        uesio/crm.name: {}
+        uesio/crm.related_lead: {}
+      init:
+        query: false
+        create: true
+      collection: uesio/crm.task
+      defaults:
+        - field: uesio/crm.related_lead
           valueSource: LOOKUP
           lookupWire: lead
           lookupField: uesio/core.id
@@ -70,7 +94,28 @@ definition:
         create: false
       conditions:
         - field: uesio/crm.related_lead
-          operator: IN
+          valueSource: LOOKUP
+          lookupWire: lead
+          lookupField: uesio/core.id
+      order:
+        - field: uesio/crm.starttime
+          desc: false
+    newevent:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+        uesio/crm.related_contact: {}
+      init:
+        query: false
+        create: true
+      collection: uesio/crm.event
+      defaults:
+        - field: uesio/crm.related_lead
           valueSource: LOOKUP
           lookupWire: lead
           lookupField: uesio/core.id
@@ -104,7 +149,6 @@ definition:
         query: false
         create: true
       collection: uesio/crm.activity
-      batchsize: 200
       defaults:
         - field: uesio/crm.parent
           valueSource: LOOKUP
@@ -369,6 +413,25 @@ definition:
                                 items:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.topic
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Audit Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.owner
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.createdby
+                                      user:
+                                        subtitle: $Time{uesio/core.createdat}
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.updatedby
+                                      user:
+                                        subtitle: $Time{uesio/core.updatedat}
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main
@@ -385,21 +448,7 @@ definition:
                                     id: activities
                                     uesio.variant: uesio/crm.tiles
                                     components:
-                                      - uesio/io.tile:
-                                          uesio.variant: uesio/crm.commentitem
-                                          content:
-                                            - uesio/io.titlebar:
-                                                uesio.variant: uesio/crm.commentitem
-                                                title: ${description}
-                                                subtitle: $Time{uesio/core.createdat}
-                                          avatar:
-                                            - uesio/io.avatar:
-                                                uesio.context:
-                                                  workspace:
-                                                    name:
-                                                    app:
-                                                text: ${uesio/core.createdby->uesio/core.initials}
-                                                image: $UserFile{uesio/core.createdby->uesio/core.picture}
+                                      - uesio/crm.commenttile:
                               footer:
                                 - uesio/io.item:
                                     wire: newactivity
@@ -428,9 +477,87 @@ definition:
                       - id: tasks
                         label: Tasks
                         components:
+                          - uesio/io.scrollpanel:
+                              uesio.variant: uesio/crm.sidebar
+                              content:
+                                - uesio/io.deck:
+                                    wire: tasks
+                                    mode: READ
+                                    id: tasks
+                                    uesio.variant: uesio/crm.tiles
+                                    components:
+                                      - uesio/crm.tasktile:
+                              footer:
+                                - uesio/io.item:
+                                    wire: newtask
+                                    mode: EDIT
+                                    components:
+                                      - uesio/io.field:
+                                          fieldId: name
+                                      - uesio/io.field:
+                                          fieldId: due_by
+                                      - uesio/io.group:
+                                          uesio.styleTokens:
+                                            root:
+                                              - justify-right
+                                          components:
+                                            - uesio/io.button:
+                                                text: Create Task
+                                                uesio.variant: uesio/crm.secondary
+                                                signals:
+                                                  - signal: wire/SAVE
+                                                    wires:
+                                                      - newtask
+                                                  - signal: wire/RESET
+                                                    wire: newtask
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - tasks
                       - id: events
                         label: Events
                         components:
+                          - uesio/io.scrollpanel:
+                              uesio.variant: uesio/crm.sidebar
+                              content:
+                                - uesio/io.deck:
+                                    wire: events
+                                    mode: READ
+                                    id: events
+                                    uesio.variant: uesio/crm.tiles
+                                    components:
+                                      - uesio/crm.eventtile:
+                              footer:
+                                - uesio/io.item:
+                                    wire: newevent
+                                    mode: EDIT
+                                    components:
+                                      - uesio/io.field:
+                                          label: Event Name
+                                          fieldId: name
+                                      - uesio/io.grid:
+                                          uesio.variant: uesio/io.two_columns
+                                          items:
+                                            - uesio/io.field:
+                                                fieldId: starttime
+                                            - uesio/io.field:
+                                                fieldId: endtime
+                                      - uesio/io.group:
+                                          uesio.styleTokens:
+                                            root:
+                                              - justify-right
+                                          components:
+                                            - uesio/io.button:
+                                                text: Create Event
+                                                uesio.variant: uesio/crm.secondary
+                                                signals:
+                                                  - signal: wire/SAVE
+                                                    wires:
+                                                      - newevent
+                                                  - signal: wire/RESET
+                                                    wire: newevent
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - events
     - uesio/io.box:
         uesio.variant: uesio/io.section
         uesio.display:
