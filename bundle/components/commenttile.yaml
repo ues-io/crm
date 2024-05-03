@@ -1,0 +1,26 @@
+name: commenttile
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.tile:
+      uesio.variant: uesio/crm.commentitem
+      content:
+        - uesio/io.titlebar:
+            uesio.variant: uesio/crm.commentitem
+            title: ${description}
+            subtitle: $Time{uesio/core.createdat}
+      avatar:
+        - uesio/io.avatar:
+            uesio.context:
+              workspace:
+                name:
+                app:
+            text: ${uesio/core.createdby->uesio/core.initials}
+            image: $UserFile{uesio/core.createdby->uesio/core.picture}
+title: Comment Tile Component
+discoverable: true
+description: A comment tile
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY
