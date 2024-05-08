@@ -237,8 +237,8 @@ definition:
       defaults:
         - field: uesio/crm.account
           valueSource: LOOKUP
-          lookupWire: contacts
-          lookupField: uesio/crm.account->uesio/core.id
+          lookupWire: account
+          lookupField: uesio/core.id
       batchsize: 200
       init:
         query: false
@@ -268,10 +268,6 @@ definition:
                                         - signal: wire/SAVE
                                           wires:
                                             - account
-                                            - events
-                                            - tasks
-                                            - contacts
-                                            - opportunities
                                       text: Save
                                       hotkey: "meta+s"
                                       uesio.variant: uesio/crm.primary
@@ -282,76 +278,16 @@ definition:
                                             - type: wireHasChanges
                                               operator: EQUALS
                                               wire: account
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: tasks
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: events
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: contacts
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: opportunities
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/CANCEL
                                           wire: account
-                                        - signal: wire/CANCEL
-                                          wire: contacts
-                                        - signal: wire/CANCEL
-                                          wire: opportunities
-                                        - signal: wire/CANCEL
-                                          wire: tasks
-                                        - signal: wire/CANCEL
-                                          wire: events
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: accounts_list
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: contacts_table
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: opps_table
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: tasks_table
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: events_table
                                       text: Cancel
                                       uesio.variant: uesio/crm.secondary
                                       uesio.display:
-                                        - type: group
-                                          conjunction: OR
-                                          conditions:
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: account
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: tasks
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: events
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: contacts
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: opportunities
+                                        - type: wireHasChanges
+                                          operator: EQUALS
+                                          wire: account
                                   - uesio/io.button:
                                       signals:
                                         - signal: component/CALL
@@ -360,7 +296,7 @@ definition:
                                           targettype: specific
                                           componentid: accounts_list
                                       text: Read
-                                      uesio.variant: uesio/io.secondary
+                                      uesio.variant: uesio/crm.secondary
                                       uesio.display:
                                         - type: mergeValue
                                           operator: EQUALS
@@ -369,18 +305,6 @@ definition:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
                                           wire: account
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: contacts
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: opportunities
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: tasks
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: events
                                       icon: task_alt
                                   - uesio/io.button:
                                       signals:
@@ -400,22 +324,28 @@ definition:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
                                           wire: account
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: contacts
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: opportunities
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: tasks
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: events
                           avatar:
-                            - uesio/io.avatar:
-                                text: ${initials}
-                                image: $UserFile{uesio/crm.logo}
+                            - uesio/io.menu:
+                                uesio.variant: uesio/crm.upload
+                                arrow: true
+                                closeButton: true
+                                trigger:
+                                  - uesio/io.avatar:
+                                      uesio.variant: uesio/crm.main_pointer
+                                      text: ${initials}
+                                      image: $UserFile{uesio/crm.logo}
+                                content:
+                                  - uesio/io.box:
+                                      components:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.sub
+                                            title: Upload or Delete Account Logo
+                                        - uesio/io.field:
+                                            labelPosition: none
+                                            uesio.context:
+                                              fieldMode: EDIT
+                                            fieldId: uesio/crm.logo
+                                            displayAs: IMAGE
                       - uesio/io.box:
                           uesio.variant: ""
                           components:
@@ -444,9 +374,7 @@ definition:
                                             fieldId: uesio/crm.no_employees
                                         - uesio/io.field:
                                             fieldId: uesio/crm.website
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.logo
-                                uesio.variant: uesio/crm.section
+                                uesio.variant: uesio/crm.primarysection
                             - uesio/io.box:
                                 components:
                                   - uesio/io.titlebar:

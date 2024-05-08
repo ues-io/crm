@@ -7,7 +7,8 @@ definition:
     root:
       - gap-0
     title:
-      - text-xs
+      - text-sm
+      - font-light
       - bg-slate-100
       - rounded-t-lg
       - rounded-br-lg
