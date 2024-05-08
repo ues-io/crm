@@ -1,0 +1,41 @@
+name: contactselecttile
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.tile:
+      uesio.variant: uesio/crm.item
+      content:
+        - uesio/io.titlebar:
+            uesio.variant: uesio/crm.item
+            uesio.styleTokens:
+              root:
+                - items-center
+            title: ${firstname} ${lastname}
+            subtitle: ${email}
+            actions:
+              - uesio/io.text:
+                  uesio.styleTokens:
+                    root:
+                      - bg-green-600
+                      - text-white
+                  uesio.display:
+                    - type: hasValue
+                      value: $Prop{selected}
+                  uesio.variant: uesio/crm.avatariconoutline
+                  text: check
+      avatar:
+        - uesio/io.avatar:
+            text: ${initials}
+            image: $UserFile{image}
+      signals: $Prop{signals}
+properties:
+  - type: SIGNALS
+    name: signals
+    label: Signals
+title: Contact Tile Component
+discoverable: true
+description: A contact tile
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

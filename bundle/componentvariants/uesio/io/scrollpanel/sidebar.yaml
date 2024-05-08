@@ -7,7 +7,7 @@ definition:
     inner:
       - p-2
     footer:
-      - p-2
+      - p-4
       - bg-slate-100
       - border-t
       - border-slate-300

@@ -23,6 +23,7 @@ definition:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
+        uesio/crm.expected_revenue:
         uesio/crm.image:
         uesio/crm.website:
         uesio/crm.company: {}
@@ -175,9 +176,11 @@ definition:
                             - uesio/io.toolbar:
                                 right:
                                   - uesio/io.button:
-                                      signals:
                                       text: Convert Lead
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/crm.secondary
+                                      signals:
+                                        - signal: route/NAVIGATE
+                                          path: "lead/convert/${uesio/core.id}?contact=${firstname} ${lastname}&account=${company}"
                                       uesio.display:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
@@ -413,6 +416,8 @@ definition:
                                 items:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.topic
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.expected_revenue
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:

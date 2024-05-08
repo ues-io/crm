@@ -1,0 +1,24 @@
+name: lead_convert
+definition:
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.viewlayout:
+        left:
+          - uesio/crm.nav:
+        content:
+          - uesio/core.view:
+              view: lead_convert_content
+              uesio.id: convertcontent
+              params:
+                recordid: $Param{recordid}
+                contact: $Param{contact}
+                account: $Param{account}
+  params:
+    recordid:
+      type: RECORD
+      required: true
+      collection: uesio/crm.lead
+    contact:
+      type: TEXT
+    account:
+      type: TEXT
