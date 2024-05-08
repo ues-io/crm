@@ -32,12 +32,16 @@ definition:
               uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.tabs:
+                    uesio.variant: uesio/crm.main
                     tabs:
                       - id: leadsources
                         label: Lead Sources
                         components:
                           - uesio/io.grid:
                               uesio.variant: uesio/crm.three_columns
+                              uesio.styleTokens:
+                                root:
+                                  - m-6
                               items:
                                 - uesio/io.box:
                                     uesio.styleTokens:
@@ -197,6 +201,9 @@ definition:
                         components:
                           - uesio/io.grid:
                               uesio.variant: uesio/crm.three_columns
+                              uesio.styleTokens:
+                                root:
+                                  - m-6
                               items:
                                 - uesio/io.box:
                                     uesio.styleTokens:

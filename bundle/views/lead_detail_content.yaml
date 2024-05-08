@@ -409,7 +409,7 @@ definition:
                                           components:
                                             - uesio/io.button:
                                                 text: Comment
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 signals:
                                                   - signal: wire/SAVE
                                                     wires:
@@ -448,7 +448,7 @@ definition:
                                           components:
                                             - uesio/io.button:
                                                 text: Create Task
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 signals:
                                                   - signal: wire/SAVE
                                                     wires:
@@ -493,7 +493,7 @@ definition:
                                           components:
                                             - uesio/io.button:
                                                 text: Create Event
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 signals:
                                                   - signal: wire/SAVE
                                                     wires:
