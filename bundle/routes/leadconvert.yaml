@@ -1,0 +1,5 @@
+name: leadconvert
+path: lead/convert/{recordid}
+view: lead_convert
+theme: uesio/core.default
+title: Lead Convert View

@@ -1,0 +1,5 @@
+name: expected_revenue
+label: Expected Revenue
+type: NUMBER
+number:
+  decimals: 2

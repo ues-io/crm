@@ -1,0 +1,23 @@
+name: convert_lead
+public: true
+type: LISTENER
+dialect: TYPESCRIPT
+params:
+  - name: lead
+    type: TEXT
+    required: true
+  - name: contactaction
+    type: TEXT
+    required: true
+  - name: accountaction
+    type: TEXT
+    required: true
+  - name: opportunityaction
+    type: TEXT
+    required: true
+  - name: contact
+    type: TEXT
+  - name: account
+    type: TEXT
+  - name: opportunity
+    type: TEXT

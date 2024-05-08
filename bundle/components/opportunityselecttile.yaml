@@ -1,0 +1,41 @@
+name: opportunityselecttile
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.tile:
+      uesio.variant: uesio/crm.item
+      content:
+        - uesio/io.titlebar:
+            uesio.variant: uesio/crm.item
+            uesio.styleTokens:
+              root:
+                - items-center
+            title: ${topic}
+            subtitle: ${expected_revenue}
+            actions:
+              - uesio/io.text:
+                  uesio.styleTokens:
+                    root:
+                      - bg-green-600
+                      - text-white
+                  uesio.display:
+                    - type: hasValue
+                      value: $Prop{selected}
+                  uesio.variant: uesio/crm.avatariconoutline
+                  text: check
+      avatar:
+        - uesio/io.text:
+            uesio.variant: uesio/crm.avatariconoutline
+            text: payments
+      signals: $Prop{signals}
+properties:
+  - type: SIGNALS
+    name: signals
+    label: Signals
+title: Opportunity Tile Component
+discoverable: true
+description: An opportunity tile
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

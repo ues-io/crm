@@ -1,0 +1,486 @@
+name: lead_convert_content
+definition:
+  # Wires connect to data in collections
+  wires:
+    lead:
+      collection: uesio/crm.lead
+      fields:
+        uesio/crm.description:
+        uesio/crm.email:
+        uesio/crm.firstname:
+        uesio/crm.fullname:
+        uesio/crm.industry:
+        uesio/crm.is_converted:
+        uesio/crm.lastname:
+        uesio/crm.location:
+        uesio/crm.mailing_city:
+        uesio/crm.mailing_country:
+        uesio/crm.mailing_state_province:
+        uesio/crm.mailing_street:
+        uesio/crm.mailing_zip_postal:
+        uesio/crm.no_employees:
+        uesio/crm.phone:
+        uesio/crm.phone_business:
+        uesio/crm.phone_mobile:
+        uesio/crm.topic:
+        uesio/crm.expected_revenue:
+        uesio/crm.image:
+        uesio/crm.website:
+        uesio/crm.company: {}
+        uesio/core.id: {}
+        uesio/core.updatedby: {}
+        uesio/core.updatedat: {}
+        uesio/core.createdby: {}
+        uesio/core.createdat: {}
+        uesio/core.owner: {}
+        uesio/crm.lead_status: {}
+        uesio/crm.lead_rating: {}
+        uesio/crm.next_steps: {}
+        uesio/crm.initials: {}
+        uesio/crm.source: {}
+      conditions:
+        - field: uesio/core.id
+          valueSource: PARAM
+          param: recordid
+    contactsearch:
+      collection: uesio/crm.contact
+      fields:
+        uesio/crm.firstname:
+        uesio/crm.lastname:
+        uesio/crm.email:
+        uesio/crm.initials:
+      conditions:
+        - type: SEARCH
+          id: uesio.search
+          fields:
+            - uesio/crm.firstname
+            - uesio/crm.lastname
+          value: $Param{contact}
+      batchsize: 5
+    accountsearch:
+      collection: uesio/crm.account
+      fields:
+        uesio/crm.name:
+        uesio/crm.initials:
+        uesio/crm.description:
+      conditions:
+        - type: SEARCH
+          id: uesio.search
+          fields:
+            - uesio/crm.name
+          value: $Param{account}
+      batchsize: 5
+    opportunitysearch:
+      collection: uesio/crm.opportunity
+      fields:
+        uesio/crm.topic:
+        uesio/crm.expected_revenue:
+      init:
+        query: false
+      batchsize: 5
+    options:
+      viewOnly: true
+      fields:
+        contact_action:
+          viewOnly: true
+          label: Contact Action
+          type: SELECT
+          selectlist:
+            options:
+              - value: "create"
+                label: "Create new contact"
+              - value: "link"
+                label: "Link to existing contact"
+        account_action:
+          viewOnly: true
+          label: Account Action
+          type: SELECT
+          selectlist:
+            options:
+              - value: "create"
+                label: "Create new account"
+              - value: "link"
+                label: "Link to existing account"
+        opportunity_action:
+          viewOnly: true
+          label: Opportunity Action
+          type: SELECT
+          selectlist:
+            options:
+              - value: "create"
+                label: "Create new opportunity"
+              - value: "link"
+                label: "Link to existing opportunity"
+              - value: "none"
+                label: "Do not create an opportunity"
+        selected_contact:
+          viewOnly: true
+          label: Selected Contact
+          type: TEXT
+        selected_account:
+          viewOnly: true
+          label: Selected Account
+          type: TEXT
+        selected_opportunity:
+          viewOnly: true
+          label: Selected Opportunity
+          type: TEXT
+      init:
+        create: true
+        query: false
+      defaults:
+        - field: contact_action
+          valueSource: VALUE
+          value: create
+          conditions:
+            - type: wireHasNoRecords
+              wire: contactsearch
+        - field: contact_action
+          valueSource: VALUE
+          value: link
+          conditions:
+            - type: wireHasRecords
+              wire: contactsearch
+        - field: account_action
+          valueSource: VALUE
+          value: create
+          conditions:
+            - type: wireHasNoRecords
+              wire: accountsearch
+        - field: account_action
+          valueSource: VALUE
+          value: link
+          conditions:
+            - type: wireHasRecords
+              wire: accountsearch
+        - field: opportunity_action
+          valueSource: VALUE
+          value: create
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.box:
+        uesio.display:
+          - type: paramIsSet
+            param: recordid
+        components:
+          - uesio/crm.detailsplit:
+              main:
+                - uesio/io.list:
+                    wire: lead
+                    uesio.id: leadList
+                    mode: EDIT
+                    components:
+                      - uesio/io.titlebar:
+                          title: ${uesio/crm.fullname}
+                          subtitle: Convert Lead
+                          uesio.variant: uesio/crm.main
+                          actions:
+                            - uesio/io.toolbar:
+                                right:
+                                  - uesio/io.button:
+                                      uesio.variant: uesio/crm.primary
+                                      text: Convert
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - lead
+                                        - signal: bot/CALL
+                                          bot: uesio/crm.convert_lead
+                                          params:
+                                            lead: ${uesio/core.id}
+                                            contactaction: ${options:contact_action}
+                                            contact: ${options:selected_contact}
+                                            accountaction: ${options:account_action}
+                                            account: ${options:selected_account}
+                                            opportunityaction: ${options:opportunity_action}
+                                            opportunity: ${options:selected_opportunity}
+                                  - uesio/io.button:
+                                      uesio.variant: uesio/crm.secondary
+                                      text: Cancel
+                                      signals:
+                                        - signal: route/NAVIGATE
+                                          path: "lead/detail/${uesio/core.id}"
+                          avatar:
+                            - uesio/io.avatar:
+                                uesio.variant: uesio/crm.main_pointer
+                                text: ${initials}
+                                image: $UserFile{uesio/crm.image}
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.primarysection
+                          components:
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.lead_status
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.lead_rating
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.source
+                            - uesio/io.field:
+                                fieldId: uesio/crm.next_steps
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Contact Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.item:
+                                wire: options
+                                components:
+                                  - uesio/io.field:
+                                      uesio.context:
+                                        fieldMode: EDIT
+                                      labelPosition: none
+                                      fieldId: contact_action
+                                      displayAs: RADIO
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: contact_action
+                                    wire: options
+                                    value: link
+                                components:
+                                  - uesio/io.searchbox:
+                                      uesio.variant: uesio/crm.main
+                                      wire: contactsearch
+                                      searchFields:
+                                        - firstname
+                                        - lastname
+                                  - uesio/io.deck:
+                                      wire: contactsearch
+                                      components:
+                                        - uesio/crm.contactselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                value: ${options:selected_contact}
+                                            selected: true
+                                        - uesio/crm.contactselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                operator: NOT_EQUALS
+                                                value: ${options:selected_contact}
+                                            selected: false
+                                            signals:
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_contact
+                                                value: ${uesio/core.id}
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: contact_action
+                                    wire: options
+                                    value: create
+                                components:
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.three_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.firstname
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.lastname
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.email
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.phone
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.phone_business
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.phone_mobile
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.three_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.location
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.mailing_city
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.mailing_street
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.mailing_state_province
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.mailing_country
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.mailing_zip_postal
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Account Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.item:
+                                wire: options
+                                components:
+                                  - uesio/io.field:
+                                      uesio.context:
+                                        fieldMode: EDIT
+                                      labelPosition: none
+                                      fieldId: account_action
+                                      displayAs: RADIO
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: account_action
+                                    wire: options
+                                    value: link
+                                components:
+                                  - uesio/io.searchbox:
+                                      uesio.variant: uesio/crm.main
+                                      wire: accountsearch
+                                      searchFields:
+                                        - name
+                                  - uesio/io.deck:
+                                      wire: accountsearch
+                                      components:
+                                        - uesio/crm.accountselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                value: ${options:selected_account}
+                                            selected: true
+                                        - uesio/crm.accountselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                operator: NOT_EQUALS
+                                                value: ${options:selected_account}
+                                            selected: false
+                                            signals:
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_account
+                                                value: ${uesio/core.id}
+                                              - signal: wire/SET_CONDITION
+                                                wire: opportunitysearch
+                                                condition:
+                                                  id: account
+                                                  field: uesio/crm.account
+                                                  value: ${uesio/core.id}
+                                              - signal: wire/LOAD
+                                                wires:
+                                                  - opportunitysearch
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: account_action
+                                    wire: options
+                                    value: create
+                                components:
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.two_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.company
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.industry
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.three_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.description
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.website
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.no_employees
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Opportunity Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.item:
+                                wire: options
+                                components:
+                                  - uesio/io.field:
+                                      uesio.context:
+                                        fieldMode: EDIT
+                                      labelPosition: none
+                                      fieldId: opportunity_action
+                                      displayAs: RADIO
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: opportunity_action
+                                    wire: options
+                                    value: create
+                                components:
+                                  - uesio/io.grid:
+                                      uesio.variant: uesio/crm.two_columns
+                                      items:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.topic
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.expected_revenue
+                            - uesio/io.box:
+                                uesio.display:
+                                  - field: opportunity_action
+                                    wire: options
+                                    value: link
+                                components:
+                                  - uesio/io.deck:
+                                      wire: opportunitysearch
+                                      components:
+                                        - uesio/crm.opportunityselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                value: ${options:selected_opportunity}
+                                            selected: true
+                                            signals:
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_opportunity
+                                                value: ${uesio/core.id}
+                                        - uesio/crm.opportunityselecttile:
+                                            uesio.display:
+                                              - field: uesio/core.id
+                                                operator: NOT_EQUALS
+                                                value: ${options:selected_opportunity}
+                                            selected: false
+                                            signals:
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_opportunity
+                                                value: ${uesio/core.id}
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Audit Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.owner
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.createdby
+                                      user:
+                                        subtitle: $Time{uesio/core.createdat}
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.updatedby
+                                      user:
+                                        subtitle: $Time{uesio/core.updatedat}
+              left:
+                - uesio/io.box:
+                    components:
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.note
+                          components:
+                            - uesio/io.text:
+                                text: The "Convert Lead" process lets you create an account, contact, (and optionally) an opportunity from lead. Typically, a lead should be converted when they've progressed from being a potential prospect to a qualified opportunity.
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.note
+                          components:
+                            - uesio/io.text:
+                                text: This process lets you decide whether you're creating new records for this lead or linking them to existing ones. Be sure to search for existing records to prevent creating duplicates.
+    - uesio/io.box:
+        uesio.variant: uesio/io.section
+        uesio.display:
+          - type: paramIsNotSet
+            param: recordid
+        components:
+          - uesio/io.text:
+              text: Select a record
+  params:
+    recordid:
+      type: RECORD
+      required: true
+      collection: uesio/crm.lead
+    contact:
+      type: TEXT
+    account:
+      type: TEXT
