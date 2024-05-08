@@ -185,34 +185,16 @@ definition:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
                                           wire: lead
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: tasks
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: events
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/SAVE
                                           wires:
                                             - lead
-                                            - tasks
-                                            - events
                                         - signal: component/CALL
                                           component: uesio/io.list
                                           componentsignal: SET_READ_MODE
                                           targettype: specific
                                           componentid: leadList
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: tasks_table
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: events_table
                                       text: Save
                                       hotkey: "meta+s"
                                       uesio.variant: uesio/crm.primary
@@ -223,50 +205,16 @@ definition:
                                             - type: wireHasChanges
                                               operator: EQUALS
                                               wire: lead
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: tasks
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: events
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/CANCEL
                                           wire: lead
-                                        - signal: wire/CANCEL
-                                          wire: tasks
-                                        - signal: wire/CANCEL
-                                          wire: events
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: leadList
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: tasks_table
-                                        - signal: component/CALL
-                                          component: uesio/io.table
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: events_table
                                       text: Cancel
                                       uesio.variant: uesio/crm.secondary
                                       uesio.display:
-                                        - type: group
-                                          conjunction: OR
-                                          conditions:
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: lead
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: tasks
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: events
+                                        - type: wireHasChanges
+                                          operator: EQUALS
+                                          wire: lead
                                   - uesio/io.button:
                                       signals:
                                         - signal: component/CALL
@@ -285,10 +233,6 @@ definition:
                                           sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
                                         - type: wireHasNoChanges
                                           wire: lead
-                                        - type: wireHasNoChanges
-                                          wire: tasks
-                                        - type: wireHasNoChanges
-                                          wire: events
                                   - uesio/io.button:
                                       signals:
                                         - signal: component/CALL
@@ -303,10 +247,6 @@ definition:
                                           sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
                                         - type: wireHasNoChanges
                                           wire: lead
-                                        - type: wireHasNoChanges
-                                          wire: tasks
-                                        - type: wireHasNoChanges
-                                          wire: events
                                       icon: task_alt
                                       iconFill: false
                                       text: Read
