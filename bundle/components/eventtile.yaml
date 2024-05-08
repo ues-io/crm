@@ -8,7 +8,7 @@ definition:
         - uesio/io.titlebar:
             uesio.variant: uesio/crm.item
             title: ${name}
-            subtitle: $Date{starttime}
+            subtitle: $Date{starttime} - $Date{endtime}
       avatar:
         - uesio/io.text:
             uesio.variant: uesio/crm.avatariconoutline

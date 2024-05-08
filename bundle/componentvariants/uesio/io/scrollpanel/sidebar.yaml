@@ -6,8 +6,9 @@ definition:
   uesio.styleTokens:
     inner:
       - p-2
+      - py-3
     footer:
       - p-4
       - bg-slate-100
       - border-t
-      - border-slate-300
+      - border-slate-200

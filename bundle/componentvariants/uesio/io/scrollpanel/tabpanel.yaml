@@ -4,10 +4,14 @@ public: true
 extends: uesio/io.default
 definition:
   uesio.styleTokens:
+    root:
+      - "[&.selected-index-0>div:nth-child(2)]:rounded-tl-none"
     inner:
       - p-0
       - border-1
-      - border-slate-300
+      - border-t-2
+      - border-slate-400
+      - border-t-slate-800
       - rounded-b-md
-      - rounded-tr-md
+      - rounded-t-md
       - "[min-height:200px]"
