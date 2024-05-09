@@ -17,7 +17,10 @@ params:
     required: true
   - name: contact
     type: TEXT
+    required: false
   - name: account
     type: TEXT
+    required: false
   - name: opportunity
     type: TEXT
+    required: false

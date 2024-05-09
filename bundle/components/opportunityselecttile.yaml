@@ -1,6 +1,10 @@
 name: opportunityselecttile
 category: LAYOUT
 type: DECLARATIVE
+properties:
+  - type: SIGNALS
+    name: signals
+    label: Signals
 definition:
   - uesio/io.tile:
       uesio.variant: uesio/crm.item
@@ -28,10 +32,6 @@ definition:
             uesio.variant: uesio/crm.avatariconoutline
             text: payments
       signals: $Prop{signals}
-properties:
-  - type: SIGNALS
-    name: signals
-    label: Signals
 title: Opportunity Tile Component
 discoverable: true
 description: An opportunity tile

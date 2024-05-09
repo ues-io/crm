@@ -1,6 +1,10 @@
 name: contactselecttile
 category: LAYOUT
 type: DECLARATIVE
+properties:
+  - type: SIGNALS
+    name: signals
+    label: Signals
 definition:
   - uesio/io.tile:
       uesio.variant: uesio/crm.item
@@ -28,10 +32,6 @@ definition:
             text: ${initials}
             image: $UserFile{image}
       signals: $Prop{signals}
-properties:
-  - type: SIGNALS
-    name: signals
-    label: Signals
 title: Contact Tile Component
 discoverable: true
 description: A contact tile
