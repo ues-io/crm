@@ -199,7 +199,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 				"uesio/crm.location": location,
 				"uesio/crm.mailing_city": mailingCity,
 				"uesio/crm.mailing_street": mailingStreet,
-				"uesio/crm.mailing_state": mailingState,
+				"uesio/crm.mailing_state_province": mailingState,
 				"uesio/crm.mailing_country": mailingCountry,
 				"uesio/crm.mailing_zip_postal": mailingZip,
 				"uesio/crm.account": {
