@@ -1,0 +1,5 @@
+name: related_event
+label: Related Event
+type: REFERENCE
+reference:
+  collection: event
