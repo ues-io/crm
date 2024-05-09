@@ -18,9 +18,9 @@ definition:
         uesio/crm.lastname:
         uesio/crm.mailing_city:
         uesio/crm.mailing_country:
-        uesio/crm.mailing_state:
+        uesio/crm.mailing_state_province:
         uesio/crm.mailing_street:
-        uesio/crm.mailing_zip:
+        uesio/crm.mailing_zip_postal:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:
         uesio/crm.reports_to:
