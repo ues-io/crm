@@ -56,6 +56,7 @@ definition:
             - uesio/crm.firstname
             - uesio/crm.lastname
           value: $Param{contact}
+          noValueBehavior: NOQUERY
       batchsize: 5
     accountsearch:
       collection: uesio/crm.account
@@ -69,6 +70,7 @@ definition:
           fields:
             - uesio/crm.name
           value: $Param{account}
+          noValueBehavior: NOQUERY
       batchsize: 5
     opportunitysearch:
       collection: uesio/crm.opportunity
@@ -246,6 +248,7 @@ definition:
                                       searchFields:
                                         - firstname
                                         - lastname
+                                      noValueBehavior: NOQUERY
                                   - uesio/io.deck:
                                       wire: contactsearch
                                       components:
@@ -265,6 +268,29 @@ definition:
                                                 wire: options
                                                 field: selected_contact
                                                 value: ${uesio/core.id}
+                                  - uesio/io.box:
+                                      uesio.variant: uesio/crm.minornote
+                                      uesio.display:
+                                        - type: wireHasNoRecords
+                                          wire: contactsearch
+                                      components:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/io.iconoutline
+                                            uesio.styleTokens:
+                                              root:
+                                                - text-xl
+                                                - mr-3
+                                            text: info
+                                        - uesio/io.text:
+                                            uesio.display:
+                                              - type: hasValue
+                                                value: $ConditionValue{contactsearch:uesio.search}
+                                            text: "No results found for search: $ConditionValue{contactsearch:uesio.search}"
+                                        - uesio/io.text:
+                                            uesio.display:
+                                              - type: hasNoValue
+                                                value: $ConditionValue{contactsearch:uesio.search}
+                                            text: "Search for an existing contact to link to this lead"
                             - uesio/io.box:
                                 uesio.display:
                                   - field: contact_action
@@ -327,6 +353,7 @@ definition:
                                       wire: accountsearch
                                       searchFields:
                                         - name
+                                      noValueBehavior: NOQUERY
                                   - uesio/io.deck:
                                       wire: accountsearch
                                       components:
@@ -355,6 +382,29 @@ definition:
                                               - signal: wire/LOAD
                                                 wires:
                                                   - opportunitysearch
+                                  - uesio/io.box:
+                                      uesio.variant: uesio/crm.minornote
+                                      uesio.display:
+                                        - type: wireHasNoRecords
+                                          wire: accountsearch
+                                      components:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/io.iconoutline
+                                            uesio.styleTokens:
+                                              root:
+                                                - text-xl
+                                                - mr-3
+                                            text: info
+                                        - uesio/io.text:
+                                            uesio.display:
+                                              - type: hasValue
+                                                value: $ConditionValue{accountsearch:uesio.search}
+                                            text: "No results found for search: $ConditionValue{accountsearch:uesio.search}"
+                                        - uesio/io.text:
+                                            uesio.display:
+                                              - type: hasNoValue
+                                                value: $ConditionValue{accountsearch:uesio.search}
+                                            text: "Search for an existing account to link to this lead"
                             - uesio/io.box:
                                 uesio.display:
                                   - field: account_action
@@ -435,6 +485,21 @@ definition:
                                                 wire: options
                                                 field: selected_opportunity
                                                 value: ${uesio/core.id}
+                                  - uesio/io.box:
+                                      uesio.variant: uesio/crm.minornote
+                                      uesio.display:
+                                        - type: wireHasNoRecords
+                                          wire: opportunitysearch
+                                      components:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/io.iconoutline
+                                            uesio.styleTokens:
+                                              root:
+                                                - text-xl
+                                                - mr-3
+                                            text: info
+                                        - uesio/io.text:
+                                            text: "No opportunities are associated with the selected account."
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:

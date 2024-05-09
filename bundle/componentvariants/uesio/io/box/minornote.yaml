@@ -1,0 +1,16 @@
+name: minornote
+label: Minor Note
+public: true
+definition:
+  uesio.styleTokens:
+    root:
+      - border-1
+      - border-indigo-900
+      - p-3
+      - font-light
+      - text-indigo-900
+      - text-sm
+      - rounded-md
+      - mb-4
+      - flex
+      - items-center

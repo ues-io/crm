@@ -1,10 +1,8 @@
 name: sidebar
 label: Sidebar
 public: true
-extends: uesio/io.secondary
+extends: uesio/crm.secondary
 definition:
   uesio.styleTokens:
     root:
-      - min-w-[88px]
       - text-xs
-      - text-slate-800

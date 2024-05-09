@@ -7,3 +7,4 @@ definition:
     root:
       - min-w-[88px]
       - text-slate-800
+      - border-slate-700
