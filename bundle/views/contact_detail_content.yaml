@@ -27,7 +27,12 @@ definition:
         uesio/crm.role:
         uesio/crm.salutation:
         uesio/crm.title:
-        uesio/core.id: {}
+        uesio/crm.initials:
+        uesio/core.updatedby: {}
+        uesio/core.updatedat: {}
+        uesio/core.createdby: {}
+        uesio/core.createdat: {}
+        uesio/core.owner: {}
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -223,7 +228,6 @@ definition:
                           uesio.variant: uesio/crm.main
                           actions:
                             - uesio/io.group:
-                                columnGap: ""
                                 components:
                                   - uesio/io.button:
                                       signals:
@@ -285,7 +289,9 @@ definition:
                                           wire: contact
                           avatar:
                             - uesio/io.menu:
-                                uesio.variant: uesio/io.default
+                                uesio.variant: uesio/crm.upload
+                                arrow: true
+                                closeButton: true
                                 trigger:
                                   - uesio/io.avatar:
                                       text: ${initials}
@@ -295,10 +301,14 @@ definition:
                                   - uesio/io.box:
                                       components:
                                         - uesio/io.titlebar:
-                                            title: New Title
+                                            uesio.variant: uesio/crm.sub
+                                            title: Upload or Delete Contact Image
                                         - uesio/io.field:
-                                            fieldId: uesio/crm.image
                                             labelPosition: none
+                                            uesio.context:
+                                              fieldMode: EDIT
+                                            fieldId: uesio/crm.image
+                                            displayAs: IMAGE
                       - uesio/io.box:
                           uesio.display:
                             - type: paramIsSet
@@ -325,14 +335,14 @@ definition:
                                       fieldId: uesio/crm.description
                                   - uesio/io.field:
                                       fieldId: uesio/crm.email_opt_out
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/crm.primarysection
                       - uesio/io.box:
                           uesio.display:
                             - type: paramIsSet
                               param: recordid
                           components:
                             - uesio/io.titlebar:
-                                title: ACCOUNT INFORMATION
+                                title: Account Information
                                 uesio.variant: uesio/crm.sub
                             - uesio/io.grid:
                                 uesio.variant: uesio/io.three_columns
@@ -354,7 +364,7 @@ definition:
                           uesio.variant: uesio/io.section
                           components:
                             - uesio/io.titlebar:
-                                title: MAILING ADDRESS
+                                title: Mailing Address
                                 uesio.variant: uesio/crm.sub
                             - uesio/io.grid:
                                 items:
@@ -369,6 +379,25 @@ definition:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.mailing_zip
                                 uesio.variant: uesio/crm.three_columns
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Audit Information
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.owner
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.createdby
+                                      user:
+                                        subtitle: $Time{uesio/core.createdat}
+                                  - uesio/io.field:
+                                      fieldId: uesio/core.updatedby
+                                      user:
+                                        subtitle: $Time{uesio/core.updatedat}
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main
@@ -398,7 +427,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Comment
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
@@ -440,7 +469,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Create Task
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
@@ -484,7 +513,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Create Event
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
