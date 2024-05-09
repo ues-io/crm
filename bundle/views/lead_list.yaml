@@ -54,6 +54,11 @@ definition:
                               componentsignal: SET_READ_MODE
                               targettype: specific
                               componentid: leadTable
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: leadTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
                           uesio.variant: uesio/crm.primary
