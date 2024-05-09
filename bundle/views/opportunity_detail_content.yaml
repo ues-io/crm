@@ -209,6 +209,10 @@ definition:
                                           componentsignal: TOGGLE_MODE
                                           targettype: specific
                                           componentid: opportunityList
+                          avatar:
+                            - uesio/io.text:
+                                text: payments
+                                uesio.variant: uesio/io.icon
                       - uesio/io.box:
                           uesio.styleTokens:
                             root:

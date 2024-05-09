@@ -143,6 +143,10 @@ definition:
                                           operator: EQUALS
                                           wire: task
                           uesio.variant: uesio/crm.main
+                          avatar:
+                            - uesio/io.text:
+                                text: task_alt
+                                uesio.variant: uesio/io.icon
                       - uesio/io.box:
                           components:
                             - uesio/io.grid:
@@ -156,7 +160,7 @@ definition:
                                       fieldId: uesio/crm.due_by
                                   - uesio/io.field:
                                       fieldId: uesio/crm.is_completed
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/crm.primarysection
                       - uesio/io.box:
                           components:
                             - uesio/io.titlebar:
