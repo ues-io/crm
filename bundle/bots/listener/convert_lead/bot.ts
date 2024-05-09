@@ -30,6 +30,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 	const leadResult = bot.load({
 		collection: "uesio/crm.lead",
 		fields: [
+			// Contact Fields
 			{
 				id: "uesio/crm.firstname",
 			},
@@ -40,10 +41,57 @@ export default function convert_lead(bot: ListenerBotApi) {
 				id: "uesio/crm.email",
 			},
 			{
+				id: "uesio/crm.phone",
+			},
+			{
+				id: "uesio/crm.phone_business",
+			},
+			{
+				id: "uesio/crm.phone_mobile",
+			},
+			{
+				id: "uesio/crm.location",
+			},
+			{
+				id: "uesio/crm.mailing_city",
+			},
+			{
+				id: "uesio/crm.mailing_street",
+			},
+			{
+				id: "uesio/crm.mailing_state_province",
+			},
+			{
+				id: "uesio/crm.mailing_country",
+			},
+			{
+				id: "uesio/crm.mailing_zip_postal",
+			},
+			// Account Fields
+			{
+				id: "uesio/crm.company",
+			},
+			{
+				id: "uesio/crm.industry",
+			},
+			{
+				id: "uesio/crm.description",
+			},
+			{
+				id: "uesio/crm.website",
+			},
+			{
+				id: "uesio/crm.no_employees",
+			},
+			// Opportunity Fields
+			{
 				id: "uesio/crm.topic",
 			},
 			{
-				id: "uesio/crm.company",
+				id: "uesio/crm.expected_revenue",
+			},
+			{
+				id: "uesio/crm.close_date",
 			},
 		],
 		conditions: [
@@ -91,6 +139,10 @@ export default function convert_lead(bot: ListenerBotApi) {
 	if (accountAction === "create") {
 		//bot.log.info("Creating New Account")
 		const company = leadResultItem["uesio/crm.company"]
+		const industry = leadResultItem["uesio/crm.industry"]
+		const description = leadResultItem["uesio/crm.description"]
+		const website = leadResultItem["uesio/crm.website"]
+		const noEmployees = leadResultItem["uesio/crm.no_employees"]
 
 		if (!company) {
 			throw new Error(
@@ -101,6 +153,10 @@ export default function convert_lead(bot: ListenerBotApi) {
 		const accountSaveResult = bot.save("uesio/crm.account", [
 			{
 				"uesio/crm.name": company,
+				"uesio/crm.industry": industry,
+				"uesio/crm.description": description,
+				"uesio/crm.website": website,
+				"uesio/crm.no_employees": noEmployees,
 			},
 		] as unknown as WireRecord[])?.[0]
 
@@ -119,11 +175,33 @@ export default function convert_lead(bot: ListenerBotApi) {
 	if (contactAction === "create") {
 		//bot.log.info("Creating New Contact")
 
+		const firstname = leadResultItem["uesio/crm.firstname"]
+		const lastname = leadResultItem["uesio/crm.lastname"]
+		const email = leadResultItem["uesio/crm.email"]
+		const phone = leadResultItem["uesio/crm.phone"]
+		const phoneBusiness = leadResultItem["uesio/crm.phone_business"]
+		const phoneMobile = leadResultItem["uesio/crm.phone_mobile"]
+		const location = leadResultItem["uesio/crm.location"]
+		const mailingCity = leadResultItem["uesio/crm.mailing_city"]
+		const mailingStreet = leadResultItem["uesio/crm.mailing_street"]
+		const mailingState = leadResultItem["uesio/crm.mailing_state_province"]
+		const mailingCountry = leadResultItem["uesio/crm.mailing_country"]
+		const mailingZip = leadResultItem["uesio/crm.mailing_zip_postal"]
+
 		const contactSaveResult = bot.save("uesio/crm.contact", [
 			{
-				"uesio/crm.firstname": leadResultItem["uesio/crm.firstname"],
-				"uesio/crm.lastname": leadResultItem["uesio/crm.lastname"],
-				"uesio/crm.email": leadResultItem["uesio/crm.email"],
+				"uesio/crm.firstname": firstname,
+				"uesio/crm.lastname": lastname,
+				"uesio/crm.email": email,
+				"uesio/crm.phone": phone,
+				"uesio/crm.phone_business": phoneBusiness,
+				"uesio/crm.phone_mobile": phoneMobile,
+				"uesio/crm.location": location,
+				"uesio/crm.mailing_city": mailingCity,
+				"uesio/crm.mailing_street": mailingStreet,
+				"uesio/crm.mailing_state": mailingState,
+				"uesio/crm.mailing_country": mailingCountry,
+				"uesio/crm.mailing_zip_postal": mailingZip,
 				"uesio/crm.account": {
 					"uesio/core.id": accountId,
 				},
@@ -169,11 +247,15 @@ export default function convert_lead(bot: ListenerBotApi) {
 		//bot.log.info("Creating New Opportunity")
 
 		const topic = leadResultItem["uesio/crm.topic"]
+		const expectedRevenue = leadResultItem["uesio/crm.expected_revenue"]
+		const closeDate = leadResultItem["uesio/crm.close_date"]
 
 		if (topic) {
 			bot.save("uesio/crm.opportunity", [
 				{
 					"uesio/crm.topic": topic,
+					"uesio/crm.expected_revenue": expectedRevenue,
+					"uesio/crm.close_date": closeDate,
 					"uesio/crm.account": {
 						"uesio/core.id": accountId,
 					},
@@ -203,5 +285,12 @@ export default function convert_lead(bot: ListenerBotApi) {
 	}
 
 	// 6: Update Existing Lead Record Status
+	bot.save("uesio/crm.lead", [
+		{
+			"uesio/core.id": lead,
+			"uesio/crm.lead_status": "CONVERTED",
+		},
+	] as unknown as WireRecord[])
+
 	bot.addResult("contactid", contactId)
 }
