@@ -1,0 +1,5 @@
+name: related_opportunity
+label: Opportunity
+type: REFERENCE
+reference:
+  collection: opportunity
