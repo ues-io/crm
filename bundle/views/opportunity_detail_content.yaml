@@ -225,13 +225,13 @@ definition:
                                       fieldId: uesio/crm.expected_revenue
                                   - uesio/io.field:
                                       fieldId: uesio/crm.close_date
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/crm.primarysection
                       - uesio/io.box:
                           uesio.styleTokens:
                             root: []
                           components:
                             - uesio/io.titlebar:
-                                title: RELATED TO
+                                title: Related To
                                 uesio.variant: uesio/crm.sub
                             - uesio/io.grid:
                                 uesio.variant: uesio/crm.two_columns
@@ -246,7 +246,7 @@ definition:
                             root: []
                           components:
                             - uesio/io.titlebar:
-                                title: AUDIT INFORMATION
+                                title: Audit Informatioin
                                 uesio.variant: uesio/crm.sub
                             - uesio/io.grid:
                                 uesio.variant: uesio/crm.three_columns
