@@ -1,0 +1,16 @@
+name: avatartext
+label: Avatar Text
+public: true
+definition:
+  uesio.styleTokens:
+    root:
+      - bg-slate-100
+      - rounded-full
+      - text-base
+      - text-slate-700
+      - font-bold
+      - h-8
+      - w-8
+      - grid
+      - items-center
+      - justify-center

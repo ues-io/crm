@@ -127,6 +127,18 @@ definition:
           viewOnly: true
           label: Selected Opportunity
           type: TEXT
+        selected_contact_name:
+          viewOnly: true
+          label: Selected Contact Name
+          type: TEXT
+        selected_account_name:
+          viewOnly: true
+          label: Selected Account Name
+          type: TEXT
+        selected_opportunity_name:
+          viewOnly: true
+          label: Selected Opportunity Name
+          type: TEXT
       init:
         create: true
         query: false
@@ -268,6 +280,10 @@ definition:
                                                 wire: options
                                                 field: selected_contact
                                                 value: ${uesio/core.id}
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_contact_name
+                                                value: ${firstname} ${lastname}
                                   - uesio/io.box:
                                       uesio.variant: uesio/crm.minornote
                                       uesio.display:
@@ -373,6 +389,10 @@ definition:
                                                 wire: options
                                                 field: selected_account
                                                 value: ${uesio/core.id}
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_account_name
+                                                value: ${name}
                                               - signal: wire/SET_CONDITION
                                                 wire: opportunitysearch
                                                 condition:
@@ -463,17 +483,16 @@ definition:
                                 components:
                                   - uesio/io.deck:
                                       wire: opportunitysearch
+                                      uesio.display:
+                                        - field: account_action
+                                          wire: options
+                                          value: link
                                       components:
                                         - uesio/crm.opportunityselecttile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 value: ${options:selected_opportunity}
                                             selected: true
-                                            signals:
-                                              - signal: wire/UPDATE_RECORD
-                                                wire: options
-                                                field: selected_opportunity
-                                                value: ${uesio/core.id}
                                         - uesio/crm.opportunityselecttile:
                                             uesio.display:
                                               - field: uesio/core.id
@@ -485,11 +504,18 @@ definition:
                                                 wire: options
                                                 field: selected_opportunity
                                                 value: ${uesio/core.id}
+                                              - signal: wire/UPDATE_RECORD
+                                                wire: options
+                                                field: selected_opportunity_name
+                                                value: ${topic}
                                   - uesio/io.box:
                                       uesio.variant: uesio/crm.minornote
                                       uesio.display:
                                         - type: wireHasNoRecords
                                           wire: opportunitysearch
+                                        - field: account_action
+                                          wire: options
+                                          value: link
                                       components:
                                         - uesio/io.text:
                                             uesio.variant: uesio/io.iconoutline
@@ -500,6 +526,23 @@ definition:
                                             text: info
                                         - uesio/io.text:
                                             text: "No opportunities are associated with the selected account."
+                                  - uesio/io.box:
+                                      uesio.variant: uesio/crm.minornote
+                                      uesio.display:
+                                        - field: account_action
+                                          operator: NOT_EQUALS
+                                          wire: options
+                                          value: link
+                                      components:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/io.iconoutline
+                                            uesio.styleTokens:
+                                              root:
+                                                - text-xl
+                                                - mr-3
+                                            text: info
+                                        - uesio/io.text:
+                                            text: "You cannot link to an existing opportunity unless you're also linking to an existing account."
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -532,6 +575,172 @@ definition:
                           components:
                             - uesio/io.text:
                                 text: This process lets you decide whether you're creating new records for this lead or linking them to existing ones. Be sure to search for existing records to prevent creating duplicates.
+                      - uesio/io.titlebar:
+                          title: Pending Conversion Actions
+                          uesio.variant: uesio/crm.sub
+                      - uesio/io.item:
+                          wire: options
+                          uesio.id: optionsItem
+                          components:
+                            - uesio/io.item:
+                                wire: lead
+                                uesio.id: pendingActions
+                                components:
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: mergeValue
+                                          value: ${options:contact_action}
+                                          sourceValue: create
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Create New Contact Record
+                                            subtitle: ${firstname} ${lastname}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "1"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: mergeValue
+                                          value: ${options:contact_action}
+                                          sourceValue: link
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Contact Record
+                                            subtitle: ${options:selected_contact_name}
+                                            uesio.display:
+                                              - type: hasValue
+                                                value: ${options:selected_contact}
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Contact Record
+                                            subtitle: Select a contact.
+                                            uesio.display:
+                                              - type: hasNoValue
+                                                value: ${options:selected_contact}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "1"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Migrate Timeline Activity
+                                            subtitle: Lead Activity -> Contact Activity
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "2"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: hasValue
+                                          value: ${company}
+                                        - type: mergeValue
+                                          value: ${options:account_action}
+                                          sourceValue: create
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Create New Account Record
+                                            subtitle: ${company}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "3"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: mergeValue
+                                          value: ${options:account_action}
+                                          sourceValue: link
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Account Record
+                                            subtitle: ${options:selected_account_name}
+                                            uesio.display:
+                                              - type: hasValue
+                                                value: ${options:selected_account}
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Account Record
+                                            subtitle: Select an account.
+                                            uesio.display:
+                                              - type: hasNoValue
+                                                value: ${options:selected_account}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "3"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: mergeValue
+                                          value: ${options:opportunity_action}
+                                          sourceValue: create
+                                        - type: group
+                                          conjunction: OR
+                                          conditions:
+                                            - type: group
+                                              conjunction: AND
+                                              conditions:
+                                                - type: hasValue
+                                                  value: ${company}
+                                                - type: mergeValue
+                                                  value: ${options:account_action}
+                                                  sourceValue: create
+                                            - type: group
+                                              conjunction: AND
+                                              conditions:
+                                                - type: hasValue
+                                                  value: ${options:selected_account}
+                                                - type: mergeValue
+                                                  value: ${options:account_action}
+                                                  sourceValue: link
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Create New Opportunity Record
+                                            subtitle: ${topic}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "4"
+                                  - uesio/io.tile:
+                                      uesio.variant: uesio/crm.item
+                                      uesio.display:
+                                        - type: mergeValue
+                                          value: ${options:opportunity_action}
+                                          sourceValue: link
+                                        - type: mergeValue
+                                          value: ${options:account_action}
+                                          sourceValue: link
+                                      content:
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Opportunity Record
+                                            subtitle: ${options:selected_opportunity_name}
+                                            uesio.display:
+                                              - type: hasValue
+                                                value: ${options:selected_opportunity}
+                                        - uesio/io.titlebar:
+                                            uesio.variant: uesio/crm.item
+                                            title: Link to Existing Opportunity Record
+                                            subtitle: Select an opportunity.
+                                            uesio.display:
+                                              - type: hasNoValue
+                                                value: ${options:selected_opportunity}
+                                      avatar:
+                                        - uesio/io.text:
+                                            uesio.variant: uesio/crm.avatartext
+                                            text: "4"
     - uesio/io.box:
         uesio.variant: uesio/io.section
         uesio.display:
