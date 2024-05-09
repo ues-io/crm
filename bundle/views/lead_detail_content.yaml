@@ -24,6 +24,7 @@ definition:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
         uesio/crm.expected_revenue:
+        uesio/crm.close_date:
         uesio/crm.image:
         uesio/crm.website:
         uesio/crm.company: {}
@@ -354,10 +355,17 @@ definition:
                             - uesio/io.grid:
                                 uesio.variant: uesio/crm.two_columns
                                 items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.topic
+                                  - uesio/io.box:
+                                      uesio.styleTokens:
+                                        root:
+                                          - col-span-2
+                                      components:
+                                        - uesio/io.field:
+                                            fieldId: uesio/crm.topic
                                   - uesio/io.field:
                                       fieldId: uesio/crm.expected_revenue
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.close_date
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:

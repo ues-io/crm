@@ -1,6 +1,10 @@
 name: accountselecttile
 category: LAYOUT
 type: DECLARATIVE
+properties:
+  - type: SIGNALS
+    name: signals
+    label: Signals
 definition:
   - uesio/io.tile:
       uesio.variant: uesio/crm.item
@@ -28,10 +32,6 @@ definition:
             text: ${initials}
             image: $UserFile{image}
       signals: $Prop{signals}
-properties:
-  - type: SIGNALS
-    name: signals
-    label: Signals
 title: Account Tile Component
 discoverable: true
 description: An account tile
