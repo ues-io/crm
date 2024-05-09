@@ -136,6 +136,10 @@ definition:
                                   - type: wireHasNoChanges
                                     operator: EQUALS
                                     wire: event
+                    avatar:
+                      - uesio/io.text:
+                          text: calendar_month
+                          uesio.variant: uesio/io.icon
                 - uesio/io.box:
                     components:
                       - uesio/io.grid:
@@ -153,7 +157,7 @@ definition:
                             - uesio/io.field:
                                 wire: event
                                 fieldId: uesio/crm.endtime
-                    uesio.variant: uesio/crm.section
+                    uesio.variant: uesio/crm.primarysection
                 - uesio/io.box:
                     components:
                       - uesio/io.titlebar:
@@ -195,7 +199,7 @@ definition:
                     uesio.variant: uesio/crm.section
         left:
           - uesio/io.tabs:
-              uesio.variant: uesio/io.default
+              uesio.variant: uesio/crm.main
               tabs:
                 - id: timeline
                   label: Timeline
