@@ -468,7 +468,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Comment
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
@@ -519,7 +519,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Create Contact
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
@@ -559,7 +559,7 @@ definition:
                                           components:
                                             - uesio/io.button:
                                                 text: Create Task
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 signals:
                                                   - signal: wire/SAVE
                                                     wires:
@@ -601,7 +601,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Create Event
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
@@ -667,7 +667,7 @@ definition:
                                             - uesio/io.button:
                                                 text: Create Opportunity
                                                 icon: ""
-                                                uesio.variant: uesio/crm.secondary
+                                                uesio.variant: uesio/crm.sidebar
                                                 iconPlacement: start
                                                 signals:
                                                   - signal: wire/SAVE
