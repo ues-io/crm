@@ -200,6 +200,7 @@ definition:
                                             - lead
                                         - signal: bot/CALL
                                           bot: uesio/crm.convert_lead
+                                          stepId: convert
                                           params:
                                             lead: ${uesio/core.id}
                                             contactaction: ${options:contact_action}
@@ -208,6 +209,10 @@ definition:
                                             account: ${options:selected_account}
                                             opportunityaction: ${options:opportunity_action}
                                             opportunity: ${options:selected_opportunity}
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.contact
+                                          viewtype: detail
+                                          recordid: $SignalOutput{[convert][contactid]}
                                   - uesio/io.button:
                                       uesio.variant: uesio/crm.secondary
                                       text: Cancel
@@ -685,6 +690,8 @@ definition:
                                         - type: mergeValue
                                           value: ${options:opportunity_action}
                                           sourceValue: create
+                                        - type: hasValue
+                                          value: ${topic}
                                         - type: group
                                           conjunction: OR
                                           conditions:
