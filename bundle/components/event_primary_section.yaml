@@ -1,0 +1,29 @@
+name: event_primary_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.name
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.description
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.starttime
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.endtime
+      uesio.variant: uesio/crm.primarysection
+title: Event Primary Section
+discoverable: true
+description: Event Primary Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

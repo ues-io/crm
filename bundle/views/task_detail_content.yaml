@@ -112,39 +112,8 @@ definition:
                             - uesio/io.text:
                                 text: task_alt
                                 uesio.variant: uesio/io.icon
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.two_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.name
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.due_by
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.is_completed
-                          uesio.variant: uesio/crm.primarysection
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.titlebar:
-                                title: RELATED TO
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.two_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_contact
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_lead
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_opportunity
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_event
-                          uesio.variant: uesio/crm.section
+                      - uesio/crm.task_primary_section:
+                      - uesio/crm.task_related_to_section:
                       - uesio/crm.audit_info_section:
                       - uesio/crm.delete_section:
               left:

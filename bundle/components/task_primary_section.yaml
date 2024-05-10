@@ -1,0 +1,25 @@
+name: task_primary_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.name
+              - uesio/io.field:
+                  fieldId: uesio/crm.description
+              - uesio/io.field:
+                  fieldId: uesio/crm.due_by
+              - uesio/io.field:
+                  fieldId: uesio/crm.is_completed
+      uesio.variant: uesio/crm.primarysection
+title: Task Primary Section
+discoverable: true
+description: Task Primary Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

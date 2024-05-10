@@ -12,6 +12,8 @@ definition:
         uesio/crm.related_contact:
         uesio/crm.related_lead:
         uesio/crm.related_opportunity:
+        uesio/crm.related_event:
+        uesio/crm.is_completed:
       init:
         create: true
         query: false
@@ -21,58 +23,41 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.list:
-              wire: task
-              uesio.id: taskList
-              mode: EDIT
-              components:
-                - uesio/io.titlebar:
-                    title: Create a new $Collection{label}
-                    subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/crm.main
-                    actions:
-                      - uesio/io.group:
-                          components:
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - task
-                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                    collection: uesio/crm.task
-                                text: Create
-                                hotkey: "meta+s"
-                                uesio.variant: uesio/crm.primary
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/RESET
-                                    wire: task
-                                text: Reset
-                                uesio.variant: uesio/io.secondary
-                - uesio/io.box:
-                    uesio.variant: uesio/io.section
+          - uesio/crm.detail_split:
+              main:
+                - uesio/io.list:
+                    wire: task
+                    uesio.id: taskList
+                    mode: EDIT
                     components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.three_columns
-                          items:
-                            - uesio/io.box:
-                                uesio.styleTokens:
-                                  root:
-                                    - col-span-2
+                      - uesio/io.titlebar:
+                          title: New Task
+                          subtitle: $RecordMeta{name}
+                          uesio.variant: uesio/crm.main
+                          avatar:
+                            - uesio/io.text:
+                                text: task_alt
+                                uesio.variant: uesio/io.icon
+                          actions:
+                            - uesio/io.group:
                                 components:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.name
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.due_by
-                            - uesio/io.box:
-                                components:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_contact
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_lead
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_opportunity
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - task
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.task
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                      text: Create Task
+                                      hotkey: "meta+s"
+                                      uesio.variant: uesio/crm.primary
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/RESET
+                                          wire: task
+                                      text: Reset
+                                      uesio.variant: uesio/crm.secondary
+                      - uesio/crm.task_primary_section:
+                      - uesio/crm.task_related_to_section:

@@ -8,6 +8,7 @@ definition:
         uesio/crm.name:
         uesio/crm.related_account: {}
         uesio/crm.related_contact: {}
+        uesio/crm.related_opportunity: {}
         uesio/crm.description: {}
         uesio/crm.endtime: {}
         uesio/crm.related_lead: {}
@@ -22,60 +23,41 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.list:
-              wire: event
-              uesio.id: eventList
-              mode: EDIT
-              components:
-                - uesio/io.titlebar:
-                    title: Create a new $Collection{label}
-                    subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/crm.main
-                    actions:
-                      - uesio/io.group:
-                          components:
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - event
-                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                    collection: uesio/crm.event
-                                text: Create
-                                hotkey: "meta+s"
-                                uesio.variant: uesio/crm.primary
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/RESET
-                                    wire: event
-                                text: Reset
-                                uesio.variant: uesio/io.secondary
-                - uesio/io.box:
-                    uesio.variant: uesio/io.section
+          - uesio/crm.detail_split:
+              main:
+                - uesio/io.list:
+                    wire: event
+                    uesio.id: eventList
+                    mode: EDIT
                     components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.three_columns
-                          items:
-                            - uesio/io.box:
-                                uesio.styleTokens:
-                                  root:
-                                    - col-span-2
+                      - uesio/io.titlebar:
+                          title: New Event
+                          subtitle: $RecordMeta{name}
+                          uesio.variant: uesio/crm.main
+                          avatar:
+                            - uesio/io.text:
+                                text: calendar_month
+                                uesio.variant: uesio/io.icon
+                          actions:
+                            - uesio/io.group:
                                 components:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.name
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.starttime
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.endtime
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.location
-                            - uesio/io.box:
-                                components:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_contact
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.related_lead
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - event
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.event
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                      text: Create
+                                      hotkey: "meta+s"
+                                      uesio.variant: uesio/crm.primary
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/RESET
+                                          wire: event
+                                      text: Reset
+                                      uesio.variant: uesio/crm.secondary
+                      - uesio/crm.event_primary_section:
+                      - uesio/crm.event_related_to_section:

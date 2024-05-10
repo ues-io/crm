@@ -105,45 +105,8 @@ definition:
                       - uesio/io.text:
                           text: calendar_month
                           uesio.variant: uesio/io.icon
-                - uesio/io.box:
-                    components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
-                          items:
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.name
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.description
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.starttime
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.endtime
-                    uesio.variant: uesio/crm.primarysection
-                - uesio/io.box:
-                    components:
-                      - uesio/io.titlebar:
-                          title: related to
-                          uesio.variant: uesio/crm.sub
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
-                          items:
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_account
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_contact
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_lead
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_opportunity
-                    uesio.variant: uesio/crm.section
+                - uesio/crm.event_primary_section:
+                - uesio/crm.event_related_to_section:
                 - uesio/crm.audit_info_section:
                 - uesio/crm.delete_section:
         left:

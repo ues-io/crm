@@ -47,7 +47,7 @@ definition:
                                           collection: uesio/crm.opportunity
                                           viewtype: detail
                                           recordid: ${uesio/core.id}
-                                      text: Create
+                                      text: Create Opportunity
                                       hotkey: "meta+s"
                                       uesio.variant: uesio/crm.primary
                                   - uesio/io.button:
