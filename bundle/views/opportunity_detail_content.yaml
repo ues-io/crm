@@ -101,38 +101,8 @@ definition:
                             - uesio/io.text:
                                 text: payments
                                 uesio.variant: uesio/io.icon
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root:
-                              - col-span-2
-                          components:
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.two_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.topic
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.expected_revenue
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.close_date
-                          uesio.variant: uesio/crm.primarysection
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root: []
-                          components:
-                            - uesio/io.titlebar:
-                                title: Related To
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.two_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.contact
-                          uesio.variant: uesio/crm.section
+                      - uesio/crm.opportunity_primary_section:
+                      - uesio/crm.opportunity_related_to_section:
                       - uesio/crm.audit_info_section:
                       - uesio/crm.delete_section:
               left:
