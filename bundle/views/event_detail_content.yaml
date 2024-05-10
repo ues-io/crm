@@ -22,42 +22,6 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
-    activities:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.name: {}
-        uesio/crm.parent: {}
-        uesio/crm.type: {}
-        uesio/core.id: {}
-        uesio/core.createdby: {}
-        uesio/core.createdat: {}
-      collection: uesio/crm.activity
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - field: uesio/crm.parent
-          operator: IN
-          valueSource: LOOKUP
-          lookupWire: event
-          lookupField: uesio/core.id
-    newactivity:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.name: {}
-        uesio/crm.parent: {}
-        uesio/crm.type: {}
-        uesio/core.id: {}
-      collection: uesio/crm.activity
-      defaults:
-        - field: uesio/crm.parent
-          valueSource: LOOKUP
-          lookupWire: event
-          lookupField: uesio/core.id
-      init:
-        query: false
-        create: true
   # Components determine the layout and composition of your view
   components:
     - uesio/crm.detailsplit:
@@ -188,42 +152,11 @@ definition:
                 - id: timeline
                   label: Timeline
                   components:
-                    - uesio/io.scrollpanel:
-                        uesio.variant: uesio/crm.sidebar
-                        content:
-                          - uesio/io.deck:
-                              mode: READ
-                              uesio.variant: uesio/crm.tiles
-                              components:
-                                - uesio/crm.commenttile:
-                              wire: activities
-                              id: activities
-                        footer:
-                          - uesio/io.item:
-                              mode: EDIT
-                              wire: newactivity
-                              components:
-                                - uesio/io.field:
-                                    fieldId: uesio/crm.description
-                                - uesio/io.group:
-                                    columnGap: 10px
-                                    uesio.styleTokens:
-                                      root:
-                                        - justify-right
-                                    components:
-                                      - uesio/io.button:
-                                          text: COMMENT
-                                          uesio.variant: uesio/crm.sidebar
-                                          iconPlacement: start
-                                          signals:
-                                            - signal: wire/SAVE
-                                              wires:
-                                                - newactivity
-                                            - signal: wire/RESET
-                                              wire: newactivity
-                                            - signal: wire/LOAD
-                                              wires:
-                                                - activities
+                    - uesio/core.view:
+                        view: uesio/crm.timelinetab
+                        uesio.id: timelinetab
+                        params:
+                          recordid: $Param{recordid}
   params:
     recordid:
       type: RECORD
