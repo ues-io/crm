@@ -23,7 +23,15 @@ definition:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:
         uesio/crm.topic:
+        uesio/crm.expected_revenue:
+        uesio/crm.close_date:
         uesio/crm.website:
+        uesio/crm.company:
+        uesio/crm.lead_status:
+        uesio/crm.lead_rating:
+        uesio/crm.next_steps:
+        uesio/crm.initials:
+        uesio/crm.source:
       init:
         create: true
         query: false
@@ -33,72 +41,48 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.list:
-              wire: lead
-              uesio.id: leadList
-              mode: EDIT
-              components:
-                - uesio/io.titlebar:
-                    title: Create a new $Collection{label}
-                    subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/crm.main
-                    actions:
-                      - uesio/io.group:
-                          components:
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - lead
-                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                    collection: uesio/crm.lead
-                                text: Create
-                                hotkey: "meta+s"
-                                uesio.variant: uesio/crm.primary
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/CANCEL
-                                    wire: lead
-                                text: Reset
-                                uesio.variant: uesio/io.secondary
-                - uesio/io.box:
-                    uesio.variant: uesio/io.section
+          - uesio/crm.detailsplit:
+              main:
+                - uesio/io.list:
+                    wire: lead
+                    uesio.id: leadList
+                    mode: EDIT
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.firstname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.fullname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.industry
-                      - uesio/io.field:
-                          fieldId: uesio/crm.is_converted
-                      - uesio/io.field:
-                          fieldId: uesio/crm.lastname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.location
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_zip_postal
-                      - uesio/io.field:
-                          fieldId: uesio/crm.no_employees
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_business
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_mobile
-                      - uesio/io.field:
-                          fieldId: uesio/crm.topic
-                      - uesio/io.field:
-                          fieldId: uesio/crm.website
+                      - uesio/io.titlebar:
+                          title: New Lead
+                          subtitle: "${firstname} ${lastname}"
+                          uesio.variant: uesio/crm.main
+                          actions:
+                            - uesio/io.group:
+                                components:
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - lead
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.lead
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                      text: Create Lead
+                                      hotkey: "meta+s"
+                                      uesio.variant: uesio/crm.primary
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/RESET
+                                          wire: lead
+                                      text: Reset
+                                      uesio.variant: uesio/crm.secondary
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.primarysection
+                          components:
+                            - uesio/crm.leadcontactinfofields:
+                      - uesio/crm.leadaccountinfosection:
+                      - uesio/crm.leadoppinfosection:
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Lead Info
+                                uesio.variant: uesio/crm.sub
+                            - uesio/crm.leadprimaryfields:

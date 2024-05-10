@@ -5,17 +5,7 @@ definition:
   - uesio/io.box:
       uesio.variant: uesio/crm.primarysection
       components:
-        - uesio/io.grid:
-            uesio.variant: uesio/crm.three_columns
-            items:
-              - uesio/io.field:
-                  fieldId: uesio/crm.lead_status
-              - uesio/io.field:
-                  fieldId: uesio/crm.lead_rating
-              - uesio/io.field:
-                  fieldId: uesio/crm.source
-        - uesio/io.field:
-            fieldId: uesio/crm.next_steps
+        - uesio/crm.leadprimaryfields:
 title: Lead Primary Section
 discoverable: true
 description: Lead Primary Section
