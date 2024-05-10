@@ -347,81 +347,78 @@ definition:
                                             fieldId: uesio/crm.logo
                                             displayAs: IMAGE
                       - uesio/io.box:
-                          uesio.variant: ""
                           components:
-                            - uesio/io.box:
-                                components:
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.three_columns
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.name
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.parent_account
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.industry
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.account_type
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.description
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.annual_revenue
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.phone
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.email
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.no_employees
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.website
-                                uesio.variant: uesio/crm.primarysection
-                            - uesio/io.box:
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: Billing Address
-                                      uesio.variant: uesio/crm.sub
-                                  - uesio/io.grid:
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.billing_street
-                                            labelPosition: top
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.billing_city
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.billing_country
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.billing_state_province
-                                            labelPosition: top
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.billing_zip
-                                            labelPosition: top
-                                      uesio.variant: uesio/crm.three_columns
-                                      uesio.styleTokens:
-                                        root: []
-                                uesio.variant: uesio/crm.section
-                            - uesio/io.box:
-                                uesio.variant: uesio/crm.section
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: Shipping address
-                                      uesio.variant: uesio/crm.sub
-                                  - uesio/io.grid:
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.shipping_street
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.shipping_city
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.shipping_country
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.shipping_state_province
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.shipping_zip
-                                      uesio.variant: uesio/crm.three_columns
-                                      uesio.styleTokens:
-                                        root: []
-                            - uesio/crm.auditinfosection:
-                            - uesio/crm.deletesection:
+                            - uesio/io.grid:
+                                uesio.variant: uesio/crm.three_columns
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.name
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.parent_account
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.industry
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.account_type
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.description
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.annual_revenue
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.phone
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.email
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.no_employees
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.website
+                          uesio.variant: uesio/crm.primarysection
+                      - uesio/io.box:
+                          components:
+                            - uesio/io.titlebar:
+                                title: Billing Address
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.grid:
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.billing_street
+                                      labelPosition: top
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.billing_city
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.billing_country
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.billing_state_province
+                                      labelPosition: top
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.billing_zip
+                                      labelPosition: top
+                                uesio.variant: uesio/crm.three_columns
+                                uesio.styleTokens:
+                                  root: []
+                          uesio.variant: uesio/crm.section
+                      - uesio/io.box:
+                          uesio.variant: uesio/crm.section
+                          components:
+                            - uesio/io.titlebar:
+                                title: Shipping address
+                                uesio.variant: uesio/crm.sub
+                            - uesio/io.grid:
+                                items:
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.shipping_street
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.shipping_city
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.shipping_country
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.shipping_state_province
+                                  - uesio/io.field:
+                                      fieldId: uesio/crm.shipping_zip
+                                uesio.variant: uesio/crm.three_columns
+                                uesio.styleTokens:
+                                  root: []
+                      - uesio/crm.auditinfosection:
+                      - uesio/crm.deletesection:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

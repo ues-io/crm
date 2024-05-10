@@ -1,9 +1,0 @@
-name: four_columns
-label: Four Column Responsive
-public: true
-extends: uesio/io.four_columns
-definition:
-  uesio.styleTokens:
-    root:
-      - gap-x-10
-      - gap-y-0

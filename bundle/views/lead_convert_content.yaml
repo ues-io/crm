@@ -225,20 +225,7 @@ definition:
                                 uesio.variant: uesio/crm.main_pointer
                                 text: ${initials}
                                 image: $UserFile{uesio/crm.image}
-                      - uesio/io.box:
-                          uesio.variant: uesio/crm.primarysection
-                          components:
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.lead_status
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.lead_rating
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.source
-                            - uesio/io.field:
-                                fieldId: uesio/crm.next_steps
+                      - uesio/crm.leadprimarysection:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -319,36 +306,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.three_columns
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.firstname
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.lastname
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.email
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.phone
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.phone_business
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.phone_mobile
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.three_columns
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.location
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.mailing_city
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.mailing_street
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.mailing_state_province
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.mailing_country
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.mailing_zip_postal
+                                  - uesio/crm.leadcontactinfofields:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -437,22 +395,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.two_columns
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.company
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.industry
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.three_columns
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.description
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.website
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.no_employees
+                                  - uesio/crm.leadaccountinfofields:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -474,20 +417,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/io.grid:
-                                      uesio.variant: uesio/crm.two_columns
-                                      items:
-                                        - uesio/io.box:
-                                            uesio.styleTokens:
-                                              root:
-                                                - col-span-2
-                                            components:
-                                              - uesio/io.field:
-                                                  fieldId: uesio/crm.topic
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.expected_revenue
-                                        - uesio/io.field:
-                                            fieldId: uesio/crm.close_date
+                                  - uesio/crm.leadoppinfofields:
                             - uesio/io.box:
                                 uesio.display:
                                   - field: opportunity_action

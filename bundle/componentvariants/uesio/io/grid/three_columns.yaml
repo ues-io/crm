@@ -5,5 +5,5 @@ extends: uesio/io.three_columns
 definition:
   uesio.styleTokens:
     root:
-      - gap-x-10
+      - gap-x-6
       - lg:gap-y-0
