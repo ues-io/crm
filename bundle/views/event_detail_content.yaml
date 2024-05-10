@@ -24,7 +24,7 @@ definition:
           param: recordid
   # Components determine the layout and composition of your view
   components:
-    - uesio/crm.detailsplit:
+    - uesio/crm.detail_split:
         main:
           - uesio/io.list:
               mode: READ
@@ -144,8 +144,8 @@ definition:
                                 wire: event
                                 fieldId: uesio/crm.related_opportunity
                     uesio.variant: uesio/crm.section
-                - uesio/crm.auditinfosection:
-                - uesio/crm.deletesection:
+                - uesio/crm.audit_info_section:
+                - uesio/crm.delete_section:
         left:
           - uesio/io.tabs:
               uesio.variant: uesio/crm.main

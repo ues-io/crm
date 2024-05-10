@@ -1,4 +1,4 @@
-name: leadcontactinfosection
+name: lead_account_info_section
 category: LAYOUT
 type: DECLARATIVE
 definition:
@@ -6,12 +6,12 @@ definition:
       uesio.variant: uesio/crm.section
       components:
         - uesio/io.titlebar:
-            title: Contact Information
+            title: Account Information
             uesio.variant: uesio/crm.sub
-        - uesio/crm.leadcontactinfofields:
-title: Lead Contact Info Section
+        - uesio/crm.leadaccountinfofields:
+title: Lead Account Info Section
 discoverable: true
-description: Lead Contact Info Section
+description: Lead Account Info Section
 sections:
   - type: HOME
     properties:

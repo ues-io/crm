@@ -41,7 +41,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: lead
@@ -80,13 +80,13 @@ definition:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.primarysection
                           components:
-                            - uesio/crm.leadcontactinfofields:
-                      - uesio/crm.leadaccountinfosection:
-                      - uesio/crm.leadoppinfosection:
+                            - uesio/crm.lead_contact_info_fields:
+                      - uesio/crm.lead_account_info_section:
+                      - uesio/crm.lead_opp_info_section:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
                             - uesio/io.titlebar:
                                 title: Lead Info
                                 uesio.variant: uesio/crm.sub
-                            - uesio/crm.leadprimaryfields:
+                            - uesio/crm.lead_primary_fields:

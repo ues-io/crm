@@ -43,7 +43,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: account
@@ -140,11 +140,11 @@ definition:
                                               fieldMode: EDIT
                                             fieldId: uesio/crm.logo
                                             displayAs: IMAGE
-                      - uesio/crm.accountprimarysection:
-                      - uesio/crm.accountbillingaddresssection:
-                      - uesio/crm.accountshippingaddresssection:
-                      - uesio/crm.auditinfosection:
-                      - uesio/crm.deletesection:
+                      - uesio/crm.account_primary_section:
+                      - uesio/crm.account_billing_address_section:
+                      - uesio/crm.account_shipping_address_section:
+                      - uesio/crm.audit_info_section:
+                      - uesio/crm.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

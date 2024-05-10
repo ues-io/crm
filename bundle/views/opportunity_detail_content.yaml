@@ -25,7 +25,7 @@ definition:
   components:
     - uesio/io.box:
         components:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: opportunity
@@ -133,8 +133,8 @@ definition:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.contact
                           uesio.variant: uesio/crm.section
-                      - uesio/crm.auditinfosection:
-                      - uesio/crm.deletesection:
+                      - uesio/crm.audit_info_section:
+                      - uesio/crm.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

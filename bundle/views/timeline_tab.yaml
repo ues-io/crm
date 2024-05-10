@@ -44,7 +44,7 @@ definition:
               id: activities
               uesio.variant: uesio/crm.tiles
               components:
-                - uesio/crm.commenttile:
+                - uesio/crm.comment_tile:
         footer:
           - uesio/io.item:
               wire: newactivity
