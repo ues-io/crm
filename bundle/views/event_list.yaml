@@ -114,6 +114,7 @@ definition:
                               sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
                               value: EDIT
                           icon: edit_square
+                          iconFill: false
                     linkedComponentType: uesio/io.table
                     linkedComponentId: eventsTable
               avatar:

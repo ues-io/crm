@@ -36,92 +36,6 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
-    contacts:
-      fields:
-        uesio/crm.firstname: {}
-        uesio/crm.gender: {}
-        uesio/crm.lastname: {}
-        uesio/crm.email: {}
-        uesio/crm.description: {}
-        uesio/crm.department: {}
-        uesio/crm.account: {}
-        uesio/core.id: {}
-        uesio/crm.fullname: {}
-      collection: uesio/crm.contact
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - id: accid
-          field: uesio/crm.account
-          valueSource: PARAM
-          param: recordid
-    opportunities:
-      fields:
-        uesio/crm.close_date: {}
-        uesio/crm.contact:
-          fields:
-            uesio/crm.account: {}
-        uesio/crm.description: {}
-        uesio/crm.expected_revenue: {}
-        uesio/crm.topic: {}
-        uesio/crm.account: {}
-      collection: uesio/crm.opportunity
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - id: oppaccid
-          field: uesio/crm.account
-          operator: EQ
-          valueSource: PARAM
-          param: recordid
-    newopp:
-      fields:
-        uesio/crm.close_date: {}
-        uesio/crm.contact:
-          fields:
-            uesio/crm.account: {}
-        uesio/crm.description: {}
-        uesio/crm.expected_revenue: {}
-        uesio/crm.topic: {}
-        uesio/crm.account: {}
-      collection: uesio/crm.opportunity
-      defaults:
-        - field: uesio/crm.account
-          valueSource: LOOKUP
-          lookupWire: opportunities
-          lookupField: uesio/crm.account->uesio/core.id
-      batchsize: 200
-      init:
-        query: false
-        create: true
-      conditions:
-        - id: oppaccid
-          field: uesio/crm.account
-          operator: EQ
-          valueSource: LOOKUP
-          lookupWire: account
-          lookupField: uesio/core.id
-    createcontact:
-      fields:
-        uesio/crm.account: {}
-        uesio/crm.email: {}
-        uesio/crm.firstname: {}
-        uesio/crm.fullname: {}
-        uesio/crm.lastname: {}
-      collection: uesio/crm.contact
-      defaults:
-        - field: uesio/crm.account
-          valueSource: LOOKUP
-          lookupWire: account
-          lookupField: uesio/core.id
-      batchsize: 200
-      init:
-        query: false
-        create: true
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -195,6 +109,7 @@ definition:
                                       text: Edit
                                       uesio.variant: uesio/crm.secondary
                                       icon: edit_square
+                                      iconFill: false
                                       uesio.display:
                                         - type: mergeValue
                                           value: EDIT
@@ -313,52 +228,11 @@ definition:
                       - label: contacts
                         id: contacts
                         components:
-                          - uesio/io.scrollpanel:
-                              uesio.variant: uesio/crm.sidebar
-                              content:
-                                - uesio/io.deck:
-                                    mode: READ
-                                    uesio.variant: uesio/crm.tiles
-                                    components:
-                                      - uesio/io.field:
-                                          fieldId: uesio/crm.fullname
-                                          label: Name
-                                    wire: contacts
-                              footer:
-                                - uesio/io.item:
-                                    mode: EDIT
-                                    components:
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/crm.three_columns
-                                          items:
-                                            - uesio/io.field:
-                                                wire: createcontact
-                                                fieldId: uesio/crm.firstname
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.lastname
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.email
-                                      - uesio/io.group:
-                                          columnGap: 10px
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Contact
-                                                icon: ""
-                                                uesio.variant: uesio/crm.sidebar
-                                                iconPlacement: start
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - createcontact
-                                                  - signal: wire/RESET
-                                                    wire: createcontact
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - contacts
-                                    wire: createcontact
+                          - uesio/core.view:
+                              view: uesio/crm.contactstab
+                              uesio.id: contactstab
+                              params:
+                                accountid: $Param{recordid}
                       - label: Tasks
                         id: taskstable
                         components:
@@ -378,65 +252,11 @@ definition:
                       - label: Opportunities
                         id: opportunities
                         components:
-                          - uesio/io.scrollpanel:
-                              content:
-                                - uesio/io.deck:
-                                    mode: READ
-                                    uesio.variant: uesio/io.two_column_grid
-                                    components:
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/crm.tiles
-                                          items:
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.topic
-                                                label: Topic
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.expected_revenue
-                                                label: Revenue
-                                                labelPosition: top
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.close_date
-                                          uesio.styleTokens:
-                                            root: []
-                                    wire: opportunities
-                              footer:
-                                - uesio/io.item:
-                                    mode: EDIT
-                                    wire: newopp
-                                    components:
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/crm.three_columns
-                                          items:
-                                            - uesio/io.field:
-                                                wire: newopp
-                                                fieldId: uesio/crm.topic
-                                            - uesio/io.field:
-                                                wire: newopp
-                                                fieldId: uesio/crm.expected_revenue
-                                            - uesio/io.field:
-                                                wire: newopp
-                                                fieldId: uesio/crm.close_date
-                                      - uesio/io.group:
-                                          columnGap: 10px
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Opportunity
-                                                icon: ""
-                                                uesio.variant: uesio/crm.sidebar
-                                                iconPlacement: start
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newopp
-                                                  - signal: wire/RESET
-                                                    wire: newopp
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - opportunities
-                              uesio.variant: uesio/crm.sidebar
+                          - uesio/core.view:
+                              view: uesio/crm.opportunitiestab
+                              uesio.id: opportunitiestab
+                              params:
+                                accountid: $Param{recordid}
                     uesio.id: detailtab
   params:
     recordid:

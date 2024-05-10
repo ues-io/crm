@@ -90,6 +90,7 @@ definition:
                                   - uesio/io.button:
                                       text: EDIT
                                       icon: edit_square
+                                      iconFill: false
                                       uesio.variant: uesio/crm.secondary
                                       iconPlacement: start
                                       signals:

@@ -37,50 +37,6 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
-    opportunity:
-      fields:
-        uesio/crm.close_date: {}
-        uesio/crm.contact:
-        uesio/crm.description: {}
-        uesio/crm.expected_revenue: {}
-        uesio/crm.topic: {}
-        uesio/crm.account: {}
-      collection: uesio/crm.opportunity
-      defaults:
-        - field: uesio/crm.contact
-          valueSource: LOOKUP
-          lookupWire: contact
-          lookupField: uesio/core.id
-        - field: uesio/crm.account
-          valueSource: LOOKUP
-          lookupWire: contact
-          lookupField: uesio/crm.account->uesio/core.id
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - field: uesio/crm.contact
-          operator: EQ
-          valueSource: PARAM
-          param: recordid
-    newopp:
-      fields:
-        uesio/crm.contact: {}
-        uesio/crm.close_date: {}
-        uesio/crm.expected_revenue: {}
-        uesio/crm.description: {}
-        uesio/crm.topic: {}
-      collection: uesio/crm.opportunity
-      defaults:
-        - field: uesio/crm.contact
-          valueSource: LOOKUP
-          lookupWire: opportunity
-          lookupField: uesio/crm.contact->uesio/core.id
-      batchsize: 200
-      init:
-        query: false
-        create: true
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -148,6 +104,7 @@ definition:
                                       text: EDIT
                                       uesio.variant: uesio/crm.secondary
                                       icon: edit_square
+                                      iconFill: false
                                       uesio.display:
                                         - type: mergeValue
                                           operator: NOT_EQUALS
@@ -281,57 +238,11 @@ definition:
                       - id: oppsTab
                         label: Opportunities
                         components:
-                          - uesio/io.scrollpanel:
-                              content:
-                                - uesio/io.deck:
-                                    mode: READ
-                                    uesio.variant: uesio/io.two_column_grid
-                                    components:
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/crm.tiles
-                                          items:
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.topic
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.expected_revenue
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.close_date
-                                    wire: opportunity
-                              uesio.variant: uesio/crm.sidebar
-                              footer:
-                                - uesio/io.item:
-                                    mode: EDIT
-                                    wire: newopp
-                                    components:
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/crm.three_columns
-                                          items:
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.topic
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.expected_revenue
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.close_date
-                                      - uesio/io.group:
-                                          columnGap: ""
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Opportunity
-                                                icon: ""
-                                                uesio.variant: uesio/crm.sidebar
-                                                iconPlacement: start
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newopp
-                                                  - signal: wire/RESET
-                                                    wire: newopp
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - opportunity
+                          - uesio/core.view:
+                              view: uesio/crm.opportunitiestab
+                              uesio.id: opportunitiestab
+                              params:
+                                contactid: $Param{recordid}
   params:
     recordid:
       type: RECORD

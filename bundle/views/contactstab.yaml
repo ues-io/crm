@@ -1,0 +1,91 @@
+name: contactstab
+definition:
+  # Wires connect to data in collections
+  wires:
+    contacts:
+      fields:
+        uesio/crm.firstname: {}
+        uesio/crm.gender: {}
+        uesio/crm.lastname: {}
+        uesio/crm.email: {}
+        uesio/crm.description: {}
+        uesio/crm.department: {}
+        uesio/crm.account: {}
+        uesio/core.id: {}
+        uesio/crm.fullname: {}
+      collection: uesio/crm.contact
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.account
+          valueSource: PARAM
+          param: accountid
+    createcontact:
+      fields:
+        uesio/crm.account: {}
+        uesio/crm.email: {}
+        uesio/crm.firstname: {}
+        uesio/crm.fullname: {}
+        uesio/crm.lastname: {}
+      collection: uesio/crm.contact
+      defaults:
+        - field: uesio/crm.account
+          valueSource: PARAM
+          param: accountid
+      batchsize: 200
+      init:
+        query: false
+        create: true
+  components:
+    - uesio/io.scrollpanel:
+        uesio.variant: uesio/crm.sidebar
+        content:
+          - uesio/io.deck:
+              mode: READ
+              uesio.variant: uesio/crm.tiles
+              components:
+                - uesio/io.field:
+                    fieldId: uesio/crm.fullname
+                    label: Name
+              wire: contacts
+        footer:
+          - uesio/io.item:
+              mode: EDIT
+              components:
+                - uesio/io.grid:
+                    uesio.variant: uesio/crm.three_columns
+                    items:
+                      - uesio/io.field:
+                          wire: createcontact
+                          fieldId: uesio/crm.firstname
+                      - uesio/io.field:
+                          fieldId: uesio/crm.lastname
+                      - uesio/io.field:
+                          fieldId: uesio/crm.email
+                - uesio/io.group:
+                    columnGap: 10px
+                    uesio.styleTokens:
+                      root:
+                        - justify-right
+                    components:
+                      - uesio/io.button:
+                          text: Create Contact
+                          icon: ""
+                          uesio.variant: uesio/crm.sidebar
+                          iconPlacement: start
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - createcontact
+                            - signal: wire/RESET
+                              wire: createcontact
+                            - signal: wire/LOAD
+                              wires:
+                                - contacts
+              wire: createcontact
+  params:
+    accountid:
+      type: TEXT
+      required: true

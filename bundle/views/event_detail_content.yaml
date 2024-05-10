@@ -84,6 +84,7 @@ definition:
                             - uesio/io.button:
                                 text: Edit
                                 icon: edit_square
+                                iconFill: false
                                 uesio.variant: uesio/crm.secondary
                                 iconPlacement: start
                                 signals:
