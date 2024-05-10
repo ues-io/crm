@@ -556,25 +556,7 @@ definition:
                                             text: info
                                         - uesio/io.text:
                                             text: "You cannot link to an existing opportunity unless you're also linking to an existing account."
-                      - uesio/io.box:
-                          uesio.variant: uesio/crm.section
-                          components:
-                            - uesio/io.titlebar:
-                                title: Audit Information
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.owner
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.createdby
-                                      user:
-                                        subtitle: $Time{uesio/core.createdat}
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.updatedby
-                                      user:
-                                        subtitle: $Time{uesio/core.updatedat}
+                      - uesio/crm.auditinfosection:
               left:
                 - uesio/io.box:
                     components:

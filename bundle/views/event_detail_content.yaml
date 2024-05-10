@@ -179,24 +179,8 @@ definition:
                                 wire: event
                                 fieldId: uesio/crm.related_opportunity
                     uesio.variant: uesio/crm.section
-                - uesio/io.box:
-                    components:
-                      - uesio/io.titlebar:
-                          title: audit information
-                          uesio.variant: uesio/crm.sub
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.three_columns
-                          items:
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/core.owner
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/core.createdby
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/core.updatedby
-                    uesio.variant: uesio/crm.section
+                - uesio/crm.auditinfosection:
+                - uesio/crm.deletesection:
         left:
           - uesio/io.tabs:
               uesio.variant: uesio/crm.main

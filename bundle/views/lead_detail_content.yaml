@@ -366,25 +366,8 @@ definition:
                                       fieldId: uesio/crm.expected_revenue
                                   - uesio/io.field:
                                       fieldId: uesio/crm.close_date
-                      - uesio/io.box:
-                          uesio.variant: uesio/crm.section
-                          components:
-                            - uesio/io.titlebar:
-                                title: Audit Information
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.owner
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.createdby
-                                      user:
-                                        subtitle: $Time{uesio/core.createdat}
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.updatedby
-                                      user:
-                                        subtitle: $Time{uesio/core.updatedat}
+                      - uesio/crm.auditinfosection:
+                      - uesio/crm.deletesection:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

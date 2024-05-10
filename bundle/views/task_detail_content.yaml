@@ -180,21 +180,8 @@ definition:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.related_event
                           uesio.variant: uesio/crm.section
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.titlebar:
-                                title: AUDIT INFORMATION
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.owner
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.createdby
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.updatedby
-                          uesio.variant: uesio/crm.section
+                      - uesio/crm.auditinfosection:
+                      - uesio/crm.deletesection:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

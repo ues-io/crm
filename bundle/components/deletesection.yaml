@@ -1,0 +1,41 @@
+name: deletesection
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.section
+      uesio.display:
+        - type: fieldMode
+          mode: EDIT
+      components:
+        - uesio/io.titlebar:
+            title: Danger Zone
+            uesio.variant: uesio/crm.sub
+            uesio.styleTokens:
+              root:
+                - border-red-600
+              title:
+                - text-red-600
+        - uesio/io.titlebar:
+            actions:
+              - uesio/io.button:
+                  uesio.styleTokens:
+                    root:
+                      - mt-4
+                      - border-red-600
+                      - text-red-600
+                  uesio.variant: uesio/crm.secondary
+                  text: Delete Lead
+                  signals:
+                    - signal: wire/MARK_FOR_DELETE
+                    - signal: wire/SAVE
+                    - signal: route/NAVIGATE_TO_ASSIGNMENT
+                      collection: $Collection{id}
+                      viewtype: list
+title: Delete Section Component
+discoverable: true
+description: Delete Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY
