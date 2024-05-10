@@ -80,6 +80,7 @@ definition:
                                   - uesio/io.button:
                                       text: EDIT
                                       icon: edit_square
+                                      iconFill: false
                                       uesio.variant: uesio/crm.secondary
                                       iconPlacement: start
                                       uesio.display:
@@ -132,23 +133,8 @@ definition:
                                   - uesio/io.field:
                                       fieldId: uesio/crm.contact
                           uesio.variant: uesio/crm.section
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root: []
-                          components:
-                            - uesio/io.titlebar:
-                                title: Audit Informatioin
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.owner
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.createdby
-                                  - uesio/io.field:
-                                      fieldId: uesio/core.updatedby
-                          uesio.variant: uesio/crm.section
+                      - uesio/crm.auditinfosection:
+                      - uesio/crm.deletesection:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main

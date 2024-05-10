@@ -1,0 +1,115 @@
+name: opportunitiestab
+definition:
+  # Wires connect to data in collections
+  wires:
+    opportunities:
+      fields:
+        uesio/crm.close_date: {}
+        uesio/crm.contact:
+          fields:
+            uesio/crm.account: {}
+        uesio/crm.description: {}
+        uesio/crm.expected_revenue: {}
+        uesio/crm.topic: {}
+        uesio/crm.account: {}
+      collection: uesio/crm.opportunity
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.account
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: accountid
+        - field: uesio/crm.contact
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: contactid
+    newopp:
+      fields:
+        uesio/crm.close_date: {}
+        uesio/crm.contact:
+          fields:
+            uesio/crm.account: {}
+        uesio/crm.description: {}
+        uesio/crm.expected_revenue: {}
+        uesio/crm.topic: {}
+        uesio/crm.account: {}
+      collection: uesio/crm.opportunity
+      defaults:
+        - field: uesio/crm.account
+          valueSource: PARAM
+          param: accountid
+        - field: uesio/crm.contact
+          valueSource: PARAM
+          param: contactid
+      batchsize: 200
+      init:
+        query: false
+        create: true
+  components:
+    - uesio/io.scrollpanel:
+        content:
+          - uesio/io.deck:
+              mode: READ
+              uesio.variant: uesio/io.two_column_grid
+              components:
+                - uesio/io.grid:
+                    uesio.variant: uesio/crm.tiles
+                    items:
+                      - uesio/io.field:
+                          fieldId: uesio/crm.topic
+                          label: Topic
+                      - uesio/io.field:
+                          fieldId: uesio/crm.expected_revenue
+                          label: Revenue
+                          labelPosition: top
+                      - uesio/io.field:
+                          fieldId: uesio/crm.close_date
+                    uesio.styleTokens:
+                      root: []
+              wire: opportunities
+        footer:
+          - uesio/io.item:
+              mode: EDIT
+              wire: newopp
+              components:
+                - uesio/io.grid:
+                    uesio.variant: uesio/crm.three_columns
+                    items:
+                      - uesio/io.field:
+                          wire: newopp
+                          fieldId: uesio/crm.topic
+                      - uesio/io.field:
+                          wire: newopp
+                          fieldId: uesio/crm.expected_revenue
+                      - uesio/io.field:
+                          wire: newopp
+                          fieldId: uesio/crm.close_date
+                - uesio/io.group:
+                    columnGap: 10px
+                    uesio.styleTokens:
+                      root:
+                        - justify-right
+                    components:
+                      - uesio/io.button:
+                          text: Create Opportunity
+                          icon: ""
+                          uesio.variant: uesio/crm.sidebar
+                          iconPlacement: start
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - newopp
+                            - signal: wire/RESET
+                              wire: newopp
+                            - signal: wire/LOAD
+                              wires:
+                                - opportunities
+        uesio.variant: uesio/crm.sidebar
+  params:
+    accountid:
+      type: TEXT
+    contactid:
+      type: TEXT
