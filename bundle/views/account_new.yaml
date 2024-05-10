@@ -36,78 +36,38 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.list:
-              wire: account
-              uesio.id: accountList
-              mode: EDIT
-              components:
-                - uesio/io.titlebar:
-                    title: Create a new $Collection{label}
-                    subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/crm.main
-                    actions:
-                      - uesio/io.group:
-                          components:
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - account
-                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                    collection: uesio/crm.account
-                                text: Create
-                                hotkey: "meta+s"
-                                uesio.variant: uesio/crm.primary
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/CANCEL
-                                    wire: account
-                                text: Reset
-                                uesio.variant: uesio/io.secondary
-                - uesio/io.box:
-                    uesio.variant: uesio/io.section
+          - uesio/crm.detailsplit:
+              main:
+                - uesio/io.list:
+                    wire: account
+                    uesio.id: accountList
+                    mode: EDIT
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.account_type
-                      - uesio/io.field:
-                          fieldId: uesio/crm.annual_revenue
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.billing_zip
-                      - uesio/io.field:
-                          fieldId: uesio/crm.contacts
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.industry
-                      - uesio/io.field:
-                          fieldId: uesio/crm.logo
-                      - uesio/io.field:
-                          fieldId: uesio/crm.name
-                      - uesio/io.field:
-                          fieldId: uesio/crm.no_employees
-                      - uesio/io.field:
-                          fieldId: uesio/crm.parent_account
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.shipping_zip
-                      - uesio/io.field:
-                          fieldId: uesio/crm.website
+                      - uesio/io.titlebar:
+                          title: New Account
+                          subtitle: $RecordMeta{name}
+                          uesio.variant: uesio/crm.main
+                          actions:
+                            - uesio/io.group:
+                                components:
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - account
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.account
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                      text: Create Account
+                                      hotkey: "meta+s"
+                                      uesio.variant: uesio/crm.primary
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/RESET
+                                          wire: account
+                                      text: Reset
+                                      uesio.variant: uesio/crm.secondary
+                      - uesio/crm.accountprimarysection:
+                      - uesio/crm.accountbillingaddresssection:
+                      - uesio/crm.accountshippingaddresssection:

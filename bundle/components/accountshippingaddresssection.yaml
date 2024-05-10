@@ -1,0 +1,30 @@
+name: accountshippingaddresssection
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.section
+      components:
+        - uesio/io.titlebar:
+            title: Shipping Address
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.three_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.shipping_street
+              - uesio/io.field:
+                  fieldId: uesio/crm.shipping_city
+              - uesio/io.field:
+                  fieldId: uesio/crm.shipping_country
+              - uesio/io.field:
+                  fieldId: uesio/crm.shipping_state_province
+              - uesio/io.field:
+                  fieldId: uesio/crm.shipping_zip
+title: Account Shipping Address Section
+discoverable: true
+description: Account Shipping Address Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

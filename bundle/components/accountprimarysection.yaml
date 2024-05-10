@@ -1,0 +1,37 @@
+name: accountprimarysection
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.primarysection
+      components:
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.three_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.name
+              - uesio/io.field:
+                  fieldId: uesio/crm.parent_account
+              - uesio/io.field:
+                  fieldId: uesio/crm.industry
+              - uesio/io.field:
+                  fieldId: uesio/crm.account_type
+              - uesio/io.field:
+                  fieldId: uesio/crm.description
+              - uesio/io.field:
+                  fieldId: uesio/crm.annual_revenue
+              - uesio/io.field:
+                  fieldId: uesio/crm.phone
+              - uesio/io.field:
+                  fieldId: uesio/crm.email
+              - uesio/io.field:
+                  fieldId: uesio/crm.no_employees
+              - uesio/io.field:
+                  fieldId: uesio/crm.website
+title: Account Primary Section
+discoverable: true
+description: Account Primary Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY
