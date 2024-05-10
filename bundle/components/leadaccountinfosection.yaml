@@ -1,0 +1,18 @@
+name: leadaccountinfosection
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.section
+      components:
+        - uesio/io.titlebar:
+            title: Account Information
+            uesio.variant: uesio/crm.sub
+        - uesio/crm.leadaccountinfofields:
+title: Lead Account Info Section
+discoverable: true
+description: Lead Account Info Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

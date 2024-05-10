@@ -1,0 +1,41 @@
+name: leadcontactinfofields
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.grid:
+      uesio.variant: uesio/crm.three_columns
+      items:
+        - uesio/io.field:
+            fieldId: uesio/crm.firstname
+        - uesio/io.field:
+            fieldId: uesio/crm.lastname
+        - uesio/io.field:
+            fieldId: uesio/crm.email
+        - uesio/io.field:
+            fieldId: uesio/crm.phone
+        - uesio/io.field:
+            fieldId: uesio/crm.phone_business
+        - uesio/io.field:
+            fieldId: uesio/crm.phone_mobile
+  - uesio/io.grid:
+      uesio.variant: uesio/crm.three_columns
+      items:
+        - uesio/io.field:
+            fieldId: uesio/crm.location
+        - uesio/io.field:
+            fieldId: uesio/crm.mailing_city
+        - uesio/io.field:
+            fieldId: uesio/crm.mailing_street
+        - uesio/io.field:
+            fieldId: uesio/crm.mailing_state_province
+        - uesio/io.field:
+            fieldId: uesio/crm.mailing_country
+        - uesio/io.field:
+            fieldId: uesio/crm.mailing_zip_postal
+title: Lead Contact Info Fields
+discoverable: true
+description: Lead Contact Info Fields
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

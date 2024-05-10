@@ -1,0 +1,25 @@
+name: leadoppinfofields
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.grid:
+      uesio.variant: uesio/crm.two_columns
+      items:
+        - uesio/io.box:
+            uesio.styleTokens:
+              root:
+                - col-span-2
+            components:
+              - uesio/io.field:
+                  fieldId: uesio/crm.topic
+        - uesio/io.field:
+            fieldId: uesio/crm.expected_revenue
+        - uesio/io.field:
+            fieldId: uesio/crm.close_date
+title: Lead Opportunity Info Fields
+discoverable: true
+description: Lead Opportunity Info Fields
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

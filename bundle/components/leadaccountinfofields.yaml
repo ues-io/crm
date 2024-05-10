@@ -1,0 +1,27 @@
+name: leadaccountinfofields
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.grid:
+      uesio.variant: uesio/crm.two_columns
+      items:
+        - uesio/io.field:
+            fieldId: uesio/crm.company
+        - uesio/io.field:
+            fieldId: uesio/crm.industry
+  - uesio/io.grid:
+      uesio.variant: uesio/crm.three_columns
+      items:
+        - uesio/io.field:
+            fieldId: uesio/crm.description
+        - uesio/io.field:
+            fieldId: uesio/crm.website
+        - uesio/io.field:
+            fieldId: uesio/crm.no_employees
+title: Lead Account Info Fields
+discoverable: true
+description: Lead Account Info Fields
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY
