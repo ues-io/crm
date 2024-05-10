@@ -420,23 +420,8 @@ definition:
                                       uesio.variant: uesio/crm.three_columns
                                       uesio.styleTokens:
                                         root: []
-                            - uesio/io.box:
-                                uesio.variant: uesio/crm.section
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: audit information
-                                      uesio.variant: uesio/crm.sub
-                                  - uesio/io.grid:
-                                      items:
-                                        - uesio/io.field:
-                                            fieldId: uesio/core.owner
-                                        - uesio/io.field:
-                                            fieldId: uesio/core.createdby
-                                        - uesio/io.field:
-                                            fieldId: uesio/core.updatedby
-                                      uesio.variant: uesio/crm.three_columns
-                                      uesio.styleTokens:
-                                        root: []
+                            - uesio/crm.auditinfosection:
+                            - uesio/crm.deletesection:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main
