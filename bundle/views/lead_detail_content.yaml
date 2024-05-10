@@ -43,84 +43,6 @@ definition:
         - field: uesio/core.id
           valueSource: PARAM
           param: recordid
-    tasks:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
-        uesio/crm.related_lead: {}
-        uesio/crm.is_completed:
-        uesio/crm.is_overdue:
-      collection: uesio/crm.task
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - field: uesio/crm.related_lead
-          valueSource: LOOKUP
-          lookupWire: lead
-          lookupField: uesio/core.id
-      order:
-        - field: uesio/crm.due_by
-          desc: false
-    newtask:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
-        uesio/crm.related_lead: {}
-      init:
-        query: false
-        create: true
-      collection: uesio/crm.task
-      defaults:
-        - field: uesio/crm.related_lead
-          valueSource: LOOKUP
-          lookupWire: lead
-          lookupField: uesio/core.id
-    events:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.endtime: {}
-        uesio/crm.related_lead: {}
-        uesio/crm.location: {}
-        uesio/crm.name: {}
-        uesio/crm.starttime: {}
-        uesio/core.id: {}
-        uesio/crm.related_contact: {}
-      collection: uesio/crm.event
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - field: uesio/crm.related_lead
-          valueSource: LOOKUP
-          lookupWire: lead
-          lookupField: uesio/core.id
-      order:
-        - field: uesio/crm.starttime
-          desc: false
-    newevent:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.endtime: {}
-        uesio/crm.related_lead: {}
-        uesio/crm.location: {}
-        uesio/crm.name: {}
-        uesio/crm.starttime: {}
-        uesio/core.id: {}
-        uesio/crm.related_contact: {}
-      init:
-        query: false
-        create: true
-      collection: uesio/crm.event
-      defaults:
-        - field: uesio/crm.related_lead
-          valueSource: LOOKUP
-          lookupWire: lead
-          lookupField: uesio/core.id
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
@@ -260,87 +182,19 @@ definition:
                       - id: tasks
                         label: Tasks
                         components:
-                          - uesio/io.scrollpanel:
-                              uesio.variant: uesio/crm.sidebar
-                              content:
-                                - uesio/io.deck:
-                                    wire: tasks
-                                    mode: READ
-                                    id: tasks
-                                    uesio.variant: uesio/crm.tiles
-                                    components:
-                                      - uesio/crm.tasktile:
-                              footer:
-                                - uesio/io.item:
-                                    wire: newtask
-                                    mode: EDIT
-                                    components:
-                                      - uesio/io.field:
-                                          fieldId: name
-                                      - uesio/io.field:
-                                          fieldId: due_by
-                                      - uesio/io.group:
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Task
-                                                uesio.variant: uesio/crm.sidebar
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newtask
-                                                  - signal: wire/RESET
-                                                    wire: newtask
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - tasks
+                          - uesio/core.view:
+                              view: uesio/crm.taskstab
+                              uesio.id: taskstab
+                              params:
+                                leadid: $Param{recordid}
                       - id: events
                         label: Events
                         components:
-                          - uesio/io.scrollpanel:
-                              uesio.variant: uesio/crm.sidebar
-                              content:
-                                - uesio/io.deck:
-                                    wire: events
-                                    mode: READ
-                                    id: events
-                                    uesio.variant: uesio/crm.tiles
-                                    components:
-                                      - uesio/crm.eventtile:
-                              footer:
-                                - uesio/io.item:
-                                    wire: newevent
-                                    mode: EDIT
-                                    components:
-                                      - uesio/io.field:
-                                          label: Event Name
-                                          fieldId: name
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/io.two_columns
-                                          items:
-                                            - uesio/io.field:
-                                                fieldId: starttime
-                                            - uesio/io.field:
-                                                fieldId: endtime
-                                      - uesio/io.group:
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Event
-                                                uesio.variant: uesio/crm.sidebar
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newevent
-                                                  - signal: wire/RESET
-                                                    wire: newevent
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - events
+                          - uesio/core.view:
+                              view: uesio/crm.eventstab
+                              uesio.id: eventstab
+                              params:
+                                leadid: $Param{recordid}
     - uesio/io.box:
         uesio.variant: uesio/io.section
         uesio.display:

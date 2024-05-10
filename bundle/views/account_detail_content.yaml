@@ -78,94 +78,6 @@ definition:
           operator: EQ
           valueSource: PARAM
           param: recordid
-    tasks:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
-        uesio/crm.related_account: {}
-        uesio/crm.is_completed: {}
-        uesio/crm.is_overdue: {}
-      collection: uesio/crm.task
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - field: uesio/crm.related_account
-          valueSource: LOOKUP
-          lookupField: uesio/core.id
-          lookupWire: account
-    newtask:
-      fields:
-        uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
-        uesio/crm.related_contact: null
-        uesio/crm.related_account: {}
-        uesio/crm.is_completed: {}
-        uesio/crm.is_overdue: {}
-      collection: uesio/crm.task
-      defaults:
-        - field: uesio/crm.related_account
-          valueSource: LOOKUP
-          lookupWire: account
-          lookupField: uesio/core.id
-      batchsize: 200
-      init:
-        query: false
-        create: true
-      conditions: []
-    events:
-      fields:
-        uesio/crm.related_account: null
-        uesio/crm.description: {}
-        uesio/crm.endtime: {}
-        uesio/crm.location: {}
-        uesio/crm.name: {}
-        uesio/crm.starttime: {}
-        uesio/crm.related_contact:
-          fields:
-            uesio/crm.account: {}
-      collection: uesio/crm.event
-      batchsize: 200
-      init:
-        query: true
-        create: false
-      conditions:
-        - id: accid
-          field: uesio/crm.related_account
-          valueSource: LOOKUP
-          lookupWire: account
-          lookupField: uesio/core.id
-    newevent:
-      fields:
-        uesio/crm.related_account: null
-        uesio/crm.description: {}
-        uesio/crm.endtime: {}
-        uesio/crm.location: {}
-        uesio/crm.name: {}
-        uesio/crm.starttime: {}
-        uesio/crm.related_contact:
-          fields:
-            uesio/crm.account: {}
-        uesio/core.id: {}
-      collection: uesio/crm.event
-      defaults:
-        - field: uesio/crm.related_account
-          valueSource: LOOKUP
-          lookupWire: account
-          lookupField: uesio/core.id
-      batchsize: 200
-      init:
-        query: false
-        create: true
-      conditions:
-        - id: accid
-          field: uesio/crm.related_account
-          operator: EQ
-          valueSource: PARAM
-          param: recordid
     newopp:
       fields:
         uesio/crm.close_date: {}
@@ -450,89 +362,19 @@ definition:
                       - label: Tasks
                         id: taskstable
                         components:
-                          - uesio/io.scrollpanel:
-                              content:
-                                - uesio/io.deck:
-                                    mode: READ
-                                    uesio.variant: uesio/crm.tiles
-                                    components:
-                                      - uesio/crm.tasktile: {}
-                                    wire: tasks
-                              footer:
-                                - uesio/io.item:
-                                    mode: EDIT
-                                    wire: newtask
-                                    components:
-                                      - uesio/io.field:
-                                          wire: newtask
-                                          fieldId: name
-                                      - uesio/io.field:
-                                          fieldId: due_by
-                                      - uesio/io.group:
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Task
-                                                uesio.variant: uesio/crm.sidebar
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newtask
-                                                  - signal: wire/RESET
-                                                    wire: newtask
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - tasks
-                              uesio.variant: uesio/crm.sidebar
+                          - uesio/core.view:
+                              view: uesio/crm.taskstab
+                              uesio.id: taskstab
+                              params:
+                                accountid: $Param{recordid}
                       - label: Events
                         id: events
                         components:
-                          - uesio/io.scrollpanel:
-                              content:
-                                - uesio/io.deck:
-                                    mode: READ
-                                    uesio.variant: uesio/crm.tiles
-                                    components:
-                                      - uesio/crm.eventtile:
-                                    wire: events
-                              footer:
-                                - uesio/io.item:
-                                    mode: EDIT
-                                    components:
-                                      - uesio/io.field:
-                                          fieldId: uesio/crm.name
-                                          label: Event Name
-                                      - uesio/io.grid:
-                                          uesio.variant: uesio/io.two_columns
-                                          items:
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.starttime
-                                            - uesio/io.field:
-                                                fieldId: uesio/crm.endtime
-                                      - uesio/io.group:
-                                          columnGap: ""
-                                          components:
-                                            - uesio/io.button:
-                                                text: Create Event
-                                                icon: ""
-                                                uesio.variant: uesio/crm.sidebar
-                                                iconPlacement: start
-                                                signals:
-                                                  - signal: wire/SAVE
-                                                    wires:
-                                                      - newevent
-                                                  - signal: wire/RESET
-                                                    wire: newevent
-                                                  - signal: wire/LOAD
-                                                    wires:
-                                                      - events
-                                          uesio.styleTokens:
-                                            root:
-                                              - justify-right
-                                    wire: newevent
-                              uesio.variant: uesio/crm.sidebar
+                          - uesio/core.view:
+                              view: uesio/crm.eventstab
+                              uesio.id: eventstab
+                              params:
+                                accountid: $Param{recordid}
                       - label: Opportunities
                         id: opportunities
                         components:
