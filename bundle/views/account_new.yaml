@@ -47,6 +47,10 @@ definition:
                           title: New Account
                           subtitle: $RecordMeta{name}
                           uesio.variant: uesio/crm.main
+                          avatar:
+                            - uesio/io.text:
+                                text: domain
+                                uesio.variant: uesio/io.icon
                           actions:
                             - uesio/io.group:
                                 components:

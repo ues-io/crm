@@ -1,16 +1,18 @@
-name: taskstab
+name: events_tab
 definition:
   # Wires connect to data in collections
   wires:
-    tasks:
+    events:
       fields:
         uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
+        uesio/crm.endtime: {}
         uesio/crm.related_lead: {}
-        uesio/crm.is_completed:
-        uesio/crm.is_overdue:
-      collection: uesio/crm.task
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+        uesio/crm.related_contact: {}
+      collection: uesio/crm.event
       batchsize: 200
       init:
         query: true
@@ -32,23 +34,23 @@ definition:
           valueSource: PARAM
           noValueBehavior: DEACTIVATE
           param: opportunityid
-        - field: uesio/crm.related_event
-          valueSource: PARAM
-          noValueBehavior: DEACTIVATE
-          param: eventid
       order:
-        - field: uesio/crm.due_by
+        - field: uesio/crm.starttime
           desc: false
-    newtask:
+    newevent:
       fields:
         uesio/crm.description: {}
-        uesio/crm.due_by: {}
-        uesio/crm.name: {}
+        uesio/crm.endtime: {}
         uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+        uesio/crm.related_contact: {}
       init:
         query: false
         create: true
-      collection: uesio/crm.task
+      collection: uesio/crm.event
       defaults:
         - field: uesio/crm.related_lead
           valueSource: PARAM
@@ -62,46 +64,49 @@ definition:
         - field: uesio/crm.related_opportunity
           valueSource: PARAM
           param: opportunityid
-        - field: uesio/crm.related_event
-          valueSource: PARAM
-          param: eventid
   components:
     - uesio/io.scrollpanel:
         uesio.variant: uesio/crm.sidebar
         content:
           - uesio/io.deck:
-              wire: tasks
+              wire: events
               mode: READ
-              id: tasks
+              id: events
               uesio.variant: uesio/crm.tiles
               components:
-                - uesio/crm.tasktile:
+                - uesio/crm.eventtile:
         footer:
           - uesio/io.item:
-              wire: newtask
+              wire: newevent
               mode: EDIT
               components:
                 - uesio/io.field:
+                    label: Event Name
                     fieldId: name
-                - uesio/io.field:
-                    fieldId: due_by
+                - uesio/io.grid:
+                    uesio.variant: uesio/io.two_columns
+                    items:
+                      - uesio/io.field:
+                          fieldId: starttime
+                      - uesio/io.field:
+                          fieldId: endtime
                 - uesio/io.group:
                     uesio.styleTokens:
                       root:
                         - justify-right
                     components:
                       - uesio/io.button:
-                          text: Create Task
+                          text: Create Event
                           uesio.variant: uesio/crm.sidebar
                           signals:
                             - signal: wire/SAVE
                               wires:
-                                - newtask
+                                - newevent
                             - signal: wire/RESET
-                              wire: newtask
+                              wire: newevent
                             - signal: wire/LOAD
                               wires:
-                                - tasks
+                                - events
   params:
     leadid:
       type: TEXT
@@ -110,6 +115,4 @@ definition:
     contactid:
       type: TEXT
     opportunityid:
-      type: TEXT
-    eventid:
       type: TEXT

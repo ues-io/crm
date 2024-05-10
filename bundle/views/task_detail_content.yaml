@@ -155,8 +155,8 @@ definition:
                         label: Timeline
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.timelinetab
-                              uesio.id: timelinetab
+                              view: uesio/crm.timeline_tab
+                              uesio.id: timeline_tab
                               params:
                                 recordid: $Param{recordid}
   params:

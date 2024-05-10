@@ -143,24 +143,24 @@ definition:
                         label: Timeline
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.timelinetab
-                              uesio.id: timelinetab
+                              view: uesio/crm.timeline_tab
+                              uesio.id: timeline_tab
                               params:
                                 recordid: $Param{recordid}
                       - id: tasks
                         label: Tasks
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.taskstab
-                              uesio.id: taskstab
+                              view: uesio/crm.tasks_tab
+                              uesio.id: tasks_tab
                               params:
                                 opportunityid: $Param{recordid}
                       - id: events
                         label: Events
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.eventstab
-                              uesio.id: eventstab
+                              view: uesio/crm.events_tab
+                              uesio.id: events_tab
                               params:
                                 opportunityid: $Param{recordid}
   params:
