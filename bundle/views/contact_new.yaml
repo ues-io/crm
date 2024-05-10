@@ -36,78 +36,42 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.list:
-              wire: contact
-              uesio.id: contactList
-              mode: EDIT
-              components:
-                - uesio/io.titlebar:
-                    title: Create a new $Collection{label}
-                    subtitle: $RecordMeta{name}
-                    uesio.variant: uesio/crm.main
-                    actions:
-                      - uesio/io.group:
-                          components:
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - contact
-                                  - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                    collection: uesio/crm.contact
-                                text: Create
-                                hotkey: "meta+s"
-                                uesio.variant: uesio/crm.primary
-                            - uesio/io.button:
-                                signals:
-                                  - signal: wire/RESET
-                                    wire: contact
-                                text: Reset
-                                uesio.variant: uesio/io.secondary
-                - uesio/io.box:
-                    uesio.variant: uesio/io.section
+          - uesio/crm.detail_split:
+              main:
+                - uesio/io.list:
+                    wire: contact
+                    uesio.id: contactList
+                    mode: EDIT
                     components:
-                      - uesio/io.field:
-                          fieldId: uesio/crm.account
-                      - uesio/io.field:
-                          fieldId: uesio/crm.birthdate
-                      - uesio/io.field:
-                          fieldId: uesio/crm.department
-                      - uesio/io.field:
-                          fieldId: uesio/crm.description
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email_opt_out
-                      - uesio/io.field:
-                          fieldId: uesio/crm.firstname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.fullname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.gender
-                      - uesio/io.field:
-                          fieldId: uesio/crm.image
-                      - uesio/io.field:
-                          fieldId: uesio/crm.lastname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_city
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_country
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_state_province
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_street
-                      - uesio/io.field:
-                          fieldId: uesio/crm.mailing_zip_postal
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_business
-                      - uesio/io.field:
-                          fieldId: uesio/crm.phone_mobile
-                      - uesio/io.field:
-                          fieldId: uesio/crm.reports_to
-                      - uesio/io.field:
-                          fieldId: uesio/crm.role
-                      - uesio/io.field:
-                          fieldId: uesio/crm.salutation
-                      - uesio/io.field:
-                          fieldId: uesio/crm.title
+                      - uesio/io.titlebar:
+                          title: New Contact
+                          subtitle: "${firstname} ${lastname}"
+                          uesio.variant: uesio/crm.main
+                          avatar:
+                            - uesio/io.text:
+                                text: person
+                                uesio.variant: uesio/io.icon
+                          actions:
+                            - uesio/io.group:
+                                components:
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/SAVE
+                                          wires:
+                                            - contact
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.contact
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                      text: Create Contact
+                                      hotkey: "meta+s"
+                                      uesio.variant: uesio/crm.primary
+                                  - uesio/io.button:
+                                      signals:
+                                        - signal: wire/RESET
+                                          wire: contact
+                                      text: Reset
+                                      uesio.variant: uesio/crm.secondary
+                      - uesio/crm.contact_primary_section:
+                      - uesio/crm.contact_account_info_section:
+                      - uesio/crm.contact_mailing_address_section:

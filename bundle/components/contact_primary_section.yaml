@@ -1,0 +1,35 @@
+name: contact_primary_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.primarysection
+      components:
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.three_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.firstname
+              - uesio/io.field:
+                  fieldId: uesio/crm.lastname
+              - uesio/io.field:
+                  fieldId: uesio/crm.salutation
+              - uesio/io.field:
+                  fieldId: uesio/crm.phone_mobile
+              - uesio/io.field:
+                  fieldId: uesio/crm.email
+              - uesio/io.field:
+                  fieldId: uesio/crm.birthdate
+              - uesio/io.field:
+                  fieldId: uesio/crm.gender
+              - uesio/io.field:
+                  fieldId: uesio/crm.description
+              - uesio/io.field:
+                  fieldId: uesio/crm.email_opt_out
+title: Contact Primary Section
+discoverable: true
+description: Contact Primary Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

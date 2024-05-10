@@ -40,6 +40,9 @@ definition:
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:
+        uesio.display:
+          - type: paramIsSet
+            param: recordid
         components:
           - uesio/crm.detail_split:
               main:
@@ -135,76 +138,9 @@ definition:
                                               fieldMode: EDIT
                                             fieldId: uesio/crm.image
                                             displayAs: IMAGE
-                      - uesio/io.box:
-                          uesio.display:
-                            - type: paramIsSet
-                              param: recordid
-                          components:
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.firstname
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.lastname
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.salutation
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.phone_mobile
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.email
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.birthdate
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.gender
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.email_opt_out
-                          uesio.variant: uesio/crm.primarysection
-                      - uesio/io.box:
-                          uesio.display:
-                            - type: paramIsSet
-                              param: recordid
-                          components:
-                            - uesio/io.titlebar:
-                                title: Account Information
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.phone_business
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.department
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.title
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.role
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.reports_to
-                          uesio.variant: uesio/crm.section
-                      - uesio/io.box:
-                          uesio.variant: uesio/io.section
-                          components:
-                            - uesio/io.titlebar:
-                                title: Mailing Address
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.mailing_street
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.mailing_city
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.mailing_state_province
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.mailing_country
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.mailing_zip_postal
-                                uesio.variant: uesio/crm.three_columns
+                      - uesio/crm.contact_primary_section:
+                      - uesio/crm.contact_account_info_section:
+                      - uesio/crm.contact_mailing_address_section:
                       - uesio/crm.audit_info_section:
                       - uesio/crm.delete_section:
               left:
