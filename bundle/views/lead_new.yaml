@@ -73,6 +73,10 @@ definition:
                                           wire: lead
                                       text: Reset
                                       uesio.variant: uesio/crm.secondary
+                          avatar:
+                            - uesio/io.text:
+                                uesio.variant: uesio/io.icon
+                                text: filter_alt
                       - uesio/io.box:
                           uesio.variant: uesio/crm.primarysection
                           components:

@@ -1,0 +1,76 @@
+name: timelinetab
+definition:
+  # Wires connect to data in collections
+  wires:
+    activities:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.name: {}
+        uesio/crm.type: {}
+        uesio/core.createdat:
+        uesio/core.createdby:
+          fields:
+            uesio/core.picture:
+            uesio/core.initials:
+            uesio/core.firstname:
+            uesio/core.lastname:
+            uesio/core.username:
+      collection: uesio/crm.activity
+      conditions:
+        - field: uesio/crm.parent
+          valueSource: PARAM
+          param: recordid
+      batchsize: 200
+    newactivity:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.name: {}
+        uesio/crm.type: {}
+      init:
+        query: false
+        create: true
+      collection: uesio/crm.activity
+      defaults:
+        - field: uesio/crm.parent
+          valueSource: PARAM
+          param: recordid
+  components:
+    - uesio/io.scrollpanel:
+        uesio.variant: uesio/crm.sidebar
+        content:
+          - uesio/io.deck:
+              wire: activities
+              mode: READ
+              id: activities
+              uesio.variant: uesio/crm.tiles
+              components:
+                - uesio/crm.commenttile:
+        footer:
+          - uesio/io.item:
+              wire: newactivity
+              mode: EDIT
+              components:
+                - uesio/io.field:
+                    labelPosition: none
+                    fieldId: description
+                - uesio/io.group:
+                    uesio.styleTokens:
+                      root:
+                        - justify-right
+                    components:
+                      - uesio/io.button:
+                          text: Comment
+                          uesio.variant: uesio/crm.sidebar
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - newactivity
+                            - signal: wire/RESET
+                              wire: newactivity
+                            - signal: wire/LOAD
+                              wires:
+                                - activities
+  params:
+    recordid:
+      type: TEXT
+      required: true

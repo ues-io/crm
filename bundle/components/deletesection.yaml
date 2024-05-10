@@ -25,7 +25,7 @@ definition:
                       - border-red-600
                       - text-red-600
                   uesio.variant: uesio/crm.secondary
-                  text: Delete Lead
+                  text: Delete $Collection{label}
                   signals:
                     - signal: wire/MARK_FOR_DELETE
                     - signal: wire/SAVE
