@@ -1,0 +1,30 @@
+name: contact_mailing_address_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/io.section
+      components:
+        - uesio/io.titlebar:
+            title: Mailing Address
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.mailing_street
+              - uesio/io.field:
+                  fieldId: uesio/crm.mailing_city
+              - uesio/io.field:
+                  fieldId: uesio/crm.mailing_state_province
+              - uesio/io.field:
+                  fieldId: uesio/crm.mailing_country
+              - uesio/io.field:
+                  fieldId: uesio/crm.mailing_zip_postal
+            uesio.variant: uesio/crm.three_columns
+title: Contact Mailing Address Section
+discoverable: true
+description: Contact Mailing Address Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

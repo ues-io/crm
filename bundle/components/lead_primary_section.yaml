@@ -1,11 +1,11 @@
-name: leadprimarysection
+name: lead_primary_section
 category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
       uesio.variant: uesio/crm.primarysection
       components:
-        - uesio/crm.leadprimaryfields:
+        - uesio/crm.lead_primary_fields:
 title: Lead Primary Section
 discoverable: true
 description: Lead Primary Section

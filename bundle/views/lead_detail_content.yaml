@@ -50,7 +50,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: lead
@@ -161,12 +161,12 @@ definition:
                                               fieldMode: EDIT
                                             fieldId: uesio/crm.image
                                             displayAs: IMAGE
-                      - uesio/crm.leadprimarysection:
-                      - uesio/crm.leadcontactinfosection:
-                      - uesio/crm.leadaccountinfosection:
-                      - uesio/crm.leadoppinfosection:
-                      - uesio/crm.auditinfosection:
-                      - uesio/crm.deletesection:
+                      - uesio/crm.lead_primary_section:
+                      - uesio/crm.lead_contact_info_section:
+                      - uesio/crm.lead_account_info_section:
+                      - uesio/crm.lead_opp_info_section:
+                      - uesio/crm.audit_info_section:
+                      - uesio/crm.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main
@@ -175,24 +175,24 @@ definition:
                         label: Timeline
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.timelinetab
-                              uesio.id: timelinetab
+                              view: uesio/crm.timeline_tab
+                              uesio.id: timeline_tab
                               params:
                                 recordid: $Param{recordid}
                       - id: tasks
                         label: Tasks
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.taskstab
-                              uesio.id: taskstab
+                              view: uesio/crm.tasks_tab
+                              uesio.id: tasks_tab
                               params:
                                 leadid: $Param{recordid}
                       - id: events
                         label: Events
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.eventstab
-                              uesio.id: eventstab
+                              view: uesio/crm.events_tab
+                              uesio.id: events_tab
                               params:
                                 leadid: $Param{recordid}
     - uesio/io.box:

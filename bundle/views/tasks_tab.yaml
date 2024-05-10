@@ -1,4 +1,4 @@
-name: taskstab
+name: tasks_tab
 definition:
   # Wires connect to data in collections
   wires:
@@ -75,7 +75,7 @@ definition:
               id: tasks
               uesio.variant: uesio/crm.tiles
               components:
-                - uesio/crm.tasktile:
+                - uesio/crm.task_tile:
         footer:
           - uesio/io.item:
               wire: newtask

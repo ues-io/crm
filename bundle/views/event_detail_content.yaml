@@ -24,7 +24,7 @@ definition:
           param: recordid
   # Components determine the layout and composition of your view
   components:
-    - uesio/crm.detailsplit:
+    - uesio/crm.detail_split:
         main:
           - uesio/io.list:
               mode: READ
@@ -105,47 +105,10 @@ definition:
                       - uesio/io.text:
                           text: calendar_month
                           uesio.variant: uesio/io.icon
-                - uesio/io.box:
-                    components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
-                          items:
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.name
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.description
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.starttime
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.endtime
-                    uesio.variant: uesio/crm.primarysection
-                - uesio/io.box:
-                    components:
-                      - uesio/io.titlebar:
-                          title: related to
-                          uesio.variant: uesio/crm.sub
-                      - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
-                          items:
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_account
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_contact
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_lead
-                            - uesio/io.field:
-                                wire: event
-                                fieldId: uesio/crm.related_opportunity
-                    uesio.variant: uesio/crm.section
-                - uesio/crm.auditinfosection:
-                - uesio/crm.deletesection:
+                - uesio/crm.event_primary_section:
+                - uesio/crm.event_related_to_section:
+                - uesio/crm.audit_info_section:
+                - uesio/crm.delete_section:
         left:
           - uesio/io.tabs:
               uesio.variant: uesio/crm.main
@@ -154,16 +117,16 @@ definition:
                   label: Timeline
                   components:
                     - uesio/core.view:
-                        view: uesio/crm.timelinetab
-                        uesio.id: timelinetab
+                        view: uesio/crm.timeline_tab
+                        uesio.id: timeline_tab
                         params:
                           recordid: $Param{recordid}
                 - id: tasks
                   label: Tasks
                   components:
                     - uesio/core.view:
-                        view: uesio/crm.taskstab
-                        uesio.id: taskstab
+                        view: uesio/crm.tasks_tab
+                        uesio.id: tasks_tab
                         params:
                           eventid: $Param{recordid}
   params:

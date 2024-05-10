@@ -178,7 +178,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: lead
@@ -225,7 +225,7 @@ definition:
                                 uesio.variant: uesio/crm.main_pointer
                                 text: ${initials}
                                 image: $UserFile{uesio/crm.image}
-                      - uesio/crm.leadprimarysection:
+                      - uesio/crm.lead_primary_section:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -257,12 +257,12 @@ definition:
                                   - uesio/io.deck:
                                       wire: contactsearch
                                       components:
-                                        - uesio/crm.contactselecttile:
+                                        - uesio/crm.contact_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 value: ${options:selected_contact}
                                             selected: true
-                                        - uesio/crm.contactselecttile:
+                                        - uesio/crm.contact_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 operator: NOT_EQUALS
@@ -306,7 +306,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/crm.leadcontactinfofields:
+                                  - uesio/crm.lead_contact_info_fields:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -337,12 +337,12 @@ definition:
                                   - uesio/io.deck:
                                       wire: accountsearch
                                       components:
-                                        - uesio/crm.accountselecttile:
+                                        - uesio/crm.account_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 value: ${options:selected_account}
                                             selected: true
-                                        - uesio/crm.accountselecttile:
+                                        - uesio/crm.account_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 operator: NOT_EQUALS
@@ -395,7 +395,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/crm.leadaccountinfofields:
+                                  - uesio/crm.lead_account_info_fields:
                       - uesio/io.box:
                           uesio.variant: uesio/crm.section
                           components:
@@ -417,7 +417,7 @@ definition:
                                     wire: options
                                     value: create
                                 components:
-                                  - uesio/crm.leadoppinfofields:
+                                  - uesio/crm.lead_opp_info_fields:
                             - uesio/io.box:
                                 uesio.display:
                                   - field: opportunity_action
@@ -431,12 +431,12 @@ definition:
                                           wire: options
                                           value: link
                                       components:
-                                        - uesio/crm.opportunityselecttile:
+                                        - uesio/crm.opportunity_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 value: ${options:selected_opportunity}
                                             selected: true
-                                        - uesio/crm.opportunityselecttile:
+                                        - uesio/crm.opportunity_select_tile:
                                             uesio.display:
                                               - field: uesio/core.id
                                                 operator: NOT_EQUALS
@@ -486,7 +486,7 @@ definition:
                                             text: info
                                         - uesio/io.text:
                                             text: "You cannot link to an existing opportunity unless you're also linking to an existing account."
-                      - uesio/crm.auditinfosection:
+                      - uesio/crm.audit_info_section:
               left:
                 - uesio/io.box:
                     components:

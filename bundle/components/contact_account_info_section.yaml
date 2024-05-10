@@ -1,0 +1,32 @@
+name: contact_account_info_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.titlebar:
+            title: Account Information
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.three_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.account
+              - uesio/io.field:
+                  fieldId: uesio/crm.phone_business
+              - uesio/io.field:
+                  fieldId: uesio/crm.department
+              - uesio/io.field:
+                  fieldId: uesio/crm.title
+              - uesio/io.field:
+                  fieldId: uesio/crm.role
+              - uesio/io.field:
+                  fieldId: uesio/crm.reports_to
+      uesio.variant: uesio/crm.section
+title: Contact Account Info Section
+discoverable: true
+description: Contact Account Info Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

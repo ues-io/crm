@@ -1,0 +1,24 @@
+name: opportunity_related_to_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.titlebar:
+            title: Related To
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.account
+              - uesio/io.field:
+                  fieldId: uesio/crm.contact
+      uesio.variant: uesio/crm.section
+title: Opportunity Related To Section
+discoverable: true
+description: Opportunity Related To Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

@@ -1,4 +1,4 @@
-name: contactstab
+name: contacts_tab
 definition:
   # Wires connect to data in collections
   wires:

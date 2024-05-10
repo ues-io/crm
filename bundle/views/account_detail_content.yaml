@@ -43,7 +43,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detailsplit:
+          - uesio/crm.detail_split:
               main:
                 - uesio/io.list:
                     wire: account
@@ -140,79 +140,11 @@ definition:
                                               fieldMode: EDIT
                                             fieldId: uesio/crm.logo
                                             displayAs: IMAGE
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.grid:
-                                uesio.variant: uesio/crm.three_columns
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.name
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.parent_account
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.industry
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.account_type
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.description
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.annual_revenue
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.phone
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.email
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.no_employees
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.website
-                          uesio.variant: uesio/crm.primarysection
-                      - uesio/io.box:
-                          components:
-                            - uesio/io.titlebar:
-                                title: Billing Address
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.billing_street
-                                      labelPosition: top
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.billing_city
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.billing_country
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.billing_state_province
-                                      labelPosition: top
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.billing_zip
-                                      labelPosition: top
-                                uesio.variant: uesio/crm.three_columns
-                                uesio.styleTokens:
-                                  root: []
-                          uesio.variant: uesio/crm.section
-                      - uesio/io.box:
-                          uesio.variant: uesio/crm.section
-                          components:
-                            - uesio/io.titlebar:
-                                title: Shipping address
-                                uesio.variant: uesio/crm.sub
-                            - uesio/io.grid:
-                                items:
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.shipping_street
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.shipping_city
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.shipping_country
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.shipping_state_province
-                                  - uesio/io.field:
-                                      fieldId: uesio/crm.shipping_zip
-                                uesio.variant: uesio/crm.three_columns
-                                uesio.styleTokens:
-                                  root: []
-                      - uesio/crm.auditinfosection:
-                      - uesio/crm.deletesection:
+                      - uesio/crm.account_primary_section:
+                      - uesio/crm.account_billing_address_section:
+                      - uesio/crm.account_shipping_address_section:
+                      - uesio/crm.audit_info_section:
+                      - uesio/crm.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/crm.main
@@ -221,40 +153,40 @@ definition:
                         label: Timeline
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.timelinetab
-                              uesio.id: timelinetab
+                              view: uesio/crm.timeline_tab
+                              uesio.id: timeline_tab
                               params:
                                 recordid: $Param{recordid}
                       - label: contacts
                         id: contacts
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.contactstab
-                              uesio.id: contactstab
+                              view: uesio/crm.contacts_tab
+                              uesio.id: contacts_tab
                               params:
                                 accountid: $Param{recordid}
                       - label: Tasks
                         id: taskstable
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.taskstab
-                              uesio.id: taskstab
+                              view: uesio/crm.tasks_tab
+                              uesio.id: tasks_tab
                               params:
                                 accountid: $Param{recordid}
                       - label: Events
                         id: events
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.eventstab
-                              uesio.id: eventstab
+                              view: uesio/crm.events_tab
+                              uesio.id: events_tab
                               params:
                                 accountid: $Param{recordid}
                       - label: Opportunities
                         id: opportunities
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.opportunitiestab
-                              uesio.id: opportunitiestab
+                              view: uesio/crm.opportunities_tab
+                              uesio.id: opportunities_tab
                               params:
                                 accountid: $Param{recordid}
                     uesio.id: detailtab

@@ -1,4 +1,4 @@
-name: leadoppinfosection
+name: lead_opp_info_section
 category: LAYOUT
 type: DECLARATIVE
 definition:
@@ -8,7 +8,7 @@ definition:
         - uesio/io.titlebar:
             title: Opportunity Information
             uesio.variant: uesio/crm.sub
-        - uesio/crm.leadoppinfofields:
+        - uesio/crm.lead_opp_info_fields:
 title: Lead Opportunity Info Section
 discoverable: true
 description: Lead Opportunity Info Section

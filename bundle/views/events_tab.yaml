@@ -1,4 +1,4 @@
-name: eventstab
+name: events_tab
 definition:
   # Wires connect to data in collections
   wires:
@@ -74,7 +74,7 @@ definition:
               id: events
               uesio.variant: uesio/crm.tiles
               components:
-                - uesio/crm.eventtile:
+                - uesio/crm.event_tile:
         footer:
           - uesio/io.item:
               wire: newevent

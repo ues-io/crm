@@ -1,4 +1,4 @@
-name: detailsplit
+name: detail_split
 category: LAYOUT
 type: DECLARATIVE
 slots:

@@ -1,4 +1,4 @@
-name: contactselecttile
+name: opportunity_select_tile
 category: LAYOUT
 type: DECLARATIVE
 properties:
@@ -14,8 +14,8 @@ definition:
             uesio.styleTokens:
               root:
                 - items-center
-            title: ${firstname} ${lastname}
-            subtitle: ${email}
+            title: ${topic}
+            subtitle: ${expected_revenue}
             actions:
               - uesio/io.text:
                   uesio.styleTokens:
@@ -28,13 +28,13 @@ definition:
                   uesio.variant: uesio/crm.avatariconoutline
                   text: check
       avatar:
-        - uesio/io.avatar:
-            text: ${initials}
-            image: $UserFile{image}
+        - uesio/io.text:
+            uesio.variant: uesio/crm.avatariconoutline
+            text: payments
       signals: $Prop{signals}
-title: Contact Tile Component
+title: Opportunity Tile Component
 discoverable: true
-description: A contact tile
+description: An opportunity tile
 sections:
   - type: HOME
     properties:

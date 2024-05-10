@@ -1,0 +1,30 @@
+name: account_billing_address_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.section
+      components:
+        - uesio/io.titlebar:
+            title: Billing Address
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.billing_street
+              - uesio/io.field:
+                  fieldId: uesio/crm.billing_city
+              - uesio/io.field:
+                  fieldId: uesio/crm.billing_country
+              - uesio/io.field:
+                  fieldId: uesio/crm.billing_state_province
+              - uesio/io.field:
+                  fieldId: uesio/crm.billing_zip
+            uesio.variant: uesio/crm.three_columns
+title: Account Billing Address Section
+discoverable: true
+description: Account Billing Address Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

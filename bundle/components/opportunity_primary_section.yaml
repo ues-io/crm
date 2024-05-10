@@ -1,0 +1,25 @@
+name: opportunity_primary_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      uesio.variant: uesio/crm.primarysection
+      components:
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.topic
+              - uesio/io.field:
+                  fieldId: uesio/crm.description
+              - uesio/io.field:
+                  fieldId: uesio/crm.expected_revenue
+              - uesio/io.field:
+                  fieldId: uesio/crm.close_date
+title: Opportunity Primary Section
+discoverable: true
+description: Opportunity Primary Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

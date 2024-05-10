@@ -1,4 +1,4 @@
-name: opportunityselecttile
+name: account_select_tile
 category: LAYOUT
 type: DECLARATIVE
 properties:
@@ -14,8 +14,8 @@ definition:
             uesio.styleTokens:
               root:
                 - items-center
-            title: ${topic}
-            subtitle: ${expected_revenue}
+            title: ${name}
+            subtitle: ${description}
             actions:
               - uesio/io.text:
                   uesio.styleTokens:
@@ -28,13 +28,13 @@ definition:
                   uesio.variant: uesio/crm.avatariconoutline
                   text: check
       avatar:
-        - uesio/io.text:
-            uesio.variant: uesio/crm.avatariconoutline
-            text: payments
+        - uesio/io.avatar:
+            text: ${initials}
+            image: $UserFile{image}
       signals: $Prop{signals}
-title: Opportunity Tile Component
+title: Account Tile Component
 discoverable: true
-description: An opportunity tile
+description: An account tile
 sections:
   - type: HOME
     properties:

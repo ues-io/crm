@@ -1,0 +1,32 @@
+name: event_related_to_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.titlebar:
+            title: related to
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.related_account
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.related_contact
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.related_lead
+              - uesio/io.field:
+                  wire: event
+                  fieldId: uesio/crm.related_opportunity
+      uesio.variant: uesio/crm.section
+title: Event Related To Section
+discoverable: true
+description: Event Related To Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY

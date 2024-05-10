@@ -1,0 +1,30 @@
+name: task_related_to_section
+category: LAYOUT
+type: DECLARATIVE
+definition:
+  - uesio/io.box:
+      components:
+        - uesio/io.titlebar:
+            title: RELATED TO
+            uesio.variant: uesio/crm.sub
+        - uesio/io.grid:
+            uesio.variant: uesio/crm.two_columns
+            items:
+              - uesio/io.field:
+                  fieldId: uesio/crm.related_account
+              - uesio/io.field:
+                  fieldId: uesio/crm.related_contact
+              - uesio/io.field:
+                  fieldId: uesio/crm.related_lead
+              - uesio/io.field:
+                  fieldId: uesio/crm.related_opportunity
+              - uesio/io.field:
+                  fieldId: uesio/crm.related_event
+      uesio.variant: uesio/crm.section
+title: Task Related To Section
+discoverable: true
+description: Task Related To Section
+sections:
+  - type: HOME
+    properties:
+  - type: DISPLAY
