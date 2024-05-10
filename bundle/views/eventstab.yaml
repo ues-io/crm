@@ -1,0 +1,118 @@
+name: eventstab
+definition:
+  # Wires connect to data in collections
+  wires:
+    events:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+        uesio/crm.related_contact: {}
+      collection: uesio/crm.event
+      batchsize: 200
+      init:
+        query: true
+        create: false
+      conditions:
+        - field: uesio/crm.related_lead
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: leadid
+        - field: uesio/crm.related_account
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: accountid
+        - field: uesio/crm.related_contact
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: contactid
+        - field: uesio/crm.related_opportunity
+          valueSource: PARAM
+          noValueBehavior: DEACTIVATE
+          param: opportunityid
+      order:
+        - field: uesio/crm.starttime
+          desc: false
+    newevent:
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.endtime: {}
+        uesio/crm.related_lead: {}
+        uesio/crm.location: {}
+        uesio/crm.name: {}
+        uesio/crm.starttime: {}
+        uesio/core.id: {}
+        uesio/crm.related_contact: {}
+      init:
+        query: false
+        create: true
+      collection: uesio/crm.event
+      defaults:
+        - field: uesio/crm.related_lead
+          valueSource: PARAM
+          param: leadid
+        - field: uesio/crm.related_account
+          valueSource: PARAM
+          param: accountid
+        - field: uesio/crm.related_contact
+          valueSource: PARAM
+          param: contactid
+        - field: uesio/crm.related_opportunity
+          valueSource: PARAM
+          param: opportunityid
+  components:
+    - uesio/io.scrollpanel:
+        uesio.variant: uesio/crm.sidebar
+        content:
+          - uesio/io.deck:
+              wire: events
+              mode: READ
+              id: events
+              uesio.variant: uesio/crm.tiles
+              components:
+                - uesio/crm.eventtile:
+        footer:
+          - uesio/io.item:
+              wire: newevent
+              mode: EDIT
+              components:
+                - uesio/io.field:
+                    label: Event Name
+                    fieldId: name
+                - uesio/io.grid:
+                    uesio.variant: uesio/io.two_columns
+                    items:
+                      - uesio/io.field:
+                          fieldId: starttime
+                      - uesio/io.field:
+                          fieldId: endtime
+                - uesio/io.group:
+                    uesio.styleTokens:
+                      root:
+                        - justify-right
+                    components:
+                      - uesio/io.button:
+                          text: Create Event
+                          uesio.variant: uesio/crm.sidebar
+                          signals:
+                            - signal: wire/SAVE
+                              wires:
+                                - newevent
+                            - signal: wire/RESET
+                              wire: newevent
+                            - signal: wire/LOAD
+                              wires:
+                                - events
+  params:
+    leadid:
+      type: TEXT
+    accountid:
+      type: TEXT
+    contactid:
+      type: TEXT
+    opportunityid:
+      type: TEXT

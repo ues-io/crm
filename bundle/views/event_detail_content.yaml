@@ -157,6 +157,14 @@ definition:
                         uesio.id: timelinetab
                         params:
                           recordid: $Param{recordid}
+                - id: tasks
+                  label: Tasks
+                  components:
+                    - uesio/core.view:
+                        view: uesio/crm.taskstab
+                        uesio.id: taskstab
+                        params:
+                          eventid: $Param{recordid}
   params:
     recordid:
       type: RECORD
