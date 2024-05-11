@@ -8,7 +8,7 @@ definition:
         - uesio/io.titlebar:
             title: Account Information
             uesio.variant: uesio/crm.sub
-        - uesio/crm.leadaccountinfofields:
+        - uesio/crm.lead_account_info_fields:
 title: Lead Account Info Section
 discoverable: true
 description: Lead Account Info Section
