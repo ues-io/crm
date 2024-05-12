@@ -73,6 +73,13 @@ definition:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
                                           wire: lead
+                                        - type: fieldValue
+                                          operator: NOT_IN
+                                          wire: lead
+                                          field: uesio/crm.lead_status
+                                          values:
+                                            - CONVERTED
+                                            - CLOSED
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/SAVE
