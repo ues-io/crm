@@ -39,6 +39,13 @@ definition:
       order:
         - field: uesio/core.createdat
           desc: true
+      conditions:
+        - field: uesio/crm.lead_status
+          operator: NOT_IN
+          valueSource: VALUE
+          values:
+            - CONVERTED
+            - CLOSED
     upcomingevents:
       collection: uesio/crm.event
       fields:
