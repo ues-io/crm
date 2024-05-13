@@ -26,6 +26,8 @@ definition:
         uesio/crm.website:
         uesio/crm.initials:
         uesio/crm.image:
+        uesio/crm.company: {}
+        uesio/crm.lead_status: {}
   components:
     - uesio/io.viewlayout:
         left:
@@ -184,10 +186,13 @@ definition:
                               image: $UserFile{uesio/crm.image}
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname
+                      - field: uesio/crm.company
                       - field: uesio/crm.email
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
                       - field: uesio/crm.website
+                      - field: uesio/crm.lead_status
+                        readonly: true
                     uesio.id: leadTable
                     mode: READ
                     wire: lead
