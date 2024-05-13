@@ -132,6 +132,38 @@ export default function convert_lead(bot: ListenerBotApi) {
 		],
 	})
 
+	const tasksResult = bot.load({
+		collection: "uesio/crm.task",
+		fields: [
+			{
+				id: "uesio/core.id",
+			},
+		],
+		conditions: [
+			{
+				field: "uesio/crm.related_lead",
+				operator: "EQ",
+				value: lead,
+			},
+		],
+	})
+
+	const eventsResult = bot.load({
+		collection: "uesio/crm.event",
+		fields: [
+			{
+				id: "uesio/core.id",
+			},
+		],
+		conditions: [
+			{
+				field: "uesio/crm.related_lead",
+				operator: "EQ",
+				value: lead,
+			},
+		],
+	})
+
 	//bot.log.info("Lead Result", leadResultItem)
 
 	//bot.log.info("Activity Result", activityResult)
@@ -144,11 +176,6 @@ export default function convert_lead(bot: ListenerBotApi) {
 			fields: [
 				{
 					id: "uesio/crm.account",
-					fields: [
-						{
-							id: "uesio/core.id",
-						},
-					],
 				},
 			],
 			conditions: [
@@ -284,7 +311,33 @@ export default function convert_lead(bot: ListenerBotApi) {
 		)
 	}
 
-	// 6: Create Opportunity Record
+	// 6: Migrate Tasks to Contact
+	if (tasksResult.length) {
+		bot.save(
+			"uesio/crm.task",
+			tasksResult.map((task) => ({
+				"uesio/core.id": task["uesio/core.id"],
+				"uesio/crm.related_contact": {
+					"uesio/core.id": contactId,
+				},
+			})) as unknown as WireRecord[]
+		)
+	}
+
+	// 7: Migrate Events to Contact
+	if (eventsResult.length) {
+		bot.save(
+			"uesio/crm.event",
+			eventsResult.map((event) => ({
+				"uesio/core.id": event["uesio/core.id"],
+				"uesio/crm.related_contact": {
+					"uesio/core.id": contactId,
+				},
+			})) as unknown as WireRecord[]
+		)
+	}
+
+	// 8: Create Opportunity Record
 	if (opportunityAction === "create") {
 		//bot.log.info("Creating New Opportunity")
 
@@ -326,7 +379,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 		throw new Error("Invalid Opportunity Convert Action")
 	}
 
-	// 7: Update Existing Lead Record Status
+	// 9: Update Existing Lead Record Status
 	bot.save("uesio/crm.lead", [
 		{
 			"uesio/core.id": lead,
