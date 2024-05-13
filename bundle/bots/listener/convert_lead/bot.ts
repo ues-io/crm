@@ -1,4 +1,4 @@
-import { ListenerBotApi, WireRecord } from "@uesio/bots"
+import { FieldValue, ListenerBotApi, WireRecord } from "@uesio/bots"
 
 export default function convert_lead(bot: ListenerBotApi) {
 	const contactAction = bot.params.get("contactaction") as string
@@ -25,6 +25,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 
 	let contactId = ""
 	let accountId = ""
+	let contactAccountId = ""
 
 	// 1: Load in current lead information
 	const leadResult = bot.load({
@@ -135,9 +136,50 @@ export default function convert_lead(bot: ListenerBotApi) {
 
 	//bot.log.info("Activity Result", activityResult)
 
-	// 2: Create Account Record
-	if (accountAction === "create") {
+	// 2: If the contact action is link, verify that that contact
+	// exists. And get the relevant data.
+	if (contactAction === "link") {
+		const contactResult = bot.load({
+			collection: "uesio/crm.contact",
+			fields: [
+				{
+					id: "uesio/crm.account",
+					fields: [
+						{
+							id: "uesio/core.id",
+						},
+					],
+				},
+			],
+			conditions: [
+				{
+					field: "uesio/core.id",
+					operator: "EQ",
+					value: contact,
+				},
+			],
+		})
+
+		if (contactResult.length !== 1) {
+			throw new Error("Could not find linked contact.")
+		}
+
+		const contactResultItem = contactResult[0]
+		const contactAccount = contactResultItem["uesio/crm.account"] as Record<
+			string,
+			FieldValue
+		>
+
+		contactAccountId = contactAccount?.["uesio/core.id"] as string
+	}
+
+	// 3: Create Account Record
+	if (contactAccountId) {
+		// Skip this process. We don't need to create or link an account here.
+		accountId = contactAccountId
+	} else if (accountAction === "create") {
 		//bot.log.info("Creating New Account")
+
 		const company = leadResultItem["uesio/crm.company"]
 		const industry = leadResultItem["uesio/crm.industry"]
 		const description = leadResultItem["uesio/crm.description"]
@@ -171,7 +213,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 		throw new Error("Invalid Account Convert Action")
 	}
 
-	// 3: Create Contact Record
+	// 4: Create or Link Contact Record
 	if (contactAction === "create") {
 		//bot.log.info("Creating New Contact")
 
@@ -227,7 +269,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 		throw new Error("Invalid Contact Convert Action")
 	}
 
-	// 4: Migrate Activity to Contact
+	// 5: Migrate Activity to Contact
 	if (activityResult.length) {
 		bot.save(
 			"uesio/crm.activity",
@@ -242,7 +284,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 		)
 	}
 
-	// 5: Create Opportunity Record
+	// 6: Create Opportunity Record
 	if (opportunityAction === "create") {
 		//bot.log.info("Creating New Opportunity")
 
@@ -284,7 +326,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 		throw new Error("Invalid Opportunity Convert Action")
 	}
 
-	// 6: Update Existing Lead Record Status
+	// 7: Update Existing Lead Record Status
 	bot.save("uesio/crm.lead", [
 		{
 			"uesio/core.id": lead,

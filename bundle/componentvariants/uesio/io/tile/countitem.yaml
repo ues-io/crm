@@ -1,0 +1,14 @@
+name: countitem
+label: Count Item
+public: true
+extends: uesio/crm.item
+definition:
+  uesio.styleTokens:
+    root:
+      - "[counter-increment:items]"
+  avatar:
+    - uesio/io.text:
+        uesio.styleTokens:
+          root:
+            - after:content-[counter(items)]
+        uesio.variant: uesio/crm.avatartext
