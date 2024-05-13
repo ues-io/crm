@@ -17,6 +17,7 @@ definition:
         uesio/core.updatedat:
         uesio/core.owner:
         uesio/core.id: {}
+        uesio/crm.stage: {}
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
