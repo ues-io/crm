@@ -27,8 +27,13 @@ definition:
         uesio/crm.reports_to:
         uesio/crm.role:
         uesio/crm.salutation:
-        uesio/crm.title: # Components determine the layout and composition of your view
-        uesio/crm.initials: {}
+        uesio/crm.title:
+        uesio/crm.initials:
+      batchsize: 200
+      order:
+        - desc: false
+          field: uesio/crm.lastname
+  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -38,8 +43,14 @@ definition:
               title: $Collection{contact:pluralLabel}
               subtitle: List View
               uesio.variant: uesio/crm.main
+              avatar:
+                - uesio/io.text:
+                    text: person
+                    uesio.variant: uesio/io.icon
               actions:
                 - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: contactTable
                     right:
                       - uesio/io.button:
                           signals:
@@ -51,9 +62,11 @@ definition:
                               componentsignal: SET_READ_MODE
                               targettype: specific
                               componentid: contactTable
-                            - signal: wire/LOAD
-                              wires:
-                                - contact
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: contactTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
                           uesio.variant: uesio/crm.primary
@@ -71,20 +84,12 @@ definition:
                               componentid: contactTable
                             - signal: component/CALL
                               component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
                               targettype: specific
                               componentid: contactTable
-                              componentsignal: CLEAR_SELECTED
                           uesio.display:
-                            - type: group
-                              conjunction: OR
-                              conditions:
-                                - type: wireHasChanges
-                                  operator: EQUALS
-                                  wire: contact
-                                - type: mergeValue
-                                  operator: ""
-                                  sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
-                                  value: EDIT
+                            - type: wireHasChanges
+                              wire: contact
                           text: $Label{uesio/io.cancel}
                           uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
@@ -94,21 +99,35 @@ definition:
                               componentsignal: TOGGLE_MODE
                               targettype: specific
                               componentid: contactTable
-                          text: Edit
-                          uesio.variant: uesio/crm.secondary
-                          icon: edit_square
-                          iconFill: false
                           uesio.display:
                             - type: mergeValue
+                              value: EDIT
                               operator: NOT_EQUALS
                               sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: contact
+                          text: Edit
+                          icon: edit_square
+                          iconFill: false
+                          uesio.variant: uesio/crm.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: contactTable
+                          uesio.display:
+                            - type: mergeValue
                               value: EDIT
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: contactTable
-              avatar:
-                - uesio/io.text:
-                    text: person
-                    uesio.variant: uesio/io.icon
+                              operator: EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: contact
+                          icon: task_alt
+                          iconFill: false
+                          text: Read
+                          uesio.variant: uesio/crm.secondary
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection
               components:
@@ -119,11 +138,11 @@ definition:
                       - uesio/io.searchbox:
                           uesio.variant: uesio/crm.main
                           wire: contact
+                          placeholder: Search Contacts
                           searchFields:
                             - uesio/crm.firstname
                             - uesio/crm.fullname
                             - uesio/crm.lastname
-                          placeholder: Search Contacts
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -135,7 +154,6 @@ definition:
                               prepend: true
                           uesio.display:
                             - type: mergeValue
-                              operator: ""
                               sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
                               value: EDIT
                       - uesio/io.button:
@@ -157,6 +175,7 @@ definition:
                     rowactions:
                       - icon: visibility
                         text: View
+                        type: DEFAULT
                         uesio.display:
                           - type: recordIsNotNew
                         signals:
@@ -164,15 +183,12 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.contact
-                        type: DEFAULT
                     columns:
                       - components:
                           - uesio/io.avatar:
+                              uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
-                              image: $UserFile{uesio/crm.logo}
-                              uesio.styleTokens:
-                                root:
-                                  - m-auto
+                              image: $UserFile{uesio/crm.image}
                       - field: uesio/crm.firstname
                       - field: uesio/crm.lastname
                       - field: uesio/crm.account

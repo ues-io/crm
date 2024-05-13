@@ -26,8 +26,13 @@ definition:
         uesio/crm.website:
         uesio/crm.initials:
         uesio/crm.image:
-        uesio/crm.company: {}
-        uesio/crm.lead_status: {}
+        uesio/crm.company:
+        uesio/crm.lead_status:
+      batchsize: 200
+      order:
+        - desc: true
+          field: uesio/core.updatedat
+  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -45,7 +50,7 @@ definition:
                 - uesio/io.toolbar:
                     linkedComponentType: uesio/io.table
                     linkedComponentId: leadTable
-                    left:
+                    right:
                       - uesio/io.button:
                           signals:
                             - signal: wire/SAVE
@@ -138,17 +143,17 @@ definition:
                             - uesio/crm.lastname
                     right:
                       - uesio/io.button:
-                          uesio.variant: uesio/crm.add
                           text: Quick Create
                           icon: add_circle
+                          uesio.variant: uesio/crm.add
                           signals:
                             - signal: wire/CREATE_RECORD
                               wire: lead
                               prepend: true
                           uesio.display:
                             - type: mergeValue
-                              value: EDIT
                               sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
+                              value: EDIT
                       - uesio/io.button:
                           icon: delete
                           uesio.variant: uesio/crm.delete
@@ -179,9 +184,7 @@ definition:
                     columns:
                       - components:
                           - uesio/io.avatar:
-                              uesio.styleTokens:
-                                root:
-                                  - m-auto
+                              uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.image}
                       - field: uesio/crm.firstname
