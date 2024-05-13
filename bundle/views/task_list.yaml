@@ -11,11 +11,13 @@ definition:
         uesio/crm.related_account:
         uesio/crm.related_contact:
         uesio/crm.related_lead:
-        uesio/crm.related_opportunity: # Components determine the layout and composition of your view
-        uesio/crm.initials: {}
+        uesio/crm.related_opportunity:
+        uesio/crm.initials:
+      batchsize: 200
       order:
         - desc: false
           field: uesio/crm.due_by
+  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -25,8 +27,14 @@ definition:
               title: $Collection{task:pluralLabel}
               subtitle: List View
               uesio.variant: uesio/crm.main
+              avatar:
+                - uesio/io.text:
+                    text: task_alt
+                    uesio.variant: uesio/io.icon
               actions:
                 - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: taskTable
                     right:
                       - uesio/io.button:
                           signals:
@@ -38,9 +46,11 @@ definition:
                               componentsignal: SET_READ_MODE
                               targettype: specific
                               componentid: taskTable
-                            - signal: wire/LOAD
-                              wires:
-                                - task
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: taskTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
                           uesio.variant: uesio/crm.primary
@@ -62,16 +72,8 @@ definition:
                               targettype: specific
                               componentid: taskTable
                           uesio.display:
-                            - type: group
-                              conjunction: OR
-                              conditions:
-                                - type: wireHasChanges
-                                  operator: EQUALS
-                                  wire: task
-                                - type: mergeValue
-                                  operator: ""
-                                  sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
-                                  value: EDIT
+                            - type: wireHasChanges
+                              wire: task
                           text: $Label{uesio/io.cancel}
                           uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
@@ -81,32 +83,48 @@ definition:
                               componentsignal: TOGGLE_MODE
                               targettype: specific
                               componentid: taskTable
-                          text: Edit
-                          uesio.variant: uesio/crm.secondary
-                          icon: edit_square
-                          iconFill: false
                           uesio.display:
                             - type: mergeValue
+                              value: EDIT
                               operator: NOT_EQUALS
                               sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: task
+                          text: Edit
+                          icon: edit_square
+                          iconFill: false
+                          uesio.variant: uesio/crm.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: taskTable
+                          uesio.display:
+                            - type: mergeValue
                               value: EDIT
-                    linkedComponentId: taskTable
-                    linkedComponentType: uesio/io.table
-              avatar:
-                - uesio/io.text:
-                    text: task_alt
-                    uesio.variant: uesio/io.icon
+                              operator: EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: task
+                          icon: task_alt
+                          iconFill: false
+                          text: Read
+                          uesio.variant: uesio/crm.secondary
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: taskTable
                     left:
                       - uesio/io.searchbox:
+                          uesio.variant: uesio/crm.main
                           wire: task
+                          placeholder: Search Tasks
                           searchFields:
                             - uesio/crm.name
-                          placeholder: Search Tasks
-                          uesio.variant: uesio/crm.main
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -133,14 +151,13 @@ definition:
                           uesio.display:
                             - type: hasValue
                               value: $ComponentState{[uesio/io.table][taskTable][selected->count]}
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: taskTable
                 - uesio/io.table:
                     uesio.variant: uesio/crm.main
                     selectable: true
                     rowactions:
                       - icon: visibility
                         text: View
+                        type: DEFAULT
                         uesio.display:
                           - type: recordIsNotNew
                         signals:
@@ -148,14 +165,11 @@ definition:
                             viewtype: detail
                             recordid: ${uesio/core.id}
                             collection: uesio/crm.task
-                        type: DEFAULT
                     columns:
-                      - type: custom
-                        components:
-                          - uesio/io.avatar:
-                              text: ${initials}
-                              image: $UserFile{uesio/crm.logo}
-                              uesio.variant: uesio/io.default
+                      - components:
+                          - uesio/io.text:
+                              uesio.variant: uesio/crm.avatariconoutline
+                              text: task_alt
                       - field: uesio/crm.name
                       - field: uesio/crm.description
                       - field: uesio/crm.due_by

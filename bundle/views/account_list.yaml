@@ -25,11 +25,13 @@ definition:
         uesio/crm.shipping_state_province:
         uesio/crm.shipping_street:
         uesio/crm.shipping_zip:
-        uesio/crm.website: # Components determine the layout and composition of your view
-        uesio/crm.initials: {}
+        uesio/crm.website:
+        uesio/crm.initials:
+      batchsize: 200
       order:
         - desc: false
           field: uesio/crm.name
+  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:
@@ -39,8 +41,14 @@ definition:
               title: $Collection{account:pluralLabel}
               subtitle: List View
               uesio.variant: uesio/crm.main
+              avatar:
+                - uesio/io.text:
+                    uesio.variant: uesio/io.icon
+                    text: domain
               actions:
                 - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: accountTable
                     right:
                       - uesio/io.button:
                           signals:
@@ -52,9 +60,11 @@ definition:
                               componentsignal: SET_READ_MODE
                               targettype: specific
                               componentid: accountTable
-                            - signal: wire/LOAD
-                              wires:
-                                - account
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: CLEAR_SELECTED
+                              targettype: specific
+                              componentid: accountTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
                           uesio.variant: uesio/crm.primary
@@ -76,16 +86,8 @@ definition:
                               targettype: specific
                               componentid: accountTable
                           uesio.display:
-                            - type: group
-                              conjunction: OR
-                              conditions:
-                                - type: wireHasChanges
-                                  operator: EQUALS
-                                  wire: account
-                                - type: mergeValue
-                                  operator: ""
-                                  sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
-                                  value: EDIT
+                            - type: wireHasChanges
+                              wire: account
                           text: $Label{uesio/io.cancel}
                           uesio.variant: uesio/crm.secondary
                       - uesio/io.button:
@@ -100,27 +102,43 @@ definition:
                               value: EDIT
                               operator: NOT_EQUALS
                               sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: account
                           text: Edit
-                          uesio.variant: uesio/crm.secondary
                           icon: edit_square
                           iconFill: false
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: accountTable
-              avatar:
-                - uesio/io.text:
-                    text: domain
-                    uesio.variant: uesio/io.icon
+                          uesio.variant: uesio/crm.secondary
+                      - uesio/io.button:
+                          signals:
+                            - signal: component/CALL
+                              component: uesio/io.table
+                              componentsignal: TOGGLE_MODE
+                              targettype: specific
+                              componentid: accountTable
+                          uesio.display:
+                            - type: mergeValue
+                              value: EDIT
+                              operator: EQUALS
+                              sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
+                            - type: wireHasNoChanges
+                              wire: account
+                          icon: task_alt
+                          iconFill: false
+                          text: Read
+                          uesio.variant: uesio/crm.secondary
           - uesio/io.box:
               uesio.variant: uesio/crm.primarysection
               components:
                 - uesio/io.toolbar:
+                    linkedComponentType: uesio/io.table
+                    linkedComponentId: accountTable
                     left:
                       - uesio/io.searchbox:
+                          uesio.variant: uesio/crm.main
                           wire: account
+                          placeholder: Search Accounts
                           searchFields:
                             - uesio/crm.name
-                          placeholder: Search Accounts
-                          uesio.variant: uesio/crm.main
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -132,8 +150,8 @@ definition:
                               prepend: true
                           uesio.display:
                             - type: mergeValue
-                              value: EDIT
                               sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
+                              value: EDIT
                       - uesio/io.button:
                           icon: delete
                           uesio.variant: uesio/crm.delete
@@ -147,8 +165,6 @@ definition:
                           uesio.display:
                             - type: hasValue
                               value: $ComponentState{[uesio/io.table][accountTable][selected->count]}
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: accountTable
                 - uesio/io.table:
                     uesio.variant: uesio/crm.main
                     selectable: true
@@ -166,11 +182,9 @@ definition:
                     columns:
                       - components:
                           - uesio/io.avatar:
+                              uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.logo}
-                              uesio.styleTokens:
-                                root:
-                                  - m-auto
                       - field: uesio/crm.name
                       - field: uesio/crm.account_type
                       - field: uesio/crm.industry
