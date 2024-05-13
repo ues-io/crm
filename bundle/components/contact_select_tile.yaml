@@ -9,24 +9,36 @@ definition:
   - uesio/io.tile:
       uesio.variant: uesio/crm.item
       content:
-        - uesio/io.titlebar:
-            uesio.variant: uesio/crm.item
+        - uesio/io.group:
             uesio.styleTokens:
               root:
-                - items-center
-            title: ${firstname} ${lastname}
-            subtitle: ${email}
-            actions:
-              - uesio/io.text:
+                - grid-cols-[200px_1fr]
+            components:
+              - uesio/io.titlebar:
+                  uesio.variant: uesio/crm.item
                   uesio.styleTokens:
                     root:
-                      - bg-green-600
-                      - text-white
-                  uesio.display:
-                    - type: hasValue
-                      value: $Prop{selected}
-                  uesio.variant: uesio/crm.avatariconoutline
-                  text: check
+                      - items-center
+                  title: ${firstname} ${lastname}
+                  subtitle: ${account->name}
+              - uesio/io.titlebar:
+                  uesio.variant: uesio/crm.subitem
+                  uesio.styleTokens:
+                    root:
+                      - items-center
+                  title: ${email}
+                  subtitle: ${phone}
+                  actions:
+                    - uesio/io.text:
+                        uesio.styleTokens:
+                          root:
+                            - bg-green-600
+                            - text-white
+                        uesio.display:
+                          - type: hasValue
+                            value: $Prop{selected}
+                        uesio.variant: uesio/crm.avatariconoutline
+                        text: check
       avatar:
         - uesio/io.avatar:
             text: ${initials}
