@@ -153,6 +153,7 @@ definition:
                               sourceValue: $ComponentState{[uesio/io.table][accountTable][mode]}
                               value: EDIT
                       - uesio/io.button:
+                          text: Delete
                           icon: delete
                           uesio.variant: uesio/crm.delete
                           signals:

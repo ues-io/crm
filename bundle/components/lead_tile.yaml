@@ -8,21 +8,30 @@ definition:
         - uesio/io.titlebar:
             uesio.variant: uesio/crm.item
             title: ${firstname} ${lastname}
-            subtitle: ${email}
+            subtitle: ${company}
             actions:
-              - uesio/io.text:
-                  uesio.display:
-                    - type: hasValue
-                      value: ${source->uesio/core.uniquekey}
-                  uesio.styleTokens:
-                    root:
-                      - bg-teal-500
-                      - text-white
-                  uesio.variant: uesio/crm.badge
-                  element: div
-                  text: ${source->uesio/core.uniquekey}
-              - uesio/crm.stoplight:
-                  field: lead_rating
+              - uesio/io.group:
+                  components:
+                    - uesio/io.text:
+                        uesio.display:
+                          - type: hasValue
+                            value: ${source->uesio/core.uniquekey}
+                          - type: hasValue
+                            value: $Prop{showSource}
+                        uesio.styleTokens:
+                          root:
+                            - bg-teal-500
+                            - text-white
+                        uesio.variant: uesio/crm.badge
+                        element: div
+                        text: ${source->uesio/core.uniquekey}
+                    - uesio/io.box:
+                        components:
+                          - uesio/crm.stoplight:
+                              uesio.display:
+                                - type: hasValue
+                                  value: $Prop{showRating}
+                              field: lead_rating
       avatar:
         - uesio/io.avatar:
             text: ${initials}

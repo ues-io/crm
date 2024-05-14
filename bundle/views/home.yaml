@@ -33,6 +33,7 @@ definition:
         uesio/crm.lead_rating:
         uesio/crm.image:
         uesio/crm.initials:
+        uesio/crm.company:
         uesio/crm.source:
       order:
         - field: uesio/core.createdat
@@ -164,6 +165,8 @@ definition:
                                             uesio.variant: uesio/crm.tiles
                                             components:
                                               - uesio/crm.lead_tile:
+                                                  showSource: true
+                                                  showRating: true
                             - uesio/io.box:
                                 uesio.variant: uesio/crm.dashboarditem
                                 components:

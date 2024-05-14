@@ -1,47 +1,37 @@
 import { styles, definition, component } from "@uesio/ui"
 
-type ComponentDefinition = {
-	field: string
-}
-
 const StyleDefaults = Object.freeze({
-	root: ["absolute", "flex", "-bottom-0.5", "-right-0.5", "gap-0.5"],
-	circle: ["text-slate-200", "text-base", "leading-none"],
+	root: ["flex", "justify-center"],
+	circle: ["text-slate-200", "text-xl", "leading-none"],
 	warm: ["text-yellow-400"],
 	hot: ["text-red-500"],
 	cold: ["text-sky-400"],
 })
 
-const Component: definition.UC<ComponentDefinition> = (props) => {
+const Component: definition.UC = (props) => {
 	const { context } = props
-	const { field } = props.definition
 	const Icon = component.getUtility("uesio/io.icon")
 	const classes = styles.useStyleTokens(StyleDefaults, props)
-	const value = context.getRecord()?.getFieldValue(field)
+	const value = context.getRecord()?.getFieldValue("lead_rating")
+	let icon = ""
+	let iconClass = ""
+	if (value === "Cold") {
+		icon = "ac_unit"
+		iconClass = classes.cold
+	} else if (value === "Warm") {
+		icon = "partly_cloudy_day"
+		iconClass = classes.warm
+	} else if (value === "Hot") {
+		icon = "local_fire_department"
+		iconClass = classes.hot
+	} else {
+		icon = "mist"
+	}
 	return (
-		<div className={classes.root}>
+		<div className={styles.cx(classes.root)}>
 			<Icon
-				className={styles.cx(
-					classes.circle,
-					value === "Cold" && classes.cold
-				)}
-				icon="ac_unit"
-				context={context}
-			/>
-			<Icon
-				className={styles.cx(
-					classes.circle,
-					value === "Warm" && classes.warm
-				)}
-				icon="partly_cloudy_day"
-				context={context}
-			/>
-			<Icon
-				className={styles.cx(
-					classes.circle,
-					value === "Hot" && classes.hot
-				)}
-				icon="local_fire_department"
+				className={styles.cx(classes.circle, iconClass)}
+				icon={icon}
 				context={context}
 			/>
 		</div>
