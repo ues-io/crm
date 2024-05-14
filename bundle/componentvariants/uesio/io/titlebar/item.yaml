@@ -6,3 +6,5 @@ definition:
   uesio.styleTokens:
     title:
       - text-sm
+    actions:
+      - "[min-height:36px]"

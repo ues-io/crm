@@ -50,9 +50,11 @@ definition:
               wire: newactivity
               mode: EDIT
               components:
-                - uesio/io.field:
-                    labelPosition: none
-                    fieldId: description
+                - uesio/io.box:
+                    components:
+                      - uesio/io.field:
+                          labelPosition: none
+                          fieldId: description
                 - uesio/io.group:
                     uesio.styleTokens:
                       root:
@@ -63,10 +65,7 @@ definition:
                           uesio.variant: uesio/crm.sidebar
                           signals:
                             - signal: wire/SAVE
-                              wires:
-                                - newactivity
                             - signal: wire/RESET
-                              wire: newactivity
                             - signal: wire/LOAD
                               wires:
                                 - activities
