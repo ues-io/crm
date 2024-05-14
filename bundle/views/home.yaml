@@ -34,8 +34,6 @@ definition:
         uesio/crm.image:
         uesio/crm.initials:
         uesio/crm.source:
-          fields:
-            uesio/core.uniquekey:
       order:
         - field: uesio/core.createdat
           desc: true
