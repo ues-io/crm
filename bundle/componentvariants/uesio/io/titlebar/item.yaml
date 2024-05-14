@@ -4,7 +4,7 @@ public: true
 extends: uesio/io.default
 definition:
   uesio.styleTokens:
+    root:
+      - items-center
     title:
       - text-sm
-    actions:
-      - "[min-height:36px]"

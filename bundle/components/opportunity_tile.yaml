@@ -13,8 +13,6 @@ definition:
               - uesio/io.titlebar:
                   uesio.variant: uesio/crm.subitem
                   uesio.styleTokens:
-                    root:
-                      - items-center
                     content:
                       - text-right
                     title:

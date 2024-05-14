@@ -6,6 +6,7 @@ definition:
   uesio.styleTokens:
     root:
       - gap-1
+      - items-center
     title:
       - text-xs
       - font-light

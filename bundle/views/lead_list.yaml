@@ -28,6 +28,8 @@ definition:
         uesio/crm.image:
         uesio/crm.company:
         uesio/crm.lead_status:
+        uesio/crm.source:
+        uesio/crm.lead_rating:
       batchsize: 200
       order:
         - desc: true
@@ -141,6 +143,18 @@ definition:
                           searchFields:
                             - uesio/crm.firstname
                             - uesio/crm.lastname
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: lead
+                          fieldId: uesio/crm.lead_status
+                          labelPosition: none
+                          displayAs: MULTISELECT
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: lead
+                          fieldId: uesio/crm.lead_rating
+                          labelPosition: none
+                          displayAs: MULTISELECT
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -155,6 +169,7 @@ definition:
                               sourceValue: $ComponentState{[uesio/io.table][leadTable][mode]}
                               value: EDIT
                       - uesio/io.button:
+                          text: Delete
                           icon: delete
                           uesio.variant: uesio/crm.delete
                           signals:
@@ -187,9 +202,39 @@ definition:
                               uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.image}
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - components:
+                          - uesio/crm.lead_tile:
+                        uesio.display:
+                          - type: fieldMode
+                            mode: READ
                       - field: uesio/crm.firstname
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.lastname
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.company
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - components:
+                          - uesio/crm.stoplight:
+                              field: lead_rating
+                              size: large
+                        label: Rating
+                        uesio.display:
+                          - type: fieldMode
+                            mode: READ
+                      - field: uesio/crm.lead_rating
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - field: uesio/crm.source
                       - field: uesio/crm.email
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
