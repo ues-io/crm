@@ -1,0 +1,6 @@
+name: tabform
+label: Tab Form
+definition:
+  uesio.styleTokens:
+    root:
+      - mb-4

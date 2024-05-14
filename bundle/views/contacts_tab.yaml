@@ -11,6 +11,9 @@ definition:
         uesio/crm.description: {}
         uesio/crm.department: {}
         uesio/crm.account: {}
+        uesio/crm.image: {}
+        uesio/crm.initials: {}
+        uesio/crm.phone: {}
         uesio/core.id: {}
         uesio/crm.fullname: {}
       collection: uesio/crm.contact
@@ -26,14 +29,22 @@ definition:
       fields:
         uesio/crm.account: {}
         uesio/crm.email: {}
+        uesio/crm.phone: {}
         uesio/crm.firstname: {}
         uesio/crm.fullname: {}
         uesio/crm.lastname: {}
+        open_panel:
+          viewOnly: true
+          label: Open Panel
+          type: CHECKBOX
       collection: uesio/crm.contact
       defaults:
         - field: uesio/crm.account
           valueSource: PARAM
           param: accountid
+        - field: open_panel
+          valueSource: VALUE
+          value: false
       batchsize: 200
       init:
         query: false
@@ -46,44 +57,65 @@ definition:
               mode: READ
               uesio.variant: uesio/crm.tiles
               components:
-                - uesio/io.field:
-                    fieldId: uesio/crm.fullname
-                    label: Name
+                - uesio/crm.contact_tile:
               wire: contacts
         footer:
           - uesio/io.item:
               mode: EDIT
               components:
-                - uesio/io.grid:
-                    uesio.variant: uesio/crm.three_columns
-                    items:
-                      - uesio/io.field:
-                          wire: createcontact
-                          fieldId: uesio/crm.firstname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.lastname
-                      - uesio/io.field:
-                          fieldId: uesio/crm.email
+                - uesio/io.box:
+                    uesio.variant: uesio/crm.tabform
+                    uesio.display:
+                      - field: open_panel
+                        value: true
+                    components:
+                      - uesio/io.grid:
+                          uesio.variant: uesio/crm.two_columns
+                          items:
+                            - uesio/io.field:
+                                fieldId: uesio/crm.firstname
+                            - uesio/io.field:
+                                fieldId: uesio/crm.lastname
+                            - uesio/io.field:
+                                fieldId: uesio/crm.email
+                            - uesio/io.field:
+                                fieldId: uesio/crm.phone
                 - uesio/io.group:
-                    columnGap: 10px
                     uesio.styleTokens:
                       root:
                         - justify-right
                     components:
                       - uesio/io.button:
                           text: Create Contact
-                          icon: ""
                           uesio.variant: uesio/crm.sidebar
-                          iconPlacement: start
+                          uesio.display:
+                            - field: open_panel
+                              value: false
+                          signals:
+                            - signal: wire/UPDATE_RECORD
+                              field: open_panel
+                              value: true
+                      - uesio/io.button:
+                          text: Save
+                          uesio.variant: uesio/crm.sidebar
+                          uesio.display:
+                            - field: open_panel
+                              value: true
                           signals:
                             - signal: wire/SAVE
                               wires:
-                                - createcontact
                             - signal: wire/RESET
-                              wire: createcontact
                             - signal: wire/LOAD
                               wires:
                                 - contacts
+                      - uesio/io.button:
+                          text: Cancel
+                          uesio.variant: uesio/crm.sidebar
+                          uesio.display:
+                            - field: open_panel
+                              value: true
+                          signals:
+                            - signal: wire/RESET
               wire: createcontact
   params:
     accountid:

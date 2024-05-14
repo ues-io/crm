@@ -105,16 +105,7 @@ definition:
                                   collection: uesio/crm.lead
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.lead
@@ -144,16 +135,7 @@ definition:
                                   collection: uesio/crm.account
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.account
@@ -183,16 +165,7 @@ definition:
                                   collection: uesio/crm.contact
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.contact
@@ -222,16 +195,7 @@ definition:
                                   collection: uesio/crm.opportunity
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.opportunity
@@ -261,16 +225,7 @@ definition:
                                   collection: uesio/crm.task
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.task
@@ -300,16 +255,7 @@ definition:
                                   collection: uesio/crm.event
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - p-1.5
-                                avatar:
-                                  - text-sm
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: add
+                              uesio.variant: uesio/crm.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.event

@@ -45,6 +45,10 @@ definition:
         uesio/crm.due_by: {}
         uesio/crm.name: {}
         uesio/crm.related_lead: {}
+        open_panel:
+          viewOnly: true
+          label: Open Panel
+          type: CHECKBOX
       init:
         query: false
         create: true
@@ -65,6 +69,9 @@ definition:
         - field: uesio/crm.related_event
           valueSource: PARAM
           param: eventid
+        - field: open_panel
+          valueSource: VALUE
+          value: false
   components:
     - uesio/io.scrollpanel:
         uesio.variant: uesio/crm.sidebar
@@ -81,10 +88,16 @@ definition:
               wire: newtask
               mode: EDIT
               components:
-                - uesio/io.field:
-                    fieldId: name
-                - uesio/io.field:
-                    fieldId: due_by
+                - uesio/io.box:
+                    uesio.variant: uesio/crm.tabform
+                    uesio.display:
+                      - field: open_panel
+                        value: true
+                    components:
+                      - uesio/io.field:
+                          fieldId: name
+                      - uesio/io.field:
+                          fieldId: due_by
                 - uesio/io.group:
                     uesio.styleTokens:
                       root:
@@ -93,15 +106,33 @@ definition:
                       - uesio/io.button:
                           text: Create Task
                           uesio.variant: uesio/crm.sidebar
+                          uesio.display:
+                            - field: open_panel
+                              value: false
+                          signals:
+                            - signal: wire/UPDATE_RECORD
+                              field: open_panel
+                              value: true
+                      - uesio/io.button:
+                          text: Save
+                          uesio.variant: uesio/crm.sidebar
+                          uesio.display:
+                            - field: open_panel
+                              value: true
                           signals:
                             - signal: wire/SAVE
-                              wires:
-                                - newtask
                             - signal: wire/RESET
-                              wire: newtask
                             - signal: wire/LOAD
                               wires:
                                 - tasks
+                      - uesio/io.button:
+                          text: Cancel
+                          uesio.variant: uesio/crm.sidebar
+                          uesio.display:
+                            - field: open_panel
+                              value: true
+                          signals:
+                            - signal: wire/RESET
   params:
     leadid:
       type: TEXT
