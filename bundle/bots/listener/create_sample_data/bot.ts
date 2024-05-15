@@ -9,6 +9,7 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			imagepath: "randy_billingston.jpg",
 			rating: "Hot",
 			company: "Geonovis Industrial",
+			externalid: "SAMPLE-LEAD-01",
 		},
 		{
 			firstname: "Connie",
@@ -16,6 +17,7 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			email: "cforrester@example.com",
 			imagepath: "connie_forrester.jpg",
 			company: "Geonovis Industrial",
+			externalid: "SAMPLE-LEAD-02",
 		},
 		{
 			firstname: "Josie",
@@ -24,6 +26,7 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			imagepath: "josie_malkovic.jpg",
 			rating: "Hot",
 			company: "Fortuna Education Services",
+			externalid: "SAMPLE-LEAD-03",
 		},
 		{
 			firstname: "Gavin",
@@ -31,12 +34,14 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			email: "gfoster@example.com",
 			imagepath: "gavin_foster.jpg",
 			rating: "Warm",
+			externalid: "SAMPLE-LEAD-04",
 		},
 		{
 			firstname: "Susan",
 			lastname: "Birchfield",
 			email: "sbirchfield@example.com",
 			company: "Henry & Associates",
+			externalid: "SAMPLE-LEAD-05",
 		},
 		{
 			firstname: "Avery",
@@ -44,12 +49,14 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			email: "avalentine@example.com",
 			rating: "Cold",
 			company: "Exemplary Apparrel",
+			externalid: "SAMPLE-LEAD-06",
 		},
 		{
 			firstname: "Sandy",
 			lastname: "Burtrand",
 			email: "sburtrand@example.com",
 			imagepath: "sandy_burtrand.jpg",
+			externalid: "SAMPLE-LEAD-07",
 		},
 	]
 	const leadresult = bot.save(
@@ -60,6 +67,7 @@ export default function create_sample_data(bot: ListenerBotApi) {
 			"uesio/crm.email": sample.email,
 			"uesio/crm.rating": sample.rating,
 			"uesio/crm.company": sample.company,
+			"uesio/crm.external_id": sample.externalid,
 		})) as unknown as WireRecord[]
 	)
 	sampleLeadData.forEach((sample, index) => {

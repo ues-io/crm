@@ -1,0 +1,6 @@
+name: external_id
+type: AUTONUMBER
+label: External Id
+autonumber:
+  prefix: INVOICE
+  leadingZeros: 4

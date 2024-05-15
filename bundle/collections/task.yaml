@@ -2,4 +2,6 @@ name: task
 label: Task
 public: true
 pluralLabel: Tasks
+uniqueKey:
+  - external_id
 nameField: name
