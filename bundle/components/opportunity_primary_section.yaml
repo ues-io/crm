@@ -21,7 +21,6 @@ definition:
                     wrapper:
                       - col-span-2
                   fieldId: uesio/crm.description
-
 title: Opportunity Primary Section
 discoverable: true
 description: Opportunity Primary Section
