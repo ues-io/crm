@@ -5,7 +5,7 @@ definition:
     account:
       collection: uesio/crm.account
       fields:
-        uesio/crm.account_type:
+        uesio/crm.type:
         uesio/crm.annual_revenue:
         uesio/crm.billing_city:
         uesio/crm.billing_country:

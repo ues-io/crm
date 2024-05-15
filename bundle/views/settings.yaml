@@ -8,6 +8,12 @@ definition:
         uesio/crm.api_name:
         uesio/crm.label:
         uesio/crm.active:
+    accounttypes:
+      collection: uesio/crm.account_type
+      fields:
+        uesio/crm.api_name:
+        uesio/crm.label:
+        uesio/crm.active:
     opportunitystages:
       collection: uesio/crm.opportunity_stage
       fields:
@@ -196,6 +202,168 @@ definition:
                                                   - signal: wire/LOAD
                                                     wires:
                                                       - leadsources
+                      - id: accounttypes
+                        label: Account Types
+                        components:
+                          - uesio/io.grid:
+                              uesio.variant: uesio/crm.three_columns
+                              uesio.styleTokens:
+                                root:
+                                  - m-6
+                              items:
+                                - uesio/io.box:
+                                    uesio.styleTokens:
+                                      root:
+                                        - lg:col-span-2
+                                        - lg:order-first
+                                        - order-last
+                                    components:
+                                      - uesio/io.table:
+                                          uesio.variant: uesio/crm.main
+                                          selectable: true
+                                          columns:
+                                            - field: uesio/crm.api_name
+                                            - field: uesio/crm.label
+                                            - field: uesio/crm.active
+                                          uesio.id: accounttypes
+                                          mode: READ
+                                          wire: accounttypes
+                                          pagesize: 10
+                                - uesio/io.box:
+                                    components:
+                                      - uesio/io.titlebar:
+                                          title:
+                                          uesio.variant: uesio/crm.sub_noborder
+                                          actions:
+                                            - uesio/io.toolbar:
+                                                linkedComponentId: accounttypes
+                                                linkedComponentType: uesio/io.table
+                                                right:
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/SAVE
+                                                          wires:
+                                                            - accounttypes
+                                                      text: $Label{uesio/io.save}
+                                                      hotkey: "meta+s"
+                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: accounttypes
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CREATE_RECORD
+                                                          wire: accounttypes
+                                                          prepend: true
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_EDIT_MODE
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                      icon: add_circle
+                                                      uesio.variant: uesio/crm.add
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          sourceValue: $ComponentState{[uesio/io.table][accounttypes][mode]}
+                                                  - uesio/io.button:
+                                                      icon: delete
+                                                      uesio.variant: uesio/crm.delete
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: GET_SELECTED
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                        - signal: wire/TOGGLE_DELETE_STATUS
+                                                      uesio.display:
+                                                        - type: hasValue
+                                                          value: $ComponentState{[uesio/io.table][accounttypes][selected->count]}
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CANCEL
+                                                          wire: accounttypes
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: CLEAR_SELECTED
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: accounttypes
+                                                      text: $Label{uesio/io.cancel}
+                                                      uesio.variant: uesio/crm.secondary
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: TOGGLE_MODE
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                      text: Edit
+                                                      icon: edit_square
+                                                      iconFill: false
+                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: NOT_EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][accounttypes][mode]}
+                                                        - type: wireHasNoChanges
+                                                          wire: accounttypes
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: TOGGLE_MODE
+                                                          targettype: specific
+                                                          componentid: accounttypes
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][accounttypes][mode]}
+                                                        - type: wireHasNoChanges
+                                                          wire: accounttypes
+                                                      icon: task_alt
+                                                      iconFill: false
+                                                      text: Read
+                                                      uesio.variant: uesio/crm.secondary
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Specify the valid account types for your organization. You can categorize your accounts for filtering and reporting with account types.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Only active account types will appear when selecting a type for a new account.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          uesio.display:
+                                            - type: wireHasNoRecords
+                                              wire: accounttypes
+                                            - type: wireHasNoChanges
+                                              wire: accounttypes
+                                          components:
+                                            - uesio/io.text:
+                                                text: You don't have any account types specified.
+                                                element: div
+                                            - uesio/io.button:
+                                                uesio.variant: uesio/crm.note
+                                                text: Use Default Account Types
+                                                signals:
+                                                  - signal: bot/CALL
+                                                    bot: uesio/crm.default_account_types
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - accounttypes
                       - id: opportunitystages
                         label: Opportunity Stages
                         components:

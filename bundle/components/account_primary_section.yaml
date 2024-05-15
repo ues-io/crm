@@ -15,7 +15,7 @@ definition:
               - uesio/io.field:
                   fieldId: uesio/crm.industry
               - uesio/io.field:
-                  fieldId: uesio/crm.account_type
+                  fieldId: uesio/crm.type
               - uesio/io.field:
                   fieldId: uesio/crm.annual_revenue
               - uesio/io.field:

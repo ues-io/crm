@@ -1,0 +1,5 @@
+name: type
+label: Type
+type: REFERENCE
+reference:
+  collection: account_type

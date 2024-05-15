@@ -10,6 +10,7 @@ definition:
         uesio/crm.expected_revenue:
         uesio/crm.topic:
         uesio/crm.account:
+        uesio/crm.stage:
         uesio/crm.contact:
       init:
         create: true

@@ -1,0 +1,7 @@
+name: account_type
+label: Account Type
+public: true
+pluralLabel: Account Types
+uniqueKey:
+  - api_name
+nameField: label
