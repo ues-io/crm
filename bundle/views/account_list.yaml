@@ -5,7 +5,7 @@ definition:
     account:
       collection: uesio/crm.account
       fields:
-        uesio/crm.account_type:
+        uesio/crm.type:
         uesio/crm.annual_revenue:
         uesio/crm.billing_city:
         uesio/crm.billing_country:
@@ -139,6 +139,11 @@ definition:
                           placeholder: Search Accounts
                           searchFields:
                             - uesio/crm.name
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: account
+                          fieldId: uesio/crm.type
+                          labelPosition: none
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -187,7 +192,7 @@ definition:
                               text: ${initials}
                               image: $UserFile{uesio/crm.logo}
                       - field: uesio/crm.name
-                      - field: uesio/crm.account_type
+                      - field: uesio/crm.type
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
                       - field: uesio/crm.billing_city

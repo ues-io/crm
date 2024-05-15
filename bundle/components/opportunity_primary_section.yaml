@@ -11,13 +11,17 @@ definition:
               - uesio/io.field:
                   fieldId: uesio/crm.topic
               - uesio/io.field:
-                  fieldId: uesio/crm.description
+                  fieldId: uesio/crm.stage
               - uesio/io.field:
                   fieldId: uesio/crm.expected_revenue
               - uesio/io.field:
                   fieldId: uesio/crm.close_date
               - uesio/io.field:
-                  fieldId: uesio/crm.stage
+                  uesio.styleTokens:
+                    wrapper:
+                      - col-span-2
+                  fieldId: uesio/crm.description
+
 title: Opportunity Primary Section
 discoverable: true
 description: Opportunity Primary Section

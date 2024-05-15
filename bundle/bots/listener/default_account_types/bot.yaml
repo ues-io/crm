@@ -1,0 +1,4 @@
+name: default_account_types
+public: true
+type: LISTENER
+dialect: TYPESCRIPT

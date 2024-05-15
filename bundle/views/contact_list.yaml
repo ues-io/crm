@@ -143,6 +143,11 @@ definition:
                             - uesio/crm.firstname
                             - uesio/crm.fullname
                             - uesio/crm.lastname
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: contact
+                          fieldId: uesio/crm.account
+                          labelPosition: none
                     right:
                       - uesio/io.button:
                           text: Quick Create
