@@ -27,8 +27,8 @@ definition:
         uesio/crm.close_date:
         uesio/crm.website:
         uesio/crm.company:
-        uesio/crm.lead_status:
-        uesio/crm.lead_rating:
+        uesio/crm.status:
+        uesio/crm.rating:
         uesio/crm.next_steps:
         uesio/crm.initials:
         uesio/crm.source:

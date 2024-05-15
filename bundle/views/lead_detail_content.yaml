@@ -34,8 +34,8 @@ definition:
         uesio/core.createdby: {}
         uesio/core.createdat: {}
         uesio/core.owner: {}
-        uesio/crm.lead_status: {}
-        uesio/crm.lead_rating: {}
+        uesio/crm.status: {}
+        uesio/crm.rating: {}
         uesio/crm.next_steps: {}
         uesio/crm.initials: {}
         uesio/crm.source: {}
@@ -76,7 +76,7 @@ definition:
                                         - type: fieldValue
                                           operator: NOT_IN
                                           wire: lead
-                                          field: uesio/crm.lead_status
+                                          field: uesio/crm.status
                                           values:
                                             - CONVERTED
                                             - CLOSED

@@ -12,7 +12,7 @@ const Component: definition.UC = (props) => {
 	const { context } = props
 	const Icon = component.getUtility("uesio/io.icon")
 	const classes = styles.useStyleTokens(StyleDefaults, props)
-	const value = context.getRecord()?.getFieldValue("lead_rating")
+	const value = context.getRecord()?.getFieldValue("rating")
 	let icon = ""
 	let iconClass = ""
 	if (value === "Cold") {

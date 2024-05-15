@@ -6,9 +6,9 @@ definition:
       uesio.variant: uesio/crm.three_columns
       items:
         - uesio/io.field:
-            fieldId: uesio/crm.lead_status
+            fieldId: uesio/crm.status
         - uesio/io.field:
-            fieldId: uesio/crm.lead_rating
+            fieldId: uesio/crm.rating
         - uesio/io.field:
             fieldId: uesio/crm.source
   - uesio/io.field:

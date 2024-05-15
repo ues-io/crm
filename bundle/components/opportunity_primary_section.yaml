@@ -17,7 +17,7 @@ definition:
               - uesio/io.field:
                   fieldId: uesio/crm.close_date
               - uesio/io.field:
-                  fieldId: uesio/crm.stage                  
+                  fieldId: uesio/crm.stage
 title: Opportunity Primary Section
 discoverable: true
 description: Opportunity Primary Section

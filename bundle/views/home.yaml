@@ -30,7 +30,7 @@ definition:
         uesio/crm.firstname:
         uesio/crm.lastname:
         uesio/crm.email:
-        uesio/crm.lead_rating:
+        uesio/crm.rating:
         uesio/crm.image:
         uesio/crm.initials:
         uesio/crm.company:
@@ -39,7 +39,7 @@ definition:
         - field: uesio/core.createdat
           desc: true
       conditions:
-        - field: uesio/crm.lead_status
+        - field: uesio/crm.status
           operator: NOT_IN
           valueSource: VALUE
           values:

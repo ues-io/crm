@@ -1,5 +1,6 @@
 name: navadd
 label: Nav Add
+public: true
 extends: uesio/io.nav
 definition:
   uesio.styleTokens:
@@ -12,4 +13,3 @@ definition:
     - uesio/io.text:
         uesio.variant: uesio/io.icon
         text: add
-public: true
