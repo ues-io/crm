@@ -1,4 +1,4 @@
-name: lead_status
+name: status
 label: Status
 type: SELECT
 selectList: lead_status

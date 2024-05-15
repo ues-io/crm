@@ -27,9 +27,9 @@ definition:
         uesio/crm.initials:
         uesio/crm.image:
         uesio/crm.company:
-        uesio/crm.lead_status:
+        uesio/crm.status:
         uesio/crm.source:
-        uesio/crm.lead_rating:
+        uesio/crm.rating:
       batchsize: 200
       order:
         - desc: true
@@ -146,13 +146,13 @@ definition:
                       - uesio/io.filter:
                           uesio.variant: uesio/io.customselectfield:uesio/crm.filter
                           wire: lead
-                          fieldId: uesio/crm.lead_status
+                          fieldId: uesio/crm.status
                           labelPosition: none
                           displayAs: MULTISELECT
                       - uesio/io.filter:
                           uesio.variant: uesio/io.customselectfield:uesio/crm.filter
                           wire: lead
-                          fieldId: uesio/crm.lead_rating
+                          fieldId: uesio/crm.rating
                           labelPosition: none
                           displayAs: MULTISELECT
                       - uesio/io.filter:
@@ -229,13 +229,12 @@ definition:
                             mode: EDIT
                       - components:
                           - uesio/crm.stoplight:
-                              field: lead_rating
-                              size: large
+                              field: rating
                         label: Rating
                         uesio.display:
                           - type: fieldMode
                             mode: READ
-                      - field: uesio/crm.lead_rating
+                      - field: uesio/crm.rating
                         uesio.display:
                           - type: fieldMode
                             mode: EDIT
@@ -244,7 +243,7 @@ definition:
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
                       - field: uesio/crm.website
-                      - field: uesio/crm.lead_status
+                      - field: uesio/crm.status
                         readonly: true
                     uesio.id: leadTable
                     mode: READ
