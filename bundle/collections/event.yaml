@@ -1,4 +1,7 @@
 name: event
 label: Event
+public: true
 pluralLabel: Events
+uniqueKey:
+  - external_id
 nameField: name
