@@ -217,6 +217,7 @@ interface ListenerBotApi {
 	getName: () => string
 	copyFile: (
 		sourceFileKey: string,
+		sourcePath: string,
 		destCollection: string,
 		destRecord: string,
 		destField: string

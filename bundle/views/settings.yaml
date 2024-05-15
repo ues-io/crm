@@ -556,3 +556,7 @@ definition:
                                                 signals:
                                                   - signal: bot/CALL
                                                     bot: uesio/crm.create_sample_data
+                                                  - signal: notification/ADD
+                                                    text: Sample data has been added.
+                                                    details: You can now view the data by using the sidebar navigation.
+                                                    severity: success
