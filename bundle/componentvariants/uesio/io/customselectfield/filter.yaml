@@ -1,5 +1,6 @@
 name: filter
 label: Filter
+public: true
 extends: uesio/io.customselectfield:uesio/io.default
 definition:
   uesio.styleTokens:
@@ -13,4 +14,3 @@ definition:
     selecteditemwrapper:
     selectediteminner:
     checkbox:
-public: true
