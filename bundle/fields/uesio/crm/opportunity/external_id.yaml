@@ -1,6 +1,6 @@
 name: external_id
-type: AUTONUMBER
 label: External Id
+type: AUTONUMBER
 autonumber:
   prefix: INVOICE
   leadingZeros: 4
