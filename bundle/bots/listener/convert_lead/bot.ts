@@ -68,6 +68,14 @@ export default function convert_lead(bot: ListenerBotApi) {
 			{
 				id: "uesio/crm.mailing_zip_postal",
 			},
+			{
+				id: "uesio/crm.image",
+				fields: [
+					{
+						id: "uesio/core.id",
+					},
+				],
+			},
 			// Account Fields
 			{
 				id: "uesio/crm.company",
@@ -257,6 +265,8 @@ export default function convert_lead(bot: ListenerBotApi) {
 		const mailingCountry = leadResultItem["uesio/crm.mailing_country"]
 		const mailingZip = leadResultItem["uesio/crm.mailing_zip_postal"]
 
+		const imageFileId = leadResultItem["uesio/crm.image"] as string
+
 		const contactSaveResult = bot.save("uesio/crm.contact", [
 			{
 				"uesio/crm.firstname": firstname,
@@ -279,18 +289,19 @@ export default function convert_lead(bot: ListenerBotApi) {
 
 		contactId = contactSaveResult["uesio/core.id"] as string
 
+		// If we have a lead image, transfer it to the new contact.
+		if (imageFileId) {
+			bot.copyUserFile(
+				imageFileId,
+				"uesio/crm.contact",
+				contactId,
+				"uesio/crm.image"
+			)
+		}
+
 		//bot.log.info("Created New Contact", contactSaveResult)
 	} else if (contactAction === "link") {
 		//bot.log.info("Linking Contact")
-		bot.save("uesio/crm.contact", [
-			{
-				"uesio/core.id": contact,
-				"uesio/crm.account": {
-					"uesio/core.id": accountId,
-				},
-			},
-		] as unknown as WireRecord[])
-
 		contactId = contact
 	} else {
 		throw new Error("Invalid Contact Convert Action")
