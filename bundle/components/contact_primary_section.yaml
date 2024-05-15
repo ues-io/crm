@@ -26,13 +26,11 @@ definition:
                   fieldId: uesio/crm.gender
               - uesio/io.field:
                   fieldId: uesio/crm.email_opt_out
-              - uesio/io.box:
+              - uesio/io.field:
                   uesio.styleTokens:
-                    root:
+                    wrapper:
                       - col-span-3
-                  components:
-                    - uesio/io.field:
-                        fieldId: uesio/crm.description
+                  fieldId: uesio/crm.description
 title: Contact Primary Section
 discoverable: true
 description: Contact Primary Section

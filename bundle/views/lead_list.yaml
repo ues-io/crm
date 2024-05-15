@@ -155,6 +155,11 @@ definition:
                           fieldId: uesio/crm.lead_rating
                           labelPosition: none
                           displayAs: MULTISELECT
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: lead
+                          fieldId: uesio/crm.source
+                          labelPosition: none
                     right:
                       - uesio/io.button:
                           text: Quick Create

@@ -17,17 +17,20 @@ definition:
               - uesio/io.field:
                   fieldId: uesio/crm.account_type
               - uesio/io.field:
-                  fieldId: uesio/crm.description
-              - uesio/io.field:
                   fieldId: uesio/crm.annual_revenue
+              - uesio/io.field:
+                  fieldId: uesio/crm.no_employees
               - uesio/io.field:
                   fieldId: uesio/crm.phone
               - uesio/io.field:
                   fieldId: uesio/crm.email
               - uesio/io.field:
-                  fieldId: uesio/crm.no_employees
-              - uesio/io.field:
                   fieldId: uesio/crm.website
+              - uesio/io.field:
+                  uesio.styleTokens:
+                    wrapper:
+                      - col-span-3
+                  fieldId: uesio/crm.description
 title: Account Primary Section
 discoverable: true
 description: Account Primary Section
