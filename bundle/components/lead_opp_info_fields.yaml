@@ -5,13 +5,11 @@ definition:
   - uesio/io.grid:
       uesio.variant: uesio/crm.two_columns
       items:
-        - uesio/io.box:
+        - uesio/io.field:
             uesio.styleTokens:
-              root:
+              wrapper:
                 - col-span-2
-            components:
-              - uesio/io.field:
-                  fieldId: uesio/crm.topic
+            fieldId: uesio/crm.topic
         - uesio/io.field:
             fieldId: uesio/crm.expected_revenue
         - uesio/io.field:

@@ -12,7 +12,6 @@ definition:
         uesio/crm.billing_state_province:
         uesio/crm.billing_street:
         uesio/crm.billing_zip:
-        uesio/crm.contacts:
         uesio/crm.description:
         uesio/crm.email:
         uesio/crm.industry:

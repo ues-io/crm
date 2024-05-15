@@ -126,6 +126,11 @@ definition:
                           searchFields:
                             - uesio/crm.topic
                             - uesio/crm.account
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: opportunity
+                          fieldId: uesio/crm.stage
+                          labelPosition: none
                     right:
                       - uesio/io.button:
                           text: Quick Create
