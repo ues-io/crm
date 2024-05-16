@@ -63,6 +63,7 @@ definition:
               uesio.variant: uesio/crm.tiles
               components:
                 - uesio/crm.opportunity_tile:
+                    showDealInfo: true
               wire: opportunities
         footer:
           - uesio/io.item:

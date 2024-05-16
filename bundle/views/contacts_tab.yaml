@@ -58,6 +58,7 @@ definition:
               uesio.variant: uesio/crm.tiles
               components:
                 - uesio/crm.contact_tile:
+                    showContactInfo: true
               wire: contacts
         footer:
           - uesio/io.item:

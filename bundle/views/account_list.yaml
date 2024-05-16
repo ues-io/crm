@@ -191,8 +191,22 @@ definition:
                               uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.logo}
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - components:
+                          - uesio/crm.account_tile:
+                        uesio.display:
+                          - type: fieldMode
+                            mode: READ
                       - field: uesio/crm.name
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.type
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
                       - field: uesio/crm.billing_city

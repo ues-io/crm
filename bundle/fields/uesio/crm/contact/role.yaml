@@ -1,3 +1,5 @@
 name: role
 label: Role
-type: TEXT
+type: REFERENCE
+reference:
+  collection: contact_role
