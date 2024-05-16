@@ -11,3 +11,4 @@ definition:
       - hover:bg-slate-50
       - rounded
       - relative
+      - group
