@@ -1,0 +1,4 @@
+name: create_sample_leads
+public: true
+type: LISTENER
+dialect: TYPESCRIPT

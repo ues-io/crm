@@ -1,7 +1,7 @@
 
 declare module "@uesio/app/selectlists/uesio/crm" {
 	export type Gender = "Male" | "Female" | "Other"
-	export type LeadStatus = "WORKING" | "CONVERTED" | "CLOSED" | "OPEN"
+	export type LeadStatus = "Working" | "Converted" | "Closed" | "Open"
 	export type Rating = "Warm" | "Hot" | "Cold"
 	export type Salutation = "Sir" | "Madam" | "Mr" | "Mrs" | "Miss"
 }

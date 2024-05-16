@@ -170,7 +170,10 @@ interface BeforeSaveBotApi {
 	load: (loadRequest: LoadRequest) => Record<string, FieldValue>[]
 	save: (
 		collectionName: string,
-		records: WireRecord[]
+		records: WireRecord[],
+		options?: {
+			upsert?: boolean
+		}
 	) => Record<string, FieldValue>[]
 	delete: (collectionName: string, records: WireRecord[]) => void
 	deletes: DeletesApi
@@ -189,7 +192,10 @@ interface AsAdminApi {
 	delete: (collectionName: string, records: WireRecord[]) => void
 	save: (
 		collectionName: string,
-		records: WireRecord[]
+		records: WireRecord[],
+		options?: {
+			upsert?: boolean
+		}
 	) => Record<string, FieldValue>[]
 	runIntegrationAction: RunIntegrationAction
 	callBot: CallBot
@@ -202,7 +208,10 @@ interface ListenerBotApi {
 	delete: (collectionName: string, records: WireRecord[]) => void
 	save: (
 		collectionName: string,
-		records: WireRecord[]
+		records: WireRecord[],
+		options?: {
+			upsert?: boolean
+		}
 	) => Record<string, FieldValue>[]
 	runIntegrationAction: RunIntegrationAction
 	callBot: CallBot
@@ -246,7 +255,10 @@ interface RunActionBotApi {
 	params: BotParamsApi
 	save: (
 		collectionName: string,
-		records: WireRecord[]
+		records: WireRecord[],
+		options?: {
+			upsert?: boolean
+		}
 	) => Record<string, FieldValue>[]
 	callBot: CallBot
 }
@@ -520,7 +532,10 @@ interface RouteBotApi {
 	// Insert/update collection records
 	save: (
 		collectionName: string,
-		records: WireRecord[]
+		records: WireRecord[],
+		options?: {
+			upsert?: boolean
+		}
 	) => Record<string, FieldValue>[]
 	// Run a specific integration action
 	runIntegrationAction: RunIntegrationAction
