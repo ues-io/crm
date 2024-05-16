@@ -1,11 +1,11 @@
 name: lead_status
 options:
   - label: Working
-    value: WORKING
+    value: Working
   - label: Converted
-    value: CONVERTED
+    value: Converted
   - label: Closed
-    value: CLOSED
+    value: Closed
   - label: Open
-    value: OPEN
+    value: Open
 blank_option_label: None

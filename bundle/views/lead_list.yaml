@@ -242,7 +242,6 @@ definition:
                       - field: uesio/crm.email
                       - field: uesio/crm.industry
                       - field: uesio/crm.phone
-                      - field: uesio/crm.website
                       - field: uesio/crm.status
                         readonly: true
                     uesio.id: leadTable
