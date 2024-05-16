@@ -1,0 +1,7 @@
+name: contact_role
+label: Contact Role
+public: true
+pluralLabel: Contact Roles
+uniqueKey:
+  - api_name
+nameField: label

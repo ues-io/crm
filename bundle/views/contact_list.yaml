@@ -146,6 +146,11 @@ definition:
                       - uesio/io.filter:
                           uesio.variant: uesio/io.customselectfield:uesio/crm.filter
                           wire: contact
+                          fieldId: uesio/crm.role
+                          labelPosition: none
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: contact
                           fieldId: uesio/crm.account
                           labelPosition: none
                     right:
@@ -195,11 +200,28 @@ definition:
                               uesio.variant: uesio/crm.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.image}
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - components:
+                          - uesio/crm.contact_tile:
+                        uesio.display:
+                          - type: fieldMode
+                            mode: READ
                       - field: uesio/crm.firstname
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.lastname
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.account
-                      - field: uesio/crm.department
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.title
+                      - field: uesio/crm.department
                       - field: uesio/crm.role
                       - field: uesio/crm.email
                       - field: uesio/crm.phone_mobile

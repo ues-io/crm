@@ -14,6 +14,12 @@ definition:
         uesio/crm.api_name:
         uesio/crm.label:
         uesio/crm.active:
+    contactroles:
+      collection: uesio/crm.contact_role
+      fields:
+        uesio/crm.api_name:
+        uesio/crm.label:
+        uesio/crm.active:
     opportunitystages:
       collection: uesio/crm.opportunity_stage
       fields:
@@ -364,6 +370,168 @@ definition:
                                                   - signal: wire/LOAD
                                                     wires:
                                                       - accounttypes
+                      - id: contactroles
+                        label: Contact Roles
+                        components:
+                          - uesio/io.grid:
+                              uesio.variant: uesio/crm.three_columns
+                              uesio.styleTokens:
+                                root:
+                                  - m-6
+                              items:
+                                - uesio/io.box:
+                                    uesio.styleTokens:
+                                      root:
+                                        - lg:col-span-2
+                                        - lg:order-first
+                                        - order-last
+                                    components:
+                                      - uesio/io.table:
+                                          uesio.variant: uesio/crm.main
+                                          selectable: true
+                                          columns:
+                                            - field: uesio/crm.api_name
+                                            - field: uesio/crm.label
+                                            - field: uesio/crm.active
+                                          uesio.id: contactroles
+                                          mode: READ
+                                          wire: contactroles
+                                          pagesize: 10
+                                - uesio/io.box:
+                                    components:
+                                      - uesio/io.titlebar:
+                                          title:
+                                          uesio.variant: uesio/crm.sub_noborder
+                                          actions:
+                                            - uesio/io.toolbar:
+                                                linkedComponentId: contactroles
+                                                linkedComponentType: uesio/io.table
+                                                right:
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/SAVE
+                                                          wires:
+                                                            - contactroles
+                                                      text: $Label{uesio/io.save}
+                                                      hotkey: "meta+s"
+                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: contactroles
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CREATE_RECORD
+                                                          wire: contactroles
+                                                          prepend: true
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_EDIT_MODE
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                      icon: add_circle
+                                                      uesio.variant: uesio/crm.add
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          sourceValue: $ComponentState{[uesio/io.table][contactroles][mode]}
+                                                  - uesio/io.button:
+                                                      icon: delete
+                                                      uesio.variant: uesio/crm.delete
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: GET_SELECTED
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                        - signal: wire/TOGGLE_DELETE_STATUS
+                                                      uesio.display:
+                                                        - type: hasValue
+                                                          value: $ComponentState{[uesio/io.table][contactroles][selected->count]}
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: wire/CANCEL
+                                                          wire: contactroles
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: SET_READ_MODE
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: CLEAR_SELECTED
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                      uesio.display:
+                                                        - type: wireHasChanges
+                                                          wire: contactroles
+                                                      text: $Label{uesio/io.cancel}
+                                                      uesio.variant: uesio/crm.secondary
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: TOGGLE_MODE
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                      text: Edit
+                                                      icon: edit_square
+                                                      iconFill: false
+                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: NOT_EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][contactroles][mode]}
+                                                        - type: wireHasNoChanges
+                                                          wire: contactroles
+                                                  - uesio/io.button:
+                                                      signals:
+                                                        - signal: component/CALL
+                                                          component: uesio/io.table
+                                                          componentsignal: TOGGLE_MODE
+                                                          targettype: specific
+                                                          componentid: contactroles
+                                                      uesio.display:
+                                                        - type: mergeValue
+                                                          value: EDIT
+                                                          operator: EQUALS
+                                                          sourceValue: $ComponentState{[uesio/io.table][contactroles][mode]}
+                                                        - type: wireHasNoChanges
+                                                          wire: contactroles
+                                                      icon: task_alt
+                                                      iconFill: false
+                                                      text: Read
+                                                      uesio.variant: uesio/crm.secondary
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Specify the valid contact roles for your organization. A role identifies the part a contact plays in a specific business relationship or deal.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          components:
+                                            - uesio/io.text:
+                                                text: Only active contact roles will appear when selecting a role for a new contact.
+                                      - uesio/io.box:
+                                          uesio.variant: uesio/crm.note
+                                          uesio.display:
+                                            - type: wireHasNoRecords
+                                              wire: contactroles
+                                            - type: wireHasNoChanges
+                                              wire: contactroles
+                                          components:
+                                            - uesio/io.text:
+                                                text: You don't have any contact roles specified.
+                                                element: div
+                                            - uesio/io.button:
+                                                uesio.variant: uesio/crm.note
+                                                text: Use Default Contact Roles
+                                                signals:
+                                                  - signal: bot/CALL
+                                                    bot: uesio/crm.default_contact_roles
+                                                  - signal: wire/LOAD
+                                                    wires:
+                                                      - contactroles
                       - id: opportunitystages
                         label: Opportunity Stages
                         components:
@@ -560,6 +728,7 @@ definition:
                                                     wires:
                                                       - leadsources
                                                       - accounttypes
+                                                      - contactroles
                                                       - opportunitystages
                                                   - signal: notification/ADD
                                                     text: Sample data has been added.

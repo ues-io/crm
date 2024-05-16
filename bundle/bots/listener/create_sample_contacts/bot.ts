@@ -6,6 +6,9 @@ export default function create_sample_contacts(bot: ListenerBotApi) {
 			firstname: "Connie",
 			lastname: "Forrester",
 			email: "cforrester@example.com",
+			title: "Marketing Director",
+			department: "Marketing",
+			role: "decision_maker",
 			imagepath: "connie_forrester.jpg",
 			account: "SAMPLE-ACCOUNT-01",
 			externalid: "SAMPLE-CONTACT-01",
@@ -14,6 +17,9 @@ export default function create_sample_contacts(bot: ListenerBotApi) {
 			firstname: "Dan",
 			lastname: "Steele",
 			email: "steeleman@example.com",
+			title: "IT Specialist",
+			department: "Marketing",
+			role: "evaluator",
 			imagepath: "dan_steele.jpg",
 			account: "SAMPLE-ACCOUNT-02",
 			externalid: "SAMPLE-CONTACT-02",
@@ -25,9 +31,16 @@ export default function create_sample_contacts(bot: ListenerBotApi) {
 			"uesio/crm.firstname": sample.firstname,
 			"uesio/crm.lastname": sample.lastname,
 			"uesio/crm.email": sample.email,
+			"uesio/crm.title": sample.title,
+			"uesio/crm.department": sample.department,
 			...(sample.account && {
 				"uesio/crm.account": {
 					"uesio/core.uniquekey": sample.account,
+				},
+			}),
+			...(sample.role && {
+				"uesio/crm.role": {
+					"uesio/core.uniquekey": sample.role,
 				},
 			}),
 			"uesio/crm.external_id": sample.externalid,

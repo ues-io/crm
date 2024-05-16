@@ -131,6 +131,11 @@ definition:
                           wire: opportunity
                           fieldId: uesio/crm.stage
                           labelPosition: none
+                      - uesio/io.filter:
+                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          wire: opportunity
+                          fieldId: uesio/crm.account
+                          labelPosition: none
                     right:
                       - uesio/io.button:
                           text: Quick Create
@@ -177,11 +182,25 @@ definition:
                           - uesio/io.text:
                               uesio.variant: uesio/crm.avatariconoutline
                               text: payments
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - components:
+                          - uesio/crm.opportunity_tile:
+                        uesio.display:
+                          - type: fieldMode
+                            mode: READ
                       - field: uesio/crm.topic
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
+                      - field: uesio/crm.account
+                        uesio.display:
+                          - type: fieldMode
+                            mode: EDIT
                       - field: uesio/crm.description
                       - field: uesio/crm.close_date
                       - field: uesio/crm.expected_revenue
-                      - field: uesio/crm.account
                       - field: uesio/crm.contact
                       - field: uesio/crm.stage
                     uesio.id: oppsTable

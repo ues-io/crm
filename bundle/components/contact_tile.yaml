@@ -11,6 +11,9 @@ definition:
             subtitle: ${account->name}
             actions:
               - uesio/io.titlebar:
+                  uesio.display:
+                    - type: hasValue
+                      value: $Prop{showContactInfo}
                   uesio.variant: uesio/crm.subitem
                   uesio.styleTokens:
                     content:

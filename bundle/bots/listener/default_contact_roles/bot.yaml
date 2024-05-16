@@ -1,0 +1,4 @@
+name: default_contact_roles
+public: true
+type: LISTENER
+dialect: TYPESCRIPT
