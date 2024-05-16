@@ -1,7 +1,7 @@
 import { ListenerBotApi, WireRecord } from "@uesio/bots"
 
 export default function create_sample_accounts(bot: ListenerBotApi) {
-	const sampleLeadData = [
+	const sampleAccountData = [
 		{
 			name: "Geonovis Industrial",
 			type: "prospect",
@@ -23,7 +23,7 @@ export default function create_sample_accounts(bot: ListenerBotApi) {
 	]
 	const accountresult = bot.save(
 		"uesio/crm.account",
-		sampleLeadData.map((sample) => ({
+		sampleAccountData.map((sample) => ({
 			"uesio/crm.name": sample.name,
 			"uesio/crm.industry": sample.industry,
 			"uesio/crm.phone": sample.phone,
@@ -39,7 +39,7 @@ export default function create_sample_accounts(bot: ListenerBotApi) {
 			upsert: true,
 		}
 	)
-	sampleLeadData.forEach((sample, index) => {
+	sampleAccountData.forEach((sample, index) => {
 		if (sample.imagepath) {
 			bot.copyFile(
 				"uesio/crm.accountpics",

@@ -6,4 +6,5 @@ export default function create_sample_data(bot: ListenerBotApi) {
 	bot.callBot("uesio/crm.default_opportunity_stages", {})
 	bot.callBot("uesio/crm.create_sample_leads", {})
 	bot.callBot("uesio/crm.create_sample_accounts", {})
+	bot.callBot("uesio/crm.create_sample_contacts", {})
 }
