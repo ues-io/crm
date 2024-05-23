@@ -21,3 +21,29 @@ declare module "@uesio/app/bots/listener/uesio/crm/convert_lead" {
 		Params
 	}
 }
+declare module "@uesio/app/bots/listener/uesio/crm/createlogin" {
+
+	type Params = {
+		username: string
+		email: string
+		code: string
+		host: string
+	}
+
+	export type {
+		Params
+	}
+}
+declare module "@uesio/app/bots/listener/uesio/crm/forgotpassword" {
+
+	type Params = {
+		username: string
+		email: string
+		code: string
+		host: string
+	}
+
+	export type {
+		Params
+	}
+}
