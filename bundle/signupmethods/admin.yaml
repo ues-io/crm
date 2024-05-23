@@ -1,0 +1,7 @@
+name: platform
+authsource: uesio/core.platform
+profile: uesio/crm.admin
+enableSelfSignup: false
+createLoginBot: uesio/crm.createlogin
+forgotPasswordBot: uesio/crm.forgotpassword
+public: true
