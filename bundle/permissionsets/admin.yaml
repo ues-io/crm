@@ -1,0 +1,16 @@
+name: admin
+named: {}
+views: {}
+collections: {}
+routes: {}
+files: {}
+bots: {}
+integrationActions: {}
+allowallbots: true
+allowallcollections: true
+allowallviews: true
+allowallroutes: true
+allowallfiles: true
+allowallintegrationactions: true
+modifyallrecords: true
+viewallrecords: true

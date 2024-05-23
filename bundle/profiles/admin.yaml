@@ -1,0 +1,5 @@
+name: admin
+permissionSets:
+  - uesio/crm.admin
+  - uesio/core.public
+homeRoute: uesio/crm.home
