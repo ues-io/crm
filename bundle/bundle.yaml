@@ -1,6 +1,7 @@
 name: uesio/crm
 loginRoute: uesio/crm.login
 homeRoute: uesio/crm.home
+publicProfile: uesio/crm.public
 dependencies:
   uesio/builder:
     version: v0.0.1
