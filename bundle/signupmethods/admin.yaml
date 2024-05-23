@@ -2,6 +2,7 @@ name: admin
 public: true
 authsource: uesio/core.platform
 profile: admin
+usernameTemplate: ${username}
 autoLogin: false
 enableSelfSignup: false
 createLoginBot: createlogin
