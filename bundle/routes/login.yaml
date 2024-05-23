@@ -1,0 +1,4 @@
+name: login
+path: login
+view: login
+theme: uesio/core.default
