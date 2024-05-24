@@ -78,6 +78,29 @@ definition:
                               signals:
                                 - signal: route/NAVIGATE
                                   path: settings
+                    - uesio/io.box:
+                        uesio.styleTokens:
+                          root:
+                            - flex
+                            - gap-2
+                            - items-center
+                        components:
+                          - uesio/io.tile:
+                              uesio.variant: uesio/io.nav
+                              uesio.styleTokens:
+                                root:
+                                  - flex
+                                  - grow
+                              content:
+                                - uesio/io.text:
+                                    text: Users
+                              avatar:
+                                - uesio/io.text:
+                                    uesio.variant: uesio/io.iconoutline
+                                    text: badge
+                              signals:
+                                - signal: route/NAVIGATE
+                                  path: user
               - uesio/io.navsection:
                   content:
                     - uesio/io.box:
@@ -281,6 +304,20 @@ definition:
                             - w-8
                         text: $User{initials}
                         image: $User{picture}
+                  actions:
+                    - uesio/io.button:
+                        uesio.variant: uesio/crm.navicon
+                        icon: logout
+                        uesio.id: logout
+                        signals:
+                          - signal: "user/LOGOUT"
+                    - uesio/io.button:
+                        uesio.variant: uesio/crm.navicon
+                        uesio.id: user-profile
+                        icon: account_circle
+                        signals:
+                          - signal: "route/NAVIGATE"
+                            path: myprofile
 title: Navigation Component
 discoverable: true
 description: A component for app navigation
