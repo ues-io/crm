@@ -33,8 +33,6 @@ definition:
         - field: uesio/core.user
           valueSource: PARAM
           param: recordid
-      init:
-        query: false
   # Components determine the layout and composition of your view
   components:
     - uesio/io.box:

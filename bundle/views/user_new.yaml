@@ -21,6 +21,13 @@ definition:
       init:
         create: true
         query: false
+      defaults:
+        - field: uesio/core.type
+          valueSource: VALUE
+          value: PERSON
+        - field: uesio/core.profile
+          valueSource: VALUE
+          value: uesio/crm.admin
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:

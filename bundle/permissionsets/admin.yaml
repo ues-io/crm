@@ -1,5 +1,6 @@
 name: admin
-named: {}
+named:
+  uesio/core.user_admin: true
 views: {}
 collections: {}
 routes: {}
