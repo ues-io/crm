@@ -3,6 +3,8 @@ loginRoute: uesio/crm.login
 homeRoute: uesio/crm.home
 publicProfile: uesio/crm.public
 dependencies:
+  ben/claude:
+    version: v0.0.1
   uesio/builder:
     version: v0.0.1
   uesio/core:

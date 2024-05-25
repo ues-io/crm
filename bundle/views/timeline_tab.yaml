@@ -21,6 +21,9 @@ definition:
           valueSource: PARAM
           param: recordid
       batchsize: 200
+      order:
+        - desc: true
+          field: uesio/core.createdat
     newactivity:
       fields:
         uesio/crm.description: {}
