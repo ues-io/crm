@@ -1,0 +1,11 @@
+name: new_ai_chat
+type: LISTENER
+dialect: TYPESCRIPT
+params:
+  - name: input
+    type: TEXT
+    required: true
+  - name: parent
+    type: TEXT
+    required: true
+timeout: 30

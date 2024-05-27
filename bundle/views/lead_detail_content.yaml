@@ -202,6 +202,14 @@ definition:
                               uesio.id: events_tab
                               params:
                                 leadid: $Param{recordid}
+                      - label: claude ai
+                        id: claude
+                        components:
+                          - uesio/core.view:
+                              view: uesio/crm.ai_tab
+                              uesio.id: ai_tab
+                              params:
+                                recordid: $Param{recordid}
     - uesio/io.box:
         uesio.variant: uesio/io.section
         uesio.display:

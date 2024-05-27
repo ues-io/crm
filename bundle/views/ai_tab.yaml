@@ -1,0 +1,104 @@
+name: ai_tab
+definition:
+  # Wires connect to data in collections
+  wires:
+    input:
+      viewOnly: true
+      fields:
+        input:
+          type: LONGTEXT
+          label: input
+      init:
+        query: false
+        create: true
+    new_chat_history:
+      collection: uesio/crm.ai_chat
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.type: {}
+      defaults:
+        - field: uesio/crm.parent
+          valueSource: PARAM
+          param: recordid
+        - field: uesio/crm.type
+          valueSource: VALUE
+          value: REQUEST
+      init:
+        query: false
+        create: true
+    chat_history:
+      collection: uesio/crm.ai_chat
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.type: {}
+        uesio/core.createdat:
+        uesio/core.createdby:
+          fields:
+            uesio/core.picture:
+            uesio/core.initials:
+            uesio/core.firstname:
+            uesio/core.lastname:
+            uesio/core.username:
+      conditions:
+        - field: uesio/crm.parent
+          valueSource: PARAM
+          param: recordid
+      batchsize: 200
+      order:
+        - desc: false
+          field: uesio/core.createdat
+  # Components determine the layout and composition of your view
+  components:
+    - uesio/io.scrollpanel:
+        footer:
+          - uesio/io.list:
+              mode: EDIT
+              wire: input
+              components:
+                - uesio/io.field:
+                    fieldId: input
+                    labelPosition: none
+                    placeholder: Ask Claude something about this lead...
+          - uesio/io.group:
+              columnGap: 10px
+              components:
+                - uesio/io.button:
+                    text: ask claude
+                    uesio.variant: uesio/crm.sidebar
+                    signals:
+                      - signal: wire/UPDATE_RECORD
+                        wire: new_chat_history
+                        field: description
+                        value: ${input:input}
+                      - signal: wire/SAVE
+                        wires:
+                          - new_chat_history
+                      - signal: wire/LOAD
+                        wires:
+                          - chat_history
+                      - signal: bot/CALL
+                        bot: uesio/crm.new_ai_chat
+                        params:
+                          input: ${input:input}
+                          parent: $Param{recordid}
+                      - signal: wire/LOAD
+                        wires:
+                          - chat_history
+                      - signal: wire/RESET
+                        wire: input
+              uesio.styleTokens:
+                root:
+                  - justify-right
+        content:
+          - uesio/io.deck:
+              wire: chat_history
+              mode: READ
+              id: chathistory
+              uesio.variant: uesio/crm.tiles
+              components:
+                - uesio/crm.ai_comment_tile:
+        uesio.variant: uesio/crm.sidebar
+  params:
+    recordid:
+      type: TEXT
+      required: true
