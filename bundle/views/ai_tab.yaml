@@ -73,6 +73,8 @@ definition:
                       - signal: wire/SAVE
                         wires:
                           - new_chat_history
+                      - signal: wire/RESET
+                        wire: new_chat_history
                       - signal: wire/LOAD
                         wires:
                           - chat_history
