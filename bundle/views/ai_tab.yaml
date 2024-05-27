@@ -2,149 +2,102 @@ name: ai_tab
 definition:
   # Wires connect to data in collections
   wires:
-    inputs:
+    input:
       viewOnly: true
       fields:
-        output:
-          type: LONGTEXT
-          label: output
         input:
-          type: TEXT
+          type: LONGTEXT
           label: input
-        activity_input:
-          type: TEXT
-          label: actin
       init:
         query: false
         create: true
-    activities:
+    new_chat_history:
+      collection: uesio/crm.ai_chat
       fields:
         uesio/crm.description: {}
-        uesio/crm.name: {}
-        uesio/crm.parent: {}
         uesio/crm.type: {}
-      collection: uesio/crm.activity
       defaults:
         - field: uesio/crm.parent
           valueSource: PARAM
           param: recordid
-      batchsize: 200
+        - field: uesio/crm.type
+          valueSource: VALUE
+          value: REQUEST
       init:
         query: false
-        create: false
+        create: true
+    chat_history:
+      collection: uesio/crm.ai_chat
+      fields:
+        uesio/crm.description: {}
+        uesio/crm.type: {}
+        uesio/core.createdat:
+        uesio/core.createdby:
+          fields:
+            uesio/core.picture:
+            uesio/core.initials:
+            uesio/core.firstname:
+            uesio/core.lastname:
+            uesio/core.username:
+      conditions:
+        - field: uesio/crm.parent
+          valueSource: PARAM
+          param: recordid
+      batchsize: 200
+      order:
+        - desc: false
+          field: uesio/core.createdat
   # Components determine the layout and composition of your view
   components:
     - uesio/io.scrollpanel:
         footer:
           - uesio/io.list:
               mode: EDIT
-              wire: inputs
+              wire: input
               components:
                 - uesio/io.field:
                     fieldId: input
-                    label: This is a static and limited feature to demonstrate Anthropic Claude V2.
+                    labelPosition: none
                     placeholder: Ask Claude something about this lead...
           - uesio/io.group:
               columnGap: 10px
               components:
                 - uesio/io.button:
                     text: ask claude
-                    icon: ""
                     uesio.variant: uesio/crm.sidebar
-                    iconPlacement: start
                     signals:
-                      - signal: integration/RUN_ACTION
-                        stepId: ask
-                        integrationType: uesio/core.bedrock
-                        integration: uesio/core.bedrock
-                        action: uesio/core.invokemodel
+                      - signal: wire/UPDATE_RECORD
+                        wire: new_chat_history
+                        field: description
+                        value: ${input:input}
+                      - signal: wire/SAVE
+                        wires:
+                          - new_chat_history
+                      - signal: wire/LOAD
+                        wires:
+                          - chat_history
+                      - signal: bot/CALL
+                        bot: uesio/crm.new_ai_chat
                         params:
-                          model: anthropic.claude-v2
-                          input: ${inputs:input}
-                      - signal: wire/UPDATE_FIELDS
-                        wire: inputs
-                        fields:
-                          - field: output
-                            value: $SignalOutput{[ask][data]}
-                      - signal: wire/UPDATE_FIELDS
-                        wire: inputs
-                        fields:
-                          - field: activity_input
-                            value: ${inputs:input}
-                      - signal: wire/UPDATE_FIELDS
-                        wire: inputs
-                        fields:
-                          - field: input
-                            value: " "
+                          input: ${input:input}
+                          parent: $Param{recordid}
+                      - signal: wire/LOAD
+                        wires:
+                          - chat_history
+                      - signal: wire/RESET
+                        wire: input
               uesio.styleTokens:
                 root:
                   - justify-right
         content:
-          - uesio/io.list:
+          - uesio/io.deck:
+              wire: chat_history
               mode: READ
-              wire: inputs
+              id: chathistory
+              uesio.variant: uesio/crm.tiles
               components:
-                - uesio/io.field:
-                    fieldId: output
-                    label: Answer
-                    longtext:
-                      rows: 20
-                    uesio.styleTokens:
-                      readonly: []
-                    uesio.display:
-                      - type: wireHasChanges
-                        operator: EQUALS
-                        wire: inputs
-                        fields:
-                          - output
-                - uesio/io.group:
-                    columnGap: 10px
-                    components:
-                      - uesio/io.button:
-                          text: Add to Timeline
-                          icon: ""
-                          uesio.variant: uesio/crm.sidebar
-                          iconPlacement: start
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: activities
-                              stepId: new_act1
-                            - signal: wire/UPDATE_FIELDS
-                              wire: activities
-                              fields:
-                                - field: uesio/crm.description
-                                  value: "Claude Answered: ${inputs:output}"
-                            - signal: wire/SAVE
-                              wires:
-                                - activities
-                            - signal: wire/CREATE_RECORD
-                              wire: activities
-                            - signal: wire/UPDATE_FIELDS
-                              wire: activities
-                              fields:
-                                - field: uesio/crm.description
-                                  value: "I asked: ${inputs:activity_input}"
-                            - signal: wire/SAVE
-                              wires:
-                                - activities
-                          uesio.display:
-                            - type: wireHasChanges
-                              operator: EQUALS
-                              wire: inputs
-                              fields:
-                                - output
-                    uesio.styleTokens:
-                      root:
-                        - justify-right
+                - uesio/crm.ai_comment_tile:
         uesio.variant: uesio/crm.sidebar
-        header: []
-        uesio.styleTokens:
-          root:
-            - text-xs
-    - uesio/io.table:
-        wire: activities
-        columns:
-          - field: uesio/crm.description
   params:
     recordid:
       type: TEXT
