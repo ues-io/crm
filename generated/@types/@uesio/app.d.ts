@@ -47,3 +47,14 @@ declare module "@uesio/app/bots/listener/uesio/crm/forgotpassword" {
 		Params
 	}
 }
+declare module "@uesio/app/bots/listener/uesio/crm/new_ai_chat" {
+
+	type Params = {
+		input: string
+		parent: string
+	}
+
+	export type {
+		Params
+	}
+}

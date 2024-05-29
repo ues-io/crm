@@ -1,6 +1,7 @@
 name: new_ai_chat
 type: LISTENER
 dialect: TYPESCRIPT
+timeout: 30
 params:
   - name: input
     type: TEXT
@@ -8,4 +9,3 @@ params:
   - name: parent
     type: TEXT
     required: true
-timeout: 30
