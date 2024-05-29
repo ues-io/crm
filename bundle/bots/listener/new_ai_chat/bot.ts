@@ -127,18 +127,23 @@ export default function new_ai_chat(bot: ListenerBotApi) {
 		"uesio/core.bedrock",
 		"invokemodel",
 		{
-			model: "anthropic.claude-3-sonnet-20240229-v1:0",
+			//model: "anthropic.claude-3-sonnet-20240229-v1:0",
+			model: "anthropic.claude-3-haiku-20240307-v1:0",
 			messages,
 			system: systemMessage,
 		}
-	) as string[]
+	) as string
+
+	// Backwards Compat
+	const compatResult = Array.isArray(result) ? result[0] : result
+
 	bot.save("uesio/crm.ai_chat", [
 		{
-			"uesio/crm.description": result[0],
+			"uesio/crm.description": compatResult,
 			"uesio/crm.type": "RESPONSE",
 			"uesio/crm.parent": {
 				"uesio/core.id": parent,
 			},
 		},
-	] as unknown as WireRecord[])?.[0]
+	] as unknown as WireRecord[])
 }
