@@ -4,6 +4,17 @@ definition:
   components:
     - uesio/core.splash:
         content:
+          - uesio/io.text:
+              text: Refreshing simple CRM
+              element: div
+              align: center
+              uesio.styleTokens:
+                root:
+                  - font-bold
+                  - mb-8
+                  - text-5xl
+                  - leading-tight
+                  - tracking-wide
           - uesio/io.image:
               uesio.variant: uesio/core.fancy
               file: uesio/core.logo
