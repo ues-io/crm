@@ -11,7 +11,7 @@ export default function createlogin(bot: ListenerBotApi) {
 	const contentType = "text/html"
 	const from = "info@ues.io"
 	const fromName = "ues.io"
-	const subject = "User created in ues.io crm"
+	const subject = "Welcome to ues.io crm."
 	const body = `
 	<!DOCTYPE html>
 	<html>
@@ -19,8 +19,11 @@ export default function createlogin(bot: ListenerBotApi) {
 			A user account has been created for you in ues.io crm.<br/>
 			Your username is: ${username}.<br/>
 			<br/>
-			You can set your password and log in using the link below:<br/>
-			${link}
+			To set your password and log in for the first time, click the link below:<br/>
+			${link}<br/>
+			<br/>
+			To easily log in to your site later, save this URL:
+			${host}<br/>
 		</body>
 	</html>`
 
