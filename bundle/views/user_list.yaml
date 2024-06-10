@@ -51,10 +51,12 @@ definition:
                     left:
                       - uesio/io.searchbox:
                           uesio.variant: uesio/crm.main
-                          wire: task
-                          placeholder: Search Tasks
+                          wire: user
+                          placeholder: Search Users
                           searchFields:
-                            - uesio/crm.name
+                            - uesio/core.firstname
+                            - uesio/core.lastname
+                            - uesio/core.username
                 - uesio/io.table:
                     uesio.variant: uesio/crm.main
                     rowactions:

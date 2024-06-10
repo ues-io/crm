@@ -2,5 +2,5 @@ name: external_id
 label: External Id
 type: AUTONUMBER
 autonumber:
-  prefix: INVOICE
+  prefix: OPPORTUNITY
   leadingZeros: 4
