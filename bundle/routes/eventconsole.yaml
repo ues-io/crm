@@ -1,5 +1,0 @@
-name: eventconsole
-path: eventconsole
-view: event_console
-theme: uesio/core.default
-title: Event Console View
