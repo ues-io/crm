@@ -13,12 +13,11 @@ definition:
         uesio/crm.related_contact:
         uesio/crm.related_lead:
         uesio/crm.related_opportunity:
-        uesio/crm.is_overdue: {}
-        uesio/crm.related_event: {}
-        uesio/core.owner: {}
-        uesio/core.createdby: {}
-        uesio/core.updatedby: {}
-        uesio/core.id: {}
+        uesio/crm.is_overdue:
+        uesio/crm.related_event:
+        uesio/core.owner:
+        uesio/core.createdby:
+        uesio/core.updatedby:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -32,90 +31,12 @@ definition:
         components:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
-                    mode: READ
+                - uesio/appkit.detail_form:
                     wire: task
-                    uesio.id: taskList
-                    components:
-                      - uesio/io.titlebar:
-                          title: ${uesio/crm.name}
-                          subtitle: $Collection{label}
-                          actions:
-                            - uesio/io.toolbar:
-                                right:
-                                  - uesio/io.button:
-                                      text: Save
-                                      icon: ""
-                                      uesio.variant: uesio/appkit.primary
-                                      iconPlacement: start
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - task
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          operator: EQUALS
-                                          wire: task
-                                  - uesio/io.button:
-                                      text: Cancel
-                                      icon: ""
-                                      uesio.variant: uesio/appkit.secondary
-                                      iconPlacement: start
-                                      signals:
-                                        - signal: wire/CANCEL
-                                          wire: task
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          operator: EQUALS
-                                          wire: task
-                                  - uesio/io.button:
-                                      text: Read
-                                      icon: task_alt
-                                      uesio.variant: uesio/appkit.secondary
-                                      iconPlacement: start
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: taskList
-                                      uesio.display:
-                                        - type: mergeValue
-                                          operator: EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][taskList][mode]}
-                                          value: EDIT
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: task
-                                  - uesio/io.button:
-                                      text: EDIT
-                                      icon: edit_square
-                                      iconFill: false
-                                      uesio.variant: uesio/appkit.secondary
-                                      iconPlacement: start
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: taskList
-                                      uesio.display:
-                                        - type: mergeValue
-                                          operator: NOT_EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][taskList][mode]}
-                                          value: EDIT
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: task
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: task_alt
-                                uesio.variant: uesio/io.icon
+                    avataricon: task_alt
+                    content:
                       - uesio/crm.task_primary_section:
                       - uesio/crm.task_related_to_section:
-                      - uesio/appkit.audit_info_section:
-                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/appkit.main

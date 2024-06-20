@@ -27,10 +27,10 @@ definition:
         uesio/crm.shipping_zip:
         uesio/crm.website:
         uesio/crm.initials:
-        uesio/core.createdby: {}
-        uesio/core.owner: {}
-        uesio/core.updatedby: {}
-        uesio/core.id: {}
+        uesio/core.createdby:
+        uesio/core.owner:
+        uesio/core.updatedby:
+        uesio/core.id:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -44,106 +44,14 @@ definition:
         components:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.detail_form:
                     wire: account
-                    uesio.id: accounts_list
-                    components:
-                      - uesio/io.titlebar:
-                          title: $RecordMeta{name}
-                          subtitle: $Collection{label}
-                          uesio.variant: uesio/appkit.main
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - account
-                                      text: Save
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                      uesio.display:
-                                        - type: group
-                                          conjunction: OR
-                                          conditions:
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: account
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/CANCEL
-                                          wire: account
-                                      text: Cancel
-                                      uesio.variant: uesio/appkit.secondary
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          operator: EQUALS
-                                          wire: account
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: accounts_list
-                                      text: Read
-                                      uesio.variant: uesio/appkit.secondary
-                                      uesio.display:
-                                        - type: mergeValue
-                                          operator: EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][accounts_list][mode]}
-                                          value: EDIT
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: account
-                                      icon: task_alt
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: accounts_list
-                                      text: Edit
-                                      uesio.variant: uesio/appkit.secondary
-                                      icon: edit_square
-                                      iconFill: false
-                                      uesio.display:
-                                        - type: mergeValue
-                                          value: EDIT
-                                          operator: NOT_EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][accounts_list][mode]}
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: account
-                          avatar:
-                            - uesio/io.menu:
-                                uesio.variant: uesio/appkit.upload
-                                arrow: true
-                                closeButton: true
-                                trigger:
-                                  - uesio/io.avatar:
-                                      uesio.variant: uesio/appkit.main
-                                      text: ${initials}
-                                      image: $UserFile{uesio/crm.logo}
-                                content:
-                                  - uesio/io.box:
-                                      components:
-                                        - uesio/io.titlebar:
-                                            uesio.variant: uesio/appkit.sub
-                                            title: Upload or Delete Account Logo
-                                        - uesio/io.field:
-                                            labelPosition: none
-                                            uesio.context:
-                                              fieldMode: EDIT
-                                            fieldId: uesio/crm.logo
-                                            displayAs: IMAGE
+                    imagefield: uesio/crm.logo
+                    initials: ${account:initials}
+                    content:
                       - uesio/crm.account_primary_section:
                       - uesio/crm.account_billing_address_section:
                       - uesio/crm.account_shipping_address_section:
-                      - uesio/appkit.audit_info_section:
-                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/appkit.main
