@@ -1,5 +1,0 @@
-name: accountconsole
-path: accountconsole
-view: account_console
-theme: uesio/core.default
-title: Account Console View
