@@ -1,8 +1,0 @@
-name: sidebar
-label: Sidebar
-public: true
-extends: uesio/crm.secondary
-definition:
-  uesio.styleTokens:
-    root:
-      - text-xs

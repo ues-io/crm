@@ -27,7 +27,7 @@ definition:
           - uesio/io.titlebar:
               title: $Collection{user:pluralLabel}
               subtitle: List View
-              uesio.variant: uesio/crm.main
+              uesio.variant: uesio/appkit.main
               avatar:
                 - uesio/io.text:
                     text: badge
@@ -38,19 +38,19 @@ definition:
                       - signal: route/NAVIGATE
                         path: usernew
                     text: Add New User
-                    uesio.variant: uesio/crm.secondary
+                    uesio.variant: uesio/appkit.secondary
                     uesio.display:
                       - type: wireHasNoChanges
                         wire: user
           - uesio/io.box:
-              uesio.variant: uesio/crm.primarysection
+              uesio.variant: uesio/appkit.primarysection
               components:
                 - uesio/io.toolbar:
                     linkedComponentType: uesio/io.table
                     linkedComponentId: userTable
                     left:
                       - uesio/io.searchbox:
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           wire: user
                           placeholder: Search Users
                           searchFields:
@@ -58,7 +58,7 @@ definition:
                             - uesio/core.lastname
                             - uesio/core.username
                 - uesio/io.table:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     rowactions:
                       - icon: visibility
                         text: View
@@ -70,7 +70,7 @@ definition:
                             path: user/detail/${uesio/core.id}
                     columns:
                       - components:
-                          - uesio/crm.user_tile:
+                          - uesio/appkit.user_tile:
                       - field: uesio/core.email
                     uesio.id: userTable
                     mode: READ

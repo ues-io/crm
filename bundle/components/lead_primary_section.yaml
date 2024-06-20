@@ -3,7 +3,7 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/crm.primarysection
+      uesio.variant: uesio/appkit.primarysection
       components:
         - uesio/crm.lead_primary_fields:
 title: Lead Primary Section

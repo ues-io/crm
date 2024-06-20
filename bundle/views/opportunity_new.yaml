@@ -21,7 +21,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: opportunity
@@ -31,7 +31,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New Opportunity
                           subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: payments
@@ -50,12 +50,12 @@ definition:
                                           recordid: ${uesio/core.id}
                                       text: Create Opportunity
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: opportunity
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                       - uesio/crm.opportunity_primary_section:
                       - uesio/crm.opportunity_related_to_section:

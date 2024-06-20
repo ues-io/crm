@@ -51,11 +51,11 @@ definition:
         create: true
   components:
     - uesio/io.scrollpanel:
-        uesio.variant: uesio/crm.sidebar
+        uesio.variant: uesio/appkit.sidebar
         content:
           - uesio/io.deck:
               mode: READ
-              uesio.variant: uesio/crm.tiles
+              uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.contact_tile:
                     showContactInfo: true
@@ -71,7 +71,7 @@ definition:
                         value: true
                     components:
                       - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
+                          uesio.variant: uesio/appkit.two_columns
                           items:
                             - uesio/io.field:
                                 fieldId: uesio/crm.firstname
@@ -88,7 +88,7 @@ definition:
                     components:
                       - uesio/io.button:
                           text: Create Contact
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: false
@@ -98,7 +98,7 @@ definition:
                               value: true
                       - uesio/io.button:
                           text: Save
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true
@@ -111,7 +111,7 @@ definition:
                                 - contacts
                       - uesio/io.button:
                           text: Cancel
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true

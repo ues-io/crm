@@ -37,7 +37,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: contact
@@ -47,7 +47,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New Contact
                           subtitle: "${firstname} ${lastname}"
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: person
@@ -66,13 +66,13 @@ definition:
                                           recordid: ${uesio/core.id}
                                       text: Create Contact
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: contact
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                       - uesio/crm.contact_primary_section:
                       - uesio/crm.contact_account_info_section:
                       - uesio/crm.contact_mailing_address_section:

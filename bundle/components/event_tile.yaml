@@ -3,15 +3,15 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.tile:
-      uesio.variant: uesio/crm.item
+      uesio.variant: uesio/appkit.item
       content:
         - uesio/io.titlebar:
-            uesio.variant: uesio/crm.item
+            uesio.variant: uesio/appkit.item
             title: ${name}
             subtitle: $Date{starttime} - $Date{endtime}
       avatar:
         - uesio/io.text:
-            uesio.variant: uesio/crm.avatariconoutline
+            uesio.variant: uesio/appkit.avatariconoutline
             text: calendar_month
       signals:
         - signal: route/NAVIGATE_TO_ASSIGNMENT

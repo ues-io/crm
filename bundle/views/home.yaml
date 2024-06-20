@@ -89,10 +89,10 @@ definition:
           - uesio/crm.nav:
         content:
           - uesio/io.box:
-              uesio.variant: uesio/crm.dashboarditem
+              uesio.variant: uesio/appkit.dashboarditem
               components:
                 - uesio/io.titlebar:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     title: Hi $User{firstname}!
                     subtitle: Welcome to ues.io CRM.
                     avatar:
@@ -100,22 +100,22 @@ definition:
                           uesio.variant: uesio/io.icon
                           text: home
                 - uesio/io.box:
-                    uesio.variant: uesio/crm.scrollsection
+                    uesio.variant: uesio/appkit.scrollsection
                     components:
                       - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
+                          uesio.variant: uesio/appkit.two_columns
                           uesio.styleTokens:
                             root:
                               - lg:grid-rows-1
                           items:
                             - uesio/io.box:
-                                uesio.variant: uesio/crm.dashboarditem
+                                uesio.variant: uesio/appkit.dashboarditem
                                 components:
                                   - uesio/io.titlebar:
                                       title: Upcoming Opportunities
-                                      uesio.variant: uesio/crm.sub
+                                      uesio.variant: uesio/appkit.sub
                                   - uesio/io.linechart:
-                                      uesio.variant: uesio/crm.main
+                                      uesio.variant: uesio/appkit.main
                                       series:
                                         - name: revenue
                                           label: Expected Revenue
@@ -126,13 +126,13 @@ definition:
                                         source: DATA
                                         timeunit: MONTH
                             - uesio/io.box:
-                                uesio.variant: uesio/crm.dashboarditem
+                                uesio.variant: uesio/appkit.dashboarditem
                                 components:
                                   - uesio/io.titlebar:
                                       title: Leads This Week
-                                      uesio.variant: uesio/crm.sub
+                                      uesio.variant: uesio/appkit.sub
                                   - uesio/io.barchart:
-                                      uesio.variant: uesio/crm.main
+                                      uesio.variant: uesio/appkit.main
                                       series:
                                         - name: leads
                                           label: New Leads
@@ -144,58 +144,58 @@ definition:
                                         timeunit: DAY
                                         timeunitfill: WEEK
                       - uesio/io.grid:
-                          uesio.variant: uesio/crm.three_columns
+                          uesio.variant: uesio/appkit.three_columns
                           uesio.styleTokens:
                             root:
                               - lg:grid-rows-1
                           items:
                             - uesio/io.box:
-                                uesio.variant: uesio/crm.dashboarditem
+                                uesio.variant: uesio/appkit.dashboarditem
                                 components:
                                   - uesio/io.titlebar:
                                       title: New Leads
-                                      uesio.variant: uesio/crm.sub
+                                      uesio.variant: uesio/appkit.sub
                                   - uesio/io.box:
-                                      uesio.variant: uesio/crm.dashboardpanel
+                                      uesio.variant: uesio/appkit.dashboardpanel
                                       components:
                                         - uesio/io.deck:
                                             wire: newleads
                                             mode: READ
                                             id: newleads
-                                            uesio.variant: uesio/crm.tiles
+                                            uesio.variant: uesio/appkit.tiles
                                             components:
                                               - uesio/crm.lead_tile:
                                                   showSource: true
                                                   showRating: true
                             - uesio/io.box:
-                                uesio.variant: uesio/crm.dashboarditem
+                                uesio.variant: uesio/appkit.dashboarditem
                                 components:
                                   - uesio/io.titlebar:
                                       title: My Tasks
-                                      uesio.variant: uesio/crm.sub
+                                      uesio.variant: uesio/appkit.sub
                                   - uesio/io.box:
-                                      uesio.variant: uesio/crm.dashboardpanel
+                                      uesio.variant: uesio/appkit.dashboardpanel
                                       components:
                                         - uesio/io.deck:
                                             wire: upcomingtasks
                                             mode: READ
                                             id: upcomingtasks
-                                            uesio.variant: uesio/crm.tiles
+                                            uesio.variant: uesio/appkit.tiles
                                             components:
                                               - uesio/crm.task_tile:
                             - uesio/io.box:
-                                uesio.variant: uesio/crm.dashboarditem
+                                uesio.variant: uesio/appkit.dashboarditem
                                 components:
                                   - uesio/io.titlebar:
                                       title: My Events
-                                      uesio.variant: uesio/crm.sub
+                                      uesio.variant: uesio/appkit.sub
                                   - uesio/io.box:
-                                      uesio.variant: uesio/crm.dashboardpanel
+                                      uesio.variant: uesio/appkit.dashboardpanel
                                       components:
                                         - uesio/io.deck:
                                             wire: upcomingevents
                                             mode: READ
                                             id: upcomingevents
-                                            uesio.variant: uesio/crm.tiles
+                                            uesio.variant: uesio/appkit.tiles
                                             components:
                                               - uesio/crm.event_tile:

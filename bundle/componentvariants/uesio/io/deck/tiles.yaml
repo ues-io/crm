@@ -1,7 +1,0 @@
-name: tiles
-label: Tiles
-public: true
-definition:
-  gridVariant: uesio/crm.tiles
-variants:
-  - uesio/io.grid:uesio/crm.tiles

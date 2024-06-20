@@ -6,9 +6,9 @@ definition:
       components:
         - uesio/io.titlebar:
             title: Account Information
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
-            uesio.variant: uesio/crm.three_columns
+            uesio.variant: uesio/appkit.three_columns
             items:
               - uesio/io.field:
                   fieldId: uesio/crm.account
@@ -22,7 +22,7 @@ definition:
                   fieldId: uesio/crm.role
               - uesio/io.field:
                   fieldId: uesio/crm.reports_to
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
 title: Contact Account Info Section
 discoverable: true
 description: Contact Account Info Section

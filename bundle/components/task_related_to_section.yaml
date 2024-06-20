@@ -6,9 +6,9 @@ definition:
       components:
         - uesio/io.titlebar:
             title: RELATED TO
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
-            uesio.variant: uesio/crm.two_columns
+            uesio.variant: uesio/appkit.two_columns
             items:
               - uesio/io.field:
                   fieldId: uesio/crm.related_account
@@ -20,7 +20,7 @@ definition:
                   fieldId: uesio/crm.related_opportunity
               - uesio/io.field:
                   fieldId: uesio/crm.related_event
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
 title: Task Related To Section
 discoverable: true
 description: Task Related To Section

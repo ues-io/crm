@@ -60,7 +60,7 @@ definition:
         content:
           - uesio/io.deck:
               mode: READ
-              uesio.variant: uesio/crm.tiles
+              uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.opportunity_tile:
                     showDealInfo: true
@@ -77,7 +77,7 @@ definition:
                         value: true
                     components:
                       - uesio/io.grid:
-                          uesio.variant: uesio/crm.two_columns
+                          uesio.variant: uesio/appkit.two_columns
                           items:
                             - uesio/io.field:
                                 uesio.styleTokens:
@@ -96,7 +96,7 @@ definition:
                     components:
                       - uesio/io.button:
                           text: Create Opportunity
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: false
@@ -106,7 +106,7 @@ definition:
                               value: true
                       - uesio/io.button:
                           text: Save
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true
@@ -118,13 +118,13 @@ definition:
                                 - opportunities
                       - uesio/io.button:
                           text: Cancel
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true
                           signals:
                             - signal: wire/RESET
-        uesio.variant: uesio/crm.sidebar
+        uesio.variant: uesio/appkit.sidebar
   params:
     accountid:
       type: TEXT

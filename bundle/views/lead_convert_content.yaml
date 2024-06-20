@@ -186,7 +186,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.item:
                     wire: lead
@@ -196,12 +196,12 @@ definition:
                       - uesio/io.titlebar:
                           title: ${uesio/crm.fullname}
                           subtitle: Convert Lead
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           actions:
                             - uesio/io.toolbar:
                                 right:
                                   - uesio/io.button:
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                       text: Convert
                                       signals:
                                         - signal: wire/SAVE
@@ -223,23 +223,23 @@ definition:
                                           viewtype: detail
                                           recordid: $SignalOutput{[convert][contactid]}
                                   - uesio/io.button:
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       text: Cancel
                                       signals:
                                         - signal: route/NAVIGATE
                                           path: "lead/detail/${uesio/core.id}"
                           avatar:
                             - uesio/io.avatar:
-                                uesio.variant: uesio/crm.main_pointer
+                                uesio.variant: uesio/appkit.main
                                 text: ${initials}
                                 image: $UserFile{uesio/crm.image}
                       - uesio/crm.lead_primary_section:
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/appkit.section
                           components:
                             - uesio/io.titlebar:
                                 title: Contact Information
-                                uesio.variant: uesio/crm.sub
+                                uesio.variant: uesio/appkit.sub
                             - uesio/io.item:
                                 wire: options
                                 components:
@@ -256,7 +256,7 @@ definition:
                                     value: link
                                 components:
                                   - uesio/io.searchbox:
-                                      uesio.variant: uesio/crm.main
+                                      uesio.variant: uesio/appkit.main
                                       wire: contactsearch
                                       searchFields:
                                         - firstname
@@ -329,11 +329,11 @@ definition:
                                 components:
                                   - uesio/crm.lead_contact_info_fields:
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/appkit.section
                           components:
                             - uesio/io.titlebar:
                                 title: Account Information
-                                uesio.variant: uesio/crm.sub
+                                uesio.variant: uesio/appkit.sub
                             - uesio/io.box:
                                 uesio.display:
                                   - type: hasNoValue
@@ -356,7 +356,7 @@ definition:
                                           value: link
                                       components:
                                         - uesio/io.searchbox:
-                                            uesio.variant: uesio/crm.main
+                                            uesio.variant: uesio/appkit.main
                                             wire: accountsearch
                                             searchFields:
                                               - name
@@ -435,11 +435,11 @@ definition:
                                         - uesio/io.text:
                                             text: The linked contact's account is ${options:selected_contact_account}.
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/appkit.section
                           components:
                             - uesio/io.titlebar:
                                 title: Opportunity Information
-                                uesio.variant: uesio/crm.sub
+                                uesio.variant: uesio/appkit.sub
                             - uesio/io.item:
                                 wire: options
                                 components:
@@ -539,23 +539,23 @@ definition:
                                             text: info
                                         - uesio/io.text:
                                             text: "You cannot link to an existing opportunity unless you're also linking to an existing account."
-                      - uesio/crm.audit_info_section:
+                      - uesio/appkit.audit_info_section:
               left:
                 - uesio/io.box:
                     components:
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.note
+                          uesio.variant: uesio/appkit.note
                           components:
                             - uesio/io.text:
                                 text: The "Convert Lead" process lets you create an account, contact, (and optionally) an opportunity from lead. Typically, a lead should be converted when they've progressed from being a potential prospect to a qualified opportunity.
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.note
+                          uesio.variant: uesio/appkit.note
                           components:
                             - uesio/io.text:
                                 text: This process lets you decide whether you're creating new records for this lead or linking them to existing ones. Be sure to search for existing records to prevent creating duplicates.
                       - uesio/io.titlebar:
                           title: Pending Conversion Actions
-                          uesio.variant: uesio/crm.sub
+                          uesio.variant: uesio/appkit.sub
                       - uesio/io.item:
                           wire: options
                           uesio.id: optionsItem
@@ -577,7 +577,7 @@ definition:
                                                 sourceValue: create
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Create New Contact Record
                                                   subtitle: ${firstname} ${lastname}
                                         - uesio/io.tile:
@@ -588,7 +588,7 @@ definition:
                                                 sourceValue: link
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Contact Record
                                                   subtitle: ${options:selected_contact_name} at ${options:selected_contact_account}
                                                   uesio.display:
@@ -597,7 +597,7 @@ definition:
                                                     - type: hasValue
                                                       value: ${options:selected_contact_account}
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Contact Record
                                                   subtitle: ${options:selected_contact_name}
                                                   uesio.display:
@@ -606,7 +606,7 @@ definition:
                                                     - type: hasNoValue
                                                       value: ${options:selected_contact_account}
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Contact Record
                                                   subtitle: Select a contact.
                                                   uesio.display:
@@ -616,7 +616,7 @@ definition:
                                             uesio.variant: uesio/crm.countitem
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Migrate Timeline Activity
                                                   subtitle: Lead Activity -> Contact Activity
                                         - uesio/io.tile:
@@ -631,7 +631,7 @@ definition:
                                                 value: ${options:selected_contact_account}
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Create New Account Record
                                                   subtitle: ${company}
                                         - uesio/io.tile:
@@ -644,14 +644,14 @@ definition:
                                                 value: ${options:selected_contact_account}
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Account Record
                                                   subtitle: ${options:selected_account_name}
                                                   uesio.display:
                                                     - type: hasValue
                                                       value: ${options:selected_account}
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Account Record
                                                   subtitle: Select an account.
                                                   uesio.display:
@@ -691,7 +691,7 @@ definition:
                                                         sourceValue: link
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Create New Opportunity Record
                                                   subtitle: ${topic}
                                         - uesio/io.tile:
@@ -709,14 +709,14 @@ definition:
                                                     value: ${options:selected_contact_account}
                                             content:
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Opportunity Record
                                                   subtitle: ${options:selected_opportunity_name}
                                                   uesio.display:
                                                     - type: hasValue
                                                       value: ${options:selected_opportunity}
                                               - uesio/io.titlebar:
-                                                  uesio.variant: uesio/crm.item
+                                                  uesio.variant: uesio/appkit.item
                                                   title: Link to Existing Opportunity Record
                                                   subtitle: Select an opportunity.
                                                   uesio.display:

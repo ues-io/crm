@@ -3,11 +3,11 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
       components:
         - uesio/io.titlebar:
             title: Contact Information
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/crm.lead_contact_info_fields:
 title: Lead Contact Info Section
 discoverable: true

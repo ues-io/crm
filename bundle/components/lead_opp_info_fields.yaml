@@ -3,7 +3,7 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.grid:
-      uesio.variant: uesio/crm.two_columns
+      uesio.variant: uesio/appkit.two_columns
       items:
         - uesio/io.field:
             uesio.styleTokens:

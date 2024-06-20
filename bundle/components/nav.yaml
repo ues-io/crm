@@ -128,7 +128,7 @@ definition:
                                   collection: uesio/crm.lead
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.lead
@@ -158,7 +158,7 @@ definition:
                                   collection: uesio/crm.account
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.account
@@ -188,7 +188,7 @@ definition:
                                   collection: uesio/crm.contact
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.contact
@@ -218,7 +218,7 @@ definition:
                                   collection: uesio/crm.opportunity
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.opportunity
@@ -248,7 +248,7 @@ definition:
                                   collection: uesio/crm.task
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.task
@@ -278,7 +278,7 @@ definition:
                                   collection: uesio/crm.event
                                   viewtype: list
                           - uesio/io.tile:
-                              uesio.variant: uesio/crm.navadd
+                              uesio.variant: uesio/appkit.navadd
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.event
@@ -306,13 +306,13 @@ definition:
                         image: $User{picture}
                   actions:
                     - uesio/io.button:
-                        uesio.variant: uesio/crm.navicon
+                        uesio.variant: uesio/appkit.navicon
                         icon: logout
                         uesio.id: logout
                         signals:
                           - signal: "user/LOGOUT"
                     - uesio/io.button:
-                        uesio.variant: uesio/crm.navicon
+                        uesio.variant: uesio/appkit.navicon
                         uesio.id: user-profile
                         icon: account_circle
                         signals:

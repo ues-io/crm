@@ -1,8 +1,0 @@
-name: main
-label: Main
-definition:
-  labelsVariant: uesio/crm.main
-  panelVariant: uesio/crm.tabpanel
-variants:
-  - uesio/io.tablabels:uesio/crm.main
-  - uesio/io.scrollpanel:uesio/crm.tabpanel

@@ -3,13 +3,13 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
       components:
         - uesio/io.titlebar:
             title: Shipping Address
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
-            uesio.variant: uesio/crm.three_columns
+            uesio.variant: uesio/appkit.three_columns
             items:
               - uesio/io.field:
                   fieldId: uesio/crm.shipping_street

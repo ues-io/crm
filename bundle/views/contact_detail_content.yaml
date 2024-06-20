@@ -45,7 +45,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: contact
@@ -54,7 +54,7 @@ definition:
                       - uesio/io.titlebar:
                           title: ${uesio/crm.fullname}
                           subtitle: $Collection{label}
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           actions:
                             - uesio/io.group:
                                 components:
@@ -65,7 +65,7 @@ definition:
                                             - contact
                                       text: Save
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                       uesio.display:
                                         - type: wireHasChanges
                                           operator: EQUALS
@@ -75,7 +75,7 @@ definition:
                                         - signal: wire/CANCEL
                                           wire: contact
                                       text: Cancel
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       uesio.display:
                                         - type: wireHasChanges
                                           operator: EQUALS
@@ -88,7 +88,7 @@ definition:
                                           targettype: specific
                                           componentid: contactList
                                       text: Read
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       icon: task_alt
                                       uesio.display:
                                         - type: mergeValue
@@ -106,7 +106,7 @@ definition:
                                           targettype: specific
                                           componentid: contactList
                                       text: EDIT
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       icon: edit_square
                                       iconFill: false
                                       uesio.display:
@@ -119,19 +119,19 @@ definition:
                                           wire: contact
                           avatar:
                             - uesio/io.menu:
-                                uesio.variant: uesio/crm.upload
+                                uesio.variant: uesio/appkit.upload
                                 arrow: true
                                 closeButton: true
                                 trigger:
                                   - uesio/io.avatar:
                                       text: ${initials}
                                       image: $UserFile{uesio/crm.image}
-                                      uesio.variant: uesio/crm.main_pointer
+                                      uesio.variant: uesio/appkit.main
                                 content:
                                   - uesio/io.box:
                                       components:
                                         - uesio/io.titlebar:
-                                            uesio.variant: uesio/crm.sub
+                                            uesio.variant: uesio/appkit.sub
                                             title: Upload or Delete Contact Image
                                         - uesio/io.field:
                                             labelPosition: none
@@ -142,11 +142,11 @@ definition:
                       - uesio/crm.contact_primary_section:
                       - uesio/crm.contact_account_info_section:
                       - uesio/crm.contact_mailing_address_section:
-                      - uesio/crm.audit_info_section:
-                      - uesio/crm.delete_section:
+                      - uesio/appkit.audit_info_section:
+                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     tabs:
                       - label: Timeline
                         id: timeline

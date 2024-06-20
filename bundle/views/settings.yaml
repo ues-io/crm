@@ -33,7 +33,7 @@ definition:
           - uesio/crm.nav:
         content:
           - uesio/io.titlebar:
-              uesio.variant: uesio/crm.main
+              uesio.variant: uesio/appkit.main
               title: Settings
               subtitle: Personalize ues.io CRM for your organization.
               avatar:
@@ -41,16 +41,16 @@ definition:
                     uesio.variant: uesio/io.icon
                     text: settings
           - uesio/io.box:
-              uesio.variant: uesio/crm.primarysection
+              uesio.variant: uesio/appkit.primarysection
               components:
                 - uesio/io.tabs:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     tabs:
                       - id: leadsources
                         label: Lead Sources
                         components:
                           - uesio/io.grid:
-                              uesio.variant: uesio/crm.three_columns
+                              uesio.variant: uesio/appkit.three_columns
                               uesio.styleTokens:
                                 root:
                                   - m-6
@@ -63,7 +63,7 @@ definition:
                                         - order-last
                                     components:
                                       - uesio/io.table:
-                                          uesio.variant: uesio/crm.main
+                                          uesio.variant: uesio/appkit.main
                                           selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
@@ -77,7 +77,7 @@ definition:
                                     components:
                                       - uesio/io.titlebar:
                                           title:
-                                          uesio.variant: uesio/crm.sub_noborder
+                                          uesio.variant: uesio/appkit.sub_noborder
                                           actions:
                                             - uesio/io.toolbar:
                                                 linkedComponentId: leadsources
@@ -90,7 +90,7 @@ definition:
                                                             - leadsources
                                                       text: $Label{uesio/io.save}
                                                       hotkey: "meta+s"
-                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.variant: uesio/appkit.primary
                                                       uesio.display:
                                                         - type: wireHasChanges
                                                           wire: leadsources
@@ -105,14 +105,14 @@ definition:
                                                           targettype: specific
                                                           componentid: leadsources
                                                       icon: add_circle
-                                                      uesio.variant: uesio/crm.add
+                                                      uesio.variant: uesio/appkit.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][leadsources][mode]}
                                                   - uesio/io.button:
                                                       icon: delete
-                                                      uesio.variant: uesio/crm.delete
+                                                      uesio.variant: uesio/appkit.delete
                                                       signals:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
@@ -141,7 +141,7 @@ definition:
                                                         - type: wireHasChanges
                                                           wire: leadsources
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -152,7 +152,7 @@ definition:
                                                       text: Edit
                                                       icon: edit_square
                                                       iconFill: false
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
@@ -177,19 +177,19 @@ definition:
                                                       icon: task_alt
                                                       iconFill: false
                                                       text: Read
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Specify the valid lead sources for your organization. A lead source is where the data for a lead originated.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Only active lead sources will appear when selecting a source for a new lead.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           uesio.display:
                                             - type: wireHasNoRecords
                                               wire: leadsources
@@ -200,7 +200,7 @@ definition:
                                                 text: You don't have any lead sources specified.
                                                 element: div
                                             - uesio/io.button:
-                                                uesio.variant: uesio/crm.note
+                                                uesio.variant: uesio/appkit.note
                                                 text: Use Default Lead Sources
                                                 signals:
                                                   - signal: bot/CALL
@@ -212,7 +212,7 @@ definition:
                         label: Account Types
                         components:
                           - uesio/io.grid:
-                              uesio.variant: uesio/crm.three_columns
+                              uesio.variant: uesio/appkit.three_columns
                               uesio.styleTokens:
                                 root:
                                   - m-6
@@ -225,7 +225,7 @@ definition:
                                         - order-last
                                     components:
                                       - uesio/io.table:
-                                          uesio.variant: uesio/crm.main
+                                          uesio.variant: uesio/appkit.main
                                           selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
@@ -239,7 +239,7 @@ definition:
                                     components:
                                       - uesio/io.titlebar:
                                           title:
-                                          uesio.variant: uesio/crm.sub_noborder
+                                          uesio.variant: uesio/appkit.sub_noborder
                                           actions:
                                             - uesio/io.toolbar:
                                                 linkedComponentId: accounttypes
@@ -252,7 +252,7 @@ definition:
                                                             - accounttypes
                                                       text: $Label{uesio/io.save}
                                                       hotkey: "meta+s"
-                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.variant: uesio/appkit.primary
                                                       uesio.display:
                                                         - type: wireHasChanges
                                                           wire: accounttypes
@@ -267,14 +267,14 @@ definition:
                                                           targettype: specific
                                                           componentid: accounttypes
                                                       icon: add_circle
-                                                      uesio.variant: uesio/crm.add
+                                                      uesio.variant: uesio/appkit.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][accounttypes][mode]}
                                                   - uesio/io.button:
                                                       icon: delete
-                                                      uesio.variant: uesio/crm.delete
+                                                      uesio.variant: uesio/appkit.delete
                                                       signals:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
@@ -303,7 +303,7 @@ definition:
                                                         - type: wireHasChanges
                                                           wire: accounttypes
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -314,7 +314,7 @@ definition:
                                                       text: Edit
                                                       icon: edit_square
                                                       iconFill: false
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
@@ -339,19 +339,19 @@ definition:
                                                       icon: task_alt
                                                       iconFill: false
                                                       text: Read
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Specify the valid account types for your organization. You can categorize your accounts for filtering and reporting with account types.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Only active account types will appear when selecting a type for a new account.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           uesio.display:
                                             - type: wireHasNoRecords
                                               wire: accounttypes
@@ -362,7 +362,7 @@ definition:
                                                 text: You don't have any account types specified.
                                                 element: div
                                             - uesio/io.button:
-                                                uesio.variant: uesio/crm.note
+                                                uesio.variant: uesio/appkit.note
                                                 text: Use Default Account Types
                                                 signals:
                                                   - signal: bot/CALL
@@ -374,7 +374,7 @@ definition:
                         label: Contact Roles
                         components:
                           - uesio/io.grid:
-                              uesio.variant: uesio/crm.three_columns
+                              uesio.variant: uesio/appkit.three_columns
                               uesio.styleTokens:
                                 root:
                                   - m-6
@@ -387,7 +387,7 @@ definition:
                                         - order-last
                                     components:
                                       - uesio/io.table:
-                                          uesio.variant: uesio/crm.main
+                                          uesio.variant: uesio/appkit.main
                                           selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
@@ -401,7 +401,7 @@ definition:
                                     components:
                                       - uesio/io.titlebar:
                                           title:
-                                          uesio.variant: uesio/crm.sub_noborder
+                                          uesio.variant: uesio/appkit.sub_noborder
                                           actions:
                                             - uesio/io.toolbar:
                                                 linkedComponentId: contactroles
@@ -414,7 +414,7 @@ definition:
                                                             - contactroles
                                                       text: $Label{uesio/io.save}
                                                       hotkey: "meta+s"
-                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.variant: uesio/appkit.primary
                                                       uesio.display:
                                                         - type: wireHasChanges
                                                           wire: contactroles
@@ -429,14 +429,14 @@ definition:
                                                           targettype: specific
                                                           componentid: contactroles
                                                       icon: add_circle
-                                                      uesio.variant: uesio/crm.add
+                                                      uesio.variant: uesio/appkit.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][contactroles][mode]}
                                                   - uesio/io.button:
                                                       icon: delete
-                                                      uesio.variant: uesio/crm.delete
+                                                      uesio.variant: uesio/appkit.delete
                                                       signals:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
@@ -465,7 +465,7 @@ definition:
                                                         - type: wireHasChanges
                                                           wire: contactroles
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -476,7 +476,7 @@ definition:
                                                       text: Edit
                                                       icon: edit_square
                                                       iconFill: false
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
@@ -501,19 +501,19 @@ definition:
                                                       icon: task_alt
                                                       iconFill: false
                                                       text: Read
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Specify the valid contact roles for your organization. A role identifies the part a contact plays in a specific business relationship or deal.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Only active contact roles will appear when selecting a role for a new contact.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           uesio.display:
                                             - type: wireHasNoRecords
                                               wire: contactroles
@@ -524,7 +524,7 @@ definition:
                                                 text: You don't have any contact roles specified.
                                                 element: div
                                             - uesio/io.button:
-                                                uesio.variant: uesio/crm.note
+                                                uesio.variant: uesio/appkit.note
                                                 text: Use Default Contact Roles
                                                 signals:
                                                   - signal: bot/CALL
@@ -536,7 +536,7 @@ definition:
                         label: Opportunity Stages
                         components:
                           - uesio/io.grid:
-                              uesio.variant: uesio/crm.three_columns
+                              uesio.variant: uesio/appkit.three_columns
                               uesio.styleTokens:
                                 root:
                                   - m-6
@@ -549,7 +549,7 @@ definition:
                                         - order-last
                                     components:
                                       - uesio/io.table:
-                                          uesio.variant: uesio/crm.main
+                                          uesio.variant: uesio/appkit.main
                                           selectable: true
                                           columns:
                                             - field: uesio/crm.api_name
@@ -563,7 +563,7 @@ definition:
                                     components:
                                       - uesio/io.titlebar:
                                           title:
-                                          uesio.variant: uesio/crm.sub_noborder
+                                          uesio.variant: uesio/appkit.sub_noborder
                                           actions:
                                             - uesio/io.toolbar:
                                                 linkedComponentId: opportunitystages
@@ -576,7 +576,7 @@ definition:
                                                             - opportunitystages
                                                       text: $Label{uesio/io.save}
                                                       hotkey: "meta+s"
-                                                      uesio.variant: uesio/crm.primary
+                                                      uesio.variant: uesio/appkit.primary
                                                       uesio.display:
                                                         - type: wireHasChanges
                                                           wire: opportunitystages
@@ -591,14 +591,14 @@ definition:
                                                           targettype: specific
                                                           componentid: opportunitystages
                                                       icon: add_circle
-                                                      uesio.variant: uesio/crm.add
+                                                      uesio.variant: uesio/appkit.add
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
                                                           sourceValue: $ComponentState{[uesio/io.table][opportunitystages][mode]}
                                                   - uesio/io.button:
                                                       icon: delete
-                                                      uesio.variant: uesio/crm.delete
+                                                      uesio.variant: uesio/appkit.delete
                                                       signals:
                                                         - signal: component/CALL
                                                           component: uesio/io.table
@@ -627,7 +627,7 @@ definition:
                                                         - type: wireHasChanges
                                                           wire: opportunitystages
                                                       text: $Label{uesio/io.cancel}
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                   - uesio/io.button:
                                                       signals:
                                                         - signal: component/CALL
@@ -638,7 +638,7 @@ definition:
                                                       text: Edit
                                                       icon: edit_square
                                                       iconFill: false
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                                       uesio.display:
                                                         - type: mergeValue
                                                           value: EDIT
@@ -663,19 +663,19 @@ definition:
                                                       icon: task_alt
                                                       iconFill: false
                                                       text: Read
-                                                      uesio.variant: uesio/crm.secondary
+                                                      uesio.variant: uesio/appkit.secondary
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Specify the valid opportunity stages for your organization. An opportunity stage is the current position of an opportunity in the sales process.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: Only active opportunity stages will appear when selecting a stage for a new opportunity.
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           uesio.display:
                                             - type: wireHasNoRecords
                                               wire: opportunitystages
@@ -686,7 +686,7 @@ definition:
                                                 text: You don't have any opportunity stages specified.
                                                 element: div
                                             - uesio/io.button:
-                                                uesio.variant: uesio/crm.note
+                                                uesio.variant: uesio/appkit.note
                                                 text: Use Default Opportunity Stages
                                                 signals:
                                                   - signal: bot/CALL
@@ -698,7 +698,7 @@ definition:
                         label: Sample Data
                         components:
                           - uesio/io.grid:
-                              uesio.variant: uesio/crm.three_columns
+                              uesio.variant: uesio/appkit.three_columns
                               uesio.styleTokens:
                                 root:
                                   - m-6
@@ -713,13 +713,13 @@ definition:
                                 - uesio/io.box:
                                     components:
                                       - uesio/io.box:
-                                          uesio.variant: uesio/crm.note
+                                          uesio.variant: uesio/appkit.note
                                           components:
                                             - uesio/io.text:
                                                 text: If you're just learning how to use ues.io CRM, you can add some sample data to your site. You can remove this sample data later when you're ready to use your own business data.
                                                 element: div
                                             - uesio/io.button:
-                                                uesio.variant: uesio/crm.note
+                                                uesio.variant: uesio/appkit.note
                                                 text: Create Sample Data
                                                 signals:
                                                   - signal: bot/CALL

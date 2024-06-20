@@ -64,7 +64,7 @@ definition:
               components:
                 - uesio/io.button:
                     text: ask claude
-                    uesio.variant: uesio/crm.sidebar
+                    uesio.variant: uesio/appkit.secondary_small
                     signals:
                       - signal: wire/UPDATE_RECORD
                         wire: new_chat_history
@@ -96,10 +96,10 @@ definition:
               wire: chat_history
               mode: READ
               id: chathistory
-              uesio.variant: uesio/crm.tiles
+              uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.ai_comment_tile:
-        uesio.variant: uesio/crm.sidebar
+        uesio.variant: uesio/appkit.sidebar
   params:
     recordid:
       type: TEXT
