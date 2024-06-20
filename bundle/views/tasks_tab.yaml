@@ -74,13 +74,13 @@ definition:
           value: false
   components:
     - uesio/io.scrollpanel:
-        uesio.variant: uesio/crm.sidebar
+        uesio.variant: uesio/appkit.sidebar
         content:
           - uesio/io.deck:
               wire: tasks
               mode: READ
               id: tasks
-              uesio.variant: uesio/crm.tiles
+              uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.task_tile:
         footer:
@@ -105,7 +105,7 @@ definition:
                     components:
                       - uesio/io.button:
                           text: Create Task
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: false
@@ -115,7 +115,7 @@ definition:
                               value: true
                       - uesio/io.button:
                           text: Save
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true
@@ -127,7 +127,7 @@ definition:
                                 - tasks
                       - uesio/io.button:
                           text: Cancel
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           uesio.display:
                             - field: open_panel
                               value: true

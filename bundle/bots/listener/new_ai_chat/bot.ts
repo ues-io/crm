@@ -124,7 +124,7 @@ export default function new_ai_chat(bot: ListenerBotApi) {
 	`
 
 	const result = bot.runIntegrationAction(
-		"uesio/core.bedrock",
+		"uesio/aikit.bedrock",
 		"invokemodel",
 		{
 			//model: "anthropic.claude-3-sonnet-20240229-v1:0",

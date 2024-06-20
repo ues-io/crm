@@ -3,11 +3,11 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
       components:
         - uesio/io.titlebar:
             title: Opportunity Information
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/crm.lead_opp_info_fields:
 title: Lead Opportunity Info Section
 discoverable: true

@@ -24,7 +24,7 @@ definition:
           param: recordid
   # Components determine the layout and composition of your view
   components:
-    - uesio/crm.detail_split:
+    - uesio/appkit.detail_split:
         main:
           - uesio/io.list:
               mode: READ
@@ -33,14 +33,14 @@ definition:
               components:
                 - uesio/io.titlebar:
                     title: ${uesio/crm.name}
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     subtitle: $Collection{label}
                     actions:
                       - uesio/io.toolbar:
                           right:
                             - uesio/io.button:
                                 text: Save
-                                uesio.variant: uesio/crm.primary
+                                uesio.variant: uesio/appkit.primary
                                 iconPlacement: start
                                 signals:
                                   - signal: wire/SAVE
@@ -53,7 +53,7 @@ definition:
                             - uesio/io.button:
                                 text: Cancel
                                 icon: ""
-                                uesio.variant: uesio/crm.secondary
+                                uesio.variant: uesio/appkit.secondary
                                 iconPlacement: start
                                 signals:
                                   - signal: wire/CANCEL
@@ -65,7 +65,7 @@ definition:
                             - uesio/io.button:
                                 text: Read
                                 icon: task_alt
-                                uesio.variant: uesio/crm.secondary
+                                uesio.variant: uesio/appkit.secondary
                                 iconPlacement: start
                                 signals:
                                   - signal: component/CALL
@@ -85,7 +85,7 @@ definition:
                                 text: Edit
                                 icon: edit_square
                                 iconFill: false
-                                uesio.variant: uesio/crm.secondary
+                                uesio.variant: uesio/appkit.secondary
                                 iconPlacement: start
                                 signals:
                                   - signal: component/CALL
@@ -107,11 +107,11 @@ definition:
                           uesio.variant: uesio/io.icon
                 - uesio/crm.event_primary_section:
                 - uesio/crm.event_related_to_section:
-                - uesio/crm.audit_info_section:
-                - uesio/crm.delete_section:
+                - uesio/appkit.audit_info_section:
+                - uesio/appkit.delete_section:
         left:
           - uesio/io.tabs:
-              uesio.variant: uesio/crm.main
+              uesio.variant: uesio/appkit.main
               tabs:
                 - id: timeline
                   label: Timeline

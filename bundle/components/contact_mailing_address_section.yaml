@@ -7,7 +7,7 @@ definition:
       components:
         - uesio/io.titlebar:
             title: Mailing Address
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
             items:
               - uesio/io.field:
@@ -20,7 +20,7 @@ definition:
                   fieldId: uesio/crm.mailing_country
               - uesio/io.field:
                   fieldId: uesio/crm.mailing_zip_postal
-            uesio.variant: uesio/crm.three_columns
+            uesio.variant: uesio/appkit.three_columns
 title: Contact Mailing Address Section
 discoverable: true
 description: Contact Mailing Address Section

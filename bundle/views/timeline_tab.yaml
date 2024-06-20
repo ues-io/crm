@@ -39,13 +39,13 @@ definition:
           param: recordid
   components:
     - uesio/io.scrollpanel:
-        uesio.variant: uesio/crm.sidebar
+        uesio.variant: uesio/appkit.sidebar
         content:
           - uesio/io.deck:
               wire: activities
               mode: READ
               id: activities
-              uesio.variant: uesio/crm.tiles
+              uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.comment_tile:
         footer:
@@ -65,7 +65,7 @@ definition:
                     components:
                       - uesio/io.button:
                           text: Comment
-                          uesio.variant: uesio/crm.sidebar
+                          uesio.variant: uesio/appkit.secondary_small
                           signals:
                             - signal: wire/SAVE
                             - signal: wire/RESET

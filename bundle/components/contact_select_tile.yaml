@@ -7,7 +7,7 @@ properties:
     label: Signals
 definition:
   - uesio/io.tile:
-      uesio.variant: uesio/crm.item
+      uesio.variant: uesio/appkit.item
       content:
         - uesio/io.group:
             uesio.styleTokens:
@@ -15,11 +15,11 @@ definition:
                 - grid-cols-[200px_1fr]
             components:
               - uesio/io.titlebar:
-                  uesio.variant: uesio/crm.item
+                  uesio.variant: uesio/appkit.item
                   title: ${firstname} ${lastname}
                   subtitle: ${account->name}
               - uesio/io.titlebar:
-                  uesio.variant: uesio/crm.subitem
+                  uesio.variant: uesio/appkit.subitem
                   title: ${email}
                   subtitle: ${phone}
                   actions:
@@ -31,7 +31,7 @@ definition:
                         uesio.display:
                           - type: hasValue
                             value: $Prop{selected}
-                        uesio.variant: uesio/crm.avatariconoutline
+                        uesio.variant: uesio/appkit.avatariconoutline
                         text: check
       avatar:
         - uesio/io.avatar:

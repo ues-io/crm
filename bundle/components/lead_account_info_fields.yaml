@@ -3,14 +3,14 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.grid:
-      uesio.variant: uesio/crm.two_columns
+      uesio.variant: uesio/appkit.two_columns
       items:
         - uesio/io.field:
             fieldId: uesio/crm.company
         - uesio/io.field:
             fieldId: uesio/crm.industry
   - uesio/io.grid:
-      uesio.variant: uesio/crm.three_columns
+      uesio.variant: uesio/appkit.three_columns
       items:
         - uesio/io.field:
             fieldId: uesio/crm.description

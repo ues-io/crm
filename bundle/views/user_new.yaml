@@ -34,7 +34,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: user
@@ -44,7 +44,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New User
                           subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: badge
@@ -61,11 +61,11 @@ definition:
                                           path: user/detail/${uesio/core.id}
                                       text: Create User
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: user
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
-                      - uesio/crm.user_primary_section:
+                                      uesio.variant: uesio/appkit.secondary
+                      - uesio/appkit.user_primary_section:

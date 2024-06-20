@@ -43,7 +43,7 @@ definition:
           - uesio/io.titlebar:
               title: $Collection{lead:pluralLabel}
               subtitle: List View
-              uesio.variant: uesio/crm.main
+              uesio.variant: uesio/appkit.main
               avatar:
                 - uesio/io.text:
                     uesio.variant: uesio/io.icon
@@ -70,7 +70,7 @@ definition:
                               componentid: leadTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
-                          uesio.variant: uesio/crm.primary
+                          uesio.variant: uesio/appkit.primary
                           uesio.display:
                             - type: wireHasChanges
                               wire: lead
@@ -92,7 +92,7 @@ definition:
                             - type: wireHasChanges
                               wire: lead
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -110,7 +110,7 @@ definition:
                           text: Edit
                           icon: edit_square
                           iconFill: false
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -128,35 +128,35 @@ definition:
                           icon: task_alt
                           iconFill: false
                           text: Read
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
           - uesio/io.box:
-              uesio.variant: uesio/crm.primarysection
+              uesio.variant: uesio/appkit.primarysection
               components:
                 - uesio/io.toolbar:
                     linkedComponentType: uesio/io.table
                     linkedComponentId: leadTable
                     left:
                       - uesio/io.searchbox:
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           wire: lead
                           placeholder: Search Leads
                           searchFields:
                             - uesio/crm.firstname
                             - uesio/crm.lastname
                       - uesio/io.filter:
-                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
                           wire: lead
                           fieldId: uesio/crm.status
                           labelPosition: none
                           displayAs: MULTISELECT
                       - uesio/io.filter:
-                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
                           wire: lead
                           fieldId: uesio/crm.rating
                           labelPosition: none
                           displayAs: MULTISELECT
                       - uesio/io.filter:
-                          uesio.variant: uesio/io.customselectfield:uesio/crm.filter
+                          uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
                           wire: lead
                           fieldId: uesio/crm.source
                           labelPosition: none
@@ -164,7 +164,7 @@ definition:
                       - uesio/io.button:
                           text: Quick Create
                           icon: add_circle
-                          uesio.variant: uesio/crm.add
+                          uesio.variant: uesio/appkit.add
                           signals:
                             - signal: wire/CREATE_RECORD
                               wire: lead
@@ -176,7 +176,7 @@ definition:
                       - uesio/io.button:
                           text: Delete
                           icon: delete
-                          uesio.variant: uesio/crm.delete
+                          uesio.variant: uesio/appkit.delete
                           signals:
                             - signal: component/CALL
                               component: uesio/io.table
@@ -188,7 +188,7 @@ definition:
                             - type: hasValue
                               value: $ComponentState{[uesio/io.table][leadTable][selected->count]}
                 - uesio/io.table:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     selectable: true
                     rowactions:
                       - icon: visibility
@@ -204,7 +204,7 @@ definition:
                     columns:
                       - components:
                           - uesio/io.avatar:
-                              uesio.variant: uesio/crm.tablecolumn
+                              uesio.variant: uesio/appkit.tablecolumn
                               text: ${initials}
                               image: $UserFile{uesio/crm.image}
                         uesio.display:

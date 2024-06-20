@@ -1,8 +1,0 @@
-name: delete
-label: Delete
-public: true
-extends: uesio/crm.primary
-definition:
-  uesio.styleTokens:
-    root:
-      - min-w-min

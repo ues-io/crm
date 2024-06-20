@@ -41,7 +41,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: lead
@@ -51,7 +51,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New Lead
                           subtitle: "${firstname} ${lastname}"
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           actions:
                             - uesio/io.group:
                                 components:
@@ -66,27 +66,27 @@ definition:
                                           recordid: ${uesio/core.id}
                                       text: Create Lead
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: lead
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                           avatar:
                             - uesio/io.text:
                                 uesio.variant: uesio/io.icon
                                 text: filter_alt
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.primarysection
+                          uesio.variant: uesio/appkit.primarysection
                           components:
                             - uesio/crm.lead_contact_info_fields:
                       - uesio/crm.lead_account_info_section:
                       - uesio/crm.lead_opp_info_section:
                       - uesio/io.box:
-                          uesio.variant: uesio/crm.section
+                          uesio.variant: uesio/appkit.section
                           components:
                             - uesio/io.titlebar:
                                 title: Lead Info
-                                uesio.variant: uesio/crm.sub
+                                uesio.variant: uesio/appkit.sub
                             - uesio/crm.lead_primary_fields:

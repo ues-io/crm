@@ -1,7 +1,0 @@
-name: primarysection
-label: Primary Section
-extends: uesio/crm.section
-definition:
-  uesio.styleTokens:
-    root:
-      - mt-0

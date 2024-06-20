@@ -3,10 +3,10 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/crm.primarysection
+      uesio.variant: uesio/appkit.primarysection
       components:
         - uesio/io.grid:
-            uesio.variant: uesio/crm.three_columns
+            uesio.variant: uesio/appkit.three_columns
             items:
               - uesio/io.field:
                   fieldId: uesio/crm.name

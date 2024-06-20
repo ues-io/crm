@@ -27,7 +27,7 @@ definition:
           - uesio/io.titlebar:
               title: $Collection{events:pluralLabel}
               subtitle: List View
-              uesio.variant: uesio/crm.main
+              uesio.variant: uesio/appkit.main
               avatar:
                 - uesio/io.text:
                     text: calendar_month
@@ -54,7 +54,7 @@ definition:
                               componentid: eventsTable
                           text: $Label{uesio/io.save}
                           hotkey: "meta+s"
-                          uesio.variant: uesio/crm.primary
+                          uesio.variant: uesio/appkit.primary
                           uesio.display:
                             - type: wireHasChanges
                               wire: events
@@ -76,7 +76,7 @@ definition:
                             - type: wireHasChanges
                               wire: events
                           text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -94,7 +94,7 @@ definition:
                           text: Edit
                           icon: edit_square
                           iconFill: false
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
                       - uesio/io.button:
                           signals:
                             - signal: component/CALL
@@ -112,16 +112,16 @@ definition:
                           icon: task_alt
                           iconFill: false
                           text: Read
-                          uesio.variant: uesio/crm.secondary
+                          uesio.variant: uesio/appkit.secondary
           - uesio/io.box:
-              uesio.variant: uesio/crm.primarysection
+              uesio.variant: uesio/appkit.primarysection
               components:
                 - uesio/io.toolbar:
                     linkedComponentType: uesio/io.table
                     linkedComponentId: eventsTable
                     left:
                       - uesio/io.searchbox:
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           wire: events
                           placeholder: Search Events
                           searchFields:
@@ -130,7 +130,7 @@ definition:
                       - uesio/io.button:
                           text: Quick Create
                           icon: add_circle
-                          uesio.variant: uesio/crm.add
+                          uesio.variant: uesio/appkit.add
                           signals:
                             - signal: wire/CREATE_RECORD
                               wire: events
@@ -142,7 +142,7 @@ definition:
                       - uesio/io.button:
                           text: Delete
                           icon: delete
-                          uesio.variant: uesio/crm.delete
+                          uesio.variant: uesio/appkit.delete
                           signals:
                             - signal: component/CALL
                               component: uesio/io.table
@@ -154,7 +154,7 @@ definition:
                             - type: hasValue
                               value: $ComponentState{[uesio/io.table][eventsTable][selected->count]}
                 - uesio/io.table:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     selectable: true
                     rowactions:
                       - icon: visibility
@@ -170,7 +170,7 @@ definition:
                     columns:
                       - components:
                           - uesio/io.text:
-                              uesio.variant: uesio/crm.avatariconoutline
+                              uesio.variant: uesio/appkit.avatariconoutline
                               text: calendar_month
                       - field: uesio/crm.name
                       - field: uesio/crm.location

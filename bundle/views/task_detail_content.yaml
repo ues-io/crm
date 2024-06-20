@@ -30,7 +30,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     mode: READ
@@ -46,7 +46,7 @@ definition:
                                   - uesio/io.button:
                                       text: Save
                                       icon: ""
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                       iconPlacement: start
                                       signals:
                                         - signal: wire/SAVE
@@ -59,7 +59,7 @@ definition:
                                   - uesio/io.button:
                                       text: Cancel
                                       icon: ""
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       iconPlacement: start
                                       signals:
                                         - signal: wire/CANCEL
@@ -71,7 +71,7 @@ definition:
                                   - uesio/io.button:
                                       text: Read
                                       icon: task_alt
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       iconPlacement: start
                                       signals:
                                         - signal: component/CALL
@@ -91,7 +91,7 @@ definition:
                                       text: EDIT
                                       icon: edit_square
                                       iconFill: false
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                                       iconPlacement: start
                                       signals:
                                         - signal: component/CALL
@@ -107,18 +107,18 @@ definition:
                                         - type: wireHasNoChanges
                                           operator: EQUALS
                                           wire: task
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: task_alt
                                 uesio.variant: uesio/io.icon
                       - uesio/crm.task_primary_section:
                       - uesio/crm.task_related_to_section:
-                      - uesio/crm.audit_info_section:
-                      - uesio/crm.delete_section:
+                      - uesio/appkit.audit_info_section:
+                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
-                    uesio.variant: uesio/crm.main
+                    uesio.variant: uesio/appkit.main
                     tabs:
                       - id: timeline
                         label: Timeline

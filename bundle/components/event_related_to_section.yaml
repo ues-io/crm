@@ -6,9 +6,9 @@ definition:
       components:
         - uesio/io.titlebar:
             title: related to
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
-            uesio.variant: uesio/crm.two_columns
+            uesio.variant: uesio/appkit.two_columns
             items:
               - uesio/io.field:
                   wire: event
@@ -22,7 +22,7 @@ definition:
               - uesio/io.field:
                   wire: event
                   fieldId: uesio/crm.related_opportunity
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
 title: Event Related To Section
 discoverable: true
 description: Event Related To Section

@@ -5,7 +5,7 @@ definition:
   - uesio/io.box:
       components:
         - uesio/io.grid:
-            uesio.variant: uesio/crm.two_columns
+            uesio.variant: uesio/appkit.two_columns
             items:
               - uesio/io.field:
                   wire: event
@@ -19,7 +19,7 @@ definition:
               - uesio/io.field:
                   wire: event
                   fieldId: uesio/crm.endtime
-      uesio.variant: uesio/crm.primarysection
+      uesio.variant: uesio/appkit.primarysection
 title: Event Primary Section
 discoverable: true
 description: Event Primary Section

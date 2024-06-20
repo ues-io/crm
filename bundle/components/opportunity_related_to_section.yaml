@@ -6,15 +6,15 @@ definition:
       components:
         - uesio/io.titlebar:
             title: Related To
-            uesio.variant: uesio/crm.sub
+            uesio.variant: uesio/appkit.sub
         - uesio/io.grid:
-            uesio.variant: uesio/crm.two_columns
+            uesio.variant: uesio/appkit.two_columns
             items:
               - uesio/io.field:
                   fieldId: uesio/crm.account
               - uesio/io.field:
                   fieldId: uesio/crm.contact
-      uesio.variant: uesio/crm.section
+      uesio.variant: uesio/appkit.section
 title: Opportunity Related To Section
 discoverable: true
 description: Opportunity Related To Section

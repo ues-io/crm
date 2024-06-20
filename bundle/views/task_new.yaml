@@ -23,7 +23,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: task
@@ -33,7 +33,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New Task
                           subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: task_alt
@@ -52,12 +52,12 @@ definition:
                                           recordid: ${uesio/core.id}
                                       text: Create Task
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: task
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                       - uesio/crm.task_primary_section:
                       - uesio/crm.task_related_to_section:

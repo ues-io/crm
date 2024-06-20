@@ -1,8 +1,0 @@
-name: main_pointer
-label: Main Pointer
-public: true
-extends: uesio/crm.main
-definition:
-  uesio.styleTokens:
-    root:
-      - cursor-pointer

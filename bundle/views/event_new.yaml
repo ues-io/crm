@@ -23,7 +23,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/crm.detail_split:
+          - uesio/appkit.detail_split:
               main:
                 - uesio/io.list:
                     wire: event
@@ -33,7 +33,7 @@ definition:
                       - uesio/io.titlebar:
                           title: New Event
                           subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/crm.main
+                          uesio.variant: uesio/appkit.main
                           avatar:
                             - uesio/io.text:
                                 text: calendar_month
@@ -52,12 +52,12 @@ definition:
                                           recordid: ${uesio/core.id}
                                       text: Create
                                       hotkey: "meta+s"
-                                      uesio.variant: uesio/crm.primary
+                                      uesio.variant: uesio/appkit.primary
                                   - uesio/io.button:
                                       signals:
                                         - signal: wire/RESET
                                           wire: event
                                       text: Reset
-                                      uesio.variant: uesio/crm.secondary
+                                      uesio.variant: uesio/appkit.secondary
                       - uesio/crm.event_primary_section:
                       - uesio/crm.event_related_to_section:
