@@ -27,18 +27,18 @@ definition:
         uesio/crm.close_date:
         uesio/crm.image:
         uesio/crm.website:
-        uesio/crm.company: {}
-        uesio/core.id: {}
-        uesio/core.updatedby: {}
-        uesio/core.updatedat: {}
-        uesio/core.createdby: {}
-        uesio/core.createdat: {}
-        uesio/core.owner: {}
-        uesio/crm.status: {}
-        uesio/crm.rating: {}
-        uesio/crm.next_steps: {}
-        uesio/crm.initials: {}
-        uesio/crm.source: {}
+        uesio/crm.company:
+        uesio/core.id:
+        uesio/core.updatedby:
+        uesio/core.updatedat:
+        uesio/core.createdby:
+        uesio/core.createdat:
+        uesio/core.owner:
+        uesio/crm.status:
+        uesio/crm.rating:
+        uesio/crm.next_steps:
+        uesio/crm.initials:
+        uesio/crm.source:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -52,128 +52,34 @@ definition:
         components:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.detail_form:
                     wire: lead
-                    uesio.id: leadList
-                    components:
-                      - uesio/io.titlebar:
-                          title: ${uesio/crm.fullname}
-                          subtitle: $Collection{label}
-                          uesio.variant: uesio/appkit.main
-                          actions:
-                            - uesio/io.toolbar:
-                                right:
-                                  - uesio/io.button:
-                                      text: Convert Lead
-                                      uesio.variant: uesio/appkit.secondary
-                                      signals:
-                                        - signal: route/NAVIGATE
-                                          path: "lead/convert/${uesio/core.id}?contact=${firstname} ${lastname}&account=${company}"
-                                      uesio.display:
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: lead
-                                        - type: fieldValue
-                                          operator: NOT_IN
-                                          wire: lead
-                                          field: uesio/crm.status
-                                          values:
-                                            - CONVERTED
-                                            - CLOSED
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - lead
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: SET_READ_MODE
-                                          targettype: specific
-                                          componentid: leadList
-                                      text: Save
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                      uesio.display:
-                                        - type: group
-                                          conjunction: OR
-                                          conditions:
-                                            - type: wireHasChanges
-                                              operator: EQUALS
-                                              wire: lead
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/CANCEL
-                                          wire: lead
-                                      text: Cancel
-                                      uesio.variant: uesio/appkit.secondary
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          operator: EQUALS
-                                          wire: lead
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: leadList
-                                      text: Edit
-                                      icon: edit_square
-                                      iconFill: false
-                                      uesio.variant: uesio/appkit.secondary
-                                      uesio.display:
-                                        - type: mergeValue
-                                          value: EDIT
-                                          operator: NOT_EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
-                                        - type: wireHasNoChanges
-                                          wire: lead
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: leadList
-                                      uesio.display:
-                                        - type: mergeValue
-                                          value: EDIT
-                                          operator: EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][leadList][mode]}
-                                        - type: wireHasNoChanges
-                                          wire: lead
-                                      icon: task_alt
-                                      iconFill: false
-                                      text: Read
-                                      uesio.variant: uesio/appkit.secondary
-                          avatar:
-                            - uesio/io.menu:
-                                uesio.variant: uesio/appkit.upload
-                                arrow: true
-                                closeButton: true
-                                trigger:
-                                  - uesio/io.avatar:
-                                      uesio.variant: uesio/appkit.main
-                                      text: ${initials}
-                                      image: $UserFile{uesio/crm.image}
-                                content:
-                                  - uesio/io.box:
-                                      components:
-                                        - uesio/io.titlebar:
-                                            uesio.variant: uesio/appkit.sub
-                                            title: Upload or Delete Lead Image
-                                        - uesio/io.field:
-                                            labelPosition: none
-                                            uesio.context:
-                                              fieldMode: EDIT
-                                            fieldId: uesio/crm.image
-                                            displayAs: IMAGE
+                    title: ${lead:fullname}
+                    imagefield: uesio/crm.image
+                    initials: ${lead:initials}
+                    extra_actions:
+                      - uesio/io.button:
+                          text: Convert Lead
+                          uesio.variant: uesio/appkit.secondary
+                          signals:
+                            - signal: route/NAVIGATE
+                              path: "lead/convert/${uesio/core.id}?contact=${firstname} ${lastname}&account=${company}"
+                          uesio.display:
+                            - type: wireHasNoChanges
+                              operator: EQUALS
+                              wire: lead
+                            - type: fieldValue
+                              operator: NOT_IN
+                              wire: lead
+                              field: uesio/crm.status
+                              values:
+                                - CONVERTED
+                                - CLOSED
+                    content:
                       - uesio/crm.lead_primary_section:
                       - uesio/crm.lead_contact_info_section:
                       - uesio/crm.lead_account_info_section:
                       - uesio/crm.lead_opp_info_section:
-                      - uesio/appkit.audit_info_section:
-                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/appkit.main

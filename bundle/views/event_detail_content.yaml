@@ -6,18 +6,18 @@ definition:
       collection: uesio/crm.event
       fields:
         uesio/crm.name:
-        uesio/crm.related_account: {}
-        uesio/crm.related_contact: {}
-        uesio/crm.description: {}
-        uesio/crm.endtime: {}
-        uesio/crm.related_lead: {}
-        uesio/crm.location: {}
-        uesio/crm.starttime: {}
-        uesio/crm.related_opportunity: {}
-        uesio/core.createdby: {}
-        uesio/core.id: {}
-        uesio/core.owner: {}
-        uesio/core.updatedby: {}
+        uesio/crm.related_account:
+        uesio/crm.related_contact:
+        uesio/crm.description:
+        uesio/crm.endtime:
+        uesio/crm.related_lead:
+        uesio/crm.location:
+        uesio/crm.starttime:
+        uesio/crm.related_opportunity:
+        uesio/core.createdby:
+        uesio/core.id:
+        uesio/core.owner:
+        uesio/core.updatedby:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -26,89 +26,12 @@ definition:
   components:
     - uesio/appkit.detail_split:
         main:
-          - uesio/io.list:
-              mode: READ
+          - uesio/appkit.detail_form:
               wire: event
-              uesio.id: eventList
-              components:
-                - uesio/io.titlebar:
-                    title: ${uesio/crm.name}
-                    uesio.variant: uesio/appkit.main
-                    subtitle: $Collection{label}
-                    actions:
-                      - uesio/io.toolbar:
-                          right:
-                            - uesio/io.button:
-                                text: Save
-                                uesio.variant: uesio/appkit.primary
-                                iconPlacement: start
-                                signals:
-                                  - signal: wire/SAVE
-                                    wires:
-                                      - event
-                                uesio.display:
-                                  - type: wireHasChanges
-                                    operator: EQUALS
-                                    wire: event
-                            - uesio/io.button:
-                                text: Cancel
-                                icon: ""
-                                uesio.variant: uesio/appkit.secondary
-                                iconPlacement: start
-                                signals:
-                                  - signal: wire/CANCEL
-                                    wire: event
-                                uesio.display:
-                                  - type: wireHasChanges
-                                    operator: EQUALS
-                                    wire: event
-                            - uesio/io.button:
-                                text: Read
-                                icon: task_alt
-                                uesio.variant: uesio/appkit.secondary
-                                iconPlacement: start
-                                signals:
-                                  - signal: component/CALL
-                                    component: uesio/io.list
-                                    componentsignal: TOGGLE_MODE
-                                    targettype: specific
-                                    componentid: eventList
-                                uesio.display:
-                                  - type: mergeValue
-                                    operator: EQUALS
-                                    sourceValue: $ComponentState{[uesio/io.list][eventList][mode]}
-                                    value: EDIT
-                                  - type: wireHasNoChanges
-                                    operator: EQUALS
-                                    wire: event
-                            - uesio/io.button:
-                                text: Edit
-                                icon: edit_square
-                                iconFill: false
-                                uesio.variant: uesio/appkit.secondary
-                                iconPlacement: start
-                                signals:
-                                  - signal: component/CALL
-                                    component: uesio/io.list
-                                    componentsignal: TOGGLE_MODE
-                                    targettype: specific
-                                    componentid: eventList
-                                uesio.display:
-                                  - type: mergeValue
-                                    operator: NOT_EQUALS
-                                    sourceValue: $ComponentState{[uesio/io.list][eventList][mode]}
-                                    value: EDIT
-                                  - type: wireHasNoChanges
-                                    operator: EQUALS
-                                    wire: event
-                    avatar:
-                      - uesio/io.text:
-                          text: calendar_month
-                          uesio.variant: uesio/io.icon
+              avataricon: calendar_month
+              content:
                 - uesio/crm.event_primary_section:
                 - uesio/crm.event_related_to_section:
-                - uesio/appkit.audit_info_section:
-                - uesio/appkit.delete_section:
         left:
           - uesio/io.tabs:
               uesio.variant: uesio/appkit.main

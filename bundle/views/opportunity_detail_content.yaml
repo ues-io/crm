@@ -16,8 +16,7 @@ definition:
         uesio/core.updatedby:
         uesio/core.updatedat:
         uesio/core.owner:
-        uesio/core.id: {}
-        uesio/crm.stage: {}
+        uesio/crm.stage:
       conditions:
         - field: uesio/core.id
           valueSource: PARAM
@@ -28,84 +27,12 @@ definition:
         components:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.detail_form:
                     wire: opportunity
-                    uesio.id: opportunityList
-                    components:
-                      - uesio/io.titlebar:
-                          title: $RecordMeta{name}
-                          subtitle: $Collection{label}
-                          uesio.variant: uesio/appkit.main
-                          actions:
-                            - uesio/io.group:
-                                columnGap: 10px
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - opportunity
-                                      text: Save
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          wire: opportunity
-                                  - uesio/io.button:
-                                      text: Cancel
-                                      uesio.variant: uesio/appkit.secondary
-                                      uesio.display:
-                                        - type: wireHasChanges
-                                          wire: opportunity
-                                      signals:
-                                        - signal: wire/CANCEL
-                                          wire: opportunity
-                                  - uesio/io.button:
-                                      text: Read
-                                      icon: task_alt
-                                      uesio.variant: uesio/appkit.secondary
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: opportunityList
-                                      uesio.display:
-                                        - type: mergeValue
-                                          operator: EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][opportunityList][mode]}
-                                          value: EDIT
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: opportunity
-                                  - uesio/io.button:
-                                      text: EDIT
-                                      icon: edit_square
-                                      iconFill: false
-                                      uesio.variant: uesio/appkit.secondary
-                                      iconPlacement: start
-                                      uesio.display:
-                                        - type: mergeValue
-                                          operator: NOT_EQUALS
-                                          sourceValue: $ComponentState{[uesio/io.list][opportunityList][mode]}
-                                          value: EDIT
-                                        - type: wireHasNoChanges
-                                          operator: EQUALS
-                                          wire: opportunity
-                                      signals:
-                                        - signal: component/CALL
-                                          component: uesio/io.list
-                                          componentsignal: TOGGLE_MODE
-                                          targettype: specific
-                                          componentid: opportunityList
-                          avatar:
-                            - uesio/io.text:
-                                text: payments
-                                uesio.variant: uesio/io.icon
+                    avataricon: payments
+                    content:
                       - uesio/crm.opportunity_primary_section:
                       - uesio/crm.opportunity_related_to_section:
-                      - uesio/appkit.audit_info_section:
-                      - uesio/appkit.delete_section:
               left:
                 - uesio/io.tabs:
                     uesio.variant: uesio/appkit.main
