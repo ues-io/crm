@@ -3,13 +3,13 @@ loginRoute: uesio/crm.login
 homeRoute: uesio/crm.home
 publicProfile: uesio/crm.public
 dependencies:
+  uesio/aikit:
+    version: v0.0.1
+  uesio/appkit:
+    version: v0.0.1
   uesio/builder:
     version: v0.0.1
   uesio/core:
     version: v0.0.1
   uesio/io:
-    version: v0.0.1
-  uesio/aikit:
-    version: v0.0.1
-  uesio/appkit:
     version: v0.0.1
