@@ -88,9 +88,24 @@ definition:
                           - chat_history
                       - signal: wire/RESET
                         wire: input
+                - uesio/io.button:
+                    icon: delete
+                    tooltip: Delete Chat History
+                    uesio.variant: uesio/appkit.tertiary_small
+                    uesio.styleTokens:
+                      root:
+                        - order-first
+                    signals:
+                      - signal: bot/CALL
+                        bot: uesio/crm.delete_ai_chat_history
+                        params:
+                          parent: $Param{recordid}
+                      - signal: wire/LOAD
+                        wires:
+                          - chat_history
               uesio.styleTokens:
                 root:
-                  - justify-right
+                  - justify-between
         content:
           - uesio/io.deck:
               wire: chat_history
