@@ -31,7 +31,7 @@ definition:
         components:
           - uesio/appkit.detail_split:
               main:
-                - uesio/appkit.detail_form:
+                - uesio/appkit.form_detail:
                     wire: task
                     avataricon: task_alt
                     content:

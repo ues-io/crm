@@ -25,39 +25,9 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: event
-                    uesio.id: eventList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New Event
-                          subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: calendar_month
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - event
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.event
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
-                                      text: Create
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: event
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: calendar_month
+                    content:
                       - uesio/crm.event_primary_section:
                       - uesio/crm.event_related_to_section:
