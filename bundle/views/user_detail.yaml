@@ -1,6 +1,5 @@
 name: user_detail
 definition:
-  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:

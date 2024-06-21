@@ -2,5 +2,5 @@ name: fullname
 label: Fullname
 type: FORMULA
 formula:
-  expression: (uesio/crm.firstname?uesio/crm.firstname:"") + " " + (uesio/crm.lastname?uesio/crm.lastname:"")
+  expression: 'IS_BLANK(uesio/crm.firstname) && IS_BLANK(uesio/crm.lastname) ? TO_STRING(uesio/crm.company) : TO_STRING(uesio/crm.firstname) + " " + TO_STRING(uesio/crm.lastname)'
   returntype: TEXT

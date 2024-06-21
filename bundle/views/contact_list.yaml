@@ -39,147 +39,31 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.titlebar:
-              title: $Collection{contact:pluralLabel}
-              subtitle: List View
-              uesio.variant: uesio/appkit.main
-              avatar:
-                - uesio/io.text:
-                    text: person
-                    uesio.variant: uesio/io.icon
-              actions:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: contactTable
-                    right:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/SAVE
-                              wires:
-                                - contact
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: contactTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: contactTable
-                          text: $Label{uesio/io.save}
-                          hotkey: "meta+s"
-                          uesio.variant: uesio/appkit.primary
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: contact
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CANCEL
-                              wire: contact
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: contactTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: contactTable
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: contact
-                          text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: contactTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: NOT_EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: contact
-                          text: Edit
-                          icon: edit_square
-                          iconFill: false
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: contactTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: contact
-                          icon: task_alt
-                          iconFill: false
-                          text: Read
-                          uesio.variant: uesio/appkit.secondary
-          - uesio/io.box:
-              uesio.variant: uesio/appkit.primarysection
-              components:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: contactTable
-                    left:
-                      - uesio/io.searchbox:
-                          uesio.variant: uesio/appkit.main
-                          wire: contact
-                          placeholder: Search Contacts
-                          searchFields:
-                            - uesio/crm.firstname
-                            - uesio/crm.fullname
-                            - uesio/crm.lastname
-                      - uesio/io.filter:
-                          uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
-                          wire: contact
-                          fieldId: uesio/crm.role
-                          labelPosition: none
-                      - uesio/io.filter:
-                          uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
-                          wire: contact
-                          fieldId: uesio/crm.account
-                          labelPosition: none
-                    right:
-                      - uesio/io.button:
-                          text: Quick Create
-                          icon: add_circle
-                          uesio.variant: uesio/appkit.add
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: contact
-                              prepend: true
-                          uesio.display:
-                            - type: mergeValue
-                              sourceValue: $ComponentState{[uesio/io.table][contactTable][mode]}
-                              value: EDIT
-                      - uesio/io.button:
-                          text: Delete
-                          icon: delete
-                          uesio.variant: uesio/appkit.delete
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: GET_SELECTED
-                              targettype: specific
-                              componentid: contactTable
-                            - signal: wire/TOGGLE_DELETE_STATUS
-                          uesio.display:
-                            - type: hasValue
-                              value: $ComponentState{[uesio/io.table][contactTable][selected->count]}
+          - uesio/appkit.form_list:
+              wire: contact
+              avataricon: person
+              linkedComponentType: uesio/io.table
+              linkedComponentId: contactTable
+              filters:
+                - uesio/io.searchbox:
+                    uesio.variant: uesio/appkit.main
+                    wire: contact
+                    placeholder: Search Contacts
+                    searchFields:
+                      - uesio/crm.firstname
+                      - uesio/crm.fullname
+                      - uesio/crm.lastname
+                - uesio/io.filter:
+                    uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
+                    wire: contact
+                    fieldId: uesio/crm.role
+                    labelPosition: none
+                - uesio/io.filter:
+                    uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
+                    wire: contact
+                    fieldId: uesio/crm.account
+                    labelPosition: none
+              content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
                     selectable: true
@@ -226,6 +110,5 @@ definition:
                       - field: uesio/crm.email
                       - field: uesio/crm.phone_mobile
                     uesio.id: contactTable
-                    mode: READ
                     wire: contact
                     pagesize: 10

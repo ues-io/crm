@@ -1,24 +1,5 @@
 name: user_list
 definition:
-  # Wires connect to data in collections
-  wires:
-    user:
-      collection: uesio/core.user
-      fields:
-        uesio/core.firstname:
-        uesio/core.lastname:
-        uesio/core.username:
-        uesio/core.initials:
-        uesio/core.email:
-        uesio/core.profile:
-      batchsize: 200
-      conditions:
-        - field: uesio/core.username
-          operator: NOT_IN
-          values:
-            - system
-            - guest
-  # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
         left:

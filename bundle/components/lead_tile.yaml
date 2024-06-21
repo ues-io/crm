@@ -7,7 +7,7 @@ definition:
       content:
         - uesio/io.titlebar:
             uesio.variant: uesio/appkit.item
-            title: ${firstname} ${lastname}
+            title: ${fullname}
             subtitle: ${company}
             actions:
               - uesio/io.group:
