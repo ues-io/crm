@@ -23,7 +23,7 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/appkit.detail_split:
+          - uesio/appkit.layout_detail_split:
               main:
                 - uesio/appkit.form_new:
                     wire: event

@@ -186,7 +186,7 @@ definition:
           - type: paramIsSet
             param: recordid
         components:
-          - uesio/appkit.detail_split:
+          - uesio/appkit.layout_detail_split:
               main:
                 - uesio/io.item:
                     wire: lead
@@ -539,7 +539,7 @@ definition:
                                             text: info
                                         - uesio/io.text:
                                             text: "You cannot link to an existing opportunity unless you're also linking to an existing account."
-                      - uesio/appkit.audit_info_section:
+                      - uesio/appkit.section_audit_info:
               left:
                 - uesio/io.box:
                     components:
