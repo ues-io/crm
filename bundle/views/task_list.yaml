@@ -23,135 +23,19 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.titlebar:
-              title: $Collection{task:pluralLabel}
-              subtitle: List View
-              uesio.variant: uesio/appkit.main
-              avatar:
-                - uesio/io.text:
-                    text: task_alt
-                    uesio.variant: uesio/io.icon
-              actions:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: taskTable
-                    right:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/SAVE
-                              wires:
-                                - task
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: taskTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: taskTable
-                          text: $Label{uesio/io.save}
-                          hotkey: "meta+s"
-                          uesio.variant: uesio/appkit.primary
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: task
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CANCEL
-                              wire: task
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: taskTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: taskTable
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: task
-                          text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: taskTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: NOT_EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: task
-                          text: Edit
-                          icon: edit_square
-                          iconFill: false
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: taskTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: task
-                          icon: task_alt
-                          iconFill: false
-                          text: Read
-                          uesio.variant: uesio/appkit.secondary
-          - uesio/io.box:
-              uesio.variant: uesio/appkit.primarysection
-              components:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: taskTable
-                    left:
-                      - uesio/io.searchbox:
-                          uesio.variant: uesio/appkit.main
-                          wire: task
-                          placeholder: Search Tasks
-                          searchFields:
-                            - uesio/crm.name
-                    right:
-                      - uesio/io.button:
-                          text: Quick Create
-                          icon: add_circle
-                          uesio.variant: uesio/appkit.add
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: task
-                              prepend: true
-                          uesio.display:
-                            - type: mergeValue
-                              sourceValue: $ComponentState{[uesio/io.table][taskTable][mode]}
-                              value: EDIT
-                      - uesio/io.button:
-                          text: Delete
-                          icon: delete
-                          uesio.variant: uesio/appkit.delete
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: GET_SELECTED
-                              targettype: specific
-                              componentid: taskTable
-                            - signal: wire/TOGGLE_DELETE_STATUS
-                          uesio.display:
-                            - type: hasValue
-                              value: $ComponentState{[uesio/io.table][taskTable][selected->count]}
+          - uesio/appkit.form_list:
+              wire: task
+              avataricon: task_alt
+              linkedComponentType: uesio/io.table
+              linkedComponentId: taskTable
+              filters:
+                - uesio/io.searchbox:
+                    uesio.variant: uesio/appkit.main
+                    wire: task
+                    placeholder: Search Tasks
+                    searchFields:
+                      - uesio/crm.name
+              content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
                     selectable: true
@@ -179,6 +63,5 @@ definition:
                       - field: uesio/crm.related_lead
                       - field: uesio/crm.related_opportunity
                     uesio.id: taskTable
-                    mode: READ
                     wire: task
                     pagesize: 10

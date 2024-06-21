@@ -24,135 +24,19 @@ definition:
         left:
           - uesio/crm.nav:
         content:
-          - uesio/io.titlebar:
-              title: $Collection{events:pluralLabel}
-              subtitle: List View
-              uesio.variant: uesio/appkit.main
-              avatar:
-                - uesio/io.text:
-                    text: calendar_month
-                    uesio.variant: uesio/io.icon
-              actions:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: eventsTable
-                    right:
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/SAVE
-                              wires:
-                                - events
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: eventsTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: eventsTable
-                          text: $Label{uesio/io.save}
-                          hotkey: "meta+s"
-                          uesio.variant: uesio/appkit.primary
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: events
-                      - uesio/io.button:
-                          signals:
-                            - signal: wire/CANCEL
-                              wire: events
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: SET_READ_MODE
-                              targettype: specific
-                              componentid: eventsTable
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: CLEAR_SELECTED
-                              targettype: specific
-                              componentid: eventsTable
-                          uesio.display:
-                            - type: wireHasChanges
-                              wire: events
-                          text: $Label{uesio/io.cancel}
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: eventsTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: NOT_EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: events
-                          text: Edit
-                          icon: edit_square
-                          iconFill: false
-                          uesio.variant: uesio/appkit.secondary
-                      - uesio/io.button:
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: TOGGLE_MODE
-                              targettype: specific
-                              componentid: eventsTable
-                          uesio.display:
-                            - type: mergeValue
-                              value: EDIT
-                              operator: EQUALS
-                              sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
-                            - type: wireHasNoChanges
-                              wire: events
-                          icon: task_alt
-                          iconFill: false
-                          text: Read
-                          uesio.variant: uesio/appkit.secondary
-          - uesio/io.box:
-              uesio.variant: uesio/appkit.primarysection
-              components:
-                - uesio/io.toolbar:
-                    linkedComponentType: uesio/io.table
-                    linkedComponentId: eventsTable
-                    left:
-                      - uesio/io.searchbox:
-                          uesio.variant: uesio/appkit.main
-                          wire: events
-                          placeholder: Search Events
-                          searchFields:
-                            - uesio/crm.name
-                    right:
-                      - uesio/io.button:
-                          text: Quick Create
-                          icon: add_circle
-                          uesio.variant: uesio/appkit.add
-                          signals:
-                            - signal: wire/CREATE_RECORD
-                              wire: events
-                              prepend: true
-                          uesio.display:
-                            - type: mergeValue
-                              sourceValue: $ComponentState{[uesio/io.table][eventsTable][mode]}
-                              value: EDIT
-                      - uesio/io.button:
-                          text: Delete
-                          icon: delete
-                          uesio.variant: uesio/appkit.delete
-                          signals:
-                            - signal: component/CALL
-                              component: uesio/io.table
-                              componentsignal: GET_SELECTED
-                              targettype: specific
-                              componentid: eventsTable
-                            - signal: wire/TOGGLE_DELETE_STATUS
-                          uesio.display:
-                            - type: hasValue
-                              value: $ComponentState{[uesio/io.table][eventsTable][selected->count]}
+          - uesio/appkit.form_list:
+              wire: events
+              avataricon: calendar_month
+              linkedComponentType: uesio/io.table
+              linkedComponentId: eventsTable
+              filters:
+                - uesio/io.searchbox:
+                    uesio.variant: uesio/appkit.main
+                    wire: events
+                    placeholder: Search Events
+                    searchFields:
+                      - uesio/crm.name
+              content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
                     selectable: true
@@ -181,6 +65,5 @@ definition:
                       - field: uesio/crm.related_contact
                       - field: uesio/crm.related_lead
                     uesio.id: eventsTable
-                    mode: READ
                     wire: events
                     pagesize: 10
