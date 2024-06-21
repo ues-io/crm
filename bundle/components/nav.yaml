@@ -99,8 +99,9 @@ definition:
                                     uesio.variant: uesio/io.iconoutline
                                     text: badge
                               signals:
-                                - signal: route/NAVIGATE
-                                  path: user
+                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  collection: uesio/core.user
+                                  viewtype: list
               - uesio/io.navsection:
                   content:
                     - uesio/io.box:

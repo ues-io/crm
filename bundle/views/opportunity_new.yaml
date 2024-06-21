@@ -23,39 +23,9 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: opportunity
-                    uesio.id: opportunityList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New Opportunity
-                          subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: payments
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - opportunity
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.opportunity
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
-                                      text: Create Opportunity
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: opportunity
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: payments
+                    content:
                       - uesio/crm.opportunity_primary_section:
                       - uesio/crm.opportunity_related_to_section:

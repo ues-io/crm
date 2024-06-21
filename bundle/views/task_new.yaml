@@ -25,39 +25,9 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: task
-                    uesio.id: taskList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New Task
-                          subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: task_alt
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - task
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.task
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
-                                      text: Create Task
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: task
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: task_alt
+                    content:
                       - uesio/crm.task_primary_section:
                       - uesio/crm.task_related_to_section:

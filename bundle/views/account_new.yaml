@@ -37,40 +37,10 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: account
-                    uesio.id: accountList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New Account
-                          subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: domain
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - account
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.account
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
-                                      text: Create Account
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: account
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: domain
+                    content:
                       - uesio/crm.account_primary_section:
                       - uesio/crm.account_billing_address_section:
                       - uesio/crm.account_shipping_address_section:

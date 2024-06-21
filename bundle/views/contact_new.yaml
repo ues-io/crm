@@ -39,40 +39,11 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: contact
-                    uesio.id: contactList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New Contact
-                          subtitle: "${firstname} ${lastname}"
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: person
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - contact
-                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                          collection: uesio/crm.contact
-                                          viewtype: detail
-                                          recordid: ${uesio/core.id}
-                                      text: Create Contact
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: contact
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: person
+                    subtitle: $Text{${contact:firstname} ${contact:lastname}}
+                    content:
                       - uesio/crm.contact_primary_section:
                       - uesio/crm.contact_account_info_section:
                       - uesio/crm.contact_mailing_address_section:

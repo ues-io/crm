@@ -36,36 +36,8 @@ definition:
         content:
           - uesio/appkit.detail_split:
               main:
-                - uesio/io.list:
+                - uesio/appkit.form_new:
                     wire: user
-                    uesio.id: userList
-                    mode: EDIT
-                    components:
-                      - uesio/io.titlebar:
-                          title: New User
-                          subtitle: $RecordMeta{name}
-                          uesio.variant: uesio/appkit.main
-                          avatar:
-                            - uesio/io.text:
-                                text: badge
-                                uesio.variant: uesio/io.icon
-                          actions:
-                            - uesio/io.group:
-                                components:
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/SAVE
-                                          wires:
-                                            - user
-                                        - signal: route/NAVIGATE
-                                          path: user/detail/${uesio/core.id}
-                                      text: Create User
-                                      hotkey: "meta+s"
-                                      uesio.variant: uesio/appkit.primary
-                                  - uesio/io.button:
-                                      signals:
-                                        - signal: wire/RESET
-                                          wire: user
-                                      text: Reset
-                                      uesio.variant: uesio/appkit.secondary
+                    avataricon: badge
+                    content:
                       - uesio/appkit.user_primary_section:
