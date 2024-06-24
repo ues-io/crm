@@ -29,6 +29,7 @@ definition:
       fields:
         uesio/crm.firstname:
         uesio/crm.lastname:
+        uesio/crm.fullname:
         uesio/crm.email:
         uesio/crm.rating:
         uesio/crm.image:
@@ -108,12 +109,9 @@ definition:
                             root:
                               - lg:grid-rows-1
                           items:
-                            - uesio/io.box:
-                                uesio.variant: uesio/appkit.dashboarditem
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: Upcoming Opportunities
-                                      uesio.variant: uesio/appkit.sub
+                            - uesio/appkit.section_dashboard:
+                                title: Upcoming Opportunities
+                                content:
                                   - uesio/io.linechart:
                                       uesio.variant: uesio/appkit.main
                                       series:
@@ -125,12 +123,9 @@ definition:
                                       labels:
                                         source: DATA
                                         timeunit: MONTH
-                            - uesio/io.box:
-                                uesio.variant: uesio/appkit.dashboarditem
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: Leads This Week
-                                      uesio.variant: uesio/appkit.sub
+                            - uesio/appkit.section_dashboard:
+                                title: Leads This Week
+                                content:
                                   - uesio/io.barchart:
                                       uesio.variant: uesio/appkit.main
                                       series:
@@ -149,53 +144,35 @@ definition:
                             root:
                               - lg:grid-rows-1
                           items:
-                            - uesio/io.box:
-                                uesio.variant: uesio/appkit.dashboarditem
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: New Leads
-                                      uesio.variant: uesio/appkit.sub
-                                  - uesio/io.box:
-                                      uesio.variant: uesio/appkit.dashboardpanel
+                            - uesio/appkit.section_dashboard:
+                                title: New Leads
+                                content:
+                                  - uesio/io.deck:
+                                      wire: newleads
+                                      mode: READ
+                                      id: newleads
+                                      uesio.variant: uesio/appkit.tiles
                                       components:
-                                        - uesio/io.deck:
-                                            wire: newleads
-                                            mode: READ
-                                            id: newleads
-                                            uesio.variant: uesio/appkit.tiles
-                                            components:
-                                              - uesio/crm.lead_tile:
-                                                  showSource: true
-                                                  showRating: true
-                            - uesio/io.box:
-                                uesio.variant: uesio/appkit.dashboarditem
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: My Tasks
-                                      uesio.variant: uesio/appkit.sub
-                                  - uesio/io.box:
-                                      uesio.variant: uesio/appkit.dashboardpanel
+                                        - uesio/crm.lead_tile:
+                                            showSource: true
+                                            showRating: true
+                            - uesio/appkit.section_dashboard:
+                                title: My Tasks
+                                content:
+                                  - uesio/io.deck:
+                                      wire: upcomingtasks
+                                      mode: READ
+                                      id: upcomingtasks
+                                      uesio.variant: uesio/appkit.tiles
                                       components:
-                                        - uesio/io.deck:
-                                            wire: upcomingtasks
-                                            mode: READ
-                                            id: upcomingtasks
-                                            uesio.variant: uesio/appkit.tiles
-                                            components:
-                                              - uesio/crm.task_tile:
-                            - uesio/io.box:
-                                uesio.variant: uesio/appkit.dashboarditem
-                                components:
-                                  - uesio/io.titlebar:
-                                      title: My Events
-                                      uesio.variant: uesio/appkit.sub
-                                  - uesio/io.box:
-                                      uesio.variant: uesio/appkit.dashboardpanel
+                                        - uesio/crm.task_tile:
+                            - uesio/appkit.section_dashboard:
+                                title: My Events
+                                content:
+                                  - uesio/io.deck:
+                                      wire: upcomingevents
+                                      mode: READ
+                                      id: upcomingevents
+                                      uesio.variant: uesio/appkit.tiles
                                       components:
-                                        - uesio/io.deck:
-                                            wire: upcomingevents
-                                            mode: READ
-                                            id: upcomingevents
-                                            uesio.variant: uesio/appkit.tiles
-                                            components:
-                                              - uesio/crm.event_tile:
+                                        - uesio/crm.event_tile:
