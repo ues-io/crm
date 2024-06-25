@@ -7,10 +7,10 @@ definition:
         - type: fieldValue
           field: type
           value: REQUEST
-      uesio.variant: uesio/crm.commentitem
+      uesio.variant: uesio/appkit.commentitem
       content:
         - uesio/io.titlebar:
-            uesio.variant: uesio/crm.commentitem
+            uesio.variant: uesio/appkit.commentitem
             title: ${description}
             subtitle: $Time{uesio/core.createdat}
       avatar:
@@ -26,10 +26,10 @@ definition:
         - type: fieldValue
           field: type
           value: RESPONSE
-      uesio.variant: uesio/crm.commentitemreverse
+      uesio.variant: uesio/appkit.commentitemreverse
       content:
         - uesio/io.titlebar:
-            uesio.variant: uesio/crm.commentitemreverse
+            uesio.variant: uesio/appkit.commentitemreverse
             uesio.styleTokens:
               title:
                 - bg-blue-100

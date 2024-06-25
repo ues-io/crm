@@ -108,14 +108,29 @@ definition:
                               uesio.id: events_tab
                               params:
                                 leadid: $Param{recordid}
-                      - label: claude ai
-                        id: claude
+                      - label: ai
+                        id: ai
                         components:
                           - uesio/core.view:
-                              view: uesio/crm.ai_tab
+                              view: uesio/appkit.tab_ai_threads
                               uesio.id: ai_tab
                               params:
-                                recordid: $Param{recordid}
+                                parent: $Param{recordid}
+                                displayname: ${lead:fullname}
+                                systemPrompt: |
+                                  You are a Sales Assistant helping work on a lead named ${lead:firstname} ${lead:lastname}. Be straightforward and matter-of-fact. Please keep responses brief if possible.
+                                  You know the following data about this lead.
+                                  status: ${lead:status}
+                                  rating: ${lead:rating}
+                                  source: ${lead:source->label}
+                                  next steps: ${lead:next_steps}
+                                  email: ${lead:email}
+                                  phone: ${lead:phone}
+                                  company: ${lead:company}
+                                  industry: ${lead:industry}
+                                  opportunity topic: ${lead:topic}
+                                  expected revenue: ${lead:expected_revenue}
+                                  close date: ${lead:close_date}
     - uesio/io.box:
         uesio.variant: uesio/io.section
         uesio.display:
