@@ -409,7 +409,7 @@ export default function convert_lead(bot: ListenerBotApi) {
 	bot.save("uesio/crm.lead", [
 		{
 			"uesio/core.id": lead,
-			"uesio/crm.status": "CONVERTED",
+			"uesio/crm.status": "Converted",
 		},
 	] as unknown as WireRecord[])
 

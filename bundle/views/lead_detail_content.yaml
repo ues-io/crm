@@ -76,8 +76,8 @@ definition:
                               wire: lead
                               field: uesio/crm.status
                               values:
-                                - CONVERTED
-                                - CLOSED
+                                - Converted
+                                - Closed
                     content:
                       - uesio/crm.lead_primary_section:
                       - uesio/crm.lead_contact_info_section:

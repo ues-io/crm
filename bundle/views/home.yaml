@@ -44,8 +44,8 @@ definition:
           operator: NOT_IN
           valueSource: VALUE
           values:
-            - CONVERTED
-            - CLOSED
+            - Converted
+            - Closed
     upcomingevents:
       collection: uesio/crm.event
       fields:
