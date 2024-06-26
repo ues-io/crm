@@ -25,12 +25,14 @@ definition:
               - uesio/io.field:
                   fieldId: uesio/crm.gender
               - uesio/io.field:
-                  fieldId: uesio/crm.email_opt_out
+                  fieldId: uesio/crm.social
               - uesio/io.field:
                   uesio.styleTokens:
                     wrapper:
-                      - col-span-3
+                      - col-span-2
                   fieldId: uesio/crm.description
+              - uesio/io.field:
+                  fieldId: uesio/crm.email_opt_out
 title: Contact Primary Section
 discoverable: true
 description: Contact Primary Section

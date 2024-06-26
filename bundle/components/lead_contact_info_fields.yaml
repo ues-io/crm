@@ -12,6 +12,12 @@ definition:
         - uesio/io.field:
             fieldId: uesio/crm.email
         - uesio/io.field:
+            fieldId: uesio/crm.title
+        - uesio/io.field:
+            fieldId: uesio/crm.department
+        - uesio/io.field:
+            fieldId: uesio/crm.social
+        - uesio/io.field:
             fieldId: uesio/crm.phone
         - uesio/io.field:
             fieldId: uesio/crm.phone_business

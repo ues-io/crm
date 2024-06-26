@@ -19,6 +19,9 @@ definition:
         uesio/crm.mailing_street:
         uesio/crm.mailing_zip_postal:
         uesio/crm.no_employees:
+        uesio/crm.title:
+        uesio/crm.department:
+        uesio/crm.social:
         uesio/crm.phone:
         uesio/crm.phone_business:
         uesio/crm.phone_mobile:

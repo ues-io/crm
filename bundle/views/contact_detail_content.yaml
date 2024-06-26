@@ -28,6 +28,7 @@ definition:
         uesio/crm.role:
         uesio/crm.salutation:
         uesio/crm.title:
+        uesio/crm.social:
         uesio/crm.initials:
         uesio/core.updatedby:
         uesio/core.updatedat:

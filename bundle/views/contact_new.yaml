@@ -28,6 +28,7 @@ definition:
         uesio/crm.role:
         uesio/crm.salutation:
         uesio/crm.title:
+        uesio/crm.social:
       init:
         create: true
         query: false

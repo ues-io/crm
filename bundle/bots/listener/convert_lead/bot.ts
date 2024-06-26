@@ -69,6 +69,15 @@ export default function convert_lead(bot: ListenerBotApi) {
 				id: "uesio/crm.mailing_zip_postal",
 			},
 			{
+				id: "uesio/crm.title",
+			},
+			{
+				id: "uesio/crm.department",
+			},
+			{
+				id: "uesio/crm.social",
+			},
+			{
 				id: "uesio/crm.image",
 				fields: [
 					{
@@ -264,6 +273,9 @@ export default function convert_lead(bot: ListenerBotApi) {
 		const mailingState = leadResultItem["uesio/crm.mailing_state_province"]
 		const mailingCountry = leadResultItem["uesio/crm.mailing_country"]
 		const mailingZip = leadResultItem["uesio/crm.mailing_zip_postal"]
+		const title = leadResultItem["uesio/crm.title"]
+		const department = leadResultItem["uesio/crm.department"]
+		const social = leadResultItem["uesio/crm.social"]
 
 		const imageFileId = leadResultItem["uesio/crm.image"] as string
 
@@ -281,6 +293,9 @@ export default function convert_lead(bot: ListenerBotApi) {
 				"uesio/crm.mailing_state_province": mailingState,
 				"uesio/crm.mailing_country": mailingCountry,
 				"uesio/crm.mailing_zip_postal": mailingZip,
+				"uesio/crm.title": title,
+				"uesio/crm.department": department,
+				"uesio/crm.social": social,
 				"uesio/crm.account": {
 					"uesio/core.id": accountId,
 				},
