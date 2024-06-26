@@ -48,6 +48,11 @@ definition:
               uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.comment_tile:
+              emptyState:
+                - uesio/io.emptystate:
+                    title: No Timeline Entries
+                    subtitle: You haven't created any timeline entries yet.
+                    icon: history
         footer:
           - uesio/io.item:
               wire: newactivity

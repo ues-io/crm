@@ -82,6 +82,11 @@ definition:
               uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.event_tile:
+              emptyState:
+                - uesio/io.emptystate:
+                    title: No Events Found
+                    subtitle: You haven't created any events yet.
+                    icon: calendar_month
         footer:
           - uesio/io.item:
               wire: newevent

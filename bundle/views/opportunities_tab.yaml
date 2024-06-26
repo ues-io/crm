@@ -65,6 +65,11 @@ definition:
                 - uesio/crm.opportunity_tile:
                     showDealInfo: true
               wire: opportunities
+              emptyState:
+                - uesio/io.emptystate:
+                    title: No Opportunities Found
+                    subtitle: There are not opportunities related to this record.
+                    icon: payments
         footer:
           - uesio/io.item:
               mode: EDIT

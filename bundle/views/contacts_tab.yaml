@@ -60,6 +60,11 @@ definition:
                 - uesio/crm.contact_tile:
                     showContactInfo: true
               wire: contacts
+              emptyState:
+                - uesio/io.emptystate:
+                    title: No Contacts Found
+                    subtitle: There are no contacts related to this record.
+                    icon: person
         footer:
           - uesio/io.item:
               mode: EDIT

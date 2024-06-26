@@ -83,6 +83,11 @@ definition:
               uesio.variant: uesio/appkit.tiles
               components:
                 - uesio/crm.task_tile:
+              emptyState:
+                - uesio/io.emptystate:
+                    title: No Tasks Found
+                    subtitle: You haven't created any tasks yet.
+                    icon: task_alt
         footer:
           - uesio/io.item:
               wire: newtask
