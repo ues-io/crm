@@ -34,16 +34,6 @@ declare module "@uesio/app/bots/listener/uesio/crm/createlogin" {
 		Params
 	}
 }
-declare module "@uesio/app/bots/listener/uesio/crm/delete_ai_chat_history" {
-
-	type Params = {
-		parent: string
-	}
-
-	export type {
-		Params
-	}
-}
 declare module "@uesio/app/bots/listener/uesio/crm/forgotpassword" {
 
 	type Params = {
@@ -51,17 +41,6 @@ declare module "@uesio/app/bots/listener/uesio/crm/forgotpassword" {
 		email: string
 		code: string
 		host: string
-	}
-
-	export type {
-		Params
-	}
-}
-declare module "@uesio/app/bots/listener/uesio/crm/new_ai_chat" {
-
-	type Params = {
-		input: string
-		parent: string
 	}
 
 	export type {
