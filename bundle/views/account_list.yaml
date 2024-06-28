@@ -36,6 +36,14 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Accounts
+                          icon: domain
         content:
           - uesio/appkit.form_list:
               wire: account

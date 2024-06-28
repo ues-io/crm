@@ -88,6 +88,14 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Home
+                          icon: home
         content:
           - uesio/io.box:
               uesio.variant: uesio/appkit.dashboarditem

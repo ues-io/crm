@@ -127,6 +127,9 @@ definition:
                                   rating: ${lead:rating}
                                   source: ${lead:source->label}
                                   next steps: ${lead:next_steps}
+                                  title: ${lead:title}
+                                  department: ${lead:department}
+                                  social media url: ${lead:social}
                                   email: ${lead:email}
                                   phone: ${lead:phone}
                                   company: ${lead:company}

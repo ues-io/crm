@@ -5,6 +5,29 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Contacts
+                          icon: person
+                          signals:
+                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                              collection: uesio/crm.contact
+                              viewtype: list
+                      - uesio/io.item:
+                          external:
+                            collection: uesio/crm.contact
+                            record: $Param{recordid}
+                          components:
+                            - uesio/appkit.icontile:
+                                tileVariant: uesio/appkit.breadcrumb
+                                avatarVariant: uesio/appkit.breadcrumb
+                                title: ${uesio/crm.firstname} ${uesio/crm.lastname}
+                                initials: ${uesio/crm.initials}
+                                imagefield: uesio/crm.image
         content:
           - uesio/core.view:
               view: contact_detail_content

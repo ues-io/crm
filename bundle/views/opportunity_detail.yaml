@@ -5,6 +5,27 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Opportunities
+                          icon: payments
+                          signals:
+                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                              collection: uesio/crm.opportunity
+                              viewtype: list
+                      - uesio/io.item:
+                          external:
+                            collection: uesio/crm.opportunity
+                            record: $Param{recordid}
+                          components:
+                            - uesio/appkit.icontile:
+                                tileVariant: uesio/appkit.breadcrumb
+                                avatarVariant: uesio/appkit.breadcrumb
+                                title: ${uesio/crm.topic}
         content:
           - uesio/core.view:
               view: opportunity_detail_content

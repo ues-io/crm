@@ -5,6 +5,27 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Events
+                          icon: calendar_month
+                          signals:
+                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                              collection: uesio/crm.event
+                              viewtype: list
+                      - uesio/io.item:
+                          external:
+                            collection: uesio/crm.event
+                            record: $Param{recordid}
+                          components:
+                            - uesio/appkit.icontile:
+                                tileVariant: uesio/appkit.breadcrumb
+                                avatarVariant: uesio/appkit.breadcrumb
+                                title: ${uesio/crm.name}
         content:
           - uesio/core.view:
               view: event_detail_content

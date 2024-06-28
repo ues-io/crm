@@ -3,6 +3,7 @@ category: LAYOUT
 type: DECLARATIVE
 slots:
   - name: extra
+  - name: crumbs
 definition:
   - uesio/io.scrollpanel:
       uesio.variant: uesio/io.default
@@ -25,11 +26,20 @@ definition:
                         uesio.id: img-uesio-logo
                         height: 32
                         file: uesio/core.logowhite
-                    - uesio/builder.icontile:
+                    - uesio/appkit.icontile:
                         title: CRM
                         icon: bubble_chart
                         iconcolor: "#fb7185"
                         tileVariant: uesio/builder.apptag
+              - uesio/core.slot:
+                  name: crumbs
+      content:
+        - uesio/io.box:
+            uesio.styleTokens:
+              root:
+                - grid
+                - gap-8
+            components:
               - uesio/io.navsection:
                   content:
                     - uesio/io.box:
@@ -284,9 +294,8 @@ definition:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
                                   collection: uesio/crm.event
                                   viewtype: createnew
-      content:
-        - uesio/core.slot:
-            name: extra
+              - uesio/core.slot:
+                  name: extra
       footer:
         - uesio/io.box:
             uesio.styleTokens:

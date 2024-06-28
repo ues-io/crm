@@ -20,6 +20,21 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Opportunities
+                          icon: payments
+                          signals:
+                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                              collection: uesio/crm.opportunity
+                              viewtype: list
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: New
         content:
           - uesio/appkit.layout_detail_split:
               main:

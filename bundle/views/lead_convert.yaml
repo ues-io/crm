@@ -5,6 +5,29 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              crumbs:
+                - uesio/io.group:
+                    uesio.variant: uesio/appkit.breadcrumbs
+                    components:
+                      - uesio/appkit.icontile:
+                          tileVariant: uesio/appkit.breadcrumb
+                          title: Leads
+                          icon: filter_alt
+                          signals:
+                            - signal: route/NAVIGATE_TO_ASSIGNMENT
+                              collection: uesio/crm.lead
+                              viewtype: list
+                      - uesio/io.item:
+                          external:
+                            collection: uesio/crm.lead
+                            record: $Param{recordid}
+                          components:
+                            - uesio/appkit.icontile:
+                                tileVariant: uesio/appkit.breadcrumb
+                                avatarVariant: uesio/appkit.breadcrumb
+                                title: ${uesio/crm.fullname}
+                                initials: ${uesio/crm.initials}
+                                imagefield: uesio/crm.image
         content:
           - uesio/core.view:
               view: lead_convert_content
