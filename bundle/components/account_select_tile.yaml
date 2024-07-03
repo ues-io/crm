@@ -29,7 +29,7 @@ definition:
             text: ${initials}
             image: $UserFile{image}
       signals: $Prop{signals}
-title: Account Tile Component
+title: Account Select Tile Component
 discoverable: true
 description: An account tile
 sections:
