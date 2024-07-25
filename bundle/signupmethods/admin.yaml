@@ -6,4 +6,4 @@ usernameTemplate: ${username}
 autoLogin: false
 enableSelfSignup: false
 createLoginBot: createlogin
-forgotPasswordBot: forgotpassword
+resetPasswordBot: resetpassword

@@ -34,7 +34,7 @@ declare module "@uesio/app/bots/listener/uesio/crm/createlogin" {
 		Params
 	}
 }
-declare module "@uesio/app/bots/listener/uesio/crm/forgotpassword" {
+declare module "@uesio/app/bots/listener/uesio/crm/resetpassword" {
 
 	type Params = {
 		username: string
