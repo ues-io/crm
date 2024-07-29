@@ -22,7 +22,7 @@ definition:
                           root:
                             - bg-teal-500
                             - text-white
-                        uesio.variant: uesio/crm.badge
+                        uesio.variant: uesio/appkit.badge
                         element: div
                         text: ${source->uesio/core.uniquekey}
                     - uesio/io.box:
