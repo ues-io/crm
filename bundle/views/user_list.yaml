@@ -4,6 +4,7 @@ definition:
     - uesio/io.viewlayout:
         left:
           - uesio/crm.nav:
+              selected: users
               crumbs:
                 - uesio/io.group:
                     uesio.variant: uesio/appkit.breadcrumbs

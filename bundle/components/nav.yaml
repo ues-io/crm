@@ -29,81 +29,42 @@ definition:
             uesio.styleTokens:
               root:
                 - grid
-                - gap-8
+                - gap-4
             components:
               - uesio/io.navsection:
+                  title: CRM Admin
                   content:
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Home
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: home
-                              signals:
-                                - signal: route/NAVIGATE
-                                  path: home
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Settings
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: settings
-                              signals:
-                                - signal: route/NAVIGATE
-                                  path: settings
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Users
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.iconoutline
-                                    text: badge
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/core.user
-                                  viewtype: list
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: home
+                        title: Home
+                        icon: home
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE
+                            path: home
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: settings
+                        title: Settings
+                        icon: settings
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE
+                            path: settings
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: users
+                        title: Users
+                        icon: badge
+                        iconVariant: uesio/io.iconoutline
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/core.user
+                            viewtype: list
               - uesio/io.navsection:
+                  title: CRM Data
                   content:
                     - uesio/io.box:
                         uesio.styleTokens:
