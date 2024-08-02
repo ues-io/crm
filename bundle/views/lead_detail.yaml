@@ -28,7 +28,6 @@ definition:
                                 title: ${uesio/crm.fullname}
                                 initials: ${uesio/crm.initials}
                                 imagefield: uesio/crm.image
-
         content:
           - uesio/core.view:
               view: lead_detail_content
