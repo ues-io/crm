@@ -66,184 +66,118 @@ definition:
               - uesio/io.navsection:
                   title: CRM Data
                   content:
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Leads
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: filter_alt
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: leads
+                        title: Leads
+                        icon: filter_alt
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.lead
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.lead
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.lead
                                   viewtype: createnew
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Accounts
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: domain
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: accounts
+                        title: Accounts
+                        icon: domain
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.account
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.account
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.account
                                   viewtype: createnew
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Contacts
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: person
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: contacts
+                        title: Contacts
+                        icon: person
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.contact
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.contact
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.contact
                                   viewtype: createnew
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Opportunities
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: payments
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: opportunities
+                        title: Opportunities
+                        icon: payments
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.opportunity
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.opportunity
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.opportunity
                                   viewtype: createnew
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Tasks
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: task_alt
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: tasks
+                        title: Tasks
+                        icon: task_alt
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.task
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.task
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.task
                                   viewtype: createnew
-                    - uesio/io.box:
-                        uesio.styleTokens:
-                          root:
-                            - flex
-                            - gap-2
-                            - items-center
-                        components:
-                          - uesio/io.tile:
-                              uesio.variant: uesio/io.nav
-                              uesio.styleTokens:
-                                root:
-                                  - flex
-                                  - grow
-                              content:
-                                - uesio/io.text:
-                                    text: Events
-                              avatar:
-                                - uesio/io.text:
-                                    uesio.variant: uesio/io.icon
-                                    text: calendar_month
+                    - uesio/appkit.icontile:
+                        tileVariant: uesio/io.nav
+                        uesio.id: events
+                        title: Events
+                        icon: calendar_month
+                        selectedid: $Prop{selected}
+                        signals:
+                          - signal: route/NAVIGATE_TO_ASSIGNMENT
+                            collection: uesio/crm.event
+                            viewtype: list
+                        actions:
+                          - uesio/io.button:
+                              uesio.variant: uesio/appkit.navicon_small
+                              icon: add
                               signals:
                                 - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                  collection: uesio/crm.event
-                                  viewtype: list
-                          - uesio/io.tile:
-                              uesio.variant: uesio/appkit.navadd
-                              signals:
-                                - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                  preventLinkTag: true
                                   collection: uesio/crm.event
                                   viewtype: createnew
               - uesio/core.slot:
