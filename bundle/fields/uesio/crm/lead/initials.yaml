@@ -2,5 +2,5 @@ name: initials
 label: Initials
 type: FORMULA
 formula:
-  expression: "IS_BLANK(uesio/crm.firstname) && IS_BLANK(uesio/crm.lastname) ? FIRST(uesio/crm.company) : FIRST(uesio/crm.firstname) + FIRST(uesio/crm.lastname)"
+  expression: 'IS_BLANK(uesio/crm.firstname) && IS_BLANK(uesio/crm.lastname) ? FIRST(uesio/crm.company) : FIRST(uesio/crm.firstname) + FIRST(uesio/crm.lastname)'
   returntype: TEXT
