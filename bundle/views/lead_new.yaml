@@ -64,7 +64,7 @@ definition:
                 - uesio/appkit.form_new:
                     wire: lead
                     avataricon: filter_alt
-                    subtitle: $Text{${contact:firstname} ${contact:lastname}}
+                    subtitle: ${lead:firstname} ${lead:lastname}
                     content:
                       - uesio/io.box:
                           uesio.variant: uesio/appkit.primarysection

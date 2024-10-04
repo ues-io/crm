@@ -58,7 +58,7 @@ definition:
                 - uesio/appkit.form_new:
                     wire: contact
                     avataricon: person
-                    subtitle: $Text{${contact:firstname} ${contact:lastname}}
+                    subtitle: ${contact:firstname} ${contact:lastname}
                     content:
                       - uesio/crm.contact_primary_section:
                       - uesio/crm.contact_account_info_section:
