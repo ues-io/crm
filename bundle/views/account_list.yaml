@@ -88,6 +88,7 @@ definition:
                             mode: EDIT
                       - components:
                           - uesio/crm.account_tile:
+                        width: 260px
                         uesio.display:
                           - type: fieldMode
                             mode: READ
@@ -100,9 +101,13 @@ definition:
                           - type: fieldMode
                             mode: EDIT
                       - field: uesio/crm.industry
+                        width: 140px
                       - field: uesio/crm.phone
+                        width: 140px
                       - field: uesio/crm.billing_city
+                        width: 140px
                       - field: uesio/crm.website
+                        width: 140px
                     uesio.id: accountTable
                     wire: account
                     pagesize: 10

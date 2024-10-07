@@ -26,11 +26,7 @@ definition:
         - uesio/io.avatar:
             text: ${initials}
             image: $UserFile{image}
-      signals:
-        - signal: route/NAVIGATE_TO_ASSIGNMENT
-          collection: uesio/crm.contact
-          viewtype: detail
-          recordid: ${uesio/core.id}
+      signals: $Prop{signals}
 title: Contact Tile Component
 discoverable: true
 description: A contact tile

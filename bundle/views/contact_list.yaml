@@ -100,6 +100,7 @@ definition:
                         uesio.display:
                           - type: fieldMode
                             mode: READ
+                        width: 260px
                       - field: uesio/crm.firstname
                         uesio.display:
                           - type: fieldMode
@@ -113,10 +114,15 @@ definition:
                           - type: fieldMode
                             mode: EDIT
                       - field: uesio/crm.title
+                        width: 160px
                       - field: uesio/crm.department
+                        width: 140px
                       - field: uesio/crm.role
+                        width: 140px
                       - field: uesio/crm.email
+                        width: 140px
                       - field: uesio/crm.phone_mobile
+                        width: 140px
                     uesio.id: contactTable
                     wire: contact
                     pagesize: 10

@@ -65,10 +65,14 @@ definition:
                               uesio.variant: uesio/appkit.avatariconoutline
                               text: calendar_month
                       - field: uesio/crm.name
+                        width: 200px
+                      - field: uesio/crm.description
+                        width: 320px
                       - field: uesio/crm.location
                       - field: uesio/crm.starttime
+                        width: 140px
                       - field: uesio/crm.endtime
-                      - field: uesio/crm.description
+                        width: 140px
                       - field: uesio/crm.related_account
                       - field: uesio/crm.related_contact
                       - field: uesio/crm.related_lead

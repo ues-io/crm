@@ -82,6 +82,7 @@ definition:
                         uesio.display:
                           - type: fieldMode
                             mode: READ
+                        width: 260px
                       - field: uesio/crm.topic
                         uesio.display:
                           - type: fieldMode
@@ -91,10 +92,12 @@ definition:
                           - type: fieldMode
                             mode: EDIT
                       - field: uesio/crm.description
+                        width: 400px
                       - field: uesio/crm.close_date
                       - field: uesio/crm.expected_revenue
                       - field: uesio/crm.contact
                       - field: uesio/crm.stage
+                        width: 140px
                     uesio.id: oppsTable
                     wire: opportunity
                     pagesize: 10

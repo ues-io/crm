@@ -64,6 +64,11 @@ definition:
               components:
                 - uesio/crm.opportunity_tile:
                     showDealInfo: true
+                    signals:
+                      - signal: route/NAVIGATE_TO_ASSIGNMENT
+                        collection: uesio/crm.opportunity
+                        viewtype: detail
+                        recordid: ${uesio/core.id}
               wire: opportunities
               emptyState:
                 - uesio/io.emptystate:
