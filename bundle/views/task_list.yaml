@@ -64,8 +64,11 @@ definition:
                               uesio.variant: uesio/appkit.avatariconoutline
                               text: task_alt
                       - field: uesio/crm.name
+                        width: 200px
                       - field: uesio/crm.description
+                        width: 320px
                       - field: uesio/crm.due_by
+                        width: 140px
                       - field: uesio/crm.related_account
                       - field: uesio/crm.related_contact
                       - field: uesio/crm.related_lead

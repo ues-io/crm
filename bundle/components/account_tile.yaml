@@ -13,11 +13,7 @@ definition:
         - uesio/io.avatar:
             text: ${initials}
             image: $UserFile{logo}
-      signals:
-        - signal: route/NAVIGATE_TO_ASSIGNMENT
-          collection: uesio/crm.account
-          viewtype: detail
-          recordid: ${uesio/core.id}
+      signals: $Prop{signals}
 title: Account Tile Component
 discoverable: true
 description: An account tile

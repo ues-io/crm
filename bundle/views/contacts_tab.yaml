@@ -59,6 +59,11 @@ definition:
               components:
                 - uesio/crm.contact_tile:
                     showContactInfo: true
+                    signals:
+                      - signal: route/NAVIGATE_TO_ASSIGNMENT
+                        collection: uesio/crm.contact
+                        viewtype: detail
+                        recordid: ${uesio/core.id}
               wire: contacts
               emptyState:
                 - uesio/io.emptystate:

@@ -29,11 +29,7 @@ definition:
         - uesio/io.text:
             text: payments
             uesio.variant: uesio/appkit.avatariconoutline
-      signals:
-        - signal: route/NAVIGATE_TO_ASSIGNMENT
-          collection: uesio/crm.opportunity
-          viewtype: detail
-          recordid: ${uesio/core.id}
+      signals: $Prop{signals}
 title: Opportunity Tile Component
 discoverable: true
 description: An opportunity tile

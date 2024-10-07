@@ -36,11 +36,7 @@ definition:
         - uesio/io.avatar:
             text: ${initials}
             image: $UserFile{image}
-      signals:
-        - signal: route/NAVIGATE_TO_ASSIGNMENT
-          collection: uesio/crm.lead
-          viewtype: detail
-          recordid: ${uesio/core.id}
+      signals: $Prop{signals}
 title: Lead Tile Component
 discoverable: true
 description: A lead tile

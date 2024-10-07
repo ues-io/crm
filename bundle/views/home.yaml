@@ -165,6 +165,11 @@ definition:
                                         - uesio/crm.lead_tile:
                                             showSource: true
                                             showRating: true
+                                            signals:
+                                              - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                                collection: uesio/crm.lead
+                                                viewtype: detail
+                                                recordid: ${uesio/core.id}
                             - uesio/appkit.section_dashboard:
                                 title: My Tasks
                                 content:

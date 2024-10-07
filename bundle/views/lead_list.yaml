@@ -105,6 +105,7 @@ definition:
                             mode: EDIT
                       - components:
                           - uesio/crm.lead_tile:
+                        width: 260px
                         uesio.display:
                           - type: fieldMode
                             mode: READ
@@ -132,9 +133,13 @@ definition:
                           - type: fieldMode
                             mode: EDIT
                       - field: uesio/crm.source
+                        width: 140px
                       - field: uesio/crm.email
+                        width: 140px
                       - field: uesio/crm.industry
+                        width: 140px
                       - field: uesio/crm.phone
+                        width: 140px
                       - field: uesio/crm.status
                         readonly: true
                     uesio.id: leadTable
