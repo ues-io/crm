@@ -2,6 +2,7 @@ name: user_detail
 definition:
   components:
     - uesio/io.viewlayout:
+        uesio.variant: uesio/appkit.default
         left:
           - uesio/crm.nav:
               crumbs:
