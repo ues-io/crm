@@ -726,7 +726,7 @@ definition:
                                                     - type: hasNoValue
                                                       value: ${options:selected_opportunity}
     - uesio/io.box:
-        uesio.variant: uesio/io.section
+        uesio.variant: uesio/appkit.section
         uesio.display:
           - type: paramIsNotSet
             param: recordid

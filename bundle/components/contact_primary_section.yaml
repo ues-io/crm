@@ -29,7 +29,8 @@ definition:
               - uesio/io.field:
                   uesio.styleTokens:
                     wrapper:
-                      - col-span-2
+                      - sm:col-span-2
+                      - col-span-1
                   fieldId: uesio/crm.description
               - uesio/io.field:
                   fieldId: uesio/crm.email_opt_out

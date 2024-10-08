@@ -138,7 +138,7 @@ definition:
                                   expected revenue: ${lead:expected_revenue}
                                   close date: ${lead:close_date}
     - uesio/io.box:
-        uesio.variant: uesio/io.section
+        uesio.variant: uesio/appkit.section
         uesio.display:
           - type: paramIsNotSet
             param: recordid

@@ -3,7 +3,7 @@ category: LAYOUT
 type: DECLARATIVE
 definition:
   - uesio/io.box:
-      uesio.variant: uesio/io.section
+      uesio.variant: uesio/appkit.section
       components:
         - uesio/io.titlebar:
             title: Mailing Address
