@@ -86,6 +86,7 @@ definition:
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
+        uesio.variant: uesio/appkit.default
         left:
           - uesio/crm.nav:
               selected: home
@@ -98,95 +99,109 @@ definition:
                           title: Home
                           icon: home
         content:
+          - uesio/io.titlebar:
+              uesio.variant: uesio/appkit.main
+              title: Hi $User{firstname}!
+              subtitle: Welcome to ues.io CRM.
+              avatar:
+                - uesio/io.text:
+                    uesio.variant: uesio/io.icon
+                    text: home
           - uesio/io.box:
-              uesio.variant: uesio/appkit.dashboarditem
+              uesio.variant: uesio/appkit.primarysection
               components:
-                - uesio/io.titlebar:
-                    uesio.variant: uesio/appkit.main
-                    title: Hi $User{firstname}!
-                    subtitle: Welcome to ues.io CRM.
-                    avatar:
-                      - uesio/io.text:
-                          uesio.variant: uesio/io.icon
-                          text: home
-                - uesio/io.box:
-                    uesio.variant: uesio/appkit.scrollsection
-                    components:
-                      - uesio/io.grid:
-                          uesio.variant: uesio/appkit.two_columns
-                          uesio.styleTokens:
-                            root:
-                              - lg:grid-rows-1
-                          items:
-                            - uesio/appkit.section_dashboard:
-                                title: Upcoming Opportunities
-                                content:
-                                  - uesio/io.linechart:
-                                      uesio.variant: uesio/appkit.main
-                                      series:
-                                        - name: revenue
-                                          label: Expected Revenue
-                                          valueField: uesio/crm.expected_revenue_sum
-                                          categoryField: uesio/crm.close_date_date_trunc_month
-                                          wire: opportunities
-                                      labels:
-                                        source: DATA
-                                        timeunit: MONTH
-                            - uesio/appkit.section_dashboard:
-                                title: Leads This Week
-                                content:
-                                  - uesio/io.barchart:
-                                      uesio.variant: uesio/appkit.main
-                                      series:
-                                        - name: leads
-                                          label: New Leads
-                                          valueField: uesio/core.id_count
-                                          categoryField: uesio/core.createdat_date_trunc_day
-                                          wire: leadcount
-                                      labels:
-                                        source: DATA
-                                        timeunit: DAY
-                                        timeunitfill: WEEK
-                      - uesio/io.grid:
-                          uesio.variant: uesio/appkit.three_columns
-                          uesio.styleTokens:
-                            root:
-                              - lg:grid-rows-1
-                          items:
-                            - uesio/appkit.section_dashboard:
-                                title: New Leads
-                                content:
-                                  - uesio/io.deck:
-                                      wire: newleads
-                                      mode: READ
-                                      id: newleads
-                                      uesio.variant: uesio/appkit.tiles
-                                      components:
-                                        - uesio/crm.lead_tile:
-                                            showSource: true
-                                            showRating: true
-                                            signals:
-                                              - signal: route/NAVIGATE_TO_ASSIGNMENT
-                                                collection: uesio/crm.lead
-                                                viewtype: detail
-                                                recordid: ${uesio/core.id}
-                            - uesio/appkit.section_dashboard:
-                                title: My Tasks
-                                content:
-                                  - uesio/io.deck:
-                                      wire: upcomingtasks
-                                      mode: READ
-                                      id: upcomingtasks
-                                      uesio.variant: uesio/appkit.tiles
-                                      components:
-                                        - uesio/crm.task_tile:
-                            - uesio/appkit.section_dashboard:
-                                title: My Events
-                                content:
-                                  - uesio/io.deck:
-                                      wire: upcomingevents
-                                      mode: READ
-                                      id: upcomingevents
-                                      uesio.variant: uesio/appkit.tiles
-                                      components:
-                                        - uesio/crm.event_tile:
+                - uesio/io.grid:
+                    uesio.styleTokens:
+                      root:
+                        - sm:grid-cols-1
+                        - md:grid-cols-2
+                        - gap-x-6
+                    items:
+                      - uesio/appkit.section_dashboard:
+                          title: Upcoming Opportunities
+                          content:
+                            - uesio/io.linechart:
+                                uesio.variant: uesio/appkit.main
+                                series:
+                                  - name: revenue
+                                    label: Expected Revenue
+                                    valueField: uesio/crm.expected_revenue_sum
+                                    categoryField: uesio/crm.close_date_date_trunc_month
+                                    wire: opportunities
+                                labels:
+                                  source: DATA
+                                  timeunit: MONTH
+                      - uesio/appkit.section_dashboard:
+                          title: Leads This Week
+                          content:
+                            - uesio/io.barchart:
+                                uesio.variant: uesio/appkit.main
+                                series:
+                                  - name: leads
+                                    label: New Leads
+                                    valueField: uesio/core.id_count
+                                    categoryField: uesio/core.createdat_date_trunc_day
+                                    wire: leadcount
+                                labels:
+                                  source: DATA
+                                  timeunit: DAY
+                                  timeunitfill: WEEK
+                - uesio/io.grid:
+                    uesio.styleTokens:
+                      root:
+                        - sm:grid-cols-1
+                        - md:grid-cols-3
+                        - gap-x-6
+                    items:
+                      - uesio/appkit.section_dashboard:
+                          title: New Leads
+                          content:
+                            - uesio/io.deck:
+                                wire: newleads
+                                mode: READ
+                                id: newleads
+                                uesio.variant: uesio/appkit.tiles
+                                components:
+                                  - uesio/crm.lead_tile:
+                                      showSource: true
+                                      showRating: true
+                                      signals:
+                                        - signal: route/NAVIGATE_TO_ASSIGNMENT
+                                          collection: uesio/crm.lead
+                                          viewtype: detail
+                                          recordid: ${uesio/core.id}
+                                emptyState:
+                                  - uesio/io.emptystate:
+                                      title: No newly created leads.
+                                      subtitle: You have some work to do.
+                                      icon: calendar_month
+                      - uesio/appkit.section_dashboard:
+                          title: My Tasks
+                          content:
+                            - uesio/io.deck:
+                                wire: upcomingtasks
+                                mode: READ
+                                id: upcomingtasks
+                                uesio.variant: uesio/appkit.tiles
+                                components:
+                                  - uesio/crm.task_tile:
+                                emptyState:
+                                  - uesio/io.emptystate:
+                                      title: No tasks due soon.
+                                      subtitle: Relax and enjoy your free time.
+                                      icon: calendar_month
+                      - uesio/appkit.section_dashboard:
+                          title: My Events
+                          content:
+                            - uesio/io.deck:
+                                wire: upcomingevents
+                                mode: READ
+                                id: upcomingevents
+                                uesio.variant: uesio/appkit.tiles
+                                components:
+                                  - uesio/crm.event_tile:
+                                emptyState:
+                                  - uesio/io.emptystate:
+                                      title: No upcoming events.
+                                      subtitle: You don't have any events that start soon.
+                                      icon: calendar_month

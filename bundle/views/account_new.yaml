@@ -32,6 +32,7 @@ definition:
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
+        uesio.variant: uesio/appkit.default
         left:
           - uesio/crm.nav:
               crumbs:
