@@ -7,32 +7,38 @@ export default function createlogin(bot: ListenerBotApi) {
 	const code = bot.params.get("code")
 	const host = bot.params.get("host")
 	const link = host + redirect + "?code=" + code + "&username=" + username
-	const contentType = "text/html"
-	const from = "info@ues.io"
-	const fromName = "ues.io"
+	const from = "info@updates.ues.io"
 	const subject = "Welcome to ues.io crm."
-	const body = `
-	<!DOCTYPE html>
-	<html>
-		<body>
-			A user account has been created for you in ues.io crm.<br/>
-			Your username is: ${username}.<br/>
-			<br/>
-			To set your password and log in for the first time, click the link below:<br/>
-			${link}<br/>
-			<br/>
-			To easily log in to your site later, save this URL:
-			${host}<br/>
-		</body>
-	</html>`
 
-	bot.runIntegrationAction("uesio/core.sendgrid", "sendemail", {
-		to: [email],
-		toNames: [username],
+	const templateParams = {
+		titleText: "Start closing deals.",
+		bodyText:
+			"Welcome to ues.io CRM. You can now set your password and log in.",
+		username,
+		resetLink: link,
+		laterLink: host,
+		logoUrl: host + bot.getFileUrl("uesio/core.logo", ""),
+		logoAlt: "ues.io",
+		logoWidth: "40",
+		footerText: "ues.io - Your app platform",
+	}
+	const text = bot.mergeTemplateFile(
+		"uesio/appkit.emailtemplates",
+		"templates/createlogin.txt",
+		templateParams
+	)
+
+	const html = bot.mergeTemplateFile(
+		"uesio/appkit.emailtemplates",
+		"templates/createlogin.html",
+		templateParams
+	)
+
+	bot.runIntegrationAction("uesio/appkit.resend", "sendemail", {
+		to: email,
 		from,
-		fromName,
 		subject,
-		plainBody: body,
-		contentType,
+		html,
+		text,
 	})
 }
