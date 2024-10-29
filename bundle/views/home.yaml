@@ -174,7 +174,7 @@ definition:
                                   - uesio/io.emptystate:
                                       title: No newly created leads.
                                       subtitle: You have some work to do.
-                                      icon: calendar_month
+                                      icon: filter_alt
                       - uesio/appkit.section_dashboard:
                           title: My Tasks
                           content:
@@ -189,7 +189,7 @@ definition:
                                   - uesio/io.emptystate:
                                       title: No tasks due soon.
                                       subtitle: Relax and enjoy your free time.
-                                      icon: calendar_month
+                                      icon: task_alt
                       - uesio/appkit.section_dashboard:
                           title: My Events
                           content:

@@ -2,3 +2,4 @@ name: public
 permissionSets:
   - uesio/core.public
   - uesio/crm.public
+label: CRM Public
