@@ -1,5 +1,5 @@
 name: public
+label: CRM Public
 permissionSets:
   - uesio/core.public
   - uesio/crm.public
-label: CRM Public
