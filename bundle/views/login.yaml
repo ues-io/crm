@@ -2,129 +2,112 @@ name: login
 public: true
 definition:
   components:
-    - uesio/io.grid:
-        uesio.styleTokens:
-          root:
-            - grid-cols-1
-            - md:grid-cols-2
-            - lg:grid-cols-[5fr_7fr]
-            - min-h-screen
-            - from-indigo-700
-            - to-violet-600
-            - bg-gradient-to-br
-            - "[&>*]:first:bg-slate-50"
-        items:
-          - uesio/io.grid:
-              uesio.variant: uesio/io.center
-              items:
-                - uesio/io.grid:
-                    uesio.styleTokens:
-                      root:
-                        - w-[240px]
-                        - gap-10
-                        - m-8
-                        - my-12
-                    items:
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root:
-                              - flex
-                              - justify-center
-                              - items-center
-                          components:
-                            - uesio/io.image:
-                                uesio.styleTokens:
-                                  root:
-                                    - px-3
-                                    - py-2
-                                    - inline-block
-                                    - border-r-2
-                                    - border-slate-800
-                                uesio.id: img-uesio-logo
-                                height: 44
-                                file: uesio/core.logo
-                            - uesio/io.text:
-                                uesio.styleTokens:
-                                  root:
-                                    - text-3xl
-                                    - tracking-wider
-                                    - text-slate-800
-                                    - font-bold
-                                    - ml-3
-                                    - pt-0.5
-                                text: CRM
-                      - uesio/core.view:
-                          view: uesio/core.loginarea
-                          params:
-                            expired: $Param{expired}
-          - uesio/io.grid:
-              uesio.styleTokens:
-                root:
-                  - justify-center
-                  - items-center
-                  - text-center
-                  - font-bold
-                  - lg:px-32
-                  - md:px-16
-                  - p-x8
-                  - py-48
-              items:
-                - uesio/io.box:
-                    components:
-                      - uesio/io.text:
-                          uesio.styleTokens:
-                            root:
-                              - text-white
-                              - text-xl
-                              - "[text-wrap:balance]"
-                              - font-light
-                          text: '"Best CRM I''ve used today."'
-                          element: div
-                      - uesio/io.box:
-                          uesio.styleTokens:
-                            root:
-                              - m-4
-                          components:
-                            - uesio/io.text:
-                                uesio.variant: uesio/io.icon
-                                uesio.styleTokens:
-                                  root:
-                                    - text-white
-                                    - text-2xl
-                                    - m-1
-                                text: star
-                            - uesio/io.text:
-                                uesio.variant: uesio/io.icon
-                                uesio.styleTokens:
-                                  root:
-                                    - text-white
-                                    - text-2xl
-                                    - m-1
-                                text: star
-                            - uesio/io.text:
-                                uesio.variant: uesio/io.icon
-                                uesio.styleTokens:
-                                  root:
-                                    - text-white
-                                    - text-2xl
-                                    - m-1
-                                text: star
-                            - uesio/io.text:
-                                uesio.variant: uesio/io.icon
-                                uesio.styleTokens:
-                                  root:
-                                    - text-indigo-400
-                                    - text-2xl
-                                    - m-1
-                                text: star
-                            - uesio/io.text:
-                                uesio.variant: uesio/io.icon
-                                uesio.styleTokens:
-                                  root:
-                                    - text-indigo-400
-                                    - text-2xl
-                                    - m-1
-                                text: star
+    - uesio/core.view:
+        uesio.id: login
+        view: uesio/appkit.login
+        slots:
+          logo:
+            - uesio/io.box:
+                uesio.styleTokens:
+                  root:
+                    - flex
+                    - justify-center
+                    - items-center
+                components:
+                  - uesio/io.image:
+                      uesio.styleTokens:
+                        root:
+                          - px-3
+                          - py-2
+                          - inline-block
+                          - border-r-2
+                          - border-slate-800
+                      uesio.id: img-uesio-logo
+                      height: 44
+                      file: uesio/core.logo
+                  - uesio/io.text:
+                      uesio.styleTokens:
+                        root:
+                          - text-3xl
+                          - tracking-wider
+                          - text-slate-800
+                          - font-bold
+                          - ml-3
+                          - pt-0.5
+                      text: CRM
+          splash:
+            - uesio/io.box:
+                uesio.styleTokens:
+                  root:
+                    - grid
+                    - from-indigo-700
+                    - to-violet-600
+                    - bg-gradient-to-br
+                    - justify-center
+                    - items-center
+                    - text-center
+                    - font-bold
+                    - lg:px-32
+                    - md:px-16
+                    - p-x8
+                    - py-48
+                components:
+                  - uesio/io.box:
+                      components:
+                        - uesio/io.text:
+                            uesio.styleTokens:
+                              root:
+                                - text-white
+                                - text-xl
+                                - "[text-wrap:balance]"
+                                - font-light
+                            text: '"Best CRM I''ve used today."'
+                            element: div
+                        - uesio/io.box:
+                            uesio.styleTokens:
+                              root:
+                                - m-4
+                            components:
+                              - uesio/io.text:
+                                  uesio.variant: uesio/io.icon
+                                  uesio.styleTokens:
+                                    root:
+                                      - text-white
+                                      - text-2xl
+                                      - m-1
+                                  text: star
+                              - uesio/io.text:
+                                  uesio.variant: uesio/io.icon
+                                  uesio.styleTokens:
+                                    root:
+                                      - text-white
+                                      - text-2xl
+                                      - m-1
+                                  text: star
+                              - uesio/io.text:
+                                  uesio.variant: uesio/io.icon
+                                  uesio.styleTokens:
+                                    root:
+                                      - text-white
+                                      - text-2xl
+                                      - m-1
+                                  text: star
+                              - uesio/io.text:
+                                  uesio.variant: uesio/io.icon
+                                  uesio.styleTokens:
+                                    root:
+                                      - text-indigo-400
+                                      - text-2xl
+                                      - m-1
+                                  text: star
+                              - uesio/io.text:
+                                  uesio.variant: uesio/io.icon
+                                  uesio.styleTokens:
+                                    root:
+                                      - text-indigo-400
+                                      - text-2xl
+                                      - m-1
+                                  text: star
   params:
     expired:
       type: CHECKBOX
