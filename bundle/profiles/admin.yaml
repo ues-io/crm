@@ -2,5 +2,6 @@ name: admin
 label: CRM Admin
 permissionSets:
   - uesio/crm.admin
+  - uesio/appkit.public
   - uesio/core.public
 homeRoute: uesio/crm.home

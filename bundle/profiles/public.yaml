@@ -2,4 +2,5 @@ name: public
 label: CRM Public
 permissionSets:
   - uesio/core.public
+  - uesio/appkit.public
   - uesio/crm.public
