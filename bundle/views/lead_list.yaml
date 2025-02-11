@@ -31,8 +31,6 @@ definition:
         uesio/crm.source:
         uesio/crm.rating:
         uesio/core.owner:
-          fields:
-            uesio/core.id: {}
       batchsize: 200
       order:
         - desc: true
