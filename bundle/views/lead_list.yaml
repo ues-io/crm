@@ -149,7 +149,6 @@ definition:
                         width: 140px
                       - field: uesio/crm.status
                         readonly: true
-                      - {}
                     uesio.id: leadTable
                     wire: lead
                     pagesize: 10
