@@ -30,7 +30,7 @@ definition:
         uesio/crm.status:
         uesio/crm.source:
         uesio/crm.rating:
-        uesio/core.owner:
+        uesio/core.owner: {}
       batchsize: 200
       order:
         - desc: true
