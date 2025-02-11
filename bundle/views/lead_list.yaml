@@ -30,6 +30,9 @@ definition:
         uesio/crm.status:
         uesio/crm.source:
         uesio/crm.rating:
+        uesio/core.owner:
+          fields:
+            uesio/core.id: {}
       batchsize: 200
       order:
         - desc: true
@@ -62,6 +65,12 @@ definition:
                     searchFields:
                       - uesio/crm.firstname
                       - uesio/crm.lastname
+                - uesio/io.filter:
+                    uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
+                    wire: lead
+                    fieldId: uesio/core.owner
+                    labelPosition: none
+                    displayAs: MULTISELECT
                 - uesio/io.filter:
                     uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
                     wire: lead
@@ -142,6 +151,7 @@ definition:
                         width: 140px
                       - field: uesio/crm.status
                         readonly: true
+                      - {}
                     uesio.id: leadTable
                     wire: lead
                     pagesize: 10

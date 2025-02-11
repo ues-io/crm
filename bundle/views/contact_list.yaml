@@ -29,6 +29,7 @@ definition:
         uesio/crm.salutation:
         uesio/crm.title:
         uesio/crm.initials:
+        uesio/core.owner: {}
       batchsize: 200
       order:
         - desc: false
@@ -62,6 +63,12 @@ definition:
                       - uesio/crm.firstname
                       - uesio/crm.fullname
                       - uesio/crm.lastname
+                - uesio/io.filter:
+                    uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
+                    wire: contact
+                    fieldId: uesio/core.owner
+                    labelPosition: none
+                    displayAs: MULTISELECT
                 - uesio/io.filter:
                     uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
                     wire: contact
