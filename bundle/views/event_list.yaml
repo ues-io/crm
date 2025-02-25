@@ -14,6 +14,7 @@ definition:
         uesio/crm.name:
         uesio/crm.starttime:
         uesio/crm.initials:
+        uesio/core.owner: {}
       batchsize: 200
       order:
         - desc: false
@@ -45,6 +46,12 @@ definition:
                     placeholder: Search Events
                     searchFields:
                       - uesio/crm.name
+                - uesio/io.filter:
+                    uesio.variant: uesio/io.customselectfield:uesio/appkit.filter
+                    wire: events
+                    fieldId: uesio/core.owner
+                    labelPosition: none
+                    displayAs: MULTISELECT
               content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
