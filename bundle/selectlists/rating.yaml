@@ -1,4 +1,5 @@
 name: rating
+public: true
 options:
   - label: Warm
     value: Warm
