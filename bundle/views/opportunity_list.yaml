@@ -18,6 +18,34 @@ definition:
       order:
         - desc: true
           field: uesio/core.updatedat
+      conditions:
+        - type: GROUP
+          conjunction: AND
+          conditions:
+            - field: uesio/crm.stage->uesio/crm.label
+              valueSource: VALUE
+              operator: NOT_IN
+              values:
+                - Closed Lost
+            - id: closed_lost
+              field: uesio/crm.stage->uesio/crm.label
+              valueSource: VALUE
+              operator: NOT_IN
+              values:
+                - Closed Won
+          id: not_closed
+          inactive: false
+      events:
+        - type: onChange
+          fields:
+            - uesio/crm.stage
+          signals:
+            - signal: wire/SAVE
+              wires:
+                - opportunity
+            - signal: wire/LOAD
+              wires:
+                - opportunity
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
@@ -62,6 +90,48 @@ definition:
                     wire: opportunity
                     fieldId: uesio/crm.account
                     labelPosition: none
+                - uesio/io.button:
+                    text: Show All
+                    icon: change_circle
+                    uesio.variant: uesio/appkit.secondary
+                    iconPlacement: end
+                    signals:
+                      - signal: wire/REMOVE_CONDITION
+                        wire: opportunity
+                        conditionId: not_closed
+                      - signal: wire/LOAD
+                        wires:
+                          - opportunity
+                    uesio.styleTokens:
+                      root:
+                        - bg-primary-50/70
+                    uesio.display:
+                      - type: wireHasActiveConditions
+                        operator: EQUALS
+                        wire: opportunity
+                - uesio/io.button:
+                    text: Not Closed
+                    icon: change_circle
+                    uesio.variant: uesio/appkit.secondary
+                    iconPlacement: end
+                    signals:
+                      - signal: wire/RESET_CONDITIONS
+                        wires:
+                          - opportunity
+                        wire: opportunity
+                        conditionId: not_closed
+                      - signal: wire/LOAD
+                        wire: opportunity
+                        conditionId: not_closed
+                        wires:
+                          - opportunity
+                    uesio.styleTokens:
+                      root:
+                        - bg-primary-50/70
+                    uesio.display:
+                      - type: wireHasNoActiveConditions
+                        operator: EQUALS
+                        wire: opportunity
               content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
