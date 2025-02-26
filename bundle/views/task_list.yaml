@@ -14,10 +14,28 @@ definition:
         uesio/crm.related_opportunity:
         uesio/crm.initials:
         uesio/core.owner: {}
+        uesio/crm.is_completed: {}
       batchsize: 200
       order:
         - desc: false
           field: uesio/crm.due_by
+      conditions:
+        - id: not_complete
+          field: uesio/crm.is_completed
+          operator: NOT_EQ
+          valueSource: VALUE
+          value: true
+      events:
+        - type: onChange
+          fields:
+            - uesio/crm.is_completed
+          signals:
+            - signal: wire/SAVE
+              wires:
+                - task
+            - signal: wire/LOAD
+              wires:
+                - task
   # Components determine the layout and composition of your view
   components:
     - uesio/io.viewlayout:
@@ -51,6 +69,24 @@ definition:
                     fieldId: uesio/core.owner
                     labelPosition: none
                     displayAs: MULTISELECT
+                - uesio/io.filter:
+                    wire: task
+                    conditionId: not_complete
+                    displayAs: TOGGLE
+                    label: Open
+                    labelPosition: left
+                    uesio.styleTokens:
+                      root:
+                        - pl-3
+                        - pt-px
+                        - pb-px
+                        - bg-primary-50/70
+                        - border-fontcolor-900/90
+                        - rounded
+                        - border
+                        - border-b-2
+                        - border-r-2
+                        - max-h-10
               content:
                 - uesio/io.table:
                     uesio.variant: uesio/appkit.main
@@ -81,6 +117,8 @@ definition:
                       - field: uesio/crm.related_contact
                       - field: uesio/crm.related_lead
                       - field: uesio/crm.related_opportunity
+                      - field: uesio/crm.is_completed
+                        displayAs: TOGGLE
                     uesio.id: taskTable
                     wire: task
                     pagesize: 10
